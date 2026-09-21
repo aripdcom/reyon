@@ -12,7 +12,8 @@
 
 - [ ] `reyon-release.jks` üret (`keytool`, alias `reyon`) ve iki secret'ı ekle:
       `ANDROID_KEYSTORE_BASE64` (base64 kodlu keystore), `ANDROID_KEYSTORE_PASSWORD`
-- [ ] Depo ayarları → Pages → kaynak "GitHub Actions"; `site/` yayına girsin
+- [ ] `main`'de Pages iş akışını koştur; kaynağı (`GitHub Actions`) kendisi kurar
+      ve `site/` yayına girer — gizlilik URL'si ancak bundan sonra açılır
 - [ ] `v1.0.0` etiketi it; `release.yml` imzalı APK + AAB üretsin
 - [ ] APK doğrulaması: SHA256, manifest `versionName`/paket adı, dex'te 14 dilin metni, imza parmak izi
 - [ ] Cihazda koşum (`tools/cihaz_testi.py`), `docs/cihaz-testi.md` protokolü
