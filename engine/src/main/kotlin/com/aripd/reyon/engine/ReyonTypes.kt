@@ -169,7 +169,7 @@ sealed class Clue {
 
 enum class ClueStatus { PENDING, SATISFIED, VIOLATED }
 
-/** Üretim iş sayaçları; duvar saatine değil işe bakılır (bkz. docs/oyun-testi.md). */
+/** Üretim iş sayaçları; duvar saatine değil işe bakılır (bkz. docs/cihaz-testi.md). */
 data class GenStats(
     /** Düzen örnekleme denemesi. */
     val attempts: Int,

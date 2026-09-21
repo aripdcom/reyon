@@ -5,8 +5,8 @@ import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 
 /**
- * [enabled] her titreşimde okunur; ana menüdeki düğme böylece anında etki
- * eder (bkz. [com.aripd.reyon.platform.SoundPlayer]).
+ * [enabled] her titreşimde okunur; Ayarlar ekranındaki düğme böylece anında
+ * etki eder (bkz. [SoundPlayer]).
  */
 private class GatedHaptics(
     private val delegate: HapticFeedback,
@@ -19,7 +19,7 @@ private class GatedHaptics(
 
 fun HapticFeedback.gatedBy(enabled: () -> Boolean): HapticFeedback = GatedHaptics(this, enabled)
 
-/** Oyun ekranlarının titreşim için eriştiği yer; kapatılınca sessizce yutar. */
+/** Ekranların titreşim için eriştiği yer; kapatılınca sessizce yutar. */
 val LocalHaptics = staticCompositionLocalOf<HapticFeedback> {
     error("LocalHaptics sağlanmadı")
 }

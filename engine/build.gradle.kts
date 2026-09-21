@@ -27,7 +27,7 @@ tasks.test {
     filter { excludeTestsMatching("*Probe") }
 }
 
-// Denge ölçümü: ./gradlew :engine:probe  (bkz. docs/oyun-testi.md)
+// Denge ölçümü: ./gradlew :engine:probe  (bkz. docs/cihaz-testi.md)
 tasks.register<Test>("probe") {
     description = "Denge ölçüm koşumunu çalıştırır ve raporu basar."
     group = "verification"

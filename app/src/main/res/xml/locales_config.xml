@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Uygulamanın desteklediği diller. Android 13+ bu listeyi okuyup
-  Ayarlar → Uygulamalar → ZA Games → Dil seçicisini kendiliğinden kurar;
-  uygulama içindeki seçici de (ZaLocale) aynı listeyi kullanır.
+  Ayarlar → Uygulamalar → Reyon → Dil seçicisini kendiliğinden kurar;
+  uygulama içindeki seçici de (AppLocale) aynı listeyi kullanır.
 
   Varsayılan dil İngilizce'dir (res/values): listede olmayan bir dile ayarlı
   telefon İngilizce görür. Türkçe res/values-tr altındadır.

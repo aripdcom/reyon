@@ -4,7 +4,7 @@ import org.junit.Test
 
 /**
  * Reyon denge ölçümü — birim testi değil, rapor üretir
- * (bkz. docs/oyun-testi.md). `./gradlew :games:reyon:probe` ile koşar.
+ * (bkz. docs/cihaz-testi.md). `./gradlew :engine:probe` ile koşar.
  *
  * Sıra tabanlı bulmaca: soru yetişilebilirlik değil adilliktir. Tek çözüm ve
  * tahminsizlik üreticide garanti; burada ölçülen, zorluk merdiveninin gerçek

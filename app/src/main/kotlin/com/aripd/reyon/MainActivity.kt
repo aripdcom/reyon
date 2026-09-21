@@ -75,7 +75,7 @@ class MainActivity : ComponentActivity() {
      *
      * Dokunarak keşif (TalkBack) açıkken çubuklar gizlenmez: gizli çubuğun
      * bölgesine çizilen düğmelerin erişilebilirlik sınırı bazı cihazlarda
-     * sıfırlanıyor ve ekran okuyucu oraya inemiyor (docs/oyun-testi.md,
+     * sıfırlanıyor ve ekran okuyucu oraya inemiyor (docs/cihaz-testi.md,
      * Reyon Sipariş bulgu 3). Çubuklar görünürken içerik onların üstünde kalır.
      */
     private fun hideSystemBars() {
@@ -95,7 +95,7 @@ class MainActivity : ComponentActivity() {
  * Dokunarak keşif açıkken alta durum çubuğu yüksekliği kadar ek pay. SM-A515F'te
  * erişilebilirlik penceresi uygulama alanının boyunda ama y = 0'a çakılı
  * geliyor; alanın son 33 dp'si (durum çubuğu kadar) ağaçtan düşüyor ve oradaki
- * düğmelere ekran okuyucu inemiyor (docs/oyun-testi.md, Reyon Sipariş doğrulama
+ * düğmelere ekran okuyucu inemiyor (docs/cihaz-testi.md, Reyon Sipariş doğrulama
  * turu). Pay, en alttaki eylem satırını o bandın üstüne çeker; keşif kapalıyken
  * sıfırdır.
  */

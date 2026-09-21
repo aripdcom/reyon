@@ -416,7 +416,7 @@ private fun OrderRow(state: ReyonOrderState, version: Int, index: Int, item: Ord
             .semantics { contentDescription = desc },
     ) {
         // Alt pay 10 dp: adımlayıcının 48 dp dokunma alanı kartın kırpma sınırında kesilmesin
-        // (cihazda dikey bant 44 dp ölçülmüştü; docs/oyun-testi.md, Reyon Sipariş C).
+        // (cihazda dikey bant 44 dp ölçülmüştü; docs/cihaz-testi.md, Reyon Sipariş C).
         Column(modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 6.dp, bottom = 10.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(brandColor(item.product.brand)))

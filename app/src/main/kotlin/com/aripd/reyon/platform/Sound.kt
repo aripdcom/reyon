@@ -42,8 +42,6 @@ class SoundPlayer(context: Context, private val enabled: () -> Boolean) {
     private val ids: Map<Sfx, Int> =
         Sfx.entries.associateWith { pool.load(context, it.res, 1) }
 
-    val isEnabled: Boolean get() = enabled()
-
     fun play(sfx: Sfx, volume: Float = 1f, rate: Float = 1f) {
         if (!enabled()) return
         val id = ids[sfx] ?: return

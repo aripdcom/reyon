@@ -71,7 +71,7 @@ class ReyonGeneratorTest {
 
     /**
      * Üretim bütçesi: iş sayaçları makineden bağımsızdır; sınırlar gözlenen en
-     * kötü değerin birkaç katı (bkz. docs/oyun-testi.md).
+     * kötü değerin birkaç katı (bkz. docs/cihaz-testi.md).
      */
     @Test
     fun generationStaysWithinWorkBudget() {

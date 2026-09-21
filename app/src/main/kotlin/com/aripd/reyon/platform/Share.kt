@@ -109,8 +109,8 @@ object ShareCard {
         val accent = ACCENT
         val maxW = WIDTH - 2 * PAD
 
-        // ZA'da kartın tepesinde oyunun adı yazardı; tek uygulamada o ad zaten
-        // başlıkta duruyor, ikinci kez yazmak yer yiyor.
+        // Uygulamanın adı kartın başlığında zaten yazıyor; içerik bloğunda
+        // ikinci kez tekrarlamak yer yiyor.
         val blocks = ArrayList<Block>()
         blocks += textBlock(content.headline, size = 96f, color = INK, weight = 900, maxWidth = maxW, fit = true)
         if (content.details.isNotEmpty()) {

@@ -43,10 +43,10 @@ fun formatTime(totalSeconds: Int): String =
 /**
  * Ayarlar/Hakkında ekranını açan geri çağrı.
  *
- * ZA Games'te bu düğmeler ana menünün başlığındaydı; tek ekranlı uygulamada ana
- * menü yok, o yüzden üst çubuğa taşındı. CompositionLocal olarak veriliyor ki
- * dört Reyon ekranının hiçbiri değişmesin — sağlanmazsa dişli çizilmiyor
- * (testler ekranları tek başına çizebiliyor).
+ * Uygulama tek ekranlı: ayarların duracağı bir ana menü yok, dişli üst çubuğa
+ * oturuyor. CompositionLocal olarak veriliyor ki dört mod ekranının hiçbiri
+ * gezinmeyi bilmek zorunda kalmasın — sağlanmazsa dişli çizilmiyor, böylece
+ * testler ekranları tek başına çizebiliyor.
  */
 val LocalSettingsRoute = staticCompositionLocalOf<(() -> Unit)?> { null }
 
@@ -147,7 +147,7 @@ fun ActionLabel(text: String) {
 /**
  * Menü, duraklatma ve bitiş kartı. Kabın yüksekliğine sığmazsa içi kayar: 360×640
  * dp'de Reyon menüsü ekrandan taşıyor, "Başla" düğmesine dokunulamıyordu
- * (docs/oyun-testi.md, Reyon Sipariş bulgu 1). Yükseklik sınırsızsa (kaydırılabilir
+ * (docs/cihaz-testi.md, Reyon Sipariş bulgu 1). Yükseklik sınırsızsa (kaydırılabilir
  * bir ebeveyn içinde) kaydırma eklenmez; aynı yönde iç içe kaydırma izinli değil.
  * İçeriği kendi kaydıran kartlar (tema listesi, dükkân) [scrollable] = false verir.
  */

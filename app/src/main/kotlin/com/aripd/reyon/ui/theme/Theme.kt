@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 
-// ZA bilinçli olarak tek görünüme sahip: koyu, yüksek kontrastlı bir oyun teması.
+// Tek görünüm, bilinçli: koyu ve yüksek kontrastlı. Açık tema yok.
 /**
  * Uygulama renk şeması. `internal`: erişilebilirlik kontrast testi
  * (`ThemeContrastTest`) bu değerleri okur — metin/zemin oranlarının WCAG AA
- * eşiğinin altına düşmemesi CI'da korunur. Bkz. docs/oyun-testi.md (E aşaması).
+ * eşiğinin altına düşmemesi CI'da korunur. Bkz. docs/cihaz-testi.md (E aşaması).
  */
 internal val ReyonColors = darkColorScheme(
     primary = Color(0xFF4DE1FF),

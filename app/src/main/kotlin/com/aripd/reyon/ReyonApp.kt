@@ -67,7 +67,8 @@ fun ReyonApp(onQuit: () -> Unit = {}) {
     CompositionLocalProvider(
         LocalSound provides soundPlayer,
         LocalHaptics provides gatedHaptics,
-        LocalSettingsRoute provides openSettings,
+        // Ayarlar ekranının kendi üst çubuğunda dişli olmasın.
+        LocalSettingsRoute provides openSettings.takeIf { route == Route.MAIN },
     ) {
         when (route) {
             Route.ABOUT -> AboutScreen(

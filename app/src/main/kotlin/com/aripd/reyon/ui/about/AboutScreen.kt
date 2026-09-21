@@ -67,9 +67,8 @@ private val Components = listOf(
  * Ayarlar ve Hakkında tek ekranda: ses, titreşim, dil; sonra sürüm, gizlilik
  * özeti, bağlantılar ve açık kaynak lisansları.
  *
- * ZA Games'te ayarlar ana menünün başlığındaydı; tek ekranlı uygulamada ana
- * menü yok, o yüzden buraya indi ve üst çubuktaki dişliden açılıyor.
- * Uygulama ağa çıkmaz; bağlantılar cihazın tarayıcısında açılır.
+ * Üç ayar da burada: uygulamanın ana menüsü yok, ekran üst çubuktaki dişliden
+ * açılıyor. Uygulama ağa çıkmaz; bağlantılar cihazın tarayıcısında açılır.
  */
 @Composable
 fun AboutScreen(
@@ -216,7 +215,7 @@ private fun SectionTitle(text: String) {
 
 /**
  * Açma/kapama satırı. Görünen etiket ayarın adı, ekran okuyucuya okunan ise
- * dokununca ne olacağı — ZA'nın menü düğmeleriyle aynı kural.
+ * dokununca ne olacağı: "Ses" yazar, "Sesi kapat" der.
  */
 @Composable
 private fun ToggleRow(label: String, action: String, checked: Boolean, onClick: () -> Unit, tag: String) {
