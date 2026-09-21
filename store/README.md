@@ -1,0 +1,55 @@
+# Mağaza dosyaları
+
+Google Play listelemesi için metinler ve form cevapları. Kaynak dosyalar buradadır; Play Console'a elle kopyalanır.
+
+| Dosya | İçerik | Sınır |
+| --- | --- | --- |
+| `play/<dil>/title.txt` | Uygulama adı | 30 karakter |
+| `play/<dil>/short.txt` | Kısa açıklama | 80 karakter |
+| `play/<dil>/full.txt` | Tam açıklama | 4000 karakter |
+| `play/release-notes/<sürüm>.txt` | Sürüm notları (dil başına `<tr-TR>` / `<en-US>` … blokları) | dil başına 500 karakter |
+| `data-safety.md` | Veri güvenliği formu cevapları | |
+| `icerik-derecelendirme.md` | IARC anketi cevapları ve hedef kitle | |
+| `graphics/icon-512.png` | Uygulama simgesi | 512×512, 32 bit PNG |
+| `graphics/feature-1024.png` | Öne çıkan görsel | 1024×500 |
+| `checklist.md` | Yayın öncesi kontrol listesi | |
+
+Sınırları ve dil kapsamını `tools/check_store.py` denetler; CI her itmede çağırır.
+
+## Kategori
+
+**Uygulamalar → Eğitim.** Reyon bir raf düzeni (planogram) alıştırmasıdır: kuralları
+çıkarma, plana uygunluk denetimi, satış düzeni ve stok kararı. Oyunlar kategorisindeki
+başarım ve liderlik tablosu özellikleri kullanılmıyor, kayıp yok.
+
+## Diller
+
+Uygulamanın çevirisi olan her dil için bir listeleme klasörü var; listeleme eksik kalırsa
+o dildeki kullanıcı uygulamayı kendi dilinde, mağaza sayfasını İngilizce görür. Klasör adları
+uygulamadaki dil kodlarıyla (`AppLocale.TAGS`, `res/values-<dil>`) aynıdır; Play Console bölge
+istediği için kopyalarken aşağıdaki karşılığı seçin.
+
+| Klasör | Play yerel ayarı | Dil |
+| --- | --- | --- |
+| `play/en` | en-US | İngilizce (varsayılan) |
+| `play/tr` | tr-TR | Türkçe |
+| `play/de` | de-DE | Almanca |
+| `play/fr` | fr-FR | Fransızca |
+| `play/nl` | nl-NL | Hollandaca |
+| `play/es` | es-ES | İspanyolca |
+| `play/pt` | pt-BR | Portekizce (Brezilya) |
+| `play/it` | it-IT | İtalyanca |
+| `play/da` | da-DK | Danca |
+| `play/sv` | sv-SE | İsveççe |
+| `play/nb` | no-NO | Norveççe (bokmål) |
+| `play/fi` | fi-FI | Fince |
+| `play/ru` | ru-RU | Rusça |
+| `play/ar` | ar | Arapça |
+
+## Metinler nereden geliyor
+
+`title.txt` ve `short.txt` elle yazıldı. `full.txt`'in gövdesi uygulamanın kendi
+çevirilerinden derlendi: dört modun anlatımı (`reyon_*_intro`), söz çipleri
+(`chip_no_*`), gizlilik özeti (`about_privacy_summary`) ve lisans notu
+(`about_app_license`). Böylece mağaza metni uygulamayla aynı şeyi söylüyor ve
+14 dilde aynı özenle çevrilmiş oluyor. Dosyalar artık elle düzenlenebilir.

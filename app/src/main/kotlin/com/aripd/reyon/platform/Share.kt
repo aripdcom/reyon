@@ -59,6 +59,25 @@ object ShareCard {
     private const val DIR = "shares"
     private const val KEEP_MS = 60L * 60L * 1000L
 
+    /** İşaretin dikdörtgenleri: sol, üst, genişlik, yükseklik (simgeden). */
+    private data class Shape(val x: Float, val y: Float, val w: Float, val h: Float)
+
+    private val MARK = listOf(
+        Shape(2f, 0f, 10f, 10f),
+        Shape(14f, 0f, 10f, 10f),
+        Shape(26f, 0f, 10f, 10f),
+        Shape(0f, 10f, 48f, 4f),
+        Shape(2f, 18f, 10f, 10f),
+        Shape(26f, 18f, 10f, 10f),
+        Shape(38f, 18f, 10f, 10f),
+        Shape(0f, 28f, 48f, 4f),
+        Shape(2f, 36f, 10f, 10f),
+        Shape(14f, 36f, 10f, 10f),
+        Shape(26f, 36f, 10f, 10f),
+        Shape(38f, 36f, 10f, 10f),
+        Shape(0f, 46f, 48f, 4f),
+    )
+
     private val BG = 0xFF0B0F1A.toInt()
     private val INK = 0xFFE4EAF5.toInt()
     private val MUTED = 0xFFAAB4C8.toInt()
@@ -204,22 +223,19 @@ object ShareCard {
     }
 
     /**
-     * Raf izleği: üç tahta ve üstlerindeki ürün blokları. Uygulama simgesiyle
-     * (res/drawable/ic_launcher_foreground.xml) aynı desen — aynı boyda kareler,
-     * 5 sütun × 6 satırlık ızgara.
+     * Raf izleği: üç çıta ve üstlerindeki ürünler, ortadaki rafta bir göz boş.
+     * Uygulama simgesiyle (res/drawable/ic_launcher_foreground.xml) birebir
+     * aynı desen; oranlar oradaki 48×50 birimlik kutudan alındı.
      */
     private fun drawMark(canvas: Canvas, box: RectF, paint: Paint) {
-        val plank = (0..4).map { it to 1 } + (0..4).map { it to 3 } + (0..4).map { it to 5 }
-        val goods = listOf(0 to 0, 1 to 0, 2 to 2, 3 to 2, 4 to 2, 0 to 4, 2 to 4)
-        val unit = box.width() * 0.62f / 39.2f
-        val step = unit * 8f
-        val side = unit * 7.2f
-        val left = box.centerX() - (step * 4f + side) / 2f
-        val top = box.centerY() - (step * 5f + side) / 2f
-        for ((cx, cy) in plank + goods) {
-            val x = left + cx * step
-            val y = top + cy * step
-            canvas.drawRect(x, y, x + side, y + side, paint)
+        val scale = box.width() * 0.60f / 48f
+        val left = box.centerX() - 48f * scale / 2f
+        val top = box.centerY() - 50f * scale / 2f
+        for ((x, y, w, h) in MARK) {
+            canvas.drawRect(
+                left + x * scale, top + y * scale,
+                left + (x + w) * scale, top + (y + h) * scale, paint,
+            )
         }
     }
 

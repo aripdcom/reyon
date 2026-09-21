@@ -1,0 +1,70 @@
+<tr-TR>
+• İlk sürüm.
+• Dört mod: Diziliş, Denetim, Satış, Sipariş.
+• 14 dil, çevrimdışı; reklam, izleyici ve izin yok.
+</tr-TR>
+<en-US>
+• First release.
+• Four modes: Arrange, Audit, Sales, Ordering.
+• 14 languages, offline; no ads, no trackers, no permissions.
+</en-US>
+<de-DE>
+• Erste Version.
+• Vier Modi: Bestücken, Prüfen, Verkauf, Bestellen.
+• 14 Sprachen, offline; keine Werbung, keine Tracker, keine Berechtigungen.
+</de-DE>
+<fr-FR>
+• Première version.
+• Quatre modes : Ranger, Contrôler, Ventes, Commander.
+• 14 langues, hors ligne ; ni pub, ni traqueur, ni autorisation.
+</fr-FR>
+<nl-NL>
+• Eerste versie.
+• Vier modi: Vullen, Controleren, Verkoop, Bestellen.
+• 14 talen, offline; geen advertenties, trackers of rechten.
+</nl-NL>
+<es-ES>
+• Primera versión.
+• Cuatro modos: Colocar, Auditar, Ventas, Pedidos.
+• 14 idiomas, sin conexión; sin anuncios, rastreadores ni permisos.
+</es-ES>
+<pt-BR>
+• Primeira versão.
+• Quatro modos: Arrumar, Auditar, Vendas, Pedidos.
+• 14 idiomas, offline; sem anúncios, rastreadores ou permissões.
+</pt-BR>
+<it-IT>
+• Prima versione.
+• Quattro modalità: Sistemare, Controllare, Vendite, Ordini.
+• 14 lingue, offline; niente pubblicità, tracker o permessi.
+</it-IT>
+<da-DK>
+• Første version.
+• Fire tilstande: Stil op, Kontrollér, Salg, Bestilling.
+• 14 sprog, offline; ingen reklamer, sporing eller tilladelser.
+</da-DK>
+<sv-SE>
+• Första versionen.
+• Fyra lägen: Ställ upp, Kontrollera, Försäljning, Beställning.
+• 14 språk, offline; inga annonser, spårare eller behörigheter.
+</sv-SE>
+<no-NO>
+• Første versjon.
+• Fire moduser: Still opp, Kontroller, Salg, Bestilling.
+• 14 språk, offline; ingen annonser, sporing eller tillatelser.
+</no-NO>
+<fi-FI>
+• Ensimmäinen versio.
+• Neljä tilaa: Järjestä, Tarkasta, Myynti, Tilaus.
+• 14 kieltä, offline; ei mainoksia, seurantaa tai lupia.
+</fi-FI>
+<ru-RU>
+• Первая версия.
+• Четыре режима: Раскладка, Проверка, Продажи, Заказы.
+• 14 языков, офлайн; без рекламы, трекеров и разрешений.
+</ru-RU>
+<ar>
+• الإصدار الأول.
+• أربعة أوضاع: الترتيب, التدقيق, البيع, الطلبيات.
+• 14 لغة، دون اتصال؛ بلا إعلانات ولا تتبّع ولا أذونات.
+</ar>

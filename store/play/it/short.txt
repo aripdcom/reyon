@@ -1,0 +1,1 @@
+Planogramma: sistema lo scaffale, verificalo, gestisci vendite e scorte.

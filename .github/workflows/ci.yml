@@ -17,6 +17,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Çeviri denetimi: dil listeleri tutarlı mı, her dilde bütün metinler var
+      # mı, biçim belirteçleri uyuşuyor mu. Saniyeler sürer, Gradle'dan önce.
+      - name: Çok dilli metin denetimi
+        run: python3 tools/check_strings.py
+
+      # Mağaza metinleri: karakter sınırları, her dilin listelemesi var mı,
+      # görünmez karakter (yumuşak tire, BOM) kaçmış mı.
+      - name: Mağaza metinleri denetimi
+        run: python3 tools/check_store.py
+
+      - name: Site denetimi
+        run: python3 tools/check_site.py
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -32,12 +45,21 @@ jobs:
       - name: Denge ölçüm koşumu (rapor)
         run: ./gradlew :engine:probe
 
+      - name: Robolectric önbelleği
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository/org/robolectric
+          key: robolectric-${{ hashFiles('gradle/libs.versions.toml') }}
+
+      - name: Arayüz testleri (Robolectric + Compose)
+        run: ./gradlew :app:testDebugUnitTest
+
       # Başarısız testlerin mesajı ve yığın izi kütükte görünsün; rapor artefaktı
       # her ortamdan indirilemiyor.
       - name: Başarısız testlerin mesajları
         if: failure()
         run: |
-          python3 - <<'PY'
+          python3 - <<'EOF'
           import glob, xml.etree.ElementTree as ET
           for f in glob.glob('*/build/test-results/**/*.xml', recursive=True):
               root = ET.parse(f).getroot()
@@ -47,7 +69,7 @@ jobs:
                       print((fl.get('message') or '')[:2000])
                       print((fl.text or '')[:4000])
                       print('::endgroup::')
-          PY
+          EOF
 
       - name: Test raporlarını yükle
         if: failure()
@@ -55,5 +77,16 @@ jobs:
         with:
           name: reyon-test-reports
           path: |
+            app/build/reports/tests
+            app/build/test-results
             engine/build/reports/tests
             engine/build/test-results
+
+      - name: Debug APK derle
+        run: ./gradlew :app:assembleDebug
+
+      - name: APK'yı yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: reyon-debug-apk
+          path: app/build/outputs/apk/debug/*.apk

@@ -1,0 +1,14 @@
+Planogram practice: arrange the shelf, audit it, run sales and ordering.
+
+Arrange — Tap a product, then tap a slot on the shelf; long-press to send it back to the tray. Each brief rule turns ✓ when it holds; the rules lead to a single layout, no guessing.
+Audit — Plan on top, the real shelf below. Tap the slots where the shelf deviates from the plan: a swap, an empty slot, a foreign product, a wrong brand or size, a spill. A wrong tap counts as a mistake.
+Sales — Arrange the products as you like; points come from the sales rules (eye level, heavy items low, complements side by side, cleaning away from food, category and brand blocks). The target is the best layout the optimizer found; reaching it earns three stars.
+Ordering — The shelf plan is set; your job is stock. Each day decide how many cases to order per product: orders arrive the next morning, what does not fit is returned, stock left at night pays holding, expired units are waste. The target is the profit of an expert seeing the same forecasts.
+
+0 ads · 0 trackers · 0 permissions
+
+Language: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
+
+Reyon collects no data, asks for no permissions and never connects to the network. Progress and settings live only on this device and go away when the app is uninstalled.
+
+The source code of Reyon is open under the GNU GPL v3. The "Reyon" name and logo are not part of the license.

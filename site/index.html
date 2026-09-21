@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F3F6FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0F1A" media="(prefers-color-scheme: dark)">
+<title>Reyon · planogram alıştırması</title>
+<meta name="description" content="Reyon: Android için planogram alıştırması. Diziliş, Denetim, Satış ve Sipariş — dört mod, 14 dil, sıfır reklam, sıfır izin, çevrimdışı.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B0F1A'/%3E%3Cg fill='%2360A5FA'%3E%3Crect x='6.2' y='8.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='10.2' y='8.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='14.2' y='8.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='18.2' y='8.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='22.2' y='8.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='6.2' y='16.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='10.2' y='16.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='14.2' y='16.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='18.2' y='16.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='22.2' y='16.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='6.2' y='24.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='10.2' y='24.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='14.2' y='24.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='18.2' y='24.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='22.2' y='24.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='6.2' y='4.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='10.2' y='4.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='14.2' y='12.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='18.2' y='12.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='22.2' y='12.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='6.2' y='20.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='14.2' y='20.2' width='3.6' height='3.6' rx='0.9'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  /* Tema: düğme yok; sistem tercihine (prefers-color-scheme) uyulur. */
+  :root {
+    color-scheme: light dark;
+    --bg: #F3F6FB;
+    --surface: #FFFFFF;
+    --surface-2: #E8EDF5;
+    --text: #0F1828;
+    --muted: #5A6577;
+    --title: #2563EB;
+    --btn-bg: #2563EB;
+    --btn-fg: #FFFFFF;
+    --card-border: rgba(15, 24, 40, 0.06);
+    --card-shadow: 0 8px 24px rgba(15, 24, 40, 0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0B0F1A;
+      --surface: #111827;
+      --surface-2: #1B2437;
+      --text: #E4EAF5;
+      --muted: #AAB4C8;
+      --title: #60A5FA;
+      --btn-bg: #60A5FA;
+      --btn-fg: #06121D;
+      --card-border: rgba(255, 255, 255, 0.05);
+      --card-shadow: none;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 20px 64px; }
+  header h1 {
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    color: var(--title);
+    line-height: 1.1;
+  }
+  header h1 .sub {
+    display: block;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  header p.tagline { font-size: 19px; color: var(--muted); margin-top: 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip {
+    background: var(--surface-2);
+    color: var(--muted);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .cta { margin-top: 24px; display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .cta a.all { color: var(--title); font-size: 14px; text-decoration: none; }
+  .cta a.all:hover { text-decoration: underline; }
+  main { margin-top: 36px; display: grid; gap: 34px; }
+  section h2 {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--title);
+  }
+  section p.lead { color: var(--muted); font-size: 15px; margin: 2px 0 14px; }
+  .cards { display: grid; gap: 14px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    border-radius: 24px;
+    padding: 22px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    background-image: linear-gradient(90deg, rgba(96, 165, 250, 0.10), transparent 60%);
+  }
+  .art {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 13px);
+    grid-auto-rows: 13px;
+    gap: 2px;
+  }
+  .art i { border-radius: 3px; background: rgba(96, 165, 250, 0.9); }
+  .art i.plank { background: rgba(96, 165, 250, 0.35); }
+  .card h3 { font-size: 22px; }
+  .card .info { flex: 1 1 auto; min-width: 0; }
+  .card .info p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+  .note {
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .note strong { color: var(--text); }
+  footer {
+    margin-top: 48px;
+    color: var(--muted);
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+  footer a { color: var(--title); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  @media (max-width: 540px) {
+    header h1 { font-size: 48px; }
+    .btn { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Reyon<span class="sub">planogram alıştırması</span></h1>
+    <p class="tagline">Raf dizilişini kurallardan çıkar, planı denet, satışı ve stoğu yönet. Dört mod, 14 dil, çevrimdışı.</p>
+    <div class="chips">
+      <span class="chip">0 reklam</span>
+      <span class="chip">0 izleyici</span>
+      <span class="chip">0 izin</span>
+      <span class="chip">açık kaynak</span>
+    </div>
+    <div class="cta">
+      <a class="btn" href="https://github.com/aripdcom/reyon/releases/latest/download/reyon.apk">APK indir</a>
+      <a class="all" href="https://github.com/aripdcom/reyon/releases">Bütün sürümler ve kaynak arşivleri</a>
+    </div>
+  </header>
+
+  <main>
+    <section lang="tr">
+      <h2>Dört mod</h2>
+      <p class="lead">Aynı raf, dört farklı iş. Her modun günlük turu ve serbest turu var; zorluk seçilir.</p>
+      <div class="cards">
+      <article class="card">
+        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="info">
+          <h3>Diziliş</h3>
+          <p>Brifteki kurallardan rafın tek doğru dizilişini çıkar. Her kural tutunca ✓ olur; tahmin gerekmez, çıkarım yeter.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="info">
+          <h3>Denetim</h3>
+          <p>Üstte planogram, altta gerçek raf. Sapmaları bul: yer değişimi, boş göz, yabancı ürün, yanlış marka ya da boy, taşma.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="info">
+          <h3>Satış</h3>
+          <p>Rafı istediğin gibi diz; puan satış kurallarından gelir — göz hizası, ağırlar alta, tamamlayıcılar yan yana, temizlik gıdadan uzak.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="info">
+          <h3>Sipariş</h3>
+          <p>Plan hazır, iş stokta. Her gün kaç koli isteyeceğine karar ver: iade, bekleme maliyeti ve fire hesabı tutmalı.</p>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <section lang="tr">
+      <h2>Nasıl çalışır</h2>
+      <div class="note">
+        <strong>Cihazda kalır.</strong> Reyon ağa bağlanmaz, izin istemez, hiçbir veri toplamaz. Turlar ve
+        rekorlar yalnızca telefonunuzda durur. Günlük turlar cihaz tarihinden çevrimdışı üretilir.
+        Uygulamanın dili içinden seçilir: 14 dilin tümü kutuda gelir.
+      </div>
+    </section>
+
+    <section lang="en">
+      <h2>In English</h2>
+      <p class="lead">Reyon is a planogram exercise for Android: four modes, 14 languages, no ads, no permissions, no network.</p>
+      <div class="cards">
+      <article class="card">
+        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="info">
+          <h3>Arrange</h3>
+          <p>Deduce the one correct shelf layout from the brief. Every rule turns ✓ when it holds — inference, never guessing.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="info">
+          <h3>Audit</h3>
+          <p>Planogram on top, the real shelf below. Find the deviations: a swap, an empty slot, a foreign product, a wrong brand or size, a spill.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="info">
+          <h3>Sales</h3>
+          <p>Arrange the shelf as you like; points come from the sales rules — eye level, heavy items low, complements side by side, cleaning away from food.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="info">
+          <h3>Ordering</h3>
+          <p>The plan is set; the work is stock. Decide how many cases to order each day: returns, holding cost and waste all count.</p>
+        </div>
+      </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Reyon · zero-ads, zero-permission app</span>
+    <a href="gizlilik.html">Gizlilik politikası</a>
+    <a href="https://github.com/aripdcom/reyon">GitHub</a>
+    <a href="https://github.com/aripdcom/reyon/blob/main/LICENSE">GPL-3.0</a>
+  </footer>
+</div>
+</body>
+</html>

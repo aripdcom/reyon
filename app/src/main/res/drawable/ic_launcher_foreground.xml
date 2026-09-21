@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Üç raf tahtası ve üstlerindeki ürün blokları.
-
-     Kareler tek boyda (7,2) ve tek renkte: mağaza görselini üreten
-     tools/gen_store_graphics.py bu biçimi ayrıştırıyor — desen değişirse
-     üretici de değişmeli. Güvenli alan 108'lik tuvalde 18-90 arası;
-     işaret 30-77 aralığında duruyor. -->
+<!-- Üç raf çıtası ve üstlerindeki ürünler: ortadaki rafta bir göz boş, o boşluk
+     uygulamanın işi. Şekiller `M x,y h W v H h -W z` biçiminde yazılır; mağaza
+     görsellerini üreten tools/gen_store_graphics.py bu biçimi ayrıştırıyor —
+     desen değişirse üretici de sınanmalı. Güvenli alan 108'lik tuvalde 18-90
+     arası; işaret 29-79 aralığında duruyor. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
@@ -12,5 +11,5 @@
     android:viewportHeight="108">
     <path
         android:fillColor="#60A5FA"
-        android:pathData="M34,30h7.2v7.2h-7.2z M42,30h7.2v7.2h-7.2z M34,38h7.2v7.2h-7.2z M42,38h7.2v7.2h-7.2z M50,38h7.2v7.2h-7.2z M58,38h7.2v7.2h-7.2z M66,38h7.2v7.2h-7.2z M50,46h7.2v7.2h-7.2z M58,46h7.2v7.2h-7.2z M66,46h7.2v7.2h-7.2z M34,54h7.2v7.2h-7.2z M42,54h7.2v7.2h-7.2z M50,54h7.2v7.2h-7.2z M58,54h7.2v7.2h-7.2z M66,54h7.2v7.2h-7.2z M34,62h7.2v7.2h-7.2z M50,62h7.2v7.2h-7.2z M34,70h7.2v7.2h-7.2z M42,70h7.2v7.2h-7.2z M50,70h7.2v7.2h-7.2z M58,70h7.2v7.2h-7.2z M66,70h7.2v7.2h-7.2z" />
+        android:pathData="M32,29h10v10h-10z M44,29h10v10h-10z M56,29h10v10h-10z M30,39h48v4h-48z M32,47h10v10h-10z M56,47h10v10h-10z M68,47h10v10h-10z M30,57h48v4h-48z M32,65h10v10h-10z M44,65h10v10h-10z M56,65h10v10h-10z M68,65h10v10h-10z M30,75h48v4h-48z" />
 </vector>

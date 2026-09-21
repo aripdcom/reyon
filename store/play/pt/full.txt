@@ -1,0 +1,14 @@
+Prática de planograma: arrume a prateleira, audite, venda e faça o pedido.
+
+Arrumar — Toque num produto e depois num espaço da prateleira; toque longo devolve ao tabuleiro. Cada regra do briefing vira ✓ quando é cumprida; as regras levam a uma única arrumação, sem chute.
+Auditar — O plano em cima, a prateleira real embaixo. Toque nos espaços em que a prateleira se desvia do plano: uma troca, um espaço vazio, um produto estranho, uma marca ou um tamanho errados, um transbordo. Um toque errado conta como erro.
+Vendas — Arrume os produtos como quiser; os pontos vêm das regras de venda (altura dos olhos, pesados embaixo, complementares lado a lado, limpeza longe da comida, blocos de categoria e de marca). A meta é a melhor arrumação que o otimizador encontrou; alcançá-la dá três estrelas.
+Pedidos — O plano da prateleira está fixo; seu trabalho é o estoque. Todo dia decida quantas caixas pedir por produto: os pedidos chegam na manhã seguinte, o que não cabe é devolvido, o estoque que sobra à noite custa armazenagem, as unidades vencidas são perda. A meta é o lucro de um especialista que vê as mesmas previsões.
+
+0 anúncios · 0 rastreadores · 0 permissões
+
+Idioma: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
+
+O Reyon não coleta dados, não pede permissões e nunca se conecta à rede. O progresso e os ajustes ficam só neste aparelho e somem quando o app é desinstalado.
+
+O código-fonte do Reyon é aberto sob a GNU GPL v3. O nome “Reyon” e o logotipo não fazem parte da licença.

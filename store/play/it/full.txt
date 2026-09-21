@@ -1,0 +1,14 @@
+Planogramma: sistema lo scaffale, verificalo, gestisci vendite e scorte.
+
+Sistemare — Tocca un prodotto e poi un posto sullo scaffale; una pressione lunga lo rimanda sul vassoio. Ogni regola del briefing diventa ✓ quando è rispettata; le regole portano a una sola disposizione, senza tirare a indovinare.
+Controllare — Il piano in alto, lo scaffale reale in basso. Tocca i posti in cui lo scaffale si discosta dal piano: uno scambio, un posto vuoto, un prodotto estraneo, una marca o una misura sbagliate, un’invasione. Un tocco sbagliato conta come errore.
+Vendite — Disponi i prodotti come vuoi; i punti arrivano dalle regole di vendita (altezza occhi, i pesanti in basso, i complementari accanto, la pulizia lontana dal cibo, blocchi di categoria e di marca). L’obiettivo è la disposizione migliore trovata dall’ottimizzatore; raggiungerlo dà tre stelle.
+Ordini — Il piano dello scaffale è fissato; il tuo lavoro è la scorta. Ogni giorno decidi quante casse ordinare per prodotto: gli ordini arrivano la mattina dopo, quello che non entra torna indietro, la scorta che resta la sera costa magazzino, le unità scadute sono perdita. L’obiettivo è il profitto di un esperto che vede le stesse previsioni.
+
+0 pubblicità · 0 tracker · 0 permessi
+
+Lingua: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
+
+Reyon non raccoglie dati, non chiede permessi e non si collega mai alla rete. I progressi e le impostazioni restano solo su questo dispositivo e spariscono quando disinstalli.
+
+Il codice sorgente di Reyon è aperto con licenza GNU GPL v3. Il nome «Reyon» e il logo non fanno parte della licenza.

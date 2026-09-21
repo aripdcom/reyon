@@ -1,0 +1,14 @@
+Planogramm-Training: Regal bestücken, prüfen, Umsatz und Bestand steuern.
+
+Bestücken — Tippe ein Produkt an, dann einen Platz im Regal; lang drücken schickt es zurück ins Tablett. Jede Regel des Briefings wird ✓, sobald sie gilt; die Regeln führen zu genau einer Belegung, ohne Raten.
+Prüfen — Oben der Plan, unten das echte Regal. Tippe die Plätze an, an denen das Regal vom Plan abweicht: ein Tausch, ein leerer Platz, ein fremdes Produkt, eine falsche Marke oder Größe, ein Überlaufen. Ein falscher Tipp zählt als Fehler.
+Verkauf — Stell die Produkte auf, wie du willst; die Punkte kommen aus den Verkaufsregeln (Augenhöhe, Schweres nach unten, Ergänzungen nebeneinander, Reinigungsmittel weg von Lebensmitteln, Kategorie- und Markenblöcke). Das Ziel ist die beste Belegung, die der Optimierer gefunden hat; wer sie erreicht, bekommt drei Sterne.
+Bestellen — Der Regalplan steht; deine Aufgabe ist der Bestand. Entscheide jeden Tag, wie viele Kisten du pro Produkt bestellst: Bestellungen kommen am nächsten Morgen, was nicht passt, geht zurück, was abends im Regal bleibt, kostet Lagergeld, Abgelaufenes ist Verlust. Das Ziel ist der Gewinn eines Profis, der dieselben Prognosen sieht.
+
+0 Werbung · 0 Tracker · 0 Berechtigungen
+
+Sprache: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
+
+Reyon sammelt keine Daten, verlangt keine Berechtigungen und geht nie ins Netz. Fortschritt und Einstellungen liegen nur auf diesem Gerät und verschwinden beim Deinstallieren.
+
+Der Quellcode von Reyon ist offen unter der GNU GPL v3. Der Name „Reyon“ und das Logo gehören nicht zur Lizenz.

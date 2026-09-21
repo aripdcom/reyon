@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500">
+  <defs>
+    <radialGradient id="glow" cx="24%" cy="50%" r="58%">
+      <stop offset="0" stop-color="#60A5FA" stop-opacity="0.17"/>
+      <stop offset="1" stop-color="#60A5FA" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40,0 V40 H0" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1024" height="500" fill="#0B0F1A"/>
+  <rect width="1024" height="500" fill="url(#grid)"/>
+  <rect width="1024" height="500" fill="url(#glow)"/>
+  <g fill="#60A5FA">
+  <rect x="140.00" y="125.00" width="50.00" height="50.00"/>
+  <rect x="200.00" y="125.00" width="50.00" height="50.00"/>
+  <rect x="260.00" y="125.00" width="50.00" height="50.00"/>
+  <rect x="130.00" y="175.00" width="240.00" height="20.00"/>
+  <rect x="140.00" y="215.00" width="50.00" height="50.00"/>
+  <rect x="260.00" y="215.00" width="50.00" height="50.00"/>
+  <rect x="320.00" y="215.00" width="50.00" height="50.00"/>
+  <rect x="130.00" y="265.00" width="240.00" height="20.00"/>
+  <rect x="140.00" y="305.00" width="50.00" height="50.00"/>
+  <rect x="200.00" y="305.00" width="50.00" height="50.00"/>
+  <rect x="260.00" y="305.00" width="50.00" height="50.00"/>
+  <rect x="320.00" y="305.00" width="50.00" height="50.00"/>
+  <rect x="130.00" y="355.00" width="240.00" height="20.00"/>
+  </g>
+  <text x="396" y="258" textLength="300" lengthAdjust="spacingAndGlyphs"
+        font-family="DejaVu Sans, Liberation Sans, Arial, sans-serif"
+        font-size="76" font-weight="bold" fill="#F4F7FB">REYON</text>
+  <rect x="396" y="292" width="300" height="6" fill="#60A5FA"/>
+</svg>

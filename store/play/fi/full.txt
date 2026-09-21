@@ -1,0 +1,14 @@
+Planogrammiharjoitus: täytä hylly, tarkasta, hallitse myyntiä ja varastoa.
+
+Järjestä — Napauta tuotetta ja sitten paikkaa hyllyssä; pitkä painallus lähettää sen takaisin alustalle. Jokainen briiffin sääntö muuttuu ✓:ksi, kun se pitää paikkansa; säännöt johtavat täsmälleen yhteen järjestykseen, ilman arvailua.
+Tarkasta — Suunnitelma ylhäällä, oikea hylly alhaalla. Napauta paikkoja, joissa hylly poikkeaa suunnitelmasta: vaihdos, tyhjä paikka, vieras tuote, väärä merkki tai koko, ylivuoto. Väärä napautus lasketaan virheeksi.
+Myynti — Järjestä tuotteet haluamallasi tavalla; pisteet tulevat myyntisäännöistä (silmien korkeus, painavat alas, täydentävät vierekkäin, puhdistusaineet erilleen ruoasta, kategoria- ja merkkilohkot). Tavoite on paras järjestys, jonka optimoija löysi; siihen yltäminen antaa kolme tähteä.
+Tilaus — Hyllysuunnitelma on kiinteä; sinun työsi on varasto. Päätä joka päivä, montako laatikkoa tilaat tuotetta kohti: tilaukset saapuvat seuraavana aamuna, mikä ei mahdu palautuu, illaksi jäävä varasto maksaa varastointia, vanhentuneet yksiköt ovat tappiota. Tavoite on asiantuntijan voitto samoilla ennusteilla.
+
+0 mainosta · 0 seurainta · 0 lupaa
+
+Kieli: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
+
+Reyon ei kerää tietoja, ei pyydä lupia eikä koskaan ota yhteyttä verkkoon. Edistyminen ja asetukset ovat vain tässä laitteessa ja katoavat, kun sovellus poistetaan.
+
+Reyonin lähdekoodi on avoin GNU GPL v3 -lisenssillä. Nimi ”Reyon” ja logo eivät kuulu lisenssiin.

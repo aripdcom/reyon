@@ -1,0 +1,14 @@
+Práctica de planograma: coloca el estante, audítalo, vende y pide stock.
+
+Colocar — Toca un producto y luego un hueco del estante; pulsación larga para devolverlo a la bandeja. Cada regla del briefing pasa a ✓ cuando se cumple; las reglas llevan a una sola colocación, sin adivinar.
+Auditar — El plan arriba, el estante real abajo. Toca los huecos donde el estante se desvía del plan: un cambio, un hueco vacío, un producto ajeno, una marca o un tamaño equivocados, un desborde. Un toque equivocado cuenta como fallo.
+Ventas — Coloca los productos como quieras; los puntos vienen de las reglas de venta (altura de los ojos, los pesados abajo, complementarios juntos, la limpieza lejos de la comida, bloques de categoría y de marca). El objetivo es la mejor colocación que encontró el optimizador; alcanzarlo da tres estrellas.
+Pedidos — El plan del estante está fijo; tu trabajo es el stock. Cada día decide cuántas cajas pedir por producto: los pedidos llegan a la mañana siguiente, lo que no cabe se devuelve, el stock que queda por la noche cuesta almacenaje, las unidades caducadas son pérdida. El objetivo es el beneficio de un experto que ve las mismas previsiones.
+
+0 anuncios · 0 rastreadores · 0 permisos
+
+Idioma: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
+
+Reyon no recoge datos, no pide permisos y nunca se conecta a la red. El progreso y los ajustes están solo en este dispositivo y desaparecen al desinstalar.
+
+El código fuente de Reyon es abierto bajo la GNU GPL v3. El nombre «Reyon» y el logotipo no forman parte de la licencia.

@@ -1,0 +1,14 @@
+Planogram alıştırması: rafı diz, planı denet, satışı ve stoğu yönet.
+
+Diziliş — Ürüne dokun, sonra rafta bir göze dokun; uzun basınca ürün tepsiye döner. Brifteki her kural tutunca ✓ olur; kurallar tek bir dizilişe götürür, tahmin gerekmez.
+Denetim — Üstte plan, altta gerçek raf. Rafın plandan saptığı gözlere dokun: yer değişimi, boş göz, yabancı ürün, yanlış marka ya da boy, taşma. Yanlış dokunuş hata sayılır.
+Satış — Ürünleri istediğin gibi diz; puan satış kurallarından gelir (göz hizası, ağırlar alta, tamamlayıcılar yan yana, temizlik gıdadan uzak, kategori ve marka blokları). Hedef iyileştiricinin en iyi dizilişi; hedefe ulaşan üç yıldız alır.
+Sipariş — Raf planı hazır; işin stok. Her gün ürün başına kaç koli isteyeceğine karar ver: sipariş ertesi sabah gelir, rafa sığmayan iade olur, akşam kalan stok bekleme öder, raf ömrü dolan fire olur. Hedef, aynı tahminleri gören uzmanın kârı.
+
+0 reklam · 0 izleyici · 0 izin
+
+Dil: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
+
+Reyon hiçbir veri toplamaz, hiçbir izin istemez ve ağa bağlanmaz. İlerleme ve ayarlar yalnızca bu cihazda saklanır; uygulamayı silince silinir.
+
+Reyon'un kaynak kodu GNU GPL v3 ile açıktır. "Reyon" adı ve logosu lisansa dahil değildir.

@@ -1,0 +1,14 @@
+Planogram oefenen: schap vullen, controleren, verkoop en voorraad sturen.
+
+Vullen — Tik op een product en dan op een plek in het schap; lang indrukken stuurt het terug naar het bakje. Elke regel uit de briefing wordt ✓ als hij klopt; de regels leiden naar precies één indeling, zonder gokken.
+Controleren — Het plan bovenaan, het echte schap eronder. Tik op de plekken waar het schap van het plan afwijkt: een verwisseling, een lege plek, een vreemd product, een verkeerd merk of formaat, een overloop. Een verkeerde tik geldt als fout.
+Verkoop — Zet de producten neer zoals je wilt; de punten komen uit de verkoopregels (ooghoogte, zwaar onderaan, aanvullende producten naast elkaar, schoonmaak weg van voedsel, categorie- en merkblokken). Het doel is de beste indeling die de optimalisator vond; wie die haalt, krijgt drie sterren.
+Bestellen — De schapindeling staat vast; jouw werk is de voorraad. Beslis elke dag hoeveel dozen je per product bestelt: bestellingen komen de volgende ochtend, wat niet past gaat retour, voorraad die ’s avonds blijft staan kost opslag, verlopen eenheden zijn verlies. Het doel is de winst van een expert die dezelfde prognoses ziet.
+
+0 advertenties · 0 trackers · 0 rechten
+
+Taal: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
+
+Reyon verzamelt geen gegevens, vraagt geen rechten en gaat nooit het netwerk op. Voortgang en instellingen staan alleen op dit apparaat en verdwijnen bij het verwijderen.
+
+De broncode van Reyon is open onder de GNU GPL v3. De naam „Reyon” en het logo horen niet bij de licentie.

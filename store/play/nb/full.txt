@@ -1,0 +1,14 @@
+Planogramtrening: fyll hyllen, revider den, styr salg og lager.
+
+Still opp — Trykk på en vare og så på en plass i hylla; hold inne for å sende den tilbake på brettet. Hver regel i briefen blir ✓ når den stemmer; reglene fører til nøyaktig én oppstilling, uten gjetting.
+Kontroller — Planen øverst, den ekte hylla nederst. Trykk på plassene der hylla avviker fra planen: en ombytting, en tom plass, en fremmed vare, feil merke eller feil størrelse, et oversøl. Et feil trykk teller som feil.
+Salg — Still opp varene som du vil; poengene kommer fra salgsreglene (øyehøyde, tungt nederst, komplementære ved siden av hverandre, rengjøring borte fra mat, kategori- og merkeblokker). Målet er den beste oppstillingen optimereren fant; når du dit, får du tre stjerner.
+Bestilling — Hylleplanen ligger fast; jobben din er lageret. Hver dag bestemmer du hvor mange kasser du bestiller per vare: bestillingene kommer neste morgen, det som ikke får plass går i retur, lager som står igjen om kvelden koster lagerleie, utgåtte enheter er tap. Målet er fortjenesten til en ekspert som ser de samme prognosene.
+
+0 annonser · 0 sporere · 0 tillatelser
+
+Språk: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
+
+Reyon samler ikke inn data, ber ikke om tillatelser og kobler seg aldri til nettet. Fremgang og innstillinger ligger bare på denne enheten og forsvinner når appen avinstalleres.
+
+Kildekoden til Reyon er åpen under GNU GPL v3. Navnet «Reyon» og logoen er ikke en del av lisensen.
