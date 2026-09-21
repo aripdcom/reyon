@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Reyon'un metinleri. Diller res/values-<kod> altında; varsayılan (bu dosya)
+  İngilizce. Anahtar paritesini ve biçim belirteçlerini tools/check_strings.py
+  denetler. Bölüm başlıkları her dilde Türkçe: depodaki öbür yorumlar gibi
+  geliştirici notu, çeviri değil.
+-->
+<resources>
+    <string name="app_name">Reyon</string>
+    <string name="app_tagline">Planogrampuzzel: leid uit de briefing de enige juiste schapindeling af</string>
+
+    <!-- Ortak -->
+    <string name="chip_no_ads">0 advertenties</string>
+    <string name="chip_no_trackers">0 trackers</string>
+    <string name="chip_no_permissions">0 rechten</string>
+    <string name="new_record">Nieuw record! 🏆</string>
+    <string name="exit_app">Afsluiten</string>
+    <string name="back">Terug</string>
+    <string name="congrats">Goed gedaan! 🎉</string>
+    <string name="undo">Ongedaan maken</string>
+    <string name="solved_label">Opgelost</string>
+    <string name="mode_daily">Dagelijks</string>
+    <string name="mode_free">Vrij</string>
+    <string name="difficulty_easy">Makkelijk</string>
+    <string name="difficulty_medium">Gemiddeld</string>
+    <string name="difficulty_hard">Moeilijk</string>
+    <string name="difficulty_label">Niveau</string>
+    <string name="same_difficulty">Nieuw op hetzelfde niveau</string>
+    <string name="time_label">Tijd</string>
+    <string name="time_fmt">Tijd: %1$s</string>
+
+    <!-- Ayarlar -->
+    <string name="settings_title">Instellingen</string>
+    <string name="settings_sound">Geluid</string>
+    <string name="sound_on">Geluid aanzetten</string>
+    <string name="sound_off">Geluid uitzetten</string>
+    <string name="language_title">Taal</string>
+    <string name="language_system">Taal van de telefoon</string>
+    <string name="language_selected">geselecteerd</string>
+    <string name="language_select">selecteren</string>
+    <string name="settings_haptics">Trilling</string>
+    <string name="haptics_on">Trilling aanzetten</string>
+    <string name="haptics_off">Trilling uitzetten</string>
+
+    <!-- Paylaşım -->
+    <string name="share">Delen</string>
+    <string name="share_chooser">Resultaat delen</string>
+    <string name="share_failed">Delen kon niet worden geopend</string>
+    <string name="share_tagline">Reyon: nul advertenties, nul rechten, nul trackers. Gratis en open source:</string>
+    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_solved">Opgelost!</string>
+    <string name="share_score_fmt">%1$s punten</string>
+    <string name="share_daily_fmt">Dagelijks · %1$s</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">Over</string>
+    <string name="about_version_fmt">Versie %1$s</string>
+    <string name="about_privacy_summary">Reyon verzamelt geen gegevens, vraagt geen rechten en gaat nooit het netwerk op. Voortgang en instellingen staan alleen op dit apparaat en verdwijnen bij het verwijderen.</string>
+    <string name="about_links">Links</string>
+    <string name="about_website">Website</string>
+    <string name="about_source">Broncode</string>
+    <string name="about_report">Probleem melden</string>
+    <string name="about_privacy">Privacybeleid</string>
+    <string name="about_contact">Schrijf ons</string>
+    <string name="about_open_failed">Link kon niet worden geopend: geen browser op dit apparaat</string>
+    <string name="about_licenses">Open source licenties</string>
+    <string name="about_licenses_intro">Reyon gebruikt de onderstaande open source componenten; tik erop om de bron te openen.</string>
+    <string name="about_lic_androidx_name">AndroidX Jetpack</string>
+    <string name="about_lic_androidx_desc">Bibliotheken Compose, Material 3, Lifecycle, Activity en Core. The Android Open Source Project.</string>
+    <string name="about_lic_kotlin_name">Kotlin en kotlinx.coroutines</string>
+    <string name="about_lic_kotlin_desc">Standaardbibliotheek van de taal en gelijktijdigheid. JetBrains en bijdragers.</string>
+    <string name="about_license_show">Licentietekst van Apache 2.0 tonen</string>
+    <string name="about_license_hide">Licentietekst verbergen</string>
+    <string name="about_app_license">De broncode van Reyon is open onder de GNU GPL v3. De naam „Reyon” en het logo horen niet bij de licentie.</string>
+    <string name="about_app_license_link">Licentietekst (GitHub)</string>
+
+    <!-- Reyon: Diziliş -->
+    <string name="reyon_intro">Tik op een product en dan op een plek in het schap; lang indrukken stuurt het terug naar het bakje. Elke regel uit de briefing wordt ✓ als hij klopt; de regels leiden naar precies één indeling, zonder gokken.</string>
+    <string name="reyon_level_desc_fmt">%1$d schappen × %2$d plekken · %3$d–%4$d producten</string>
+    <string name="reyon_daily_desc">Vandaag vult iedereen hetzelfde schap; je tijd wordt bijgehouden.</string>
+    <string name="reyon_daily_done_fmt">Vandaag opgelost: %1$s · %2$d hints</string>
+    <string name="reyon_free_desc">Willekeurig schap; oplossingen zonder hint gelden als record.</string>
+    <string name="reyon_best_fmt">Beste tijd: %1$s</string>
+    <string name="reyon_start">Beginnen</string>
+    <string name="reyon_play_again">Nog eens vullen</string>
+    <string name="reyon_to_menu">Terug naar het begin</string>
+    <string name="reyon_generating">Schap wordt voorbereid…</string>
+    <string name="reyon_brief_label">Planogrambriefing</string>
+    <string name="reyon_tray_label">Bakje</string>
+    <string name="reyon_tray_empty">Alle producten staan in het schap</string>
+    <string name="reyon_tray_item_fmt">%1$s, %2$d fronten</string>
+    <string name="reyon_hint">Hint</string>
+    <string name="reyon_remove">Naar het bakje</string>
+    <string name="reyon_hint_wrong_fmt">%1$s stond verkeerd en ging terug naar het bakje</string>
+    <string name="reyon_hint_place_fmt">Hint: %1$s hoort %2$s</string>
+    <string name="reyon_result_fmt">%1$s · %2$d hints</string>
+    <string name="reyon_board_desc_fmt">Reyon %1$d schappen × %2$d plekken, %3$d producten nog niet geplaatst</string>
+    <string name="reyon_shelf_top">bovenste schap</string>
+    <string name="reyon_shelf_eye">ooghoogte (schap 2)</string>
+    <string name="reyon_shelf_bottom">onderste schap</string>
+    <string name="reyon_shelf_nth">schap %1$d</string>
+    <string name="reyon_shelf_top_at">op het bovenste schap</string>
+    <string name="reyon_shelf_eye_at">op ooghoogte (schap 2)</string>
+    <string name="reyon_shelf_bottom_at">op het onderste schap</string>
+    <string name="reyon_shelf_nth_at">op schap %1$d</string>
+    <string name="reyon_clue_placed">%1$s staat %2$s (gegeven)</string>
+    <string name="reyon_clue_on_shelf">%1$s staat %2$s</string>
+    <string name="reyon_clue_in_slot">%1$s beslaat plek %2$d van links</string>
+    <string name="reyon_clue_left_edge">%1$s staat aan het linkeruiteinde van zijn schap</string>
+    <string name="reyon_clue_right_edge">%1$s staat aan het rechteruiteinde van zijn schap</string>
+    <string name="reyon_clue_adjacent">%1$s en %2$s staan naast elkaar</string>
+    <string name="reyon_clue_left_of">%1$s deelt een schap met %2$s en staat links ervan</string>
+    <string name="reyon_clue_same_shelf">%1$s en %2$s delen een schap</string>
+    <string name="reyon_clue_different_shelf">%1$s en %2$s staan op verschillende schappen</string>
+    <string name="reyon_clue_above">%1$s staat op het schap direct boven %2$s, er precies boven</string>
+    <string name="reyon_clue_eye_level">★ Producten met hoge marge staan op ooghoogte (schap 2)</string>
+    <string name="reyon_clue_heavy_bottom">▼ Zware producten horen op het onderste schap</string>
+    <string name="reyon_clue_category_block">%1$s vormen één blok: zelfde schap, naast elkaar</string>
+    <string name="reyon_clue_categories_apart">%1$s en %2$s delen nooit een schap</string>
+    <string name="reyon_clue_brand_vertical">%1$s vormt een verticaal blok: boven elkaar op opeenvolgende schappen</string>
+    <string name="reyon_clue_size_flow">De maten van %1$s worden groter van links naar rechts (• klein, ••• groot)</string>
+    <string name="reyon_cat_icecek">Dranken</string>
+    <string name="reyon_cat_atistirmalik">Snacks</string>
+    <string name="reyon_cat_kahvaltilik">Ontbijt</string>
+    <string name="reyon_cat_temizlik">Schoonmaakmiddelen</string>
+    <string name="reyon_cat_bakim">Persoonlijke verzorging</string>
+    <string name="reyon_brand_a">Toros</string>
+    <string name="reyon_brand_b">Ege</string>
+    <string name="reyon_brand_c">Kuzey</string>
+    <string name="reyon_brand_d">Meltem</string>
+    <string name="reyon_kind_puzzle">Vullen</string>
+    <string name="reyon_kind_audit">Controleren</string>
+    <string name="reyon_kind_sales">Verkoop</string>
+    <string name="reyon_kind_order">Bestellen</string>
+
+    <!-- Ürün adları -->
+    <string name="reyon_kind_kola">Cola</string>
+    <string name="reyon_kind_su">Water</string>
+    <string name="reyon_kind_gazoz">Prik</string>
+    <string name="reyon_kind_meyve_suyu">Vruchtensap</string>
+    <string name="reyon_kind_ayran">Ayran</string>
+    <string name="reyon_kind_soda">Spa rood</string>
+    <string name="reyon_kind_limonata">Limonade</string>
+    <string name="reyon_kind_cips">Chips</string>
+    <string name="reyon_kind_kraker">Crackers</string>
+    <string name="reyon_kind_kuruyemis">Noten</string>
+    <string name="reyon_kind_cikolata">Chocolade</string>
+    <string name="reyon_kind_gofret">Wafel</string>
+    <string name="reyon_kind_biskuvi">Koekjes</string>
+    <string name="reyon_kind_sos">Dipsaus</string>
+    <string name="reyon_kind_bal">Honing</string>
+    <string name="reyon_kind_recel">Jam</string>
+    <string name="reyon_kind_peynir">Kaas</string>
+    <string name="reyon_kind_zeytin">Olijven</string>
+    <string name="reyon_kind_tereyagi">Boter</string>
+    <string name="reyon_kind_yumurta">Eieren</string>
+    <string name="reyon_kind_sut">Melk</string>
+    <string name="reyon_kind_deterjan">Waspoeder</string>
+    <string name="reyon_kind_camasir_suyu">Bleek</string>
+    <string name="reyon_kind_bulasik_deterjani">Afwasmiddel</string>
+    <string name="reyon_kind_yumusatici">Wasverzachter</string>
+    <string name="reyon_kind_sunger">Spons</string>
+    <string name="reyon_kind_kagit_havlu">Keukenpapier</string>
+    <string name="reyon_kind_cop_poseti">Vuilniszakken</string>
+    <string name="reyon_kind_sampuan">Shampoo</string>
+    <string name="reyon_kind_sabun">Zeep</string>
+    <string name="reyon_kind_dis_macunu">Tandpasta</string>
+    <string name="reyon_kind_deodorant">Deodorant</string>
+    <string name="reyon_kind_tiras_kopugu">Scheerschuim</string>
+    <string name="reyon_kind_islak_mendil">Vochtige doekjes</string>
+    <string name="reyon_kind_pamuk">Watten</string>
+
+    <!-- Reyon: Denetim -->
+    <string name="reyon_audit_intro">Het plan bovenaan, het echte schap eronder. Tik op de plekken waar het schap van het plan afwijkt: een verwisseling, een lege plek, een vreemd product, een verkeerd merk of formaat, een overloop. Een verkeerde tik geldt als fout.</string>
+    <string name="reyon_audit_level_desc_fmt">%1$d schappen × %2$d plekken · %3$d afwijkingen</string>
+    <string name="reyon_audit_daily_desc">Vandaag controleert iedereen hetzelfde schap; je tijd en fouten worden bijgehouden.</string>
+    <string name="reyon_audit_daily_done_fmt">Vandaag gecontroleerd: %1$s · %2$d fouten</string>
+    <string name="reyon_audit_free_desc">Willekeurig schap; controles zonder fout en zonder hint gelden als record.</string>
+    <string name="reyon_audit_start">Controle starten</string>
+    <string name="reyon_audit_generating">Controle wordt voorbereid…</string>
+    <string name="reyon_audit_plan_label">Plan</string>
+    <string name="reyon_audit_shelf_label">Schap: tik op de afwijkingen</string>
+    <string name="reyon_audit_found_label">Gevonden</string>
+    <string name="reyon_audit_mistakes_label">Fouten</string>
+    <string name="reyon_audit_remaining_fmt">nog %1$d te vinden</string>
+    <string name="reyon_audit_done_title">Controle afgerond</string>
+    <string name="reyon_audit_result_fmt">%1$s · %2$d fouten · %3$d hints</string>
+    <string name="reyon_audit_board_desc_fmt">Controleschap %1$d schappen × %2$d plekken, %3$d/%4$d afwijkingen gevonden</string>
+    <string name="reyon_audit_plan_desc_fmt">Plan %1$d schappen × %2$d plekken</string>
+    <string name="reyon_audit_plan_zoom_hint">tik om te vergroten</string>
+    <string name="reyon_audit_plan_zoom_desc">Vergroot plan; tik om te sluiten</string>
+    <string name="reyon_audit_plan_zoom_close">Tik om te sluiten</string>
+    <string name="reyon_dev_swap_fmt">Verwisseld: %1$s ↔ %2$s</string>
+    <string name="reyon_dev_gap_fmt">Lege plek: %1$s mist één front</string>
+    <string name="reyon_dev_missing_fmt">Lege plek: %1$s ontbreekt</string>
+    <string name="reyon_dev_foreign_fmt">Vreemd product: %2$s in plaats van %1$s</string>
+    <string name="reyon_dev_brand_fmt">Verkeerd merk: %1$s (%3$s in plaats van %2$s)</string>
+    <string name="reyon_dev_size_fmt">Verkeerd formaat: %1$s</string>
+    <string name="reyon_dev_spill_fmt">Overloop: %1$s loopt over in %2$s</string>
+
+    <!-- Reyon: Satış -->
+    <string name="reyon_sales_intro">Zet de producten neer zoals je wilt; de punten komen uit de verkoopregels (ooghoogte, zwaar onderaan, aanvullende producten naast elkaar, schoonmaak weg van voedsel, categorie- en merkblokken). Het doel is de beste indeling die de optimalisator vond; wie die haalt, krijgt drie sterren.</string>
+    <string name="reyon_sales_daily_desc">Vandaag zet iedereen dezelfde producten neer; je beste score van de dag wordt bijgehouden.</string>
+    <string name="reyon_sales_daily_done_fmt">Vandaag: %1$d / %2$d punten · %3$s</string>
+    <string name="reyon_sales_free_desc">Willekeurige productset; het percentage van het doel geldt als record.</string>
+    <string name="reyon_sales_best_fmt">Record: %1$d%% van het doel</string>
+    <string name="reyon_sales_start">Beginnen met neerzetten</string>
+    <string name="reyon_sales_generating">Doel wordt berekend…</string>
+    <string name="reyon_sales_score_label">Punten</string>
+    <string name="reyon_sales_target_label">Doel</string>
+    <string name="reyon_sales_rules_label">Verkoopregels</string>
+    <string name="reyon_sales_rule_position">Positie</string>
+    <string name="reyon_sales_rule_position_desc">vraag × fronten × schapfactor: ooghoogte ×3, boven en midden ×2, onder ×1 · ▼ zwaar alleen onderaan ×3 · ★ alleen op ooghoogte ×4</string>
+    <string name="reyon_sales_rule_complement">Aanvullend</string>
+    <string name="reyon_sales_rule_complement_desc">paren zoals chips en dip naast elkaar +6, boven elkaar +3</string>
+    <string name="reyon_sales_rule_conflict">Conflict</string>
+    <string name="reyon_sales_rule_conflict_desc">een schoonmaakmiddel naast voedsel −8</string>
+    <string name="reyon_sales_rule_category">Categorieblok</string>
+    <string name="reyon_sales_rule_category_desc">zelfde categorie naast elkaar +4</string>
+    <string name="reyon_sales_rule_brand">Merkblok</string>
+    <string name="reyon_sales_rule_brand_desc">zelfde merk naast elkaar +3, boven elkaar +3</string>
+    <string name="reyon_sales_neighbors">buren</string>
+    <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
+    <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
+    <string name="reyon_sales_selected_fmt">%1$s geselecteerd (vraag %2$d): tik op een plek in het schap</string>
+    <string name="reyon_sales_pick_hint">Tik op een product om de puntenopbouw te zien</string>
+    <string name="reyon_sales_demand_fmt">vraag %1$d</string>
+    <string name="reyon_sales_finish">Klaar</string>
+    <string name="reyon_sales_done_title">Indeling klaar</string>
+    <string name="reyon_sales_result_fmt">%1$d / %2$d punten (%3$d%% van het doel)</string>
+    <string name="reyon_sales_beat_target">Je hebt het doel overtroffen! 🏆</string>
+    <string name="reyon_sales_reopen">Verder neerzetten</string>
+    <string name="reyon_sales_show_target">Doel tonen</string>
+    <string name="reyon_sales_review_mine">Mijn indeling</string>
+    <string name="reyon_sales_review_target_fmt">Doel (%1$d)</string>
+    <string name="reyon_sales_back_to_result">Resultaat</string>
+    <string name="reyon_sales_board_desc_fmt">Verkoopschap %1$d schappen × %2$d plekken, %3$d producten nog niet geplaatst, %4$d punten</string>
+
+    <!-- Reyon: Sipariş -->
+    <string name="reyon_order_intro">De schapindeling staat vast; jouw werk is de voorraad. Beslis elke dag hoeveel dozen je per product bestelt: bestellingen komen de volgende ochtend, wat niet past gaat retour, voorraad die ’s avonds blijft staan kost opslag, verlopen eenheden zijn verlies. Het doel is de winst van een expert die dezelfde prognoses ziet.</string>
+    <string name="reyon_order_level_desc_fmt">%1$d schappen × %2$d plekken · %3$d dagen · %4$d acties</string>
+    <string name="reyon_order_daily_desc">Vandaag speelt iedereen dezelfde week; je beste winst van de dag wordt bijgehouden.</string>
+    <string name="reyon_order_daily_done_fmt">Vandaag: %1$d / %2$d winst · %3$s</string>
+    <string name="reyon_order_free_desc">Willekeurige week; het percentage van het doel geldt als record.</string>
+    <string name="reyon_order_best_fmt">Record: %1$d%% van het doel</string>
+    <string name="reyon_order_start">Week starten</string>
+    <string name="reyon_order_generating">Week wordt voorbereid…</string>
+    <string name="reyon_order_day_label">Dag</string>
+    <string name="reyon_order_profit_label">Winst</string>
+    <string name="reyon_order_target_label">Doel</string>
+    <string name="reyon_order_dow_1">Maandag</string>
+    <string name="reyon_order_dow_2">Dinsdag</string>
+    <string name="reyon_order_dow_3">Woensdag</string>
+    <string name="reyon_order_dow_4">Donderdag</string>
+    <string name="reyon_order_dow_5">Vrijdag</string>
+    <string name="reyon_order_dow_6">Zaterdag</string>
+    <string name="reyon_order_dow_7">Zondag</string>
+    <string name="reyon_order_day_title_fmt">%1$s · dag %2$d van %3$d</string>
+    <string name="reyon_order_promo_ahead_fmt">%1$s: actie %2$s (vraag ×2,5)</string>
+    <string name="reyon_order_stock_fmt">voorraad %1$d/%2$d</string>
+    <string name="reyon_order_today_fmt">vandaag %1$d–%2$d</string>
+    <string name="reyon_order_forecast_fmt">%1$s %2$d–%3$d</string>
+    <string name="reyon_order_incoming_fmt">+%2$d komen %1$s</string>
+    <string name="reyon_order_expiring_fmt">%1$d eenheden verlopen vannacht</string>
+    <string name="reyon_order_expiring_tomorrow_fmt">%1$d eenheden verlopen morgennacht</string>
+    <string name="reyon_order_promo_tag">ACTIE</string>
+    <string name="reyon_order_case_fmt">%1$d dozen = %2$d eenheden</string>
+    <string name="reyon_order_case_size_fmt">doos van %1$d · komt %2$s</string>
+    <string name="reyon_order_no_order">geen bestelling</string>
+    <string name="reyon_order_closed">einde van de week, een levering zou niet meer aankomen</string>
+    <string name="reyon_order_more">Meer</string>
+    <string name="reyon_order_less">Minder</string>
+    <string name="reyon_order_close_day">Dag afsluiten</string>
+    <string name="reyon_order_close_week">Week afsluiten</string>
+    <string name="reyon_order_summary_title_fmt">%1$s afgesloten</string>
+    <string name="reyon_order_sum_sold_fmt">Verkoop: %1$d eenheden (+%2$d)</string>
+    <string name="reyon_order_sum_lost_fmt">Gemiste verkoop: %1$d eenheden</string>
+    <string name="reyon_order_sum_holding_fmt">Opslag: −%1$d</string>
+    <string name="reyon_order_sum_waste_fmt">Verlies: %1$d eenheden (−%2$d)</string>
+    <string name="reyon_order_sum_returns_fmt">Retour: %1$d eenheden (−%2$d)</string>
+    <string name="reyon_order_sum_delivered_fmt">Ochtendlevering: %1$d eenheden</string>
+    <string name="reyon_order_sum_profit_fmt">Dagwinst %1$+d · totaal %2$d</string>
+    <string name="reyon_order_continue">Doorgaan</string>
+    <string name="reyon_order_done_title">Week klaar</string>
+    <string name="reyon_order_result_fmt">%1$d / %2$d winst (%3$d%% van het doel)</string>
+    <string name="reyon_order_stats_fmt">Voorraadomloop %1$s (expert %2$s) · servicegraad %3$d%% (expert %4$d%%)</string>
+    <string name="reyon_order_chart_profit">Dagwinst</string>
+    <string name="reyon_order_chart_turnover">Omloop</string>
+    <string name="reyon_order_chart_expert_fmt">expert %1$s</string>
+    <string name="reyon_order_chart_day_fmt">dag %1$d %2$+d</string>
+    <string name="reyon_order_chart_desc_fmt">Weekdiagram: %1$s · voorraadomloop %2$s (expert %3$s)</string>
+    <string name="reyon_order_beat_target">Je hebt de expert verslagen! 🏆</string>
+    <string name="reyon_order_rules">Verkoop +4 per eenheid (★ +6) · opslag −1 per eenheid per nacht · verlies −2 (★ −4) · retour −1</string>
+    <string name="reyon_order_board_desc_fmt">Bestelschap %1$d schappen × %2$d plekken, dag %3$d, winst %4$d</string>
+    <string name="reyon_order_item_desc_fmt">%1$s: voorraad %2$d/%3$d, bestelling %4$d dozen</string>
+    <string name="reyon_order_hint_fmt">Expert: %2$d dozen %1$s</string>
+    <string name="reyon_order_hint_none">Jouw bestellingen komen overeen met die van de expert</string>
+    <string name="reyon_order_share_fmt">Voorraadomloop %1$s</string>
+</resources>

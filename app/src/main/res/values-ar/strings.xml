@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Reyon'un metinleri. Diller res/values-<kod> altında; varsayılan (bu dosya)
+  İngilizce. Anahtar paritesini ve biçim belirteçlerini tools/check_strings.py
+  denetler. Bölüm başlıkları her dilde Türkçe: depodaki öbür yorumlar gibi
+  geliştirici notu, çeviri değil.
+-->
+<resources>
+    <string name="app_name">Reyon</string>
+    <string name="app_tagline">أحجية مخطط الرف: استنتج من الإحاطة الترتيب الصحيح الوحيد للرف</string>
+
+    <!-- Ortak -->
+    <string name="chip_no_ads">0 إعلانات</string>
+    <string name="chip_no_trackers">0 أدوات تتبّع</string>
+    <string name="chip_no_permissions">0 أذونات</string>
+    <string name="new_record">رقم قياسي جديد! 🏆</string>
+    <string name="exit_app">خروج</string>
+    <string name="back">رجوع</string>
+    <string name="congrats">أحسنت! 🎉</string>
+    <string name="undo">تراجع</string>
+    <string name="solved_label">المحلولة</string>
+    <string name="mode_daily">يومي</string>
+    <string name="mode_free">حر</string>
+    <string name="difficulty_easy">سهل</string>
+    <string name="difficulty_medium">متوسط</string>
+    <string name="difficulty_hard">صعب</string>
+    <string name="difficulty_label">الدرجة</string>
+    <string name="same_difficulty">جديدة بالدرجة نفسها</string>
+    <string name="time_label">الزمن</string>
+    <string name="time_fmt">الزمن: %1$s</string>
+
+    <!-- Ayarlar -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_sound">الصوت</string>
+    <string name="sound_on">تشغيل الصوت</string>
+    <string name="sound_off">إسكات الصوت</string>
+    <string name="language_title">اللغة</string>
+    <string name="language_system">لغة الهاتف</string>
+    <string name="language_selected">مختارة</string>
+    <string name="language_select">اختر</string>
+    <string name="settings_haptics">الاهتزاز</string>
+    <string name="haptics_on">تشغيل الاهتزاز</string>
+    <string name="haptics_off">إيقاف الاهتزاز</string>
+
+    <!-- Paylaşım -->
+    <string name="share">شارك</string>
+    <string name="share_chooser">شارك النتيجة</string>
+    <string name="share_failed">لم يتمكّن من فتح المشاركة</string>
+    <string name="share_tagline">Reyon: صفر إعلانات، صفر أذونات، صفر تتبّع. مجاني ومفتوح المصدر:</string>
+    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_solved">تم الحل!</string>
+    <string name="share_score_fmt">%1$s نقطة</string>
+    <string name="share_daily_fmt">يومي · %1$s</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">حول</string>
+    <string name="about_version_fmt">الإصدار %1$s</string>
+    <string name="about_privacy_summary">لا يجمع Reyon أي بيانات، ولا يطلب أي إذن، ولا يتصل بالشبكة أبداً. التقدّم والإعدادات تبقى على هذا الجهاز فقط وتزول عند إزالة التطبيق.</string>
+    <string name="about_links">روابط</string>
+    <string name="about_website">الموقع</string>
+    <string name="about_source">الشيفرة المصدرية</string>
+    <string name="about_report">أبلغ عن مشكلة</string>
+    <string name="about_privacy">سياسة الخصوصية</string>
+    <string name="about_contact">راسلنا</string>
+    <string name="about_open_failed">لم يتمكّن من فتح الرابط: لا يوجد متصفّح على هذا الجهاز</string>
+    <string name="about_licenses">تراخيص المصادر المفتوحة</string>
+    <string name="about_licenses_intro">يستخدم Reyon المكوّنات مفتوحة المصدر التالية؛ المس أحدها لفتح مصدره.</string>
+    <string name="about_lic_androidx_name">AndroidX Jetpack</string>
+    <string name="about_lic_androidx_desc">مكتبات Compose وMaterial 3 وLifecycle وActivity وCore. The Android Open Source Project.</string>
+    <string name="about_lic_kotlin_name">Kotlin وkotlinx.coroutines</string>
+    <string name="about_lic_kotlin_desc">المكتبة القياسية للغة والتزامن. JetBrains والمساهمون.</string>
+    <string name="about_license_show">أظهر نص ترخيص Apache 2.0</string>
+    <string name="about_license_hide">أخفِ نص الترخيص</string>
+    <string name="about_app_license">شيفرة Reyon مفتوحة بترخيص GNU GPL v3. الاسم «Reyon» والشعار غير مشمولين بالترخيص.</string>
+    <string name="about_app_license_link">نص الترخيص (GitHub)</string>
+
+    <!-- Reyon: Diziliş -->
+    <string name="reyon_intro">المس منتجاً ثم موضعاً على الرف؛ الضغط المطوّل يعيده إلى الصينية. كل قاعدة في الإحاطة تصبح ✓ حين تتحقق؛ والقواعد تؤدي إلى ترتيب واحد فقط، بلا تخمين.</string>
+    <string name="reyon_level_desc_fmt">%1$d رفاً × %2$d موضعاً · %3$d–%4$d منتجاً</string>
+    <string name="reyon_daily_desc">اليوم يرتّب الجميع الرف نفسه؛ يُسجَّل زمنك.</string>
+    <string name="reyon_daily_done_fmt">حُلّ اليوم: %1$s · %2$d تلميحاً</string>
+    <string name="reyon_free_desc">رف عشوائي؛ الحلول دون تلميح تُحسب أرقاماً قياسية.</string>
+    <string name="reyon_best_fmt">أفضل زمن: %1$s</string>
+    <string name="reyon_start">ابدأ</string>
+    <string name="reyon_play_again">رتّب مرة أخرى</string>
+    <string name="reyon_to_menu">العودة إلى البداية</string>
+    <string name="reyon_generating">يجري تحضير الرف…</string>
+    <string name="reyon_brief_label">إحاطة مخطط الرف</string>
+    <string name="reyon_tray_label">الصينية</string>
+    <string name="reyon_tray_empty">كل المنتجات على الرف</string>
+    <string name="reyon_tray_item_fmt">%1$s، %2$d واجهة</string>
+    <string name="reyon_hint">تلميح</string>
+    <string name="reyon_remove">إلى الصينية</string>
+    <string name="reyon_hint_wrong_fmt">كان %1$s في غير موضعه فعاد إلى الصينية</string>
+    <string name="reyon_hint_place_fmt">تلميح: %1$s يذهب %2$s</string>
+    <string name="reyon_result_fmt">%1$s · %2$d تلميحاً</string>
+    <string name="reyon_board_desc_fmt">Reyon %1$d رفاً × %2$d موضعاً، %3$d منتجاً لم يُرتَّب</string>
+    <string name="reyon_shelf_top">الرف الأعلى</string>
+    <string name="reyon_shelf_eye">مستوى النظر (الرف 2)</string>
+    <string name="reyon_shelf_bottom">الرف الأسفل</string>
+    <string name="reyon_shelf_nth">الرف %1$d</string>
+    <string name="reyon_shelf_top_at">على الرف الأعلى</string>
+    <string name="reyon_shelf_eye_at">في مستوى النظر (الرف 2)</string>
+    <string name="reyon_shelf_bottom_at">على الرف الأسفل</string>
+    <string name="reyon_shelf_nth_at">على الرف %1$d</string>
+    <string name="reyon_clue_placed">%1$s موجود %2$s (معطى)</string>
+    <string name="reyon_clue_on_shelf">%1$s موجود %2$s</string>
+    <string name="reyon_clue_in_slot">%1$s يشغل الموضع %2$d من اليسار</string>
+    <string name="reyon_clue_left_edge">%1$s في الطرف الأيسر من رفّه</string>
+    <string name="reyon_clue_right_edge">%1$s في الطرف الأيمن من رفّه</string>
+    <string name="reyon_clue_adjacent">%1$s و%2$s جنباً إلى جنب</string>
+    <string name="reyon_clue_left_of">%1$s يتقاسم رفاً مع %2$s ويقع إلى يساره</string>
+    <string name="reyon_clue_same_shelf">%1$s و%2$s يتقاسمان رفاً</string>
+    <string name="reyon_clue_different_shelf">%1$s و%2$s على رفين مختلفين</string>
+    <string name="reyon_clue_above">%1$s على الرف الذي يعلو %2$s مباشرة، فوقه تماماً</string>
+    <string name="reyon_clue_eye_level">★ المنتجات ذات الهامش العالي في مستوى النظر (الرف 2)</string>
+    <string name="reyon_clue_heavy_bottom">▼ المنتجات الثقيلة على الرف الأسفل</string>
+    <string name="reyon_clue_category_block">%1$s تشكّل كتلة واحدة: الرف نفسه، جنباً إلى جنب</string>
+    <string name="reyon_clue_categories_apart">%1$s و%2$s لا يتقاسمان رفاً أبداً</string>
+    <string name="reyon_clue_brand_vertical">%1$s يشكّل كتلة عمودية: فوق بعضه على رفوف متتالية</string>
+    <string name="reyon_clue_size_flow">أحجام %1$s تكبر من اليسار إلى اليمين (• صغير، ••• كبير)</string>
+    <string name="reyon_cat_icecek">مشروبات</string>
+    <string name="reyon_cat_atistirmalik">وجبات خفيفة</string>
+    <string name="reyon_cat_kahvaltilik">إفطار</string>
+    <string name="reyon_cat_temizlik">مواد تنظيف</string>
+    <string name="reyon_cat_bakim">عناية شخصية</string>
+    <string name="reyon_brand_a">Toros</string>
+    <string name="reyon_brand_b">Ege</string>
+    <string name="reyon_brand_c">Kuzey</string>
+    <string name="reyon_brand_d">Meltem</string>
+    <string name="reyon_kind_puzzle">الترتيب</string>
+    <string name="reyon_kind_audit">التدقيق</string>
+    <string name="reyon_kind_sales">البيع</string>
+    <string name="reyon_kind_order">الطلبيات</string>
+
+    <!-- Ürün adları -->
+    <string name="reyon_kind_kola">كولا</string>
+    <string name="reyon_kind_su">ماء</string>
+    <string name="reyon_kind_gazoz">مشروب غازي</string>
+    <string name="reyon_kind_meyve_suyu">عصير</string>
+    <string name="reyon_kind_ayran">عيران</string>
+    <string name="reyon_kind_soda">صودا</string>
+    <string name="reyon_kind_limonata">ليموناضة</string>
+    <string name="reyon_kind_cips">رقائق بطاطس</string>
+    <string name="reyon_kind_kraker">مقرمشات</string>
+    <string name="reyon_kind_kuruyemis">مكسّرات</string>
+    <string name="reyon_kind_cikolata">شوكولاتة</string>
+    <string name="reyon_kind_gofret">ويفر</string>
+    <string name="reyon_kind_biskuvi">بسكويت</string>
+    <string name="reyon_kind_sos">صوص للتغميس</string>
+    <string name="reyon_kind_bal">عسل</string>
+    <string name="reyon_kind_recel">مربّى</string>
+    <string name="reyon_kind_peynir">جبن</string>
+    <string name="reyon_kind_zeytin">زيتون</string>
+    <string name="reyon_kind_tereyagi">زبدة</string>
+    <string name="reyon_kind_yumurta">بيض</string>
+    <string name="reyon_kind_sut">حليب</string>
+    <string name="reyon_kind_deterjan">مسحوق غسيل</string>
+    <string name="reyon_kind_camasir_suyu">مبيّض</string>
+    <string name="reyon_kind_bulasik_deterjani">سائل جلي</string>
+    <string name="reyon_kind_yumusatici">منعّم أقمشة</string>
+    <string name="reyon_kind_sunger">إسفنجة</string>
+    <string name="reyon_kind_kagit_havlu">مناشف ورقية</string>
+    <string name="reyon_kind_cop_poseti">أكياس قمامة</string>
+    <string name="reyon_kind_sampuan">شامبو</string>
+    <string name="reyon_kind_sabun">صابون</string>
+    <string name="reyon_kind_dis_macunu">معجون أسنان</string>
+    <string name="reyon_kind_deodorant">مزيل عرق</string>
+    <string name="reyon_kind_tiras_kopugu">رغوة حلاقة</string>
+    <string name="reyon_kind_islak_mendil">مناديل مبلّلة</string>
+    <string name="reyon_kind_pamuk">قطن</string>
+
+    <!-- Reyon: Denetim -->
+    <string name="reyon_audit_intro">المخطط في الأعلى والرف الحقيقي في الأسفل. المس المواضع التي يخرج فيها الرف عن المخطط: تبادل، موضع فارغ، منتج غريب، علامة أو حجم خطأ، تجاوز. اللمسة الخاطئة تُحسب خطأً.</string>
+    <string name="reyon_audit_level_desc_fmt">%1$d رفاً × %2$d موضعاً · %3$d انحرافاً</string>
+    <string name="reyon_audit_daily_desc">اليوم يدقّق الجميع الرف نفسه؛ يُسجَّل زمنك وأخطاؤك.</string>
+    <string name="reyon_audit_daily_done_fmt">دُقّق اليوم: %1$s · %2$d خطأً</string>
+    <string name="reyon_audit_free_desc">رف عشوائي؛ التدقيقات دون أخطاء ودون تلميح تُحسب أرقاماً قياسية.</string>
+    <string name="reyon_audit_start">ابدأ التدقيق</string>
+    <string name="reyon_audit_generating">يجري تحضير التدقيق…</string>
+    <string name="reyon_audit_plan_label">المخطط</string>
+    <string name="reyon_audit_shelf_label">الرف: المس الانحرافات</string>
+    <string name="reyon_audit_found_label">وُجدت</string>
+    <string name="reyon_audit_mistakes_label">الأخطاء</string>
+    <string name="reyon_audit_remaining_fmt">بقي %1$d لتجدها</string>
+    <string name="reyon_audit_done_title">انتهى التدقيق</string>
+    <string name="reyon_audit_result_fmt">%1$s · %2$d خطأً · %3$d تلميحاً</string>
+    <string name="reyon_audit_board_desc_fmt">رف التدقيق %1$d رفاً × %2$d موضعاً، وُجد %3$d/%4$d انحرافاً</string>
+    <string name="reyon_audit_plan_desc_fmt">المخطط %1$d رفاً × %2$d موضعاً</string>
+    <string name="reyon_audit_plan_zoom_hint">المس للتكبير</string>
+    <string name="reyon_audit_plan_zoom_desc">مخطط مكبّر؛ المس للإغلاق</string>
+    <string name="reyon_audit_plan_zoom_close">المس للإغلاق</string>
+    <string name="reyon_dev_swap_fmt">متبادلان: %1$s ↔ %2$s</string>
+    <string name="reyon_dev_gap_fmt">موضع فارغ: ينقص %1$s واجهة</string>
+    <string name="reyon_dev_missing_fmt">موضع فارغ: %1$s غائب</string>
+    <string name="reyon_dev_foreign_fmt">منتج غريب: %2$s بدل %1$s</string>
+    <string name="reyon_dev_brand_fmt">علامة خطأ: %1$s (%3$s بدل %2$s)</string>
+    <string name="reyon_dev_size_fmt">حجم خطأ: %1$s</string>
+    <string name="reyon_dev_spill_fmt">تجاوز: %1$s يتجاوز على %2$s</string>
+
+    <!-- Reyon: Satış -->
+    <string name="reyon_sales_intro">رتّب المنتجات كما تشاء؛ النقاط تأتي من قواعد البيع (مستوى النظر، الثقيل في الأسفل، المتكاملات جنباً إلى جنب، مواد التنظيف بعيداً عن الطعام، كتل الفئة والعلامة). الهدف هو أفضل ترتيب وجده المحسّن؛ والوصول إليه يمنح ثلاث نجوم.</string>
+    <string name="reyon_sales_daily_desc">اليوم يرتّب الجميع المنتجات نفسها؛ تُسجَّل أفضل نتيجة لك في اليوم.</string>
+    <string name="reyon_sales_daily_done_fmt">اليوم: %1$d / %2$d نقطة · %3$s</string>
+    <string name="reyon_sales_free_desc">مجموعة منتجات عشوائية؛ نسبة الهدف تُحسب رقماً قياسياً.</string>
+    <string name="reyon_sales_best_fmt">الأفضل: %1$d%% من الهدف</string>
+    <string name="reyon_sales_start">ابدأ الترتيب</string>
+    <string name="reyon_sales_generating">يجري حساب الهدف…</string>
+    <string name="reyon_sales_score_label">النقاط</string>
+    <string name="reyon_sales_target_label">الهدف</string>
+    <string name="reyon_sales_rules_label">قواعد البيع</string>
+    <string name="reyon_sales_rule_position">الموضع</string>
+    <string name="reyon_sales_rule_position_desc">الطلب × الواجهات × معامل الرف: مستوى النظر ×3، الأعلى والوسط ×2، الأسفل ×1 · ▼ الثقيل في الأسفل فقط ×3 · ★ في مستوى النظر فقط ×4</string>
+    <string name="reyon_sales_rule_complement">المتكاملات</string>
+    <string name="reyon_sales_rule_complement_desc">أزواج مثل الرقائق والصوص جنباً إلى جنب +6، فوق بعضها +3</string>
+    <string name="reyon_sales_rule_conflict">تعارض</string>
+    <string name="reyon_sales_rule_conflict_desc">مادة تنظيف بجانب الطعام −8</string>
+    <string name="reyon_sales_rule_category">كتلة فئة</string>
+    <string name="reyon_sales_rule_category_desc">الفئة نفسها جنباً إلى جنب +4</string>
+    <string name="reyon_sales_rule_brand">كتلة علامة</string>
+    <string name="reyon_sales_rule_brand_desc">العلامة نفسها جنباً إلى جنب +3، فوق بعضها +3</string>
+    <string name="reyon_sales_neighbors">الجوار</string>
+    <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
+    <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
+    <string name="reyon_sales_selected_fmt">%1$s مُختار (الطلب %2$d): المس موضعاً على الرف</string>
+    <string name="reyon_sales_pick_hint">المس منتجاً لترى تفصيل نقاطه</string>
+    <string name="reyon_sales_demand_fmt">الطلب %1$d</string>
+    <string name="reyon_sales_finish">أنهِ</string>
+    <string name="reyon_sales_done_title">انتهى الترتيب</string>
+    <string name="reyon_sales_result_fmt">%1$d / %2$d نقطة (%3$d%% من الهدف)</string>
+    <string name="reyon_sales_beat_target">تجاوزت الهدف! 🏆</string>
+    <string name="reyon_sales_reopen">تابع الترتيب</string>
+    <string name="reyon_sales_show_target">أظهر الهدف</string>
+    <string name="reyon_sales_review_mine">ترتيبي</string>
+    <string name="reyon_sales_review_target_fmt">الهدف (%1$d)</string>
+    <string name="reyon_sales_back_to_result">النتيجة</string>
+    <string name="reyon_sales_board_desc_fmt">رف البيع %1$d رفاً × %2$d موضعاً، %3$d منتجاً لم يُرتَّب، %4$d نقطة</string>
+
+    <!-- Reyon: Sipariş -->
+    <string name="reyon_order_intro">مخطط الرف ثابت؛ عملك هو المخزون. كل يوم قرّر كم صندوقاً تطلب لكل منتج: الطلبيات تأتي صباح اليوم التالي، وما لا يتّسع يُرجَع، والمخزون الباقي في المساء يكلّف تخزيناً، والوحدات منتهية الصلاحية خسارة. الهدف هو ربح خبير يرى التوقعات نفسها.</string>
+    <string name="reyon_order_level_desc_fmt">%1$d رفاً × %2$d موضعاً · %3$d يوماً · %4$d عرضاً</string>
+    <string name="reyon_order_daily_desc">اليوم يلعب الجميع الأسبوع نفسه؛ يُسجَّل أفضل ربح لك في اليوم.</string>
+    <string name="reyon_order_daily_done_fmt">اليوم: %1$d / %2$d ربحاً · %3$s</string>
+    <string name="reyon_order_free_desc">أسبوع عشوائي؛ نسبة الهدف تُحسب رقماً قياسياً.</string>
+    <string name="reyon_order_best_fmt">الأفضل: %1$d%% من الهدف</string>
+    <string name="reyon_order_start">ابدأ الأسبوع</string>
+    <string name="reyon_order_generating">يجري تحضير الأسبوع…</string>
+    <string name="reyon_order_day_label">اليوم</string>
+    <string name="reyon_order_profit_label">الربح</string>
+    <string name="reyon_order_target_label">الهدف</string>
+    <string name="reyon_order_dow_1">الاثنين</string>
+    <string name="reyon_order_dow_2">الثلاثاء</string>
+    <string name="reyon_order_dow_3">الأربعاء</string>
+    <string name="reyon_order_dow_4">الخميس</string>
+    <string name="reyon_order_dow_5">الجمعة</string>
+    <string name="reyon_order_dow_6">السبت</string>
+    <string name="reyon_order_dow_7">الأحد</string>
+    <string name="reyon_order_day_title_fmt">%1$s · اليوم %2$d من %3$d</string>
+    <string name="reyon_order_promo_ahead_fmt">%1$s: عرض %2$s (الطلب ×2.5)</string>
+    <string name="reyon_order_stock_fmt">المخزون %1$d/%2$d</string>
+    <string name="reyon_order_today_fmt">اليوم %1$d–%2$d</string>
+    <string name="reyon_order_forecast_fmt">%1$s %2$d–%3$d</string>
+    <string name="reyon_order_incoming_fmt">+%2$d تصل %1$s</string>
+    <string name="reyon_order_expiring_fmt">%1$d وحدة تنتهي هذه الليلة</string>
+    <string name="reyon_order_expiring_tomorrow_fmt">%1$d وحدة تنتهي ليلة الغد</string>
+    <string name="reyon_order_promo_tag">عرض</string>
+    <string name="reyon_order_case_fmt">%1$d صندوقاً = %2$d وحدة</string>
+    <string name="reyon_order_case_size_fmt">صندوق من %1$d · يصل %2$s</string>
+    <string name="reyon_order_no_order">بلا طلبية</string>
+    <string name="reyon_order_closed">الأسبوع ينتهي، والتسليم لن يصل</string>
+    <string name="reyon_order_more">أكثر</string>
+    <string name="reyon_order_less">أقل</string>
+    <string name="reyon_order_close_day">أغلق اليوم</string>
+    <string name="reyon_order_close_week">أغلق الأسبوع</string>
+    <string name="reyon_order_summary_title_fmt">أُغلق %1$s</string>
+    <string name="reyon_order_sum_sold_fmt">البيع: %1$d وحدة (+%2$d)</string>
+    <string name="reyon_order_sum_lost_fmt">بيع فائت: %1$d وحدة</string>
+    <string name="reyon_order_sum_holding_fmt">التخزين: −%1$d</string>
+    <string name="reyon_order_sum_waste_fmt">خسارة: %1$d وحدة (−%2$d)</string>
+    <string name="reyon_order_sum_returns_fmt">مرتجعات: %1$d وحدة (−%2$d)</string>
+    <string name="reyon_order_sum_delivered_fmt">تسليم الصباح: %1$d وحدة</string>
+    <string name="reyon_order_sum_profit_fmt">ربح اليوم %1$+d · الإجمالي %2$d</string>
+    <string name="reyon_order_continue">تابع</string>
+    <string name="reyon_order_done_title">انتهى الأسبوع</string>
+    <string name="reyon_order_result_fmt">%1$d / %2$d ربحاً (%3$d%% من الهدف)</string>
+    <string name="reyon_order_stats_fmt">دوران المخزون %1$s (الخبير %2$s) · مستوى الخدمة %3$d%% (الخبير %4$d%%)</string>
+    <string name="reyon_order_chart_profit">الربح اليومي</string>
+    <string name="reyon_order_chart_turnover">الدوران</string>
+    <string name="reyon_order_chart_expert_fmt">الخبير %1$s</string>
+    <string name="reyon_order_chart_day_fmt">اليوم %1$d %2$+d</string>
+    <string name="reyon_order_chart_desc_fmt">مخطط الأسبوع: %1$s · دوران المخزون %2$s (الخبير %3$s)</string>
+    <string name="reyon_order_beat_target">غلبت الخبير! 🏆</string>
+    <string name="reyon_order_rules">البيع +4 للوحدة (★ +6) · التخزين −1 للوحدة في الليلة · الخسارة −2 (★ −4) · المرتجع −1</string>
+    <string name="reyon_order_board_desc_fmt">رف الطلبيات %1$d رفاً × %2$d موضعاً، اليوم %3$d، الربح %4$d</string>
+    <string name="reyon_order_item_desc_fmt">%1$s: المخزون %2$d/%3$d، الطلبية %4$d صندوقاً</string>
+    <string name="reyon_order_hint_fmt">الخبير: %2$d صندوقاً من %1$s</string>
+    <string name="reyon_order_hint_none">طلبياتك مطابقة لطلبيات الخبير</string>
+    <string name="reyon_order_share_fmt">دوران المخزون %1$s</string>
+</resources>

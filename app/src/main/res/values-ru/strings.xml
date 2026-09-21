@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Reyon'un metinleri. Diller res/values-<kod> altında; varsayılan (bu dosya)
+  İngilizce. Anahtar paritesini ve biçim belirteçlerini tools/check_strings.py
+  denetler. Bölüm başlıkları her dilde Türkçe: depodaki öbür yorumlar gibi
+  geliştirici notu, çeviri değil.
+-->
+<resources>
+    <string name="app_name">Reyon</string>
+    <string name="app_tagline">Головоломка планограммы: выведи из брифа единственную верную раскладку полки</string>
+
+    <!-- Ortak -->
+    <string name="chip_no_ads">0 рекламы</string>
+    <string name="chip_no_trackers">0 трекеров</string>
+    <string name="chip_no_permissions">0 разрешений</string>
+    <string name="new_record">Новый рекорд! 🏆</string>
+    <string name="exit_app">Выход</string>
+    <string name="back">Назад</string>
+    <string name="congrats">Отлично! 🎉</string>
+    <string name="undo">Отменить</string>
+    <string name="solved_label">Решено</string>
+    <string name="mode_daily">Ежедневно</string>
+    <string name="mode_free">Свободно</string>
+    <string name="difficulty_easy">Легко</string>
+    <string name="difficulty_medium">Средне</string>
+    <string name="difficulty_hard">Сложно</string>
+    <string name="difficulty_label">Уровень</string>
+    <string name="same_difficulty">Новая на том же уровне</string>
+    <string name="time_label">Время</string>
+    <string name="time_fmt">Время: %1$s</string>
+
+    <!-- Ayarlar -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_sound">Звук</string>
+    <string name="sound_on">Включить звук</string>
+    <string name="sound_off">Выключить звук</string>
+    <string name="language_title">Язык</string>
+    <string name="language_system">Язык телефона</string>
+    <string name="language_selected">выбран</string>
+    <string name="language_select">выбрать</string>
+    <string name="settings_haptics">Вибрация</string>
+    <string name="haptics_on">Включить вибрацию</string>
+    <string name="haptics_off">Выключить вибрацию</string>
+
+    <!-- Paylaşım -->
+    <string name="share">Поделиться</string>
+    <string name="share_chooser">Поделиться результатом</string>
+    <string name="share_failed">Не удалось открыть меню «Поделиться»</string>
+    <string name="share_tagline">Reyon: ноль рекламы, ноль разрешений, ноль слежки. Бесплатно и с открытым кодом:</string>
+    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_solved">Решено!</string>
+    <string name="share_score_fmt">%1$s очков</string>
+    <string name="share_daily_fmt">Ежедневно · %1$s</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">О приложении</string>
+    <string name="about_version_fmt">Версия %1$s</string>
+    <string name="about_privacy_summary">Reyon не собирает данные, не просит разрешений и никогда не выходит в сеть. Прогресс и настройки хранятся только на этом устройстве и исчезают при удалении приложения.</string>
+    <string name="about_links">Ссылки</string>
+    <string name="about_website">Сайт</string>
+    <string name="about_source">Исходный код</string>
+    <string name="about_report">Сообщить о проблеме</string>
+    <string name="about_privacy">Политика конфиденциальности</string>
+    <string name="about_contact">Написать нам</string>
+    <string name="about_open_failed">Не удалось открыть ссылку: на устройстве нет браузера</string>
+    <string name="about_licenses">Лицензии открытого кода</string>
+    <string name="about_licenses_intro">Reyon использует перечисленные ниже компоненты с открытым кодом; нажми на любой, чтобы открыть его исходник.</string>
+    <string name="about_lic_androidx_name">AndroidX Jetpack</string>
+    <string name="about_lic_androidx_desc">Библиотеки Compose, Material 3, Lifecycle, Activity и Core. The Android Open Source Project.</string>
+    <string name="about_lic_kotlin_name">Kotlin и kotlinx.coroutines</string>
+    <string name="about_lic_kotlin_desc">Стандартная библиотека языка и параллелизм. JetBrains и участники.</string>
+    <string name="about_license_show">Показать текст лицензии Apache 2.0</string>
+    <string name="about_license_hide">Скрыть текст лицензии</string>
+    <string name="about_app_license">Исходный код Reyon открыт по GNU GPL v3. Название «Reyon» и логотип в лицензию не входят.</string>
+    <string name="about_app_license_link">Текст лицензии (GitHub)</string>
+
+    <!-- Reyon: Diziliş -->
+    <string name="reyon_intro">Нажми на товар, потом на место на полке; долгое нажатие возвращает его на поднос. Каждое правило брифа становится ✓, когда выполняется; правила ведут к одной единственной раскладке, без угадывания.</string>
+    <string name="reyon_level_desc_fmt">%1$d полок × %2$d мест · %3$d–%4$d товаров</string>
+    <string name="reyon_daily_desc">Сегодня все раскладывают одну и ту же полку; твоё время записывается.</string>
+    <string name="reyon_daily_done_fmt">Решено сегодня: %1$s · %2$d подсказок</string>
+    <string name="reyon_free_desc">Случайная полка; решения без подсказок идут в рекорд.</string>
+    <string name="reyon_best_fmt">Лучшее время: %1$s</string>
+    <string name="reyon_start">Начать</string>
+    <string name="reyon_play_again">Разложить снова</string>
+    <string name="reyon_to_menu">Назад к началу</string>
+    <string name="reyon_generating">Готовим полку…</string>
+    <string name="reyon_brief_label">Бриф планограммы</string>
+    <string name="reyon_tray_label">Поднос</string>
+    <string name="reyon_tray_empty">Все товары на полке</string>
+    <string name="reyon_tray_item_fmt">%1$s, %2$d фейсингов</string>
+    <string name="reyon_hint">Подсказка</string>
+    <string name="reyon_remove">На поднос</string>
+    <string name="reyon_hint_wrong_fmt">%1$s стоял неправильно и вернулся на поднос</string>
+    <string name="reyon_hint_place_fmt">Подсказка: %1$s идёт %2$s</string>
+    <string name="reyon_result_fmt">%1$s · %2$d подсказок</string>
+    <string name="reyon_board_desc_fmt">Reyon %1$d полок × %2$d мест, %3$d товаров не расставлено</string>
+    <string name="reyon_shelf_top">верхняя полка</string>
+    <string name="reyon_shelf_eye">уровень глаз (полка 2)</string>
+    <string name="reyon_shelf_bottom">нижняя полка</string>
+    <string name="reyon_shelf_nth">полка %1$d</string>
+    <string name="reyon_shelf_top_at">на верхнюю полку</string>
+    <string name="reyon_shelf_eye_at">на уровень глаз (полка 2)</string>
+    <string name="reyon_shelf_bottom_at">на нижнюю полку</string>
+    <string name="reyon_shelf_nth_at">на полку %1$d</string>
+    <string name="reyon_clue_placed">%1$s стоит %2$s (дано)</string>
+    <string name="reyon_clue_on_shelf">%1$s стоит %2$s</string>
+    <string name="reyon_clue_in_slot">%1$s занимает место %2$d слева</string>
+    <string name="reyon_clue_left_edge">%1$s стоит у левого края своей полки</string>
+    <string name="reyon_clue_right_edge">%1$s стоит у правого края своей полки</string>
+    <string name="reyon_clue_adjacent">%1$s и %2$s стоят рядом</string>
+    <string name="reyon_clue_left_of">%1$s делит полку с %2$s и стоит слева от него</string>
+    <string name="reyon_clue_same_shelf">%1$s и %2$s делят полку</string>
+    <string name="reyon_clue_different_shelf">%1$s и %2$s стоят на разных полках</string>
+    <string name="reyon_clue_above">%1$s стоит на полке прямо над %2$s, ровно поверх него</string>
+    <string name="reyon_clue_eye_level">★ Товары с высокой маржой стоят на уровне глаз (полка 2)</string>
+    <string name="reyon_clue_heavy_bottom">▼ Тяжёлые товары идут на нижнюю полку</string>
+    <string name="reyon_clue_category_block">%1$s образуют один блок: одна полка, рядом друг с другом</string>
+    <string name="reyon_clue_categories_apart">%1$s и %2$s никогда не делят полку</string>
+    <string name="reyon_clue_brand_vertical">%1$s образует вертикальный блок: друг над другом на соседних полках</string>
+    <string name="reyon_clue_size_flow">Размеры %1$s растут слева направо (• маленький, ••• большой)</string>
+    <string name="reyon_cat_icecek">Напитки</string>
+    <string name="reyon_cat_atistirmalik">Снеки</string>
+    <string name="reyon_cat_kahvaltilik">Завтрак</string>
+    <string name="reyon_cat_temizlik">Бытовая химия</string>
+    <string name="reyon_cat_bakim">Личная гигиена</string>
+    <string name="reyon_brand_a">Toros</string>
+    <string name="reyon_brand_b">Ege</string>
+    <string name="reyon_brand_c">Kuzey</string>
+    <string name="reyon_brand_d">Meltem</string>
+    <string name="reyon_kind_puzzle">Раскладка</string>
+    <string name="reyon_kind_audit">Проверка</string>
+    <string name="reyon_kind_sales">Продажи</string>
+    <string name="reyon_kind_order">Заказы</string>
+
+    <!-- Ürün adları -->
+    <string name="reyon_kind_kola">Кола</string>
+    <string name="reyon_kind_su">Вода</string>
+    <string name="reyon_kind_gazoz">Лимонад</string>
+    <string name="reyon_kind_meyve_suyu">Сок</string>
+    <string name="reyon_kind_ayran">Айран</string>
+    <string name="reyon_kind_soda">Газированная вода</string>
+    <string name="reyon_kind_limonata">Лимонад домашний</string>
+    <string name="reyon_kind_cips">Чипсы</string>
+    <string name="reyon_kind_kraker">Крекеры</string>
+    <string name="reyon_kind_kuruyemis">Орехи</string>
+    <string name="reyon_kind_cikolata">Шоколад</string>
+    <string name="reyon_kind_gofret">Вафли</string>
+    <string name="reyon_kind_biskuvi">Печенье</string>
+    <string name="reyon_kind_sos">Соус для дипа</string>
+    <string name="reyon_kind_bal">Мёд</string>
+    <string name="reyon_kind_recel">Варенье</string>
+    <string name="reyon_kind_peynir">Сыр</string>
+    <string name="reyon_kind_zeytin">Оливки</string>
+    <string name="reyon_kind_tereyagi">Масло</string>
+    <string name="reyon_kind_yumurta">Яйца</string>
+    <string name="reyon_kind_sut">Молоко</string>
+    <string name="reyon_kind_deterjan">Стиральный порошок</string>
+    <string name="reyon_kind_camasir_suyu">Хлорка</string>
+    <string name="reyon_kind_bulasik_deterjani">Средство для посуды</string>
+    <string name="reyon_kind_yumusatici">Кондиционер для белья</string>
+    <string name="reyon_kind_sunger">Губка</string>
+    <string name="reyon_kind_kagit_havlu">Бумажные полотенца</string>
+    <string name="reyon_kind_cop_poseti">Мусорные пакеты</string>
+    <string name="reyon_kind_sampuan">Шампунь</string>
+    <string name="reyon_kind_sabun">Мыло</string>
+    <string name="reyon_kind_dis_macunu">Зубная паста</string>
+    <string name="reyon_kind_deodorant">Дезодорант</string>
+    <string name="reyon_kind_tiras_kopugu">Пена для бритья</string>
+    <string name="reyon_kind_islak_mendil">Влажные салфетки</string>
+    <string name="reyon_kind_pamuk">Вата</string>
+
+    <!-- Reyon: Denetim -->
+    <string name="reyon_audit_intro">План сверху, настоящая полка снизу. Нажимай на места, где полка отходит от плана: подмена, пустое место, посторонний товар, не тот бренд или размер, наплыв. Неверное нажатие считается ошибкой.</string>
+    <string name="reyon_audit_level_desc_fmt">%1$d полок × %2$d мест · %3$d отклонений</string>
+    <string name="reyon_audit_daily_desc">Сегодня все проверяют одну и ту же полку; твоё время и ошибки записываются.</string>
+    <string name="reyon_audit_daily_done_fmt">Проверено сегодня: %1$s · %2$d ошибок</string>
+    <string name="reyon_audit_free_desc">Случайная полка; проверки без ошибок и без подсказок идут в рекорд.</string>
+    <string name="reyon_audit_start">Начать проверку</string>
+    <string name="reyon_audit_generating">Готовим проверку…</string>
+    <string name="reyon_audit_plan_label">План</string>
+    <string name="reyon_audit_shelf_label">Полка: нажимай на отклонения</string>
+    <string name="reyon_audit_found_label">Найдено</string>
+    <string name="reyon_audit_mistakes_label">Ошибки</string>
+    <string name="reyon_audit_remaining_fmt">осталось найти %1$d</string>
+    <string name="reyon_audit_done_title">Проверка завершена</string>
+    <string name="reyon_audit_result_fmt">%1$s · %2$d ошибок · %3$d подсказок</string>
+    <string name="reyon_audit_board_desc_fmt">Проверяемая полка %1$d полок × %2$d мест, найдено %3$d/%4$d отклонений</string>
+    <string name="reyon_audit_plan_desc_fmt">План %1$d полок × %2$d мест</string>
+    <string name="reyon_audit_plan_zoom_hint">нажми, чтобы увеличить</string>
+    <string name="reyon_audit_plan_zoom_desc">Увеличенный план; нажми, чтобы закрыть</string>
+    <string name="reyon_audit_plan_zoom_close">Нажми, чтобы закрыть</string>
+    <string name="reyon_dev_swap_fmt">Поменяны: %1$s ↔ %2$s</string>
+    <string name="reyon_dev_gap_fmt">Пустое место: у %1$s не хватает одного фейсинга</string>
+    <string name="reyon_dev_missing_fmt">Пустое место: %1$s отсутствует</string>
+    <string name="reyon_dev_foreign_fmt">Посторонний товар: %2$s вместо %1$s</string>
+    <string name="reyon_dev_brand_fmt">Не тот бренд: %1$s (%3$s вместо %2$s)</string>
+    <string name="reyon_dev_size_fmt">Не тот размер: %1$s</string>
+    <string name="reyon_dev_spill_fmt">Наплыв: %1$s заходит на %2$s</string>
+
+    <!-- Reyon: Satış -->
+    <string name="reyon_sales_intro">Расставь товары как хочешь; очки идут от правил продаж (уровень глаз, тяжёлое внизу, дополняющие рядом, химия подальше от еды, блоки категории и бренда). Цель — лучшая раскладка, которую нашёл оптимизатор; дойти до неё значит три звезды.</string>
+    <string name="reyon_sales_daily_desc">Сегодня все расставляют одни и те же товары; твой лучший результат дня записывается.</string>
+    <string name="reyon_sales_daily_done_fmt">Сегодня: %1$d / %2$d очков · %3$s</string>
+    <string name="reyon_sales_free_desc">Случайный набор товаров; доля от цели идёт в рекорд.</string>
+    <string name="reyon_sales_best_fmt">Рекорд: %1$d%% от цели</string>
+    <string name="reyon_sales_start">Начать раскладку</string>
+    <string name="reyon_sales_generating">Считаем цель…</string>
+    <string name="reyon_sales_score_label">Очки</string>
+    <string name="reyon_sales_target_label">Цель</string>
+    <string name="reyon_sales_rules_label">Правила продаж</string>
+    <string name="reyon_sales_rule_position">Позиция</string>
+    <string name="reyon_sales_rule_position_desc">спрос × фейсинги × коэффициент полки: уровень глаз ×3, верх и середина ×2, низ ×1 · ▼ тяжёлое только внизу ×3 · ★ только на уровне глаз ×4</string>
+    <string name="reyon_sales_rule_complement">Дополняющие</string>
+    <string name="reyon_sales_rule_complement_desc">пары вроде чипсов и соуса рядом +6, друг над другом +3</string>
+    <string name="reyon_sales_rule_conflict">Конфликт</string>
+    <string name="reyon_sales_rule_conflict_desc">бытовая химия рядом с едой −8</string>
+    <string name="reyon_sales_rule_category">Блок категории</string>
+    <string name="reyon_sales_rule_category_desc">одна категория рядом +4</string>
+    <string name="reyon_sales_rule_brand">Блок бренда</string>
+    <string name="reyon_sales_rule_brand_desc">один бренд рядом +3, друг над другом +3</string>
+    <string name="reyon_sales_neighbors">соседи</string>
+    <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
+    <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
+    <string name="reyon_sales_selected_fmt">%1$s выбран (спрос %2$d): нажми на место на полке</string>
+    <string name="reyon_sales_pick_hint">Нажми на товар, чтобы увидеть разбор его очков</string>
+    <string name="reyon_sales_demand_fmt">спрос %1$d</string>
+    <string name="reyon_sales_finish">Завершить</string>
+    <string name="reyon_sales_done_title">Раскладка готова</string>
+    <string name="reyon_sales_result_fmt">%1$d / %2$d очков (%3$d%% от цели)</string>
+    <string name="reyon_sales_beat_target">Ты превзошёл цель! 🏆</string>
+    <string name="reyon_sales_reopen">Продолжить раскладку</string>
+    <string name="reyon_sales_show_target">Показать цель</string>
+    <string name="reyon_sales_review_mine">Моя раскладка</string>
+    <string name="reyon_sales_review_target_fmt">Цель (%1$d)</string>
+    <string name="reyon_sales_back_to_result">Результат</string>
+    <string name="reyon_sales_board_desc_fmt">Полка продаж %1$d полок × %2$d мест, %3$d товаров не расставлено, %4$d очков</string>
+
+    <!-- Reyon: Sipariş -->
+    <string name="reyon_order_intro">План полки закреплён; твоя работа — запас. Каждый день решай, сколько ящиков заказать по каждому товару: заказы приходят на следующее утро, что не поместилось — возврат, запас, оставшийся вечером, стоит хранения, просроченные единицы — потеря. Цель — прибыль эксперта, который видит те же прогнозы.</string>
+    <string name="reyon_order_level_desc_fmt">%1$d полок × %2$d мест · %3$d дней · %4$d акций</string>
+    <string name="reyon_order_daily_desc">Сегодня все играют одну и ту же неделю; твоя лучшая прибыль дня записывается.</string>
+    <string name="reyon_order_daily_done_fmt">Сегодня: %1$d / %2$d прибыли · %3$s</string>
+    <string name="reyon_order_free_desc">Случайная неделя; доля от цели идёт в рекорд.</string>
+    <string name="reyon_order_best_fmt">Рекорд: %1$d%% от цели</string>
+    <string name="reyon_order_start">Начать неделю</string>
+    <string name="reyon_order_generating">Готовим неделю…</string>
+    <string name="reyon_order_day_label">День</string>
+    <string name="reyon_order_profit_label">Прибыль</string>
+    <string name="reyon_order_target_label">Цель</string>
+    <string name="reyon_order_dow_1">Понедельник</string>
+    <string name="reyon_order_dow_2">Вторник</string>
+    <string name="reyon_order_dow_3">Среда</string>
+    <string name="reyon_order_dow_4">Четверг</string>
+    <string name="reyon_order_dow_5">Пятница</string>
+    <string name="reyon_order_dow_6">Суббота</string>
+    <string name="reyon_order_dow_7">Воскресенье</string>
+    <string name="reyon_order_day_title_fmt">%1$s · день %2$d из %3$d</string>
+    <string name="reyon_order_promo_ahead_fmt">%1$s: акция %2$s (спрос ×2,5)</string>
+    <string name="reyon_order_stock_fmt">запас %1$d/%2$d</string>
+    <string name="reyon_order_today_fmt">сегодня %1$d–%2$d</string>
+    <string name="reyon_order_forecast_fmt">%1$s %2$d–%3$d</string>
+    <string name="reyon_order_incoming_fmt">+%2$d придёт %1$s</string>
+    <string name="reyon_order_expiring_fmt">%1$d единиц истекает этой ночью</string>
+    <string name="reyon_order_expiring_tomorrow_fmt">%1$d единиц истекает завтра ночью</string>
+    <string name="reyon_order_promo_tag">АКЦИЯ</string>
+    <string name="reyon_order_case_fmt">%1$d ящиков = %2$d единиц</string>
+    <string name="reyon_order_case_size_fmt">ящик по %1$d · придёт %2$s</string>
+    <string name="reyon_order_no_order">без заказа</string>
+    <string name="reyon_order_closed">неделя кончается, поставка уже не успеет</string>
+    <string name="reyon_order_more">Больше</string>
+    <string name="reyon_order_less">Меньше</string>
+    <string name="reyon_order_close_day">Закрыть день</string>
+    <string name="reyon_order_close_week">Закрыть неделю</string>
+    <string name="reyon_order_summary_title_fmt">%1$s закрыт</string>
+    <string name="reyon_order_sum_sold_fmt">Продажи: %1$d единиц (+%2$d)</string>
+    <string name="reyon_order_sum_lost_fmt">Упущенные продажи: %1$d единиц</string>
+    <string name="reyon_order_sum_holding_fmt">Хранение: −%1$d</string>
+    <string name="reyon_order_sum_waste_fmt">Потери: %1$d единиц (−%2$d)</string>
+    <string name="reyon_order_sum_returns_fmt">Возвраты: %1$d единиц (−%2$d)</string>
+    <string name="reyon_order_sum_delivered_fmt">Утренняя поставка: %1$d единиц</string>
+    <string name="reyon_order_sum_profit_fmt">Прибыль дня %1$+d · всего %2$d</string>
+    <string name="reyon_order_continue">Продолжить</string>
+    <string name="reyon_order_done_title">Неделя закончена</string>
+    <string name="reyon_order_result_fmt">%1$d / %2$d прибыли (%3$d%% от цели)</string>
+    <string name="reyon_order_stats_fmt">Оборачиваемость запаса %1$s (эксперт %2$s) · уровень сервиса %3$d%% (эксперт %4$d%%)</string>
+    <string name="reyon_order_chart_profit">Прибыль по дням</string>
+    <string name="reyon_order_chart_turnover">Оборачиваемость</string>
+    <string name="reyon_order_chart_expert_fmt">эксперт %1$s</string>
+    <string name="reyon_order_chart_day_fmt">день %1$d %2$+d</string>
+    <string name="reyon_order_chart_desc_fmt">График недели: %1$s · оборачиваемость запаса %2$s (эксперт %3$s)</string>
+    <string name="reyon_order_beat_target">Ты обыграл эксперта! 🏆</string>
+    <string name="reyon_order_rules">Продажа +4 за единицу (★ +6) · хранение −1 за единицу за ночь · потеря −2 (★ −4) · возврат −1</string>
+    <string name="reyon_order_board_desc_fmt">Полка заказов %1$d полок × %2$d мест, день %3$d, прибыль %4$d</string>
+    <string name="reyon_order_item_desc_fmt">%1$s: запас %2$d/%3$d, заказ %4$d ящиков</string>
+    <string name="reyon_order_hint_fmt">Эксперт: %2$d ящиков %1$s</string>
+    <string name="reyon_order_hint_none">Твои заказы совпадают с заказами эксперта</string>
+    <string name="reyon_order_share_fmt">Оборачиваемость запаса %1$s</string>
+</resources>

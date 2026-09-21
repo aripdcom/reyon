@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Uygulamanın desteklediği diller. Android 13+ bu listeyi okuyup
+  Ayarlar → Uygulamalar → ZA Games → Dil seçicisini kendiliğinden kurar;
+  uygulama içindeki seçici de (ZaLocale) aynı listeyi kullanır.
+
+  Varsayılan dil İngilizce'dir (res/values): listede olmayan bir dile ayarlı
+  telefon İngilizce görür. Türkçe res/values-tr altındadır.
+
+  Portekizce tek klasörde (values-pt) Brezilya Portekizcesi olarak tutulur;
+  hem pt-BR hem pt-PT cihazlar buraya çözülür.
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android"
+    android:defaultLocale="en">
+    <locale android:name="en" />
+    <locale android:name="tr" />
+    <locale android:name="de" />
+    <locale android:name="fr" />
+    <locale android:name="nl" />
+    <locale android:name="es" />
+    <locale android:name="pt" />
+    <locale android:name="it" />
+    <locale android:name="da" />
+    <locale android:name="sv" />
+    <locale android:name="nb" />
+    <locale android:name="fi" />
+    <locale android:name="ru" />
+    <locale android:name="ar" />
+</locale-config>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Reyon'un metinleri. Diller res/values-<kod> altında; varsayılan (bu dosya)
+  İngilizce. Anahtar paritesini ve biçim belirteçlerini tools/check_strings.py
+  denetler. Bölüm başlıkları her dilde Türkçe: depodaki öbür yorumlar gibi
+  geliştirici notu, çeviri değil.
+-->
+<resources>
+    <string name="app_name">Reyon</string>
+    <string name="app_tagline">Casse-tête de planogramme : déduis du briefing la seule disposition correcte du rayon</string>
+
+    <!-- Ortak -->
+    <string name="chip_no_ads">0 pub</string>
+    <string name="chip_no_trackers">0 traceur</string>
+    <string name="chip_no_permissions">0 autorisation</string>
+    <string name="new_record">Nouveau record ! 🏆</string>
+    <string name="exit_app">Quitter</string>
+    <string name="back">Retour</string>
+    <string name="congrats">Bien joué ! 🎉</string>
+    <string name="undo">Annuler</string>
+    <string name="solved_label">Résolus</string>
+    <string name="mode_daily">Du jour</string>
+    <string name="mode_free">Libre</string>
+    <string name="difficulty_easy">Facile</string>
+    <string name="difficulty_medium">Moyen</string>
+    <string name="difficulty_hard">Difficile</string>
+    <string name="difficulty_label">Niveau</string>
+    <string name="same_difficulty">Nouvelle au même niveau</string>
+    <string name="time_label">Temps</string>
+    <string name="time_fmt">Temps : %1$s</string>
+
+    <!-- Ayarlar -->
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_sound">Son</string>
+    <string name="sound_on">Activer le son</string>
+    <string name="sound_off">Couper le son</string>
+    <string name="language_title">Langue</string>
+    <string name="language_system">Langue du téléphone</string>
+    <string name="language_selected">sélectionnée</string>
+    <string name="language_select">sélectionner</string>
+    <string name="settings_haptics">Retour haptique</string>
+    <string name="haptics_on">Activer le retour haptique</string>
+    <string name="haptics_off">Couper le retour haptique</string>
+
+    <!-- Paylaşım -->
+    <string name="share">Partager</string>
+    <string name="share_chooser">Partager le résultat</string>
+    <string name="share_failed">Impossible d’ouvrir le partage</string>
+    <string name="share_tagline">Reyon : zéro pub, zéro autorisation, zéro traqueur. Gratuit et open source :</string>
+    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_solved">Résolu !</string>
+    <string name="share_score_fmt">%1$s points</string>
+    <string name="share_daily_fmt">Du jour · %1$s</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">À propos</string>
+    <string name="about_version_fmt">Version %1$s</string>
+    <string name="about_privacy_summary">Reyon ne collecte aucune donnée, ne demande aucune autorisation et ne se connecte jamais au réseau. La progression et les réglages restent uniquement sur cet appareil et disparaissent à la désinstallation.</string>
+    <string name="about_links">Liens</string>
+    <string name="about_website">Site web</string>
+    <string name="about_source">Code source</string>
+    <string name="about_report">Signaler un problème</string>
+    <string name="about_privacy">Politique de confidentialité</string>
+    <string name="about_contact">Écrivez-nous</string>
+    <string name="about_open_failed">Impossible d’ouvrir le lien : aucun navigateur sur cet appareil</string>
+    <string name="about_licenses">Licences open source</string>
+    <string name="about_licenses_intro">Reyon utilise les composants open source ci-dessous ; appuie sur l’un d’eux pour ouvrir sa source.</string>
+    <string name="about_lic_androidx_name">AndroidX Jetpack</string>
+    <string name="about_lic_androidx_desc">Bibliothèques Compose, Material 3, Lifecycle, Activity et Core. The Android Open Source Project.</string>
+    <string name="about_lic_kotlin_name">Kotlin et kotlinx.coroutines</string>
+    <string name="about_lic_kotlin_desc">Bibliothèque standard du langage et concurrence. JetBrains et contributeurs.</string>
+    <string name="about_license_show">Afficher le texte de la licence Apache 2.0</string>
+    <string name="about_license_hide">Masquer le texte de la licence</string>
+    <string name="about_app_license">Le code source de Reyon est ouvert sous la GNU GPL v3. Le nom « Reyon » et le logo ne font pas partie de la licence.</string>
+    <string name="about_app_license_link">Texte de la licence (GitHub)</string>
+
+    <!-- Reyon: Diziliş -->
+    <string name="reyon_intro">Appuie sur un produit, puis sur un emplacement du rayon ; appui long pour le renvoyer sur le plateau. Chaque règle du briefing passe au ✓ quand elle est respectée ; les règles mènent à une seule disposition, sans deviner.</string>
+    <string name="reyon_level_desc_fmt">%1$d étagères × %2$d emplacements · %3$d–%4$d produits</string>
+    <string name="reyon_daily_desc">Aujourd’hui tout le monde range le même rayon ; ton temps est enregistré.</string>
+    <string name="reyon_daily_done_fmt">Résolu aujourd’hui : %1$s · %2$d indices</string>
+    <string name="reyon_free_desc">Rayon aléatoire ; les solutions sans indice comptent comme records.</string>
+    <string name="reyon_best_fmt">Meilleur temps : %1$s</string>
+    <string name="reyon_start">C’est parti</string>
+    <string name="reyon_play_again">Ranger encore</string>
+    <string name="reyon_to_menu">Retour au début</string>
+    <string name="reyon_generating">Préparation du rayon…</string>
+    <string name="reyon_brief_label">Briefing planogramme</string>
+    <string name="reyon_tray_label">Plateau</string>
+    <string name="reyon_tray_empty">Tous les produits sont dans le rayon</string>
+    <string name="reyon_tray_item_fmt">%1$s, %2$d faces</string>
+    <string name="reyon_hint">Indice</string>
+    <string name="reyon_remove">Sur le plateau</string>
+    <string name="reyon_hint_wrong_fmt">%1$s était mal placé et est retourné sur le plateau</string>
+    <string name="reyon_hint_place_fmt">Indice : %1$s va %2$s</string>
+    <string name="reyon_result_fmt">%1$s · %2$d indices</string>
+    <string name="reyon_board_desc_fmt">Reyon %1$d étagères × %2$d emplacements, %3$d produits non placés</string>
+    <string name="reyon_shelf_top">étagère du haut</string>
+    <string name="reyon_shelf_eye">hauteur des yeux (étagère 2)</string>
+    <string name="reyon_shelf_bottom">étagère du bas</string>
+    <string name="reyon_shelf_nth">étagère %1$d</string>
+    <string name="reyon_shelf_top_at">sur l’étagère du haut</string>
+    <string name="reyon_shelf_eye_at">à hauteur des yeux (étagère 2)</string>
+    <string name="reyon_shelf_bottom_at">sur l’étagère du bas</string>
+    <string name="reyon_shelf_nth_at">sur l’étagère %1$d</string>
+    <string name="reyon_clue_placed">%1$s est %2$s (donné)</string>
+    <string name="reyon_clue_on_shelf">%1$s est %2$s</string>
+    <string name="reyon_clue_in_slot">%1$s occupe l’emplacement %2$d en partant de la gauche</string>
+    <string name="reyon_clue_left_edge">%1$s est à l’extrémité gauche de son étagère</string>
+    <string name="reyon_clue_right_edge">%1$s est à l’extrémité droite de son étagère</string>
+    <string name="reyon_clue_adjacent">%1$s et %2$s sont côte à côte</string>
+    <string name="reyon_clue_left_of">%1$s partage une étagère avec %2$s et se trouve à sa gauche</string>
+    <string name="reyon_clue_same_shelf">%1$s et %2$s partagent une étagère</string>
+    <string name="reyon_clue_different_shelf">%1$s et %2$s sont sur des étagères différentes</string>
+    <string name="reyon_clue_above">%1$s est sur l’étagère juste au-dessus de %2$s, empilé dessus</string>
+    <string name="reyon_clue_eye_level">★ Les produits à forte marge sont à hauteur des yeux (étagère 2)</string>
+    <string name="reyon_clue_heavy_bottom">▼ Les produits lourds vont sur l’étagère du bas</string>
+    <string name="reyon_clue_category_block">%1$s forment un seul bloc : même étagère, côte à côte</string>
+    <string name="reyon_clue_categories_apart">%1$s et %2$s ne partagent jamais une étagère</string>
+    <string name="reyon_clue_brand_vertical">%1$s forme un bloc vertical : empilé sur des étagères consécutives</string>
+    <string name="reyon_clue_size_flow">Les tailles de %1$s augmentent de gauche à droite (• petit, ••• grand)</string>
+    <string name="reyon_cat_icecek">Boissons</string>
+    <string name="reyon_cat_atistirmalik">En-cas</string>
+    <string name="reyon_cat_kahvaltilik">Petit-déjeuner</string>
+    <string name="reyon_cat_temizlik">Produits d’entretien</string>
+    <string name="reyon_cat_bakim">Soins du corps</string>
+    <string name="reyon_brand_a">Toros</string>
+    <string name="reyon_brand_b">Ege</string>
+    <string name="reyon_brand_c">Kuzey</string>
+    <string name="reyon_brand_d">Meltem</string>
+    <string name="reyon_kind_puzzle">Ranger</string>
+    <string name="reyon_kind_audit">Contrôler</string>
+    <string name="reyon_kind_sales">Ventes</string>
+    <string name="reyon_kind_order">Commander</string>
+
+    <!-- Ürün adları -->
+    <string name="reyon_kind_kola">Cola</string>
+    <string name="reyon_kind_su">Eau</string>
+    <string name="reyon_kind_gazoz">Limonade gazeuse</string>
+    <string name="reyon_kind_meyve_suyu">Jus de fruits</string>
+    <string name="reyon_kind_ayran">Ayran</string>
+    <string name="reyon_kind_soda">Eau gazeuse</string>
+    <string name="reyon_kind_limonata">Citronnade</string>
+    <string name="reyon_kind_cips">Chips</string>
+    <string name="reyon_kind_kraker">Crackers</string>
+    <string name="reyon_kind_kuruyemis">Fruits secs</string>
+    <string name="reyon_kind_cikolata">Chocolat</string>
+    <string name="reyon_kind_gofret">Gaufrette</string>
+    <string name="reyon_kind_biskuvi">Biscuits</string>
+    <string name="reyon_kind_sos">Sauce à tremper</string>
+    <string name="reyon_kind_bal">Miel</string>
+    <string name="reyon_kind_recel">Confiture</string>
+    <string name="reyon_kind_peynir">Fromage</string>
+    <string name="reyon_kind_zeytin">Olives</string>
+    <string name="reyon_kind_tereyagi">Beurre</string>
+    <string name="reyon_kind_yumurta">Œufs</string>
+    <string name="reyon_kind_sut">Lait</string>
+    <string name="reyon_kind_deterjan">Lessive</string>
+    <string name="reyon_kind_camasir_suyu">Eau de Javel</string>
+    <string name="reyon_kind_bulasik_deterjani">Liquide vaisselle</string>
+    <string name="reyon_kind_yumusatici">Adoucissant</string>
+    <string name="reyon_kind_sunger">Éponge</string>
+    <string name="reyon_kind_kagit_havlu">Essuie-tout</string>
+    <string name="reyon_kind_cop_poseti">Sacs poubelle</string>
+    <string name="reyon_kind_sampuan">Shampooing</string>
+    <string name="reyon_kind_sabun">Savon</string>
+    <string name="reyon_kind_dis_macunu">Dentifrice</string>
+    <string name="reyon_kind_deodorant">Déodorant</string>
+    <string name="reyon_kind_tiras_kopugu">Mousse à raser</string>
+    <string name="reyon_kind_islak_mendil">Lingettes</string>
+    <string name="reyon_kind_pamuk">Coton</string>
+
+    <!-- Reyon: Denetim -->
+    <string name="reyon_audit_intro">Le plan en haut, le vrai rayon en bas. Appuie sur les emplacements où le rayon s’écarte du plan : un échange, un emplacement vide, un produit étranger, une marque ou une taille fausse, un débordement. Un appui faux compte comme une erreur.</string>
+    <string name="reyon_audit_level_desc_fmt">%1$d étagères × %2$d emplacements · %3$d écarts</string>
+    <string name="reyon_audit_daily_desc">Aujourd’hui tout le monde contrôle le même rayon ; ton temps et tes erreurs sont enregistrés.</string>
+    <string name="reyon_audit_daily_done_fmt">Contrôlé aujourd’hui : %1$s · %2$d erreurs</string>
+    <string name="reyon_audit_free_desc">Rayon aléatoire ; les contrôles sans erreur ni indice comptent comme records.</string>
+    <string name="reyon_audit_start">Lancer le contrôle</string>
+    <string name="reyon_audit_generating">Préparation du contrôle…</string>
+    <string name="reyon_audit_plan_label">Plan</string>
+    <string name="reyon_audit_shelf_label">Rayon : appuie sur les écarts</string>
+    <string name="reyon_audit_found_label">Trouvés</string>
+    <string name="reyon_audit_mistakes_label">Erreurs</string>
+    <string name="reyon_audit_remaining_fmt">encore %1$d à trouver</string>
+    <string name="reyon_audit_done_title">Contrôle terminé</string>
+    <string name="reyon_audit_result_fmt">%1$s · %2$d erreurs · %3$d indices</string>
+    <string name="reyon_audit_board_desc_fmt">Rayon contrôlé %1$d étagères × %2$d emplacements, %3$d/%4$d écarts trouvés</string>
+    <string name="reyon_audit_plan_desc_fmt">Plan %1$d étagères × %2$d emplacements</string>
+    <string name="reyon_audit_plan_zoom_hint">appuie pour agrandir</string>
+    <string name="reyon_audit_plan_zoom_desc">Plan agrandi ; appuie pour fermer</string>
+    <string name="reyon_audit_plan_zoom_close">Appuie pour fermer</string>
+    <string name="reyon_dev_swap_fmt">Échangés : %1$s ↔ %2$s</string>
+    <string name="reyon_dev_gap_fmt">Emplacement vide : il manque une face à %1$s</string>
+    <string name="reyon_dev_missing_fmt">Emplacement vide : %1$s est absent</string>
+    <string name="reyon_dev_foreign_fmt">Produit étranger : %2$s au lieu de %1$s</string>
+    <string name="reyon_dev_brand_fmt">Mauvaise marque : %1$s (%3$s au lieu de %2$s)</string>
+    <string name="reyon_dev_size_fmt">Mauvaise taille : %1$s</string>
+    <string name="reyon_dev_spill_fmt">Débordement : %1$s déborde sur %2$s</string>
+
+    <!-- Reyon: Satış -->
+    <string name="reyon_sales_intro">Dispose les produits comme tu veux ; les points viennent des règles de vente (hauteur des yeux, lourds en bas, complémentaires côte à côte, entretien loin de l’alimentaire, blocs de catégorie et de marque). L’objectif est la meilleure disposition trouvée par l’optimiseur ; l’atteindre donne trois étoiles.</string>
+    <string name="reyon_sales_daily_desc">Aujourd’hui tout le monde dispose les mêmes produits ; ton meilleur score du jour est enregistré.</string>
+    <string name="reyon_sales_daily_done_fmt">Aujourd’hui : %1$d / %2$d points · %3$s</string>
+    <string name="reyon_sales_free_desc">Jeu de produits aléatoire ; le pourcentage de l’objectif compte comme record.</string>
+    <string name="reyon_sales_best_fmt">Record : %1$d%% de l’objectif</string>
+    <string name="reyon_sales_start">Commencer à disposer</string>
+    <string name="reyon_sales_generating">Calcul de l’objectif…</string>
+    <string name="reyon_sales_score_label">Points</string>
+    <string name="reyon_sales_target_label">Objectif</string>
+    <string name="reyon_sales_rules_label">Règles de vente</string>
+    <string name="reyon_sales_rule_position">Position</string>
+    <string name="reyon_sales_rule_position_desc">demande × faces × facteur d’étagère : hauteur des yeux ×3, haut et milieu ×2, bas ×1 · ▼ lourd seulement en bas ×3 · ★ seulement à hauteur des yeux ×4</string>
+    <string name="reyon_sales_rule_complement">Complémentaires</string>
+    <string name="reyon_sales_rule_complement_desc">paires comme chips et sauce côte à côte +6, empilées +3</string>
+    <string name="reyon_sales_rule_conflict">Conflit</string>
+    <string name="reyon_sales_rule_conflict_desc">un produit d’entretien à côté de l’alimentaire −8</string>
+    <string name="reyon_sales_rule_category">Bloc de catégorie</string>
+    <string name="reyon_sales_rule_category_desc">même catégorie côte à côte +4</string>
+    <string name="reyon_sales_rule_brand">Bloc de marque</string>
+    <string name="reyon_sales_rule_brand_desc">même marque côte à côte +3, empilée +3</string>
+    <string name="reyon_sales_neighbors">voisins</string>
+    <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
+    <string name="reyon_sales_breakdown_fmt">%1$s : %2$s = %3$+d</string>
+    <string name="reyon_sales_selected_fmt">%1$s sélectionné (demande %2$d) : appuie sur un emplacement du rayon</string>
+    <string name="reyon_sales_pick_hint">Appuie sur un produit pour voir le détail de ses points</string>
+    <string name="reyon_sales_demand_fmt">demande %1$d</string>
+    <string name="reyon_sales_finish">Terminer</string>
+    <string name="reyon_sales_done_title">Disposition terminée</string>
+    <string name="reyon_sales_result_fmt">%1$d / %2$d points (%3$d%% de l’objectif)</string>
+    <string name="reyon_sales_beat_target">Tu as dépassé l’objectif ! 🏆</string>
+    <string name="reyon_sales_reopen">Continuer à disposer</string>
+    <string name="reyon_sales_show_target">Voir l’objectif</string>
+    <string name="reyon_sales_review_mine">Ma disposition</string>
+    <string name="reyon_sales_review_target_fmt">Objectif (%1$d)</string>
+    <string name="reyon_sales_back_to_result">Résultat</string>
+    <string name="reyon_sales_board_desc_fmt">Rayon de vente %1$d étagères × %2$d emplacements, %3$d produits non placés, %4$d points</string>
+
+    <!-- Reyon: Sipariş -->
+    <string name="reyon_order_intro">Le plan du rayon est fixé ; ton travail c’est le stock. Chaque jour, décide combien de cartons commander par produit : les commandes arrivent le lendemain matin, ce qui ne rentre pas est retourné, le stock qui reste le soir coûte du stockage, les unités périmées sont perdues. L’objectif est le bénéfice d’un expert qui voit les mêmes prévisions.</string>
+    <string name="reyon_order_level_desc_fmt">%1$d étagères × %2$d emplacements · %3$d jours · %4$d promotions</string>
+    <string name="reyon_order_daily_desc">Aujourd’hui tout le monde joue la même semaine ; ton meilleur bénéfice du jour est enregistré.</string>
+    <string name="reyon_order_daily_done_fmt">Aujourd’hui : %1$d / %2$d de bénéfice · %3$s</string>
+    <string name="reyon_order_free_desc">Semaine aléatoire ; le pourcentage de l’objectif compte comme record.</string>
+    <string name="reyon_order_best_fmt">Record : %1$d%% de l’objectif</string>
+    <string name="reyon_order_start">Commencer la semaine</string>
+    <string name="reyon_order_generating">Préparation de la semaine…</string>
+    <string name="reyon_order_day_label">Jour</string>
+    <string name="reyon_order_profit_label">Bénéfice</string>
+    <string name="reyon_order_target_label">Objectif</string>
+    <string name="reyon_order_dow_1">Lundi</string>
+    <string name="reyon_order_dow_2">Mardi</string>
+    <string name="reyon_order_dow_3">Mercredi</string>
+    <string name="reyon_order_dow_4">Jeudi</string>
+    <string name="reyon_order_dow_5">Vendredi</string>
+    <string name="reyon_order_dow_6">Samedi</string>
+    <string name="reyon_order_dow_7">Dimanche</string>
+    <string name="reyon_order_day_title_fmt">%1$s · jour %2$d sur %3$d</string>
+    <string name="reyon_order_promo_ahead_fmt">%1$s : promotion %2$s (demande ×2,5)</string>
+    <string name="reyon_order_stock_fmt">stock %1$d/%2$d</string>
+    <string name="reyon_order_today_fmt">aujourd’hui %1$d–%2$d</string>
+    <string name="reyon_order_forecast_fmt">%1$s %2$d–%3$d</string>
+    <string name="reyon_order_incoming_fmt">+%2$d arrivent %1$s</string>
+    <string name="reyon_order_expiring_fmt">%1$d unités périment cette nuit</string>
+    <string name="reyon_order_expiring_tomorrow_fmt">%1$d unités périment demain soir</string>
+    <string name="reyon_order_promo_tag">PROMO</string>
+    <string name="reyon_order_case_fmt">%1$d cartons = %2$d unités</string>
+    <string name="reyon_order_case_size_fmt">carton de %1$d · arrive %2$s</string>
+    <string name="reyon_order_no_order">aucune commande</string>
+    <string name="reyon_order_closed">fin de semaine, une livraison n’arriverait plus</string>
+    <string name="reyon_order_more">Plus</string>
+    <string name="reyon_order_less">Moins</string>
+    <string name="reyon_order_close_day">Clore la journée</string>
+    <string name="reyon_order_close_week">Clore la semaine</string>
+    <string name="reyon_order_summary_title_fmt">%1$s clos</string>
+    <string name="reyon_order_sum_sold_fmt">Ventes : %1$d unités (+%2$d)</string>
+    <string name="reyon_order_sum_lost_fmt">Ventes perdues : %1$d unités</string>
+    <string name="reyon_order_sum_holding_fmt">Stockage : −%1$d</string>
+    <string name="reyon_order_sum_waste_fmt">Pertes : %1$d unités (−%2$d)</string>
+    <string name="reyon_order_sum_returns_fmt">Retours : %1$d unités (−%2$d)</string>
+    <string name="reyon_order_sum_delivered_fmt">Livraison du matin : %1$d unités</string>
+    <string name="reyon_order_sum_profit_fmt">Bénéfice du jour %1$+d · total %2$d</string>
+    <string name="reyon_order_continue">Continuer</string>
+    <string name="reyon_order_done_title">Semaine terminée</string>
+    <string name="reyon_order_result_fmt">%1$d / %2$d de bénéfice (%3$d%% de l’objectif)</string>
+    <string name="reyon_order_stats_fmt">Rotation du stock %1$s (expert %2$s) · taux de service %3$d%% (expert %4$d%%)</string>
+    <string name="reyon_order_chart_profit">Bénéfice quotidien</string>
+    <string name="reyon_order_chart_turnover">Rotation</string>
+    <string name="reyon_order_chart_expert_fmt">expert %1$s</string>
+    <string name="reyon_order_chart_day_fmt">jour %1$d %2$+d</string>
+    <string name="reyon_order_chart_desc_fmt">Graphique de la semaine : %1$s · rotation du stock %2$s (expert %3$s)</string>
+    <string name="reyon_order_beat_target">Tu as battu l’expert ! 🏆</string>
+    <string name="reyon_order_rules">Vente +4 par unité (★ +6) · stockage −1 par unité et par nuit · perte −2 (★ −4) · retour −1</string>
+    <string name="reyon_order_board_desc_fmt">Rayon de commande %1$d étagères × %2$d emplacements, jour %3$d, bénéfice %4$d</string>
+    <string name="reyon_order_item_desc_fmt">%1$s : stock %2$d/%3$d, commande %4$d cartons</string>
+    <string name="reyon_order_hint_fmt">Expert : %2$d cartons de %1$s</string>
+    <string name="reyon_order_hint_none">Tes commandes correspondent à celles de l’expert</string>
+    <string name="reyon_order_share_fmt">Rotation du stock %1$s</string>
+</resources>

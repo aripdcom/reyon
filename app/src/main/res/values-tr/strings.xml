@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Reyon'un metinleri. Diller res/values-<kod> altında; varsayılan (bu dosya)
+  İngilizce. Anahtar paritesini ve biçim belirteçlerini tools/check_strings.py
+  denetler. Bölüm başlıkları her dilde Türkçe: depodaki öbür yorumlar gibi
+  geliştirici notu, çeviri değil.
+-->
+<resources>
+    <string name="app_name">Reyon</string>
+    <string name="app_tagline">Planogram bulmacası: brifteki kurallardan rafın tek doğru dizilişini çıkar</string>
+
+    <!-- Ortak -->
+    <string name="chip_no_ads">0 reklam</string>
+    <string name="chip_no_trackers">0 izleyici</string>
+    <string name="chip_no_permissions">0 izin</string>
+    <string name="new_record">Yeni rekor! 🏆</string>
+    <string name="exit_app">Çıkış</string>
+    <string name="back">Geri</string>
+    <string name="congrats">Tebrikler! 🎉</string>
+    <string name="undo">Geri al</string>
+    <string name="solved_label">Çözülen</string>
+    <string name="mode_daily">Günlük</string>
+    <string name="mode_free">Serbest</string>
+    <string name="difficulty_easy">Kolay</string>
+    <string name="difficulty_medium">Orta</string>
+    <string name="difficulty_hard">Zor</string>
+    <string name="difficulty_label">Zorluk</string>
+    <string name="same_difficulty">Aynı zorlukta yeni</string>
+    <string name="time_label">Süre</string>
+    <string name="time_fmt">Süre: %1$s</string>
+
+    <!-- Ayarlar -->
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_sound">Ses</string>
+    <string name="sound_on">Sesi aç</string>
+    <string name="sound_off">Sesi kapat</string>
+    <string name="language_title">Dil</string>
+    <string name="language_system">Telefonun dili</string>
+    <string name="language_selected">seçili</string>
+    <string name="language_select">seç</string>
+    <string name="settings_haptics">Titreşim</string>
+    <string name="haptics_on">Titreşimi aç</string>
+    <string name="haptics_off">Titreşimi kapat</string>
+
+    <!-- Paylaşım -->
+    <string name="share">Paylaş</string>
+    <string name="share_chooser">Sonucu paylaş</string>
+    <string name="share_failed">Paylaşım açılamadı</string>
+    <string name="share_tagline">Reyon: sıfır reklam, sıfır izin, sıfır izleyici. Ücretsiz ve açık kaynak:</string>
+    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_solved">Çözüldü!</string>
+    <string name="share_score_fmt">%1$s puan</string>
+    <string name="share_daily_fmt">Günlük · %1$s</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">Hakkında</string>
+    <string name="about_version_fmt">Sürüm %1$s</string>
+    <string name="about_privacy_summary">Reyon hiçbir veri toplamaz, hiçbir izin istemez ve ağa bağlanmaz. İlerleme ve ayarlar yalnızca bu cihazda saklanır; uygulamayı silince silinir.</string>
+    <string name="about_links">Bağlantılar</string>
+    <string name="about_website">Web sitesi</string>
+    <string name="about_source">Kaynak kodu</string>
+    <string name="about_report">Sorun bildir</string>
+    <string name="about_privacy">Gizlilik politikası</string>
+    <string name="about_contact">Bize yaz</string>
+    <string name="about_open_failed">Bağlantı açılamadı: cihazda tarayıcı yok</string>
+    <string name="about_licenses">Açık kaynak lisansları</string>
+    <string name="about_licenses_intro">Reyon aşağıdaki açık kaynak bileşenleri kullanır; dokununca kaynağı açılır.</string>
+    <string name="about_lic_androidx_name">AndroidX Jetpack</string>
+    <string name="about_lic_androidx_desc">Compose, Material 3, Lifecycle, Activity ve Core kütüphaneleri. The Android Open Source Project.</string>
+    <string name="about_lic_kotlin_name">Kotlin ve kotlinx.coroutines</string>
+    <string name="about_lic_kotlin_desc">Dil standart kütüphanesi ve eşzamanlılık. JetBrains ve katkıda bulunanlar.</string>
+    <string name="about_license_show">Apache 2.0 lisans metnini göster</string>
+    <string name="about_license_hide">Lisans metnini gizle</string>
+    <string name="about_app_license">Reyon\'un kaynak kodu GNU GPL v3 ile açıktır. \"Reyon\" adı ve logosu lisansa dahil değildir.</string>
+    <string name="about_app_license_link">Lisans metni (GitHub)</string>
+
+    <!-- Reyon: Diziliş -->
+    <string name="reyon_intro">Ürüne dokun, sonra rafta bir göze dokun; uzun basınca ürün tepsiye döner. Brifteki her kural tutunca ✓ olur; kurallar tek bir dizilişe götürür, tahmin gerekmez.</string>
+    <string name="reyon_level_desc_fmt">%1$d raf × %2$d göz · %3$d–%4$d ürün</string>
+    <string name="reyon_daily_desc">Herkes bugün aynı rafı dizer; süren kaydedilir.</string>
+    <string name="reyon_daily_done_fmt">Bugün çözüldü: %1$s · %2$d ipucu</string>
+    <string name="reyon_free_desc">Rastgele raf; ipucusuz çözümler rekor sayılır.</string>
+    <string name="reyon_best_fmt">En iyi süre: %1$s</string>
+    <string name="reyon_start">Başla</string>
+    <string name="reyon_play_again">Yeniden diz</string>
+    <string name="reyon_to_menu">Başa dön</string>
+    <string name="reyon_generating">Raf hazırlanıyor…</string>
+    <string name="reyon_brief_label">Planogram brifi</string>
+    <string name="reyon_tray_label">Tepsi</string>
+    <string name="reyon_tray_empty">Tüm ürünler rafta</string>
+    <string name="reyon_tray_item_fmt">%1$s, %2$d yüz</string>
+    <string name="reyon_hint">İpucu</string>
+    <string name="reyon_remove">Tepsiye al</string>
+    <string name="reyon_hint_wrong_fmt">%1$s yanlış yerdeydi, tepsiye alındı</string>
+    <string name="reyon_hint_place_fmt">İpucu: %1$s %2$s</string>
+    <string name="reyon_result_fmt">%1$s · %2$d ipucu</string>
+    <string name="reyon_board_desc_fmt">Reyon %1$d raf × %2$d göz, %3$d ürün yerleşmedi</string>
+    <string name="reyon_shelf_top">en üst raf</string>
+    <string name="reyon_shelf_eye">göz hizası (2. raf)</string>
+    <string name="reyon_shelf_bottom">en alt raf</string>
+    <string name="reyon_shelf_nth">%1$d. raf</string>
+    <string name="reyon_shelf_top_at">en üst rafta</string>
+    <string name="reyon_shelf_eye_at">göz hizasında (2. raf)</string>
+    <string name="reyon_shelf_bottom_at">en alt rafta</string>
+    <string name="reyon_shelf_nth_at">%1$d. rafta</string>
+    <string name="reyon_clue_placed">%1$s %2$s (verili)</string>
+    <string name="reyon_clue_on_shelf">%1$s %2$s</string>
+    <string name="reyon_clue_in_slot">%1$s soldan %2$d. gözü kapsıyor</string>
+    <string name="reyon_clue_left_edge">%1$s rafının en solunda</string>
+    <string name="reyon_clue_right_edge">%1$s rafının en sağında</string>
+    <string name="reyon_clue_adjacent">%1$s ile %2$s yan yana</string>
+    <string name="reyon_clue_left_of">%1$s, %2$s ile aynı rafta ve onun solunda</string>
+    <string name="reyon_clue_same_shelf">%1$s ile %2$s aynı rafta</string>
+    <string name="reyon_clue_different_shelf">%1$s ile %2$s farklı raflarda</string>
+    <string name="reyon_clue_above">%1$s, %2$s ürününün hemen üst rafında ve üst üste</string>
+    <string name="reyon_clue_eye_level">★ Yüksek marjlı ürünler göz hizasında (2. raf)</string>
+    <string name="reyon_clue_heavy_bottom">▼ Ağır ürünler en alt rafta</string>
+    <string name="reyon_clue_category_block">%1$s tek blok: aynı rafta, yan yana</string>
+    <string name="reyon_clue_categories_apart">%1$s ile %2$s aynı rafı paylaşmaz</string>
+    <string name="reyon_clue_brand_vertical">%1$s markası dikey blok: ardışık raflarda üst üste</string>
+    <string name="reyon_clue_size_flow">%1$s markasında boylar soldan sağa büyür (• küçük, ••• büyük)</string>
+    <string name="reyon_cat_icecek">İçecekler</string>
+    <string name="reyon_cat_atistirmalik">Atıştırmalıklar</string>
+    <string name="reyon_cat_kahvaltilik">Kahvaltılıklar</string>
+    <string name="reyon_cat_temizlik">Temizlik ürünleri</string>
+    <string name="reyon_cat_bakim">Kişisel bakım ürünleri</string>
+    <string name="reyon_brand_a">Toros</string>
+    <string name="reyon_brand_b">Ege</string>
+    <string name="reyon_brand_c">Kuzey</string>
+    <string name="reyon_brand_d">Meltem</string>
+    <string name="reyon_kind_puzzle">Diziliş</string>
+    <string name="reyon_kind_audit">Denetim</string>
+    <string name="reyon_kind_sales">Satış</string>
+    <string name="reyon_kind_order">Sipariş</string>
+
+    <!-- Ürün adları -->
+    <string name="reyon_kind_kola">Kola</string>
+    <string name="reyon_kind_su">Su</string>
+    <string name="reyon_kind_gazoz">Gazoz</string>
+    <string name="reyon_kind_meyve_suyu">Meyve suyu</string>
+    <string name="reyon_kind_ayran">Ayran</string>
+    <string name="reyon_kind_soda">Soda</string>
+    <string name="reyon_kind_limonata">Limonata</string>
+    <string name="reyon_kind_cips">Cips</string>
+    <string name="reyon_kind_kraker">Kraker</string>
+    <string name="reyon_kind_kuruyemis">Kuruyemiş</string>
+    <string name="reyon_kind_cikolata">Çikolata</string>
+    <string name="reyon_kind_gofret">Gofret</string>
+    <string name="reyon_kind_biskuvi">Bisküvi</string>
+    <string name="reyon_kind_sos">Sos</string>
+    <string name="reyon_kind_bal">Bal</string>
+    <string name="reyon_kind_recel">Reçel</string>
+    <string name="reyon_kind_peynir">Peynir</string>
+    <string name="reyon_kind_zeytin">Zeytin</string>
+    <string name="reyon_kind_tereyagi">Tereyağı</string>
+    <string name="reyon_kind_yumurta">Yumurta</string>
+    <string name="reyon_kind_sut">Süt</string>
+    <string name="reyon_kind_deterjan">Deterjan</string>
+    <string name="reyon_kind_camasir_suyu">Çamaşır suyu</string>
+    <string name="reyon_kind_bulasik_deterjani">Bulaşık deterjanı</string>
+    <string name="reyon_kind_yumusatici">Yumuşatıcı</string>
+    <string name="reyon_kind_sunger">Sünger</string>
+    <string name="reyon_kind_kagit_havlu">Kâğıt havlu</string>
+    <string name="reyon_kind_cop_poseti">Çöp poşeti</string>
+    <string name="reyon_kind_sampuan">Şampuan</string>
+    <string name="reyon_kind_sabun">Sabun</string>
+    <string name="reyon_kind_dis_macunu">Diş macunu</string>
+    <string name="reyon_kind_deodorant">Deodorant</string>
+    <string name="reyon_kind_tiras_kopugu">Tıraş köpüğü</string>
+    <string name="reyon_kind_islak_mendil">Islak mendil</string>
+    <string name="reyon_kind_pamuk">Pamuk</string>
+
+    <!-- Reyon: Denetim -->
+    <string name="reyon_audit_intro">Üstte plan, altta gerçek raf. Rafın plandan saptığı gözlere dokun: yer değişimi, boş göz, yabancı ürün, yanlış marka ya da boy, taşma. Yanlış dokunuş hata sayılır.</string>
+    <string name="reyon_audit_level_desc_fmt">%1$d raf × %2$d göz · %3$d sapma</string>
+    <string name="reyon_audit_daily_desc">Herkes bugün aynı rafı denetler; süren ve hataların kaydedilir.</string>
+    <string name="reyon_audit_daily_done_fmt">Bugün denetlendi: %1$s · %2$d hata</string>
+    <string name="reyon_audit_free_desc">Rastgele raf; hatasız ve ipucusuz denetimler rekor sayılır.</string>
+    <string name="reyon_audit_start">Denetime başla</string>
+    <string name="reyon_audit_generating">Denetim hazırlanıyor…</string>
+    <string name="reyon_audit_plan_label">Plan</string>
+    <string name="reyon_audit_shelf_label">Raf: sapmalara dokun</string>
+    <string name="reyon_audit_found_label">Bulunan</string>
+    <string name="reyon_audit_mistakes_label">Hata</string>
+    <string name="reyon_audit_remaining_fmt">%1$d sapma daha bulunacak</string>
+    <string name="reyon_audit_done_title">Denetim tamam</string>
+    <string name="reyon_audit_result_fmt">%1$s · %2$d hata · %3$d ipucu</string>
+    <string name="reyon_audit_board_desc_fmt">Denetim rafı %1$d raf × %2$d göz, %3$d/%4$d sapma bulundu</string>
+    <string name="reyon_audit_plan_desc_fmt">Plan %1$d raf × %2$d göz</string>
+    <string name="reyon_audit_plan_zoom_hint">büyütmek için dokun</string>
+    <string name="reyon_audit_plan_zoom_desc">Büyütülmüş plan; kapatmak için dokun</string>
+    <string name="reyon_audit_plan_zoom_close">Kapatmak için dokun</string>
+    <string name="reyon_dev_swap_fmt">Yer değişimi: %1$s ↔ %2$s</string>
+    <string name="reyon_dev_gap_fmt">Boş göz: %1$s bir yüz eksik</string>
+    <string name="reyon_dev_missing_fmt">Boş göz: %1$s rafta yok</string>
+    <string name="reyon_dev_foreign_fmt">Yabancı ürün: %1$s yerine %2$s</string>
+    <string name="reyon_dev_brand_fmt">Yanlış marka: %1$s (%2$s yerine %3$s)</string>
+    <string name="reyon_dev_size_fmt">Yanlış boy: %1$s</string>
+    <string name="reyon_dev_spill_fmt">Taşma: %1$s, %2$s gözüne taşmış</string>
+
+    <!-- Reyon: Satış -->
+    <string name="reyon_sales_intro">Ürünleri istediğin gibi diz; puan satış kurallarından gelir (göz hizası, ağırlar alta, tamamlayıcılar yan yana, temizlik gıdadan uzak, kategori ve marka blokları). Hedef iyileştiricinin en iyi dizilişi; hedefe ulaşan üç yıldız alır.</string>
+    <string name="reyon_sales_daily_desc">Herkes bugün aynı ürünleri dizer; günün en iyi puanın kaydedilir.</string>
+    <string name="reyon_sales_daily_done_fmt">Bugün: %1$d / %2$d puan · %3$s</string>
+    <string name="reyon_sales_free_desc">Rastgele ürün seti; hedefin yüzdesi rekor sayılır.</string>
+    <string name="reyon_sales_best_fmt">En iyi: hedefin yüzde %1$d kadarı</string>
+    <string name="reyon_sales_start">Dizmeye başla</string>
+    <string name="reyon_sales_generating">Hedef hesaplanıyor…</string>
+    <string name="reyon_sales_score_label">Puan</string>
+    <string name="reyon_sales_target_label">Hedef</string>
+    <string name="reyon_sales_rules_label">Satış kuralları</string>
+    <string name="reyon_sales_rule_position">Konum</string>
+    <string name="reyon_sales_rule_position_desc">talep × yüz × raf çarpanı: göz hizası ×3, üst ve orta ×2, alt ×1 · ▼ ağır yalnız altta ×3 · ★ yalnız göz hizasında ×4</string>
+    <string name="reyon_sales_rule_complement">Tamamlayıcı</string>
+    <string name="reyon_sales_rule_complement_desc">cips–sos gibi çiftler yan yana +6, üst üste +3</string>
+    <string name="reyon_sales_rule_conflict">Çakışma</string>
+    <string name="reyon_sales_rule_conflict_desc">temizlik ürünü gıdanın yanında −8</string>
+    <string name="reyon_sales_rule_category">Kategori bloğu</string>
+    <string name="reyon_sales_rule_category_desc">aynı kategori yan yana +4</string>
+    <string name="reyon_sales_rule_brand">Marka bloğu</string>
+    <string name="reyon_sales_rule_brand_desc">aynı marka yan yana +3, üst üste +3</string>
+    <string name="reyon_sales_neighbors">komşuluk</string>
+    <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
+    <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
+    <string name="reyon_sales_selected_fmt">%1$s seçili (talep %2$d): rafta bir göze dokun</string>
+    <string name="reyon_sales_pick_hint">Bir ürüne dokun: puan dökümü burada görünür</string>
+    <string name="reyon_sales_demand_fmt">talep %1$d</string>
+    <string name="reyon_sales_finish">Tamamla</string>
+    <string name="reyon_sales_done_title">Diziliş tamam</string>
+    <string name="reyon_sales_result_fmt">%1$d / %2$d puan (hedefin yüzde %3$d kadarı)</string>
+    <string name="reyon_sales_beat_target">Hedefi geçtin! 🏆</string>
+    <string name="reyon_sales_reopen">Düzenlemeye dön</string>
+    <string name="reyon_sales_show_target">Hedefi göster</string>
+    <string name="reyon_sales_review_mine">Benim dizilişim</string>
+    <string name="reyon_sales_review_target_fmt">Hedef (%1$d)</string>
+    <string name="reyon_sales_back_to_result">Sonuç</string>
+    <string name="reyon_sales_board_desc_fmt">Satış rafı %1$d raf × %2$d göz, %3$d ürün yerleşmedi, %4$d puan</string>
+
+    <!-- Reyon: Sipariş -->
+    <string name="reyon_order_intro">Raf planı hazır; işin stok. Her gün ürün başına kaç koli isteyeceğine karar ver: sipariş ertesi sabah gelir, rafa sığmayan iade olur, akşam kalan stok bekleme öder, raf ömrü dolan fire olur. Hedef, aynı tahminleri gören uzmanın kârı.</string>
+    <string name="reyon_order_level_desc_fmt">%1$d raf × %2$d göz · %3$d gün · %4$d promosyon</string>
+    <string name="reyon_order_daily_desc">Herkes bugün aynı haftayı yönetir; günün en iyi kârın kaydedilir.</string>
+    <string name="reyon_order_daily_done_fmt">Bugün: %1$d / %2$d kâr · %3$s</string>
+    <string name="reyon_order_free_desc">Rastgele hafta; hedefin yüzdesi rekor sayılır.</string>
+    <string name="reyon_order_best_fmt">En iyi: hedefin yüzde %1$d kadarı</string>
+    <string name="reyon_order_start">Haftaya başla</string>
+    <string name="reyon_order_generating">Hafta hazırlanıyor…</string>
+    <string name="reyon_order_day_label">Gün</string>
+    <string name="reyon_order_profit_label">Kâr</string>
+    <string name="reyon_order_target_label">Hedef</string>
+    <string name="reyon_order_dow_1">Pazartesi</string>
+    <string name="reyon_order_dow_2">Salı</string>
+    <string name="reyon_order_dow_3">Çarşamba</string>
+    <string name="reyon_order_dow_4">Perşembe</string>
+    <string name="reyon_order_dow_5">Cuma</string>
+    <string name="reyon_order_dow_6">Cumartesi</string>
+    <string name="reyon_order_dow_7">Pazar</string>
+    <string name="reyon_order_day_title_fmt">%1$s · %2$d/%3$d. gün</string>
+    <string name="reyon_order_promo_ahead_fmt">%1$s: %2$s promosyonu (talep ×2,5)</string>
+    <string name="reyon_order_stock_fmt">stok %1$d/%2$d</string>
+    <string name="reyon_order_today_fmt">bugün %1$d–%2$d</string>
+    <string name="reyon_order_forecast_fmt">%1$s %2$d–%3$d</string>
+    <string name="reyon_order_incoming_fmt">%1$s +%2$d geliyor</string>
+    <string name="reyon_order_expiring_fmt">%1$d birim bu akşam bozulur</string>
+    <string name="reyon_order_expiring_tomorrow_fmt">%1$d birim yarın akşam bozulur</string>
+    <string name="reyon_order_promo_tag">PROMOSYON</string>
+    <string name="reyon_order_case_fmt">%1$d koli = %2$d birim</string>
+    <string name="reyon_order_case_size_fmt">koli %1$d · %2$s gelir</string>
+    <string name="reyon_order_no_order">sipariş yok</string>
+    <string name="reyon_order_closed">hafta bitiyor, teslimat yetişmez</string>
+    <string name="reyon_order_more">Artır</string>
+    <string name="reyon_order_less">Azalt</string>
+    <string name="reyon_order_close_day">Günü kapat</string>
+    <string name="reyon_order_close_week">Haftayı kapat</string>
+    <string name="reyon_order_summary_title_fmt">%1$s kapandı</string>
+    <string name="reyon_order_sum_sold_fmt">Satış: %1$d birim (+%2$d)</string>
+    <string name="reyon_order_sum_lost_fmt">Kayıp satış: %1$d birim</string>
+    <string name="reyon_order_sum_holding_fmt">Bekleme: −%1$d</string>
+    <string name="reyon_order_sum_waste_fmt">Fire: %1$d birim (−%2$d)</string>
+    <string name="reyon_order_sum_returns_fmt">İade: %1$d birim (−%2$d)</string>
+    <string name="reyon_order_sum_delivered_fmt">Sabah teslimat: %1$d birim</string>
+    <string name="reyon_order_sum_profit_fmt">Gün kârı %1$+d · toplam %2$d</string>
+    <string name="reyon_order_continue">Devam</string>
+    <string name="reyon_order_done_title">Hafta tamam</string>
+    <string name="reyon_order_result_fmt">%1$d / %2$d kâr (hedefin yüzde %3$d kadarı)</string>
+    <string name="reyon_order_stats_fmt">Stok devri %1$s (uzman %2$s) · hizmet düzeyi yüzde %3$d (uzman %4$d)</string>
+    <string name="reyon_order_chart_profit">Gün kârı</string>
+    <string name="reyon_order_chart_turnover">Devir</string>
+    <string name="reyon_order_chart_expert_fmt">uzman %1$s</string>
+    <string name="reyon_order_chart_day_fmt">%1$d. gün %2$+d</string>
+    <string name="reyon_order_chart_desc_fmt">Hafta grafiği: %1$s · stok devri %2$s (uzman %3$s)</string>
+    <string name="reyon_order_beat_target">Uzmanı geçtin! 🏆</string>
+    <string name="reyon_order_rules">Satış +4 / birim (★ +6) · bekleme −1 / birim / gece · fire −2 (★ −4) · iade −1</string>
+    <string name="reyon_order_board_desc_fmt">Sipariş rafı %1$d raf × %2$d göz, %3$d. gün, kâr %4$d</string>
+    <string name="reyon_order_item_desc_fmt">%1$s: stok %2$d/%3$d, sipariş %4$d koli</string>
+    <string name="reyon_order_hint_fmt">Uzman: %1$s için %2$d koli</string>
+    <string name="reyon_order_hint_none">Siparişlerin uzmanınkiyle aynı</string>
+    <string name="reyon_order_share_fmt">Stok devri %1$s</string>
+</resources>

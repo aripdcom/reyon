@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Reyon'un metinleri. Diller res/values-<kod> altında; varsayılan (bu dosya)
+  İngilizce. Anahtar paritesini ve biçim belirteçlerini tools/check_strings.py
+  denetler. Bölüm başlıkları her dilde Türkçe: depodaki öbür yorumlar gibi
+  geliştirici notu, çeviri değil.
+-->
+<resources>
+    <string name="app_name">Reyon</string>
+    <string name="app_tagline">Quebra-cabeça de planograma: deduza do briefing a única arrumação correta da prateleira</string>
+
+    <!-- Ortak -->
+    <string name="chip_no_ads">0 anúncios</string>
+    <string name="chip_no_trackers">0 rastreadores</string>
+    <string name="chip_no_permissions">0 permissões</string>
+    <string name="new_record">Novo recorde! 🏆</string>
+    <string name="exit_app">Sair</string>
+    <string name="back">Voltar</string>
+    <string name="congrats">Muito bem! 🎉</string>
+    <string name="undo">Desfazer</string>
+    <string name="solved_label">Resolvidos</string>
+    <string name="mode_daily">Diário</string>
+    <string name="mode_free">Livre</string>
+    <string name="difficulty_easy">Fácil</string>
+    <string name="difficulty_medium">Médio</string>
+    <string name="difficulty_hard">Difícil</string>
+    <string name="difficulty_label">Nível</string>
+    <string name="same_difficulty">Novo no mesmo nível</string>
+    <string name="time_label">Tempo</string>
+    <string name="time_fmt">Tempo: %1$s</string>
+
+    <!-- Ayarlar -->
+    <string name="settings_title">Configurações</string>
+    <string name="settings_sound">Som</string>
+    <string name="sound_on">Ligar o som</string>
+    <string name="sound_off">Desligar o som</string>
+    <string name="language_title">Idioma</string>
+    <string name="language_system">Idioma do telefone</string>
+    <string name="language_selected">selecionado</string>
+    <string name="language_select">selecionar</string>
+    <string name="settings_haptics">Vibração</string>
+    <string name="haptics_on">Ligar a vibração</string>
+    <string name="haptics_off">Desligar a vibração</string>
+
+    <!-- Paylaşım -->
+    <string name="share">Compartilhar</string>
+    <string name="share_chooser">Compartilhar o resultado</string>
+    <string name="share_failed">Não foi possível abrir o compartilhamento</string>
+    <string name="share_tagline">Reyon: zero anúncios, zero permissões, zero rastreadores. Grátis e de código aberto:</string>
+    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_solved">Resolvido!</string>
+    <string name="share_score_fmt">%1$s pontos</string>
+    <string name="share_daily_fmt">Diário · %1$s</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">Sobre</string>
+    <string name="about_version_fmt">Versão %1$s</string>
+    <string name="about_privacy_summary">O Reyon não coleta dados, não pede permissões e nunca se conecta à rede. O progresso e os ajustes ficam só neste aparelho e somem quando o app é desinstalado.</string>
+    <string name="about_links">Links</string>
+    <string name="about_website">Site</string>
+    <string name="about_source">Código-fonte</string>
+    <string name="about_report">Relatar um problema</string>
+    <string name="about_privacy">Política de privacidade</string>
+    <string name="about_contact">Fale conosco</string>
+    <string name="about_open_failed">Não foi possível abrir o link: não há navegador neste aparelho</string>
+    <string name="about_licenses">Licenças de código aberto</string>
+    <string name="about_licenses_intro">O Reyon usa os componentes de código aberto abaixo; toque num deles para abrir a fonte.</string>
+    <string name="about_lic_androidx_name">AndroidX Jetpack</string>
+    <string name="about_lic_androidx_desc">Bibliotecas Compose, Material 3, Lifecycle, Activity e Core. The Android Open Source Project.</string>
+    <string name="about_lic_kotlin_name">Kotlin e kotlinx.coroutines</string>
+    <string name="about_lic_kotlin_desc">Biblioteca padrão da linguagem e concorrência. JetBrains e colaboradores.</string>
+    <string name="about_license_show">Mostrar o texto da licença Apache 2.0</string>
+    <string name="about_license_hide">Ocultar o texto da licença</string>
+    <string name="about_app_license">O código-fonte do Reyon é aberto sob a GNU GPL v3. O nome “Reyon” e o logotipo não fazem parte da licença.</string>
+    <string name="about_app_license_link">Texto da licença (GitHub)</string>
+
+    <!-- Reyon: Diziliş -->
+    <string name="reyon_intro">Toque num produto e depois num espaço da prateleira; toque longo devolve ao tabuleiro. Cada regra do briefing vira ✓ quando é cumprida; as regras levam a uma única arrumação, sem chute.</string>
+    <string name="reyon_level_desc_fmt">%1$d prateleiras × %2$d espaços · %3$d–%4$d produtos</string>
+    <string name="reyon_daily_desc">Hoje todo mundo arruma a mesma prateleira; seu tempo é registrado.</string>
+    <string name="reyon_daily_done_fmt">Resolvido hoje: %1$s · %2$d dicas</string>
+    <string name="reyon_free_desc">Prateleira aleatória; soluções sem dica contam como recorde.</string>
+    <string name="reyon_best_fmt">Melhor tempo: %1$s</string>
+    <string name="reyon_start">Começar</string>
+    <string name="reyon_play_again">Arrumar de novo</string>
+    <string name="reyon_to_menu">Voltar ao início</string>
+    <string name="reyon_generating">Preparando a prateleira…</string>
+    <string name="reyon_brief_label">Briefing do planograma</string>
+    <string name="reyon_tray_label">Bandeja</string>
+    <string name="reyon_tray_empty">Todos os produtos estão na prateleira</string>
+    <string name="reyon_tray_item_fmt">%1$s, %2$d frentes</string>
+    <string name="reyon_hint">Dica</string>
+    <string name="reyon_remove">Para a bandeja</string>
+    <string name="reyon_hint_wrong_fmt">%1$s estava no lugar errado e voltou para a bandeja</string>
+    <string name="reyon_hint_place_fmt">Dica: %1$s fica %2$s</string>
+    <string name="reyon_result_fmt">%1$s · %2$d dicas</string>
+    <string name="reyon_board_desc_fmt">Reyon %1$d prateleiras × %2$d espaços, %3$d produtos sem lugar</string>
+    <string name="reyon_shelf_top">prateleira de cima</string>
+    <string name="reyon_shelf_eye">altura dos olhos (prateleira 2)</string>
+    <string name="reyon_shelf_bottom">prateleira de baixo</string>
+    <string name="reyon_shelf_nth">prateleira %1$d</string>
+    <string name="reyon_shelf_top_at">na prateleira de cima</string>
+    <string name="reyon_shelf_eye_at">na altura dos olhos (prateleira 2)</string>
+    <string name="reyon_shelf_bottom_at">na prateleira de baixo</string>
+    <string name="reyon_shelf_nth_at">na prateleira %1$d</string>
+    <string name="reyon_clue_placed">%1$s está %2$s (dado)</string>
+    <string name="reyon_clue_on_shelf">%1$s está %2$s</string>
+    <string name="reyon_clue_in_slot">%1$s ocupa o espaço %2$d a partir da esquerda</string>
+    <string name="reyon_clue_left_edge">%1$s está na ponta esquerda da prateleira dele</string>
+    <string name="reyon_clue_right_edge">%1$s está na ponta direita da prateleira dele</string>
+    <string name="reyon_clue_adjacent">%1$s e %2$s estão lado a lado</string>
+    <string name="reyon_clue_left_of">%1$s divide a prateleira com %2$s e fica à esquerda dele</string>
+    <string name="reyon_clue_same_shelf">%1$s e %2$s dividem a prateleira</string>
+    <string name="reyon_clue_different_shelf">%1$s e %2$s estão em prateleiras diferentes</string>
+    <string name="reyon_clue_above">%1$s está na prateleira logo acima de %2$s, empilhado sobre ele</string>
+    <string name="reyon_clue_eye_level">★ Produtos de margem alta ficam na altura dos olhos (prateleira 2)</string>
+    <string name="reyon_clue_heavy_bottom">▼ Produtos pesados vão na prateleira de baixo</string>
+    <string name="reyon_clue_category_block">%1$s formam um bloco só: mesma prateleira, lado a lado</string>
+    <string name="reyon_clue_categories_apart">%1$s e %2$s nunca dividem a prateleira</string>
+    <string name="reyon_clue_brand_vertical">%1$s forma um bloco vertical: empilhado em prateleiras seguidas</string>
+    <string name="reyon_clue_size_flow">Os tamanhos de %1$s crescem da esquerda para a direita (• pequeno, ••• grande)</string>
+    <string name="reyon_cat_icecek">Bebidas</string>
+    <string name="reyon_cat_atistirmalik">Salgadinhos</string>
+    <string name="reyon_cat_kahvaltilik">Café da manhã</string>
+    <string name="reyon_cat_temizlik">Produtos de limpeza</string>
+    <string name="reyon_cat_bakim">Higiene pessoal</string>
+    <string name="reyon_brand_a">Toros</string>
+    <string name="reyon_brand_b">Ege</string>
+    <string name="reyon_brand_c">Kuzey</string>
+    <string name="reyon_brand_d">Meltem</string>
+    <string name="reyon_kind_puzzle">Arrumar</string>
+    <string name="reyon_kind_audit">Auditar</string>
+    <string name="reyon_kind_sales">Vendas</string>
+    <string name="reyon_kind_order">Pedidos</string>
+
+    <!-- Ürün adları -->
+    <string name="reyon_kind_kola">Refrigerante de cola</string>
+    <string name="reyon_kind_su">Água</string>
+    <string name="reyon_kind_gazoz">Guaraná</string>
+    <string name="reyon_kind_meyve_suyu">Suco</string>
+    <string name="reyon_kind_ayran">Ayran</string>
+    <string name="reyon_kind_soda">Água com gás</string>
+    <string name="reyon_kind_limonata">Limonada</string>
+    <string name="reyon_kind_cips">Batata frita</string>
+    <string name="reyon_kind_kraker">Bolacha salgada</string>
+    <string name="reyon_kind_kuruyemis">Castanhas</string>
+    <string name="reyon_kind_cikolata">Chocolate</string>
+    <string name="reyon_kind_gofret">Wafer</string>
+    <string name="reyon_kind_biskuvi">Biscoitos</string>
+    <string name="reyon_kind_sos">Molho para mergulhar</string>
+    <string name="reyon_kind_bal">Mel</string>
+    <string name="reyon_kind_recel">Geleia</string>
+    <string name="reyon_kind_peynir">Queijo</string>
+    <string name="reyon_kind_zeytin">Azeitonas</string>
+    <string name="reyon_kind_tereyagi">Manteiga</string>
+    <string name="reyon_kind_yumurta">Ovos</string>
+    <string name="reyon_kind_sut">Leite</string>
+    <string name="reyon_kind_deterjan">Sabão em pó</string>
+    <string name="reyon_kind_camasir_suyu">Água sanitária</string>
+    <string name="reyon_kind_bulasik_deterjani">Detergente</string>
+    <string name="reyon_kind_yumusatici">Amaciante</string>
+    <string name="reyon_kind_sunger">Esponja</string>
+    <string name="reyon_kind_kagit_havlu">Papel toalha</string>
+    <string name="reyon_kind_cop_poseti">Sacos de lixo</string>
+    <string name="reyon_kind_sampuan">Xampu</string>
+    <string name="reyon_kind_sabun">Sabonete</string>
+    <string name="reyon_kind_dis_macunu">Creme dental</string>
+    <string name="reyon_kind_deodorant">Desodorante</string>
+    <string name="reyon_kind_tiras_kopugu">Espuma de barbear</string>
+    <string name="reyon_kind_islak_mendil">Lenços umedecidos</string>
+    <string name="reyon_kind_pamuk">Algodão</string>
+
+    <!-- Reyon: Denetim -->
+    <string name="reyon_audit_intro">O plano em cima, a prateleira real embaixo. Toque nos espaços em que a prateleira se desvia do plano: uma troca, um espaço vazio, um produto estranho, uma marca ou um tamanho errados, um transbordo. Um toque errado conta como erro.</string>
+    <string name="reyon_audit_level_desc_fmt">%1$d prateleiras × %2$d espaços · %3$d desvios</string>
+    <string name="reyon_audit_daily_desc">Hoje todo mundo audita a mesma prateleira; seu tempo e seus erros são registrados.</string>
+    <string name="reyon_audit_daily_done_fmt">Auditado hoje: %1$s · %2$d erros</string>
+    <string name="reyon_audit_free_desc">Prateleira aleatória; auditorias sem erro e sem dica contam como recorde.</string>
+    <string name="reyon_audit_start">Começar a auditoria</string>
+    <string name="reyon_audit_generating">Preparando a auditoria…</string>
+    <string name="reyon_audit_plan_label">Plano</string>
+    <string name="reyon_audit_shelf_label">Prateleira: toque nos desvios</string>
+    <string name="reyon_audit_found_label">Encontrados</string>
+    <string name="reyon_audit_mistakes_label">Erros</string>
+    <string name="reyon_audit_remaining_fmt">faltam %1$d a encontrar</string>
+    <string name="reyon_audit_done_title">Auditoria concluída</string>
+    <string name="reyon_audit_result_fmt">%1$s · %2$d erros · %3$d dicas</string>
+    <string name="reyon_audit_board_desc_fmt">Prateleira auditada %1$d prateleiras × %2$d espaços, %3$d/%4$d desvios encontrados</string>
+    <string name="reyon_audit_plan_desc_fmt">Plano %1$d prateleiras × %2$d espaços</string>
+    <string name="reyon_audit_plan_zoom_hint">toque para ampliar</string>
+    <string name="reyon_audit_plan_zoom_desc">Plano ampliado; toque para fechar</string>
+    <string name="reyon_audit_plan_zoom_close">Toque para fechar</string>
+    <string name="reyon_dev_swap_fmt">Trocados: %1$s ↔ %2$s</string>
+    <string name="reyon_dev_gap_fmt">Espaço vazio: falta uma frente de %1$s</string>
+    <string name="reyon_dev_missing_fmt">Espaço vazio: %1$s está faltando</string>
+    <string name="reyon_dev_foreign_fmt">Produto estranho: %2$s no lugar de %1$s</string>
+    <string name="reyon_dev_brand_fmt">Marca errada: %1$s (%3$s no lugar de %2$s)</string>
+    <string name="reyon_dev_size_fmt">Tamanho errado: %1$s</string>
+    <string name="reyon_dev_spill_fmt">Transbordo: %1$s transborda sobre %2$s</string>
+
+    <!-- Reyon: Satış -->
+    <string name="reyon_sales_intro">Arrume os produtos como quiser; os pontos vêm das regras de venda (altura dos olhos, pesados embaixo, complementares lado a lado, limpeza longe da comida, blocos de categoria e de marca). A meta é a melhor arrumação que o otimizador encontrou; alcançá-la dá três estrelas.</string>
+    <string name="reyon_sales_daily_desc">Hoje todo mundo arruma os mesmos produtos; sua melhor pontuação do dia é registrada.</string>
+    <string name="reyon_sales_daily_done_fmt">Hoje: %1$d / %2$d pontos · %3$s</string>
+    <string name="reyon_sales_free_desc">Conjunto de produtos aleatório; a porcentagem da meta conta como recorde.</string>
+    <string name="reyon_sales_best_fmt">Recorde: %1$d%% da meta</string>
+    <string name="reyon_sales_start">Começar a arrumar</string>
+    <string name="reyon_sales_generating">Calculando a meta…</string>
+    <string name="reyon_sales_score_label">Pontos</string>
+    <string name="reyon_sales_target_label">Meta</string>
+    <string name="reyon_sales_rules_label">Regras de venda</string>
+    <string name="reyon_sales_rule_position">Posição</string>
+    <string name="reyon_sales_rule_position_desc">procura × frentes × fator da prateleira: altura dos olhos ×3, cima e meio ×2, baixo ×1 · ▼ pesado só embaixo ×3 · ★ só na altura dos olhos ×4</string>
+    <string name="reyon_sales_rule_complement">Complementares</string>
+    <string name="reyon_sales_rule_complement_desc">pares como batata frita e molho lado a lado +6, empilhados +3</string>
+    <string name="reyon_sales_rule_conflict">Conflito</string>
+    <string name="reyon_sales_rule_conflict_desc">um produto de limpeza ao lado da comida −8</string>
+    <string name="reyon_sales_rule_category">Bloco de categoria</string>
+    <string name="reyon_sales_rule_category_desc">mesma categoria lado a lado +4</string>
+    <string name="reyon_sales_rule_brand">Bloco de marca</string>
+    <string name="reyon_sales_rule_brand_desc">mesma marca lado a lado +3, empilhada +3</string>
+    <string name="reyon_sales_neighbors">vizinhos</string>
+    <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
+    <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
+    <string name="reyon_sales_selected_fmt">%1$s selecionado (procura %2$d): toque num espaço da prateleira</string>
+    <string name="reyon_sales_pick_hint">Toque num produto para ver a composição dos pontos dele</string>
+    <string name="reyon_sales_demand_fmt">procura %1$d</string>
+    <string name="reyon_sales_finish">Terminar</string>
+    <string name="reyon_sales_done_title">Arrumação concluída</string>
+    <string name="reyon_sales_result_fmt">%1$d / %2$d pontos (%3$d%% da meta)</string>
+    <string name="reyon_sales_beat_target">Você superou a meta! 🏆</string>
+    <string name="reyon_sales_reopen">Continuar arrumando</string>
+    <string name="reyon_sales_show_target">Ver a meta</string>
+    <string name="reyon_sales_review_mine">Minha arrumação</string>
+    <string name="reyon_sales_review_target_fmt">Meta (%1$d)</string>
+    <string name="reyon_sales_back_to_result">Resultado</string>
+    <string name="reyon_sales_board_desc_fmt">Prateleira de vendas %1$d prateleiras × %2$d espaços, %3$d produtos sem lugar, %4$d pontos</string>
+
+    <!-- Reyon: Sipariş -->
+    <string name="reyon_order_intro">O plano da prateleira está fixo; seu trabalho é o estoque. Todo dia decida quantas caixas pedir por produto: os pedidos chegam na manhã seguinte, o que não cabe é devolvido, o estoque que sobra à noite custa armazenagem, as unidades vencidas são perda. A meta é o lucro de um especialista que vê as mesmas previsões.</string>
+    <string name="reyon_order_level_desc_fmt">%1$d prateleiras × %2$d espaços · %3$d dias · %4$d promoções</string>
+    <string name="reyon_order_daily_desc">Hoje todo mundo joga a mesma semana; seu melhor lucro do dia é registrado.</string>
+    <string name="reyon_order_daily_done_fmt">Hoje: %1$d / %2$d de lucro · %3$s</string>
+    <string name="reyon_order_free_desc">Semana aleatória; a porcentagem da meta conta como recorde.</string>
+    <string name="reyon_order_best_fmt">Recorde: %1$d%% da meta</string>
+    <string name="reyon_order_start">Começar a semana</string>
+    <string name="reyon_order_generating">Preparando a semana…</string>
+    <string name="reyon_order_day_label">Dia</string>
+    <string name="reyon_order_profit_label">Lucro</string>
+    <string name="reyon_order_target_label">Meta</string>
+    <string name="reyon_order_dow_1">Segunda</string>
+    <string name="reyon_order_dow_2">Terça</string>
+    <string name="reyon_order_dow_3">Quarta</string>
+    <string name="reyon_order_dow_4">Quinta</string>
+    <string name="reyon_order_dow_5">Sexta</string>
+    <string name="reyon_order_dow_6">Sábado</string>
+    <string name="reyon_order_dow_7">Domingo</string>
+    <string name="reyon_order_day_title_fmt">%1$s · dia %2$d de %3$d</string>
+    <string name="reyon_order_promo_ahead_fmt">%1$s: promoção %2$s (procura ×2,5)</string>
+    <string name="reyon_order_stock_fmt">estoque %1$d/%2$d</string>
+    <string name="reyon_order_today_fmt">hoje %1$d–%2$d</string>
+    <string name="reyon_order_forecast_fmt">%1$s %2$d–%3$d</string>
+    <string name="reyon_order_incoming_fmt">+%2$d chegam %1$s</string>
+    <string name="reyon_order_expiring_fmt">%1$d unidades vencem esta noite</string>
+    <string name="reyon_order_expiring_tomorrow_fmt">%1$d unidades vencem amanhã à noite</string>
+    <string name="reyon_order_promo_tag">PROMO</string>
+    <string name="reyon_order_case_fmt">%1$d caixas = %2$d unidades</string>
+    <string name="reyon_order_case_size_fmt">caixa de %1$d · chega %2$s</string>
+    <string name="reyon_order_no_order">sem pedido</string>
+    <string name="reyon_order_closed">fim de semana, uma entrega não chegaria mais</string>
+    <string name="reyon_order_more">Mais</string>
+    <string name="reyon_order_less">Menos</string>
+    <string name="reyon_order_close_day">Fechar o dia</string>
+    <string name="reyon_order_close_week">Fechar a semana</string>
+    <string name="reyon_order_summary_title_fmt">%1$s fechado</string>
+    <string name="reyon_order_sum_sold_fmt">Vendas: %1$d unidades (+%2$d)</string>
+    <string name="reyon_order_sum_lost_fmt">Vendas perdidas: %1$d unidades</string>
+    <string name="reyon_order_sum_holding_fmt">Armazenagem: −%1$d</string>
+    <string name="reyon_order_sum_waste_fmt">Perda: %1$d unidades (−%2$d)</string>
+    <string name="reyon_order_sum_returns_fmt">Devoluções: %1$d unidades (−%2$d)</string>
+    <string name="reyon_order_sum_delivered_fmt">Entrega da manhã: %1$d unidades</string>
+    <string name="reyon_order_sum_profit_fmt">Lucro do dia %1$+d · total %2$d</string>
+    <string name="reyon_order_continue">Continuar</string>
+    <string name="reyon_order_done_title">Semana concluída</string>
+    <string name="reyon_order_result_fmt">%1$d / %2$d de lucro (%3$d%% da meta)</string>
+    <string name="reyon_order_stats_fmt">Giro do estoque %1$s (especialista %2$s) · nível de serviço %3$d%% (especialista %4$d%%)</string>
+    <string name="reyon_order_chart_profit">Lucro diário</string>
+    <string name="reyon_order_chart_turnover">Giro</string>
+    <string name="reyon_order_chart_expert_fmt">especialista %1$s</string>
+    <string name="reyon_order_chart_day_fmt">dia %1$d %2$+d</string>
+    <string name="reyon_order_chart_desc_fmt">Gráfico da semana: %1$s · giro do estoque %2$s (especialista %3$s)</string>
+    <string name="reyon_order_beat_target">Você venceu o especialista! 🏆</string>
+    <string name="reyon_order_rules">Venda +4 por unidade (★ +6) · armazenagem −1 por unidade por noite · perda −2 (★ −4) · devolução −1</string>
+    <string name="reyon_order_board_desc_fmt">Prateleira de pedidos %1$d prateleiras × %2$d espaços, dia %3$d, lucro %4$d</string>
+    <string name="reyon_order_item_desc_fmt">%1$s: estoque %2$d/%3$d, pedido %4$d caixas</string>
+    <string name="reyon_order_hint_fmt">Especialista: %2$d caixas de %1$s</string>
+    <string name="reyon_order_hint_none">Seus pedidos batem com os do especialista</string>
+    <string name="reyon_order_share_fmt">Giro do estoque %1$s</string>
+</resources>

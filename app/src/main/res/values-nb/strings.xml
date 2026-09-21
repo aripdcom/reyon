@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Reyon'un metinleri. Diller res/values-<kod> altında; varsayılan (bu dosya)
+  İngilizce. Anahtar paritesini ve biçim belirteçlerini tools/check_strings.py
+  denetler. Bölüm başlıkları her dilde Türkçe: depodaki öbür yorumlar gibi
+  geliştirici notu, çeviri değil.
+-->
+<resources>
+    <string name="app_name">Reyon</string>
+    <string name="app_tagline">Planogram-oppgave: utled den ene riktige hylleoppstillingen av briefen</string>
+
+    <!-- Ortak -->
+    <string name="chip_no_ads">0 annonser</string>
+    <string name="chip_no_trackers">0 sporere</string>
+    <string name="chip_no_permissions">0 tillatelser</string>
+    <string name="new_record">Ny rekord! 🏆</string>
+    <string name="exit_app">Avslutt</string>
+    <string name="back">Tilbake</string>
+    <string name="congrats">Godt jobbet! 🎉</string>
+    <string name="undo">Angre</string>
+    <string name="solved_label">Løste</string>
+    <string name="mode_daily">Daglig</string>
+    <string name="mode_free">Fri</string>
+    <string name="difficulty_easy">Lett</string>
+    <string name="difficulty_medium">Middels</string>
+    <string name="difficulty_hard">Vanskelig</string>
+    <string name="difficulty_label">Nivå</string>
+    <string name="same_difficulty">Nytt på samme nivå</string>
+    <string name="time_label">Tid</string>
+    <string name="time_fmt">Tid: %1$s</string>
+
+    <!-- Ayarlar -->
+    <string name="settings_title">Innstillinger</string>
+    <string name="settings_sound">Lyd</string>
+    <string name="sound_on">Slå på lyden</string>
+    <string name="sound_off">Slå av lyden</string>
+    <string name="language_title">Språk</string>
+    <string name="language_system">Språket på telefonen</string>
+    <string name="language_selected">valgt</string>
+    <string name="language_select">velg</string>
+    <string name="settings_haptics">Vibrasjon</string>
+    <string name="haptics_on">Slå på vibrasjon</string>
+    <string name="haptics_off">Slå av vibrasjon</string>
+
+    <!-- Paylaşım -->
+    <string name="share">Del</string>
+    <string name="share_chooser">Del resultatet</string>
+    <string name="share_failed">Klarte ikke å åpne deling</string>
+    <string name="share_tagline">Reyon: null annonser, null tillatelser, null sporing. Gratis og åpen kildekode:</string>
+    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_solved">Løst!</string>
+    <string name="share_score_fmt">%1$s poeng</string>
+    <string name="share_daily_fmt">Daglig · %1$s</string>
+
+    <!-- Hakkında -->
+    <string name="about_title">Om</string>
+    <string name="about_version_fmt">Versjon %1$s</string>
+    <string name="about_privacy_summary">Reyon samler ikke inn data, ber ikke om tillatelser og kobler seg aldri til nettet. Fremgang og innstillinger ligger bare på denne enheten og forsvinner når appen avinstalleres.</string>
+    <string name="about_links">Lenker</string>
+    <string name="about_website">Nettsted</string>
+    <string name="about_source">Kildekode</string>
+    <string name="about_report">Meld fra om et problem</string>
+    <string name="about_privacy">Personvernerklæring</string>
+    <string name="about_contact">Skriv til oss</string>
+    <string name="about_open_failed">Klarte ikke å åpne lenken: det finnes ingen nettleser på enheten</string>
+    <string name="about_licenses">Åpen kildekode-lisenser</string>
+    <string name="about_licenses_intro">Reyon bruker komponentene med åpen kildekode nedenfor; trykk på en av dem for å åpne kilden.</string>
+    <string name="about_lic_androidx_name">AndroidX Jetpack</string>
+    <string name="about_lic_androidx_desc">Bibliotekene Compose, Material 3, Lifecycle, Activity og Core. The Android Open Source Project.</string>
+    <string name="about_lic_kotlin_name">Kotlin og kotlinx.coroutines</string>
+    <string name="about_lic_kotlin_desc">Standardbiblioteket til språket og samtidighet. JetBrains og bidragsytere.</string>
+    <string name="about_license_show">Vis lisensteksten til Apache 2.0</string>
+    <string name="about_license_hide">Skjul lisensteksten</string>
+    <string name="about_app_license">Kildekoden til Reyon er åpen under GNU GPL v3. Navnet «Reyon» og logoen er ikke en del av lisensen.</string>
+    <string name="about_app_license_link">Lisenstekst (GitHub)</string>
+
+    <!-- Reyon: Diziliş -->
+    <string name="reyon_intro">Trykk på en vare og så på en plass i hylla; hold inne for å sende den tilbake på brettet. Hver regel i briefen blir ✓ når den stemmer; reglene fører til nøyaktig én oppstilling, uten gjetting.</string>
+    <string name="reyon_level_desc_fmt">%1$d hyller × %2$d plasser · %3$d–%4$d varer</string>
+    <string name="reyon_daily_desc">I dag stiller alle opp den samme hylla; tiden din noteres.</string>
+    <string name="reyon_daily_done_fmt">Løst i dag: %1$s · %2$d hint</string>
+    <string name="reyon_free_desc">Tilfeldig hylle; løsninger uten hint teller som rekord.</string>
+    <string name="reyon_best_fmt">Beste tid: %1$s</string>
+    <string name="reyon_start">Start</string>
+    <string name="reyon_play_again">Still opp igjen</string>
+    <string name="reyon_to_menu">Tilbake til starten</string>
+    <string name="reyon_generating">Forbereder hylla…</string>
+    <string name="reyon_brief_label">Planogram-brief</string>
+    <string name="reyon_tray_label">Brett</string>
+    <string name="reyon_tray_empty">Alle varene står i hylla</string>
+    <string name="reyon_tray_item_fmt">%1$s, %2$d fronter</string>
+    <string name="reyon_hint">Hint</string>
+    <string name="reyon_remove">Til brettet</string>
+    <string name="reyon_hint_wrong_fmt">%1$s sto feil og havnet tilbake på brettet</string>
+    <string name="reyon_hint_place_fmt">Hint: %1$s hører %2$s</string>
+    <string name="reyon_result_fmt">%1$s · %2$d hint</string>
+    <string name="reyon_board_desc_fmt">Reyon %1$d hyller × %2$d plasser, %3$d varer er ikke satt opp</string>
+    <string name="reyon_shelf_top">øverste hylle</string>
+    <string name="reyon_shelf_eye">øyehøyde (hylle 2)</string>
+    <string name="reyon_shelf_bottom">nederste hylle</string>
+    <string name="reyon_shelf_nth">hylle %1$d</string>
+    <string name="reyon_shelf_top_at">på den øverste hylla</string>
+    <string name="reyon_shelf_eye_at">i øyehøyde (hylle 2)</string>
+    <string name="reyon_shelf_bottom_at">på den nederste hylla</string>
+    <string name="reyon_shelf_nth_at">på hylle %1$d</string>
+    <string name="reyon_clue_placed">%1$s står %2$s (gitt)</string>
+    <string name="reyon_clue_on_shelf">%1$s står %2$s</string>
+    <string name="reyon_clue_in_slot">%1$s tar plass %2$d fra venstre</string>
+    <string name="reyon_clue_left_edge">%1$s står ytterst til venstre på hylla si</string>
+    <string name="reyon_clue_right_edge">%1$s står ytterst til høyre på hylla si</string>
+    <string name="reyon_clue_adjacent">%1$s og %2$s står ved siden av hverandre</string>
+    <string name="reyon_clue_left_of">%1$s deler hylle med %2$s og står til venstre for den</string>
+    <string name="reyon_clue_same_shelf">%1$s og %2$s deler hylle</string>
+    <string name="reyon_clue_different_shelf">%1$s og %2$s står på forskjellige hyller</string>
+    <string name="reyon_clue_above">%1$s står på hylla rett over %2$s, stablet oppå den</string>
+    <string name="reyon_clue_eye_level">★ Varer med høy margin står i øyehøyde (hylle 2)</string>
+    <string name="reyon_clue_heavy_bottom">▼ Tunge varer hører hjemme på den nederste hylla</string>
+    <string name="reyon_clue_category_block">%1$s danner én blokk: samme hylle, ved siden av hverandre</string>
+    <string name="reyon_clue_categories_apart">%1$s og %2$s deler aldri hylle</string>
+    <string name="reyon_clue_brand_vertical">%1$s danner en loddrett blokk: stablet på hyller rett over hverandre</string>
+    <string name="reyon_clue_size_flow">Størrelsene på %1$s vokser fra venstre mot høyre (• liten, ••• stor)</string>
+    <string name="reyon_cat_icecek">Drikke</string>
+    <string name="reyon_cat_atistirmalik">Snacks</string>
+    <string name="reyon_cat_kahvaltilik">Frokost</string>
+    <string name="reyon_cat_temizlik">Rengjøringsmidler</string>
+    <string name="reyon_cat_bakim">Personlig pleie</string>
+    <string name="reyon_brand_a">Toros</string>
+    <string name="reyon_brand_b">Ege</string>
+    <string name="reyon_brand_c">Kuzey</string>
+    <string name="reyon_brand_d">Meltem</string>
+    <string name="reyon_kind_puzzle">Still opp</string>
+    <string name="reyon_kind_audit">Kontroller</string>
+    <string name="reyon_kind_sales">Salg</string>
+    <string name="reyon_kind_order">Bestilling</string>
+
+    <!-- Ürün adları -->
+    <string name="reyon_kind_kola">Cola</string>
+    <string name="reyon_kind_su">Vann</string>
+    <string name="reyon_kind_gazoz">Brus</string>
+    <string name="reyon_kind_meyve_suyu">Juice</string>
+    <string name="reyon_kind_ayran">Ayran</string>
+    <string name="reyon_kind_soda">Kullsyreholdig vann</string>
+    <string name="reyon_kind_limonata">Limonade</string>
+    <string name="reyon_kind_cips">Potetgull</string>
+    <string name="reyon_kind_kraker">Kjeks</string>
+    <string name="reyon_kind_kuruyemis">Nøtter</string>
+    <string name="reyon_kind_cikolata">Sjokolade</string>
+    <string name="reyon_kind_gofret">Vaffelkjeks</string>
+    <string name="reyon_kind_biskuvi">Småkaker</string>
+    <string name="reyon_kind_sos">Dipsaus</string>
+    <string name="reyon_kind_bal">Honning</string>
+    <string name="reyon_kind_recel">Syltetøy</string>
+    <string name="reyon_kind_peynir">Ost</string>
+    <string name="reyon_kind_zeytin">Oliven</string>
+    <string name="reyon_kind_tereyagi">Smør</string>
+    <string name="reyon_kind_yumurta">Egg</string>
+    <string name="reyon_kind_sut">Melk</string>
+    <string name="reyon_kind_deterjan">Vaskepulver</string>
+    <string name="reyon_kind_camasir_suyu">Klorin</string>
+    <string name="reyon_kind_bulasik_deterjani">Oppvaskmiddel</string>
+    <string name="reyon_kind_yumusatici">Tøymykner</string>
+    <string name="reyon_kind_sunger">Svamp</string>
+    <string name="reyon_kind_kagit_havlu">Tørkepapir</string>
+    <string name="reyon_kind_cop_poseti">Søppelposer</string>
+    <string name="reyon_kind_sampuan">Sjampo</string>
+    <string name="reyon_kind_sabun">Såpe</string>
+    <string name="reyon_kind_dis_macunu">Tannkrem</string>
+    <string name="reyon_kind_deodorant">Deodorant</string>
+    <string name="reyon_kind_tiras_kopugu">Barberskum</string>
+    <string name="reyon_kind_islak_mendil">Våtservietter</string>
+    <string name="reyon_kind_pamuk">Bomull</string>
+
+    <!-- Reyon: Denetim -->
+    <string name="reyon_audit_intro">Planen øverst, den ekte hylla nederst. Trykk på plassene der hylla avviker fra planen: en ombytting, en tom plass, en fremmed vare, feil merke eller feil størrelse, et oversøl. Et feil trykk teller som feil.</string>
+    <string name="reyon_audit_level_desc_fmt">%1$d hyller × %2$d plasser · %3$d avvik</string>
+    <string name="reyon_audit_daily_desc">I dag kontrollerer alle den samme hylla; tiden og feilene dine noteres.</string>
+    <string name="reyon_audit_daily_done_fmt">Kontrollert i dag: %1$s · %2$d feil</string>
+    <string name="reyon_audit_free_desc">Tilfeldig hylle; kontroller uten feil og uten hint teller som rekord.</string>
+    <string name="reyon_audit_start">Start kontrollen</string>
+    <string name="reyon_audit_generating">Forbereder kontrollen…</string>
+    <string name="reyon_audit_plan_label">Plan</string>
+    <string name="reyon_audit_shelf_label">Hylle: trykk på avvikene</string>
+    <string name="reyon_audit_found_label">Funnet</string>
+    <string name="reyon_audit_mistakes_label">Feil</string>
+    <string name="reyon_audit_remaining_fmt">%1$d igjen å finne</string>
+    <string name="reyon_audit_done_title">Kontrollen er ferdig</string>
+    <string name="reyon_audit_result_fmt">%1$s · %2$d feil · %3$d hint</string>
+    <string name="reyon_audit_board_desc_fmt">Kontrollhylle %1$d hyller × %2$d plasser, %3$d/%4$d avvik funnet</string>
+    <string name="reyon_audit_plan_desc_fmt">Plan %1$d hyller × %2$d plasser</string>
+    <string name="reyon_audit_plan_zoom_hint">trykk for å forstørre</string>
+    <string name="reyon_audit_plan_zoom_desc">Forstørret plan; trykk for å lukke</string>
+    <string name="reyon_audit_plan_zoom_close">Trykk for å lukke</string>
+    <string name="reyon_dev_swap_fmt">Byttet om: %1$s ↔ %2$s</string>
+    <string name="reyon_dev_gap_fmt">Tom plass: %1$s mangler en front</string>
+    <string name="reyon_dev_missing_fmt">Tom plass: %1$s mangler</string>
+    <string name="reyon_dev_foreign_fmt">Fremmed vare: %2$s i stedet for %1$s</string>
+    <string name="reyon_dev_brand_fmt">Feil merke: %1$s (%3$s i stedet for %2$s)</string>
+    <string name="reyon_dev_size_fmt">Feil størrelse: %1$s</string>
+    <string name="reyon_dev_spill_fmt">Oversøl: %1$s søler over på %2$s</string>
+
+    <!-- Reyon: Satış -->
+    <string name="reyon_sales_intro">Still opp varene som du vil; poengene kommer fra salgsreglene (øyehøyde, tungt nederst, komplementære ved siden av hverandre, rengjøring borte fra mat, kategori- og merkeblokker). Målet er den beste oppstillingen optimereren fant; når du dit, får du tre stjerner.</string>
+    <string name="reyon_sales_daily_desc">I dag stiller alle opp de samme varene; dagens beste poengsum noteres.</string>
+    <string name="reyon_sales_daily_done_fmt">I dag: %1$d / %2$d poeng · %3$s</string>
+    <string name="reyon_sales_free_desc">Tilfeldig vareutvalg; andelen av målet teller som rekord.</string>
+    <string name="reyon_sales_best_fmt">Rekord: %1$d%% av målet</string>
+    <string name="reyon_sales_start">Begynn å stille opp</string>
+    <string name="reyon_sales_generating">Beregner målet…</string>
+    <string name="reyon_sales_score_label">Poeng</string>
+    <string name="reyon_sales_target_label">Mål</string>
+    <string name="reyon_sales_rules_label">Salgsregler</string>
+    <string name="reyon_sales_rule_position">Plassering</string>
+    <string name="reyon_sales_rule_position_desc">etterspørsel × fronter × hyllefaktor: øyehøyde ×3, øverst og midten ×2, nederst ×1 · ▼ tungt bare nederst ×3 · ★ bare i øyehøyde ×4</string>
+    <string name="reyon_sales_rule_complement">Komplementære</string>
+    <string name="reyon_sales_rule_complement_desc">par som potetgull og dip ved siden av hverandre +6, over hverandre +3</string>
+    <string name="reyon_sales_rule_conflict">Konflikt</string>
+    <string name="reyon_sales_rule_conflict_desc">et rengjøringsmiddel ved siden av mat −8</string>
+    <string name="reyon_sales_rule_category">Kategoriblokk</string>
+    <string name="reyon_sales_rule_category_desc">samme kategori ved siden av hverandre +4</string>
+    <string name="reyon_sales_rule_brand">Merkeblokk</string>
+    <string name="reyon_sales_rule_brand_desc">samme merke ved siden av hverandre +3, over hverandre +3</string>
+    <string name="reyon_sales_neighbors">naboer</string>
+    <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
+    <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
+    <string name="reyon_sales_selected_fmt">%1$s valgt (etterspørsel %2$d): trykk på en plass i hylla</string>
+    <string name="reyon_sales_pick_hint">Trykk på en vare for å se hvordan poengene fordeler seg</string>
+    <string name="reyon_sales_demand_fmt">etterspørsel %1$d</string>
+    <string name="reyon_sales_finish">Ferdig</string>
+    <string name="reyon_sales_done_title">Oppstillingen er ferdig</string>
+    <string name="reyon_sales_result_fmt">%1$d / %2$d poeng (%3$d%% av målet)</string>
+    <string name="reyon_sales_beat_target">Du slo målet! 🏆</string>
+    <string name="reyon_sales_reopen">Still opp videre</string>
+    <string name="reyon_sales_show_target">Vis målet</string>
+    <string name="reyon_sales_review_mine">Min oppstilling</string>
+    <string name="reyon_sales_review_target_fmt">Mål (%1$d)</string>
+    <string name="reyon_sales_back_to_result">Resultat</string>
+    <string name="reyon_sales_board_desc_fmt">Salgshylle %1$d hyller × %2$d plasser, %3$d varer er ikke satt opp, %4$d poeng</string>
+
+    <!-- Reyon: Sipariş -->
+    <string name="reyon_order_intro">Hylleplanen ligger fast; jobben din er lageret. Hver dag bestemmer du hvor mange kasser du bestiller per vare: bestillingene kommer neste morgen, det som ikke får plass går i retur, lager som står igjen om kvelden koster lagerleie, utgåtte enheter er tap. Målet er fortjenesten til en ekspert som ser de samme prognosene.</string>
+    <string name="reyon_order_level_desc_fmt">%1$d hyller × %2$d plasser · %3$d dager · %4$d kampanjer</string>
+    <string name="reyon_order_daily_desc">I dag spiller alle den samme uka; dagens beste fortjeneste noteres.</string>
+    <string name="reyon_order_daily_done_fmt">I dag: %1$d / %2$d i fortjeneste · %3$s</string>
+    <string name="reyon_order_free_desc">Tilfeldig uke; andelen av målet teller som rekord.</string>
+    <string name="reyon_order_best_fmt">Rekord: %1$d%% av målet</string>
+    <string name="reyon_order_start">Start uka</string>
+    <string name="reyon_order_generating">Forbereder uka…</string>
+    <string name="reyon_order_day_label">Dag</string>
+    <string name="reyon_order_profit_label">Fortjeneste</string>
+    <string name="reyon_order_target_label">Mål</string>
+    <string name="reyon_order_dow_1">Mandag</string>
+    <string name="reyon_order_dow_2">Tirsdag</string>
+    <string name="reyon_order_dow_3">Onsdag</string>
+    <string name="reyon_order_dow_4">Torsdag</string>
+    <string name="reyon_order_dow_5">Fredag</string>
+    <string name="reyon_order_dow_6">Lørdag</string>
+    <string name="reyon_order_dow_7">Søndag</string>
+    <string name="reyon_order_day_title_fmt">%1$s · dag %2$d av %3$d</string>
+    <string name="reyon_order_promo_ahead_fmt">%1$s: kampanje %2$s (etterspørsel ×2,5)</string>
+    <string name="reyon_order_stock_fmt">lager %1$d/%2$d</string>
+    <string name="reyon_order_today_fmt">i dag %1$d–%2$d</string>
+    <string name="reyon_order_forecast_fmt">%1$s %2$d–%3$d</string>
+    <string name="reyon_order_incoming_fmt">+%2$d kommer %1$s</string>
+    <string name="reyon_order_expiring_fmt">%1$d enheter går ut i natt</string>
+    <string name="reyon_order_expiring_tomorrow_fmt">%1$d enheter går ut i morgen natt</string>
+    <string name="reyon_order_promo_tag">KAMPANJE</string>
+    <string name="reyon_order_case_fmt">%1$d kasser = %2$d enheter</string>
+    <string name="reyon_order_case_size_fmt">kasse med %1$d · kommer %2$s</string>
+    <string name="reyon_order_no_order">ingen bestilling</string>
+    <string name="reyon_order_closed">uka går mot slutten, en levering ville ikke rukket fram</string>
+    <string name="reyon_order_more">Flere</string>
+    <string name="reyon_order_less">Færre</string>
+    <string name="reyon_order_close_day">Lukk dagen</string>
+    <string name="reyon_order_close_week">Lukk uka</string>
+    <string name="reyon_order_summary_title_fmt">%1$s lukket</string>
+    <string name="reyon_order_sum_sold_fmt">Salg: %1$d enheter (+%2$d)</string>
+    <string name="reyon_order_sum_lost_fmt">Tapt salg: %1$d enheter</string>
+    <string name="reyon_order_sum_holding_fmt">Lagerleie: −%1$d</string>
+    <string name="reyon_order_sum_waste_fmt">Tap: %1$d enheter (−%2$d)</string>
+    <string name="reyon_order_sum_returns_fmt">Retur: %1$d enheter (−%2$d)</string>
+    <string name="reyon_order_sum_delivered_fmt">Morgenlevering: %1$d enheter</string>
+    <string name="reyon_order_sum_profit_fmt">Dagens fortjeneste %1$+d · totalt %2$d</string>
+    <string name="reyon_order_continue">Fortsett</string>
+    <string name="reyon_order_done_title">Uka er ferdig</string>
+    <string name="reyon_order_result_fmt">%1$d / %2$d i fortjeneste (%3$d%% av målet)</string>
+    <string name="reyon_order_stats_fmt">Lageromsetning %1$s (ekspert %2$s) · servicegrad %3$d%% (ekspert %4$d%%)</string>
+    <string name="reyon_order_chart_profit">Daglig fortjeneste</string>
+    <string name="reyon_order_chart_turnover">Omsetning</string>
+    <string name="reyon_order_chart_expert_fmt">ekspert %1$s</string>
+    <string name="reyon_order_chart_day_fmt">dag %1$d %2$+d</string>
+    <string name="reyon_order_chart_desc_fmt">Ukediagram: %1$s · lageromsetning %2$s (ekspert %3$s)</string>
+    <string name="reyon_order_beat_target">Du slo eksperten! 🏆</string>
+    <string name="reyon_order_rules">Salg +4 per enhet (★ +6) · lagerleie −1 per enhet per natt · tap −2 (★ −4) · retur −1</string>
+    <string name="reyon_order_board_desc_fmt">Bestillingshylle %1$d hyller × %2$d plasser, dag %3$d, fortjeneste %4$d</string>
+    <string name="reyon_order_item_desc_fmt">%1$s: lager %2$d/%3$d, bestilling %4$d kasser</string>
+    <string name="reyon_order_hint_fmt">Ekspert: %2$d kasser %1$s</string>
+    <string name="reyon_order_hint_none">Bestillingene dine stemmer med ekspertens</string>
+    <string name="reyon_order_share_fmt">Lageromsetning %1$s</string>
+</resources>
