@@ -15,7 +15,10 @@
 - [ ] `main`'de Pages iş akışını koştur; kaynağı (`GitHub Actions`) kendisi kurar
       ve `site/` yayına girer — gizlilik URL'si ancak bundan sonra açılır
 - [ ] `v1.0.0` etiketi it; `release.yml` imzalı APK + AAB üretsin
-- [ ] APK doğrulaması: SHA256, manifest `versionName`/paket adı, dex'te 14 dilin metni, imza parmak izi
+- [ ] Yayın dosyalarını `dist/` altına indir ve `python3 tools/apk_dogrula.py` koştur
+      (SHA256, manifestte paket/`versionName`, izin yokluğu, dex ve arsc'ta 14 dil,
+      v2 imza bloğu, AAB'de dil kaynakları). İmzanın kendisi CI'da `apksigner` ile
+      doğrulanır; parmak izi Release koşumunun kütüğünde.
 - [ ] Cihazda koşum (`tools/cihaz_testi.py`), `docs/cihaz-testi.md` protokolü
 - [ ] Play Console: uygulamayı oluştur, kategori **Uygulamalar → Eğitim**
 - [ ] Play App Signing'i aç; yüklenen AAB `-play.aab` olan

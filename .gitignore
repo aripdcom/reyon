@@ -12,6 +12,8 @@ captures/
 *.aab
 *.keystore
 *.jks
+# İndirilen yayın dosyaları (tools/apk_dogrula.py buraya bakar)
+dist/
 
 # IDE
 .idea/
