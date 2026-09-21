@@ -30,7 +30,12 @@ android {
 
     // Release imzası CI'da ortam değişkenleriyle sağlanır (bkz. release.yml).
     // Değişkenler yoksa imzasız release üretilir; debug derlemeler etkilenmez.
-    val releaseKeystorePath = System.getenv("ANDROID_KEYSTORE_PATH")
+    //
+    // Boş dizge de "yok" sayılır. Tanımlı ama boş bir değişken `file("")` ile
+    // modül kökünü keystore diye gösterirdi; parola da boşken AGP böyle bir
+    // yapılandırmayı imzaya hazır saymaz, uyarıp imzasız APK üretir ve derleme
+    // yeşil döner. Etiketli koşumda imzasızlığı release.yml ayrıca hata sayar.
+    val releaseKeystorePath = System.getenv("ANDROID_KEYSTORE_PATH")?.takeIf { it.isNotBlank() }
     if (releaseKeystorePath != null) {
         signingConfigs {
             create("release") {

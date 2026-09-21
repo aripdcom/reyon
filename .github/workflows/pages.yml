@@ -1,7 +1,7 @@
 name: Pages
 
 # site/ klasörünü GitHub Pages'e yayınlar (aripdcom.github.io/reyon).
-# Depo ayarlarında Pages kaynağı "GitHub Actions" olmalı. Kendi alan adı
+# Pages kaynağını ("GitHub Actions") aşağıdaki adım kendisi kurar. Kendi alan adı
 # bağlanınca Settings → Pages'ten tanımlanır ve platform/Links.kt ile
 # tools/check_site.py'deki adresler birlikte güncellenir.
 
@@ -32,7 +32,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Pages depo ayarlarında açık değilse eylem "Get Pages site failed —
+      # Not Found" ile düşüyordu; `pages: write` izni varken `enablement`
+      # kaynağı "GitHub Actions" olarak kendisi kurar. Açıksa dokunmaz.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
