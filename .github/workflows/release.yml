@@ -55,23 +55,83 @@ jobs:
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
 
+      # Secret yoksa dosya hiç yazılmaz ve yol boş geçer. Eski hâli `echo "" |
+      # base64 -d` ile sıfır baytlık bir .jks yazıyordu: AGP böyle bir
+      # yapılandırmayı imzaya hazır saymaz, uyarıp imzasız APK üretir ve koşum
+      # yeşil döner. Etiketli koşumda secret eksikse adım burada durur —
+      # imzasız sürüm yayımlanmaz.
       - name: Keystore'u çöz
-        run: echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/reyon-release.jks"
+        id: keystore
         env:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          RELEASING: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD" ]; then
+            if [ "$RELEASING" = 'true' ]; then
+              echo "::error::ANDROID_KEYSTORE_BASE64 ve ANDROID_KEYSTORE_PASSWORD secret'ları gerekli; imzasız sürüm yayımlanmaz."
+              exit 1
+            fi
+            echo "Keystore secret'ı yok: dal koşumu imzasız derlemeyle doğrulanacak."
+            echo 'path=' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/reyon-release.jks"
+          if [ ! -s "$RUNNER_TEMP/reyon-release.jks" ]; then
+            echo "::error::Çözülen keystore boş; ANDROID_KEYSTORE_BASE64 bozuk."
+            exit 1
+          fi
+          echo "path=$RUNNER_TEMP/reyon-release.jks" >> "$GITHUB_OUTPUT"
 
       - name: İmzalı release APK ve AAB derle
         run: ./gradlew :app:assembleRelease :app:bundleRelease -PappVersion=${{ steps.version.outputs.version }}
         env:
-          ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/reyon-release.jks
+          ANDROID_KEYSTORE_PATH: ${{ steps.keystore.outputs.path }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
 
+      # İmza gerçekten APK'ya indi mi? Yapılandırma eksikse AGP imzalamayı
+      # sessizce atlar, yani "derleme başarılı" imzayı göstermez. Etiketli
+      # koşumda imzasızlık hata; dal koşumunda yalnızca uyarı, çünkü orada
+      # keystore zaten yok. Parmak izi de burada kütüğe basılır.
+      - name: APK imzasını doğrula
+        id: apk
+        env:
+          RELEASING: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
+        run: |
+          # İmzalanmamış çıktıyı AGP "-unsigned" ekiyle adlandırır. Keystore'suz
+          # dal koşumunda çıktı odur; etiketli koşum zaten imzasız geçemiyor.
+          BASE=app/build/outputs/apk/release
+          if [ -f "$BASE/app-release.apk" ]; then
+            APK="$BASE/app-release.apk"
+          elif [ -f "$BASE/app-release-unsigned.apk" ]; then
+            APK="$BASE/app-release-unsigned.apk"
+          else
+            echo "::error::Release APK'sı bulunamadı ($BASE)."
+            exit 1
+          fi
+          echo "path=$APK" >> "$GITHUB_OUTPUT"
+          APKSIGNER="$(find "${ANDROID_HOME:-$ANDROID_SDK_ROOT}/build-tools" -maxdepth 2 -name apksigner -type f | sort -V | tail -1)"
+          if [ -z "$APKSIGNER" ]; then
+            echo "::error::apksigner bulunamadı; imza doğrulanamıyor."
+            exit 1
+          fi
+          if "$APKSIGNER" verify --verbose --print-certs "$APK"; then
+            echo "APK imzalı."
+          elif [ "$RELEASING" = 'true' ]; then
+            echo "::error::APK imzasız; sürüm yayımlanmayacak."
+            exit 1
+          else
+            echo "::warning::APK imzasız — keystore secret'ı olmayan dal koşumunda beklenen."
+          fi
+
       - name: Yayın dosyalarını hazırla (APK + AAB + kaynak arşivleri + SHA256)
+        env:
+          APK: ${{ steps.apk.outputs.path }}
         run: |
           TAG="${{ steps.version.outputs.tag }}"
           mkdir -p dist
-          cp app/build/outputs/apk/release/app-release.apk "dist/reyon-$TAG.apk"
-          cp app/build/outputs/apk/release/app-release.apk dist/reyon.apk
+          cp "$APK" "dist/reyon-$TAG.apk"
+          cp "$APK" dist/reyon.apk
           # Play Console'a yüklenen paket; yandan kurulamaz, APK onun için.
           cp app/build/outputs/bundle/release/app-release.aab "dist/reyon-$TAG-play.aab"
           git archive --format=zip --prefix="reyon-$TAG/" -o "dist/reyon-$TAG-source.zip" HEAD

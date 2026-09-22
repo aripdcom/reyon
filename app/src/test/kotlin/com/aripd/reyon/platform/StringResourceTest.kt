@@ -2,6 +2,7 @@ package com.aripd.reyon.platform
 
 import android.content.Context
 import android.content.res.Configuration
+import android.content.res.Resources
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aripd.reyon.R
@@ -25,6 +26,20 @@ class StringResourceTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
+    /**
+     * Verilen dile çözülmüş kaynaklar.
+     *
+     * Robolectric'in varsayılan dili Türkçe (`robolectric.properties`), oysa
+     * `res/values` İngilizce. Belli bir dilin metnine bakan test dili kendisi
+     * seçmeli, yoksa varsayılanın hangi dil olduğuna sessizce bağlanır.
+     */
+    private fun resourcesIn(tag: String): Resources {
+        val config = Configuration(context.resources.configuration).apply {
+            setLocale(Locale.forLanguageTag(tag))
+        }
+        return context.createConfigurationContext(config).resources
+    }
+
     @Test
     fun theLicenseNoteKeepsItsQuotes() {
         assertTrue(
@@ -44,10 +59,7 @@ class StringResourceTest {
      */
     @Test
     fun numbersStayLatinInArabic() {
-        val config = Configuration(context.resources.configuration).apply {
-            setLocale(Locale.forLanguageTag("ar"))
-        }
-        val arabic = context.createConfigurationContext(config).resources
+        val arabic = resourcesIn("ar")
         val id = R.string.reyon_order_item_desc_fmt
 
         val safe = appText(arabic, id, "Kola", 9, 12, 14)
@@ -68,11 +80,28 @@ class StringResourceTest {
      * Kaynakta `%%` yazmak zorunlu (aapt2 tek `%`'yi biçim belirteci sanır);
      * ekrana `%` olarak inmesini String.format sağlıyor. Metin argümansız
      * okunursa kullanıcı `%%` görür — testin koruduğu şey bu.
+     *
+     * İşaretin kendisi yalnız onu yazan dilde aranır: yüzde taşıyan beş
+     * anahtarın hepsinde Türkçe cümleyi "hedefin yüzde 80 kadarı" diye kurar ve
+     * `%` hiç yazmaz. Bu bilinçli bir üslup farkı — `tools/check_strings.py` de
+     * `%%`'yi biçim belirteci paritesinden ayrı tutar — ama testin dili açıkça
+     * seçmesini gerektirir, çünkü Robolectric'in varsayılan dili Türkçe.
+     * Çift yüzdenin ekrana inmemesi ise dilden bağımsız: on dört dil de bakılır.
      */
     @Test
     fun percentSignsCollapseWhenFormatted() {
-        val formatted = appText(context, R.string.reyon_sales_best_fmt, 80)
+        val id = R.string.reyon_sales_best_fmt
+        val english = resourcesIn("en")
+
+        val raw = english.getString(id)
+        assertTrue("kaynakta %% durmalı, tekleştiren String.format: $raw", raw.contains("%%"))
+
+        val formatted = appText(english, id, 80)
         assertTrue("yüzde ekrana inmeli: $formatted", formatted.contains("80%"))
-        assertFalse("çift yüzde kalmamalı: $formatted", formatted.contains("%%"))
+
+        for (tag in AppLocale.TAGS) {
+            val text = appText(resourcesIn(tag), id, 80)
+            assertFalse("çift yüzde kalmamalı ($tag): $text", text.contains("%%"))
+        }
     }
 }

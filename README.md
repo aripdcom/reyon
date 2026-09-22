@@ -30,7 +30,8 @@ engine/    saf Kotlin/JVM motor — hiçbir bağımlılığı yok (üretici, ç�
 app/       Android uygulaması: Compose arayüz, 14 dil, paylaşım kartı, ayarlar
 site/      proje sayfası ve 14 dilde gizlilik politikası (GitHub Pages)
 store/     Play listeleme metinleri, görseller, form cevapları
-tools/     metin/mağaza/site denetimleri, gizlilik ve mağaza görseli üreticileri
+tools/     metin/mağaza/site denetimleri, yayın paketi doğrulaması, gizlilik ve
+           mağaza görseli üreticileri
 docs/      cihaz koşum protokolü ve kütükler
 ```
 
@@ -52,6 +53,13 @@ Denetimler CI'da Gradle'dan önce koşar:
 python3 tools/check_strings.py   # 14 dilde anahtar ve biçim belirteci paritesi
 python3 tools/check_store.py     # Play metin sınırları ve dil kapsamı
 python3 tools/check_site.py      # gizlilik sayfası üreticisiyle aynı mı, bağlantılar tutarlı mı
+```
+
+Yayın paketleri CI'da değil, etiketten sonra elde doğrulanır — indirilen dosya
+gerçekten beklenen paket mi:
+
+```sh
+python3 tools/apk_dogrula.py     # dist/: SHA256, paket/sürüm, izin yokluğu, 14 dil, v2 imza
 ```
 
 ## Gizlilik

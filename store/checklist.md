@@ -12,9 +12,16 @@
 
 - [ ] `reyon-release.jks` üret (`keytool`, alias `reyon`) ve iki secret'ı ekle:
       `ANDROID_KEYSTORE_BASE64` (base64 kodlu keystore), `ANDROID_KEYSTORE_PASSWORD`
-- [ ] Depo ayarları → Pages → kaynak "GitHub Actions"; `site/` yayına girsin
+- [ ] Depo ayarları → Pages → kaynak "GitHub Actions"; ardından Actions → Pages →
+      Run workflow. Ayar tek başına yayınlamaz, `site/`'a dokunmayan push da iş
+      akışını tetiklemez; gizlilik URL'si ancak bu koşumdan sonra açılır. (Pages'i
+      iş akışına açtırmak işe yaramaz: `configure-pages`'in `enablement`'ı
+      GITHUB_TOKEN ile site oluşturamaz, ayrı bir token ister.)
 - [ ] `v1.0.0` etiketi it; `release.yml` imzalı APK + AAB üretsin
-- [ ] APK doğrulaması: SHA256, manifest `versionName`/paket adı, dex'te 14 dilin metni, imza parmak izi
+- [ ] Yayın dosyalarını `dist/` altına indir ve `python3 tools/apk_dogrula.py` koştur
+      (SHA256, manifestte paket/`versionName`, izin yokluğu, dex ve arsc'ta 14 dil,
+      v2 imza bloğu, AAB'de dil kaynakları). İmzanın kendisi CI'da `apksigner` ile
+      doğrulanır; parmak izi Release koşumunun kütüğünde.
 - [ ] Cihazda koşum (`tools/cihaz_testi.py`), `docs/cihaz-testi.md` protokolü
 - [ ] Play Console: uygulamayı oluştur, kategori **Uygulamalar → Eğitim**
 - [ ] Play App Signing'i aç; yüklenen AAB `-play.aab` olan
