@@ -12,8 +12,11 @@
 
 - [ ] `reyon-release.jks` üret (`keytool`, alias `reyon`) ve iki secret'ı ekle:
       `ANDROID_KEYSTORE_BASE64` (base64 kodlu keystore), `ANDROID_KEYSTORE_PASSWORD`
-- [ ] `main`'de Pages iş akışını koştur; kaynağı (`GitHub Actions`) kendisi kurar
-      ve `site/` yayına girer — gizlilik URL'si ancak bundan sonra açılır
+- [ ] Depo ayarları → Pages → kaynak "GitHub Actions"; ardından Actions → Pages →
+      Run workflow. Ayar tek başına yayınlamaz, `site/`'a dokunmayan push da iş
+      akışını tetiklemez; gizlilik URL'si ancak bu koşumdan sonra açılır. (Pages'i
+      iş akışına açtırmak işe yaramaz: `configure-pages`'in `enablement`'ı
+      GITHUB_TOKEN ile site oluşturamaz, ayrı bir token ister.)
 - [ ] `v1.0.0` etiketi it; `release.yml` imzalı APK + AAB üretsin
 - [ ] Yayın dosyalarını `dist/` altına indir ve `python3 tools/apk_dogrula.py` koştur
       (SHA256, manifestte paket/`versionName`, izin yokluğu, dex ve arsc'ta 14 dil,
