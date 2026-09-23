@@ -68,7 +68,7 @@ fun ShareButton(content: ShareContent, modifier: Modifier = Modifier, compact: B
             modifier.fillMaxWidth()
         },
     ) {
-        Icon(imageVector = Icons.Filled.Share, contentDescription = null, modifier = Modifier.size(18.dp))
+        Icon(imageVector = ReyonIcons.Share, contentDescription = null, modifier = Modifier.size(18.dp))
         if (!compact) {
             Spacer(Modifier.width(8.dp))
             Text(label)

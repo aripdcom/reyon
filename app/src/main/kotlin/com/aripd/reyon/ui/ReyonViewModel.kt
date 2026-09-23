@@ -62,8 +62,24 @@ class ReyonViewModel(application: Application) : AndroidViewModel(application) {
     private val _kind = MutableStateFlow(store.lastKind())
     val kind: StateFlow<ReyonKind> = _kind.asStateFlow()
 
+    /**
+     * Bir modun ekranı açık mı; değilse Görevler gösterilir. Saklanmaz: uygulama
+     * her açılışta Görevler'le başlar, yarım vaka o vakaya dokununca sürer.
+     */
+    private val _screenOpen = MutableStateFlow(false)
+    val screenOpen: StateFlow<Boolean> = _screenOpen.asStateFlow()
+
     private val _level = MutableStateFlow(store.lastLevel())
     val level: StateFlow<ReyonLevel> = _level.asStateFlow()
+
+    /** Görevler'de seçili alıştırma formatı; günün vakası kendi formatında açılır, bunu değiştirmez. */
+    private val _practiceLevel = MutableStateFlow(store.practiceLevel())
+    val practiceLevel: StateFlow<ReyonLevel> = _practiceLevel.asStateFlow()
+
+    fun setPracticeLevel(level: ReyonLevel) {
+        _practiceLevel.value = level
+        store.savePracticeLevel(level)
+    }
 
     private val _mode = MutableStateFlow(store.lastMode())
     val mode: StateFlow<ReyonMode> = _mode.asStateFlow()
@@ -71,7 +87,8 @@ class ReyonViewModel(application: Application) : AndroidViewModel(application) {
     private val _records = MutableStateFlow(loadRecords())
     val records: StateFlow<Map<ReyonLevel, ReyonStore.Record>> = _records.asStateFlow()
 
-    private val _timerPaused = MutableStateFlow(false)
+    /** Süre yalnız ekran önündeyken işler; ekran açılınca LifecycleResumeEffect çözer. */
+    private val _timerPaused = MutableStateFlow(true)
     private var generation = 0
     private var runMode = ReyonMode.FREE
     private var runDay = 0L
@@ -87,25 +104,6 @@ class ReyonViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     init {
-        val saved = store.restore()
-        if (saved != null) {
-            val token = ++generation
-            _generating.value = true
-            viewModelScope.launch {
-                val puzzle = withContext(Dispatchers.Default) { ReyonGenerator.generate(saved.seed, saved.level) }
-                if (token != generation) return@launch
-                val st = ReyonState(puzzle)
-                st.restore(saved.snapshot, saved.hints)
-                runMode = saved.mode
-                runDay = saved.day
-                runSeed = saved.seed
-                _elapsed.value = saved.elapsed
-                _state.value = st
-                _generating.value = false
-                if (st.isSolved) store.clear()
-                bump()
-            }
-        }
         viewModelScope.launch {
             while (true) {
                 combine(_state, _timerPaused, _result) { st, paused, result ->
@@ -123,6 +121,66 @@ class ReyonViewModel(application: Application) : AndroidViewModel(application) {
     fun setKind(kind: ReyonKind) {
         _kind.value = kind
         store.saveKind(kind)
+    }
+
+    /** Görevler'den bir modun ekranına geçiş; vakayı o modun görünüm modeli açar. */
+    fun openScreen(kind: ReyonKind) {
+        setKind(kind)
+        _screenOpen.value = true
+    }
+
+    /** Görevler'e dönüş. */
+    fun closeScreen() {
+        _screenOpen.value = false
+    }
+
+    /**
+     * Görevler'den açılış. Aynı vaka (mod, format ve günün vakasında gün) bellekte
+     * ya da kayıtta yarım duruyorsa oradan sürer; yoksa yenisi başlar. Günün vakası
+     * tohumdan üretildiği için yeniden açmak aynı rafı verir.
+     */
+    fun open(mode: ReyonMode, level: ReyonLevel) {
+        _mode.value = mode
+        _level.value = level
+        store.saveLast(level, mode)
+        val day = todayEpoch()
+        val st = _state.value
+        if (st != null && sameCase(runMode, runDay, st.puzzle.level, mode, level, day)) return
+        if (_generating.value && pending?.let { sameCase(it.mode, it.day, it.level, mode, level, day) } == true) return
+        val saved = store.restore()
+        if (saved != null && !saved.snapshot.isEmpty() && sameCase(saved.mode, saved.day, saved.level, mode, level, day)) {
+            restore(saved)
+        } else {
+            newGame()
+        }
+    }
+
+    /** Üretimi süren vakanın kimliği; aynı vakaya ikinci dokunuş üretimi yeniden başlatmasın. */
+    private var pending: ReyonStore.Saved? = null
+
+    private fun restore(saved: ReyonStore.Saved) {
+        val token = ++generation
+        pending = saved
+        _generating.value = true
+        _result.value = null
+        _selected.value = -1
+        _highlightClue.value = -1
+        _lastHint.value = null
+        viewModelScope.launch {
+            val puzzle = withContext(Dispatchers.Default) { ReyonGenerator.generate(saved.seed, saved.level) }
+            if (token != generation) return@launch
+            val st = ReyonState(puzzle)
+            st.restore(saved.snapshot, saved.hints)
+            runMode = saved.mode
+            runDay = saved.day
+            runSeed = saved.seed
+            _elapsed.value = saved.elapsed
+            _state.value = st
+            _generating.value = false
+            pending = null
+            if (st.isSolved) store.clear()
+            bump()
+        }
     }
 
     fun setLevel(level: ReyonLevel) {
@@ -144,6 +202,7 @@ class ReyonViewModel(application: Application) : AndroidViewModel(application) {
         val day = todayEpoch()
         val seed = if (mode == ReyonMode.DAILY) ReyonGenerator.dailySeed(day) else Random.nextLong()
         val token = ++generation
+        pending = ReyonStore.Saved(seed, level, mode, day, IntArray(0), 0, 0)
         _generating.value = true
         _result.value = null
         _selected.value = -1
@@ -158,6 +217,7 @@ class ReyonViewModel(application: Application) : AndroidViewModel(application) {
             _elapsed.value = 0
             _state.value = ReyonState(puzzle)
             _generating.value = false
+            pending = null
             persist()
             bump()
         }
@@ -170,6 +230,7 @@ class ReyonViewModel(application: Application) : AndroidViewModel(application) {
     fun toMenu() {
         persist()
         generation++
+        pending = null
         _generating.value = false
         _state.value = null
         _selected.value = -1
@@ -277,6 +338,7 @@ class ReyonViewModel(application: Application) : AndroidViewModel(application) {
                 _records.value = loadRecords()
             }
             if (hints == 0 && store.saveBest(st.puzzle.level, time)) record = true
+            if (!daily) store.saveLastPractice(ReyonKind.PUZZLE, st.puzzle.level, time, hints)
             _result.value = ReyonResult(time, hints, record, daily, runDay)
             store.clear()
         } else {
@@ -295,3 +357,7 @@ class ReyonViewModel(application: Application) : AndroidViewModel(application) {
         _version.update { it + 1 }
     }
 }
+
+/** İki vaka aynı mı: mod ve format aynı, günün vakasıysa gün de aynı. */
+internal fun sameCase(runMode: ReyonMode, runDay: Long, runLevel: ReyonLevel, mode: ReyonMode, level: ReyonLevel, day: Long): Boolean =
+    runMode == mode && runLevel == level && (mode == ReyonMode.FREE || runDay == day)

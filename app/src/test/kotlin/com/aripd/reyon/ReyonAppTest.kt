@@ -15,9 +15,13 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aripd.reyon.platform.SettingsStore
+import com.aripd.reyon.ui.HOME_TAG
+import com.aripd.reyon.ui.ReyonKind
 import com.aripd.reyon.ui.ReyonTestSupport
+import com.aripd.reyon.ui.homeDailyTag
+import com.aripd.reyon.ui.homePracticeTag
 import com.aripd.reyon.ui.reyonLeaveRound
-import com.aripd.reyon.ui.reyonOpenMenu
+import com.aripd.reyon.ui.reyonOpenHome
 import com.aripd.reyon.ui.about.ABOUT_LANGUAGE_TAG
 import com.aripd.reyon.ui.about.ABOUT_SOUND_TAG
 import com.aripd.reyon.ui.about.ABOUT_THEME_TAG
@@ -33,11 +37,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * Uygulama kökü: açılışta doğrudan Reyon, üst çubuktaki dişliden ayarlar.
+ * Uygulama kökü: açılışta Görevler, üst çubuktaki ayar simgesinden ayarlar.
  *
- * Ana menü yok — bu yüzden sınanan şey "oyun listesinden Reyon'a girmek" değil,
- * uygulamanın ilk karesinde dört modun orada olması ve ayarların tek dokunuşla
- * açılması.
+ * Sınanan şey uygulamanın ilk karesinde dört modun (günün vakaları ve
+ * alıştırma) orada olması ve ayarların tek dokunuşla açılması.
  */
 @RunWith(AndroidJUnit4::class)
 class ReyonAppTest {
@@ -56,20 +59,16 @@ class ReyonAppTest {
 
     private fun launch() {
         rule.setContent { ReyonTheme { ReyonApp() } }
-        rule.reyonOpenMenu()
+        rule.reyonOpenHome()
     }
 
     @Test
-    fun opensStraightIntoReyonWithItsFourModes() {
+    fun opensOnTheTaskListWithItsFourModes() {
         launch()
-        rule.onNodeWithText(titleOf(R.string.app_name)).assertIsDisplayed()
-        for (id in listOf(
-            R.string.reyon_kind_puzzle,
-            R.string.reyon_kind_audit,
-            R.string.reyon_kind_sales,
-            R.string.reyon_kind_order,
-        )) {
-            rule.onNodeWithText(str(id)).assertIsDisplayed()
+        rule.onNodeWithText(str(R.string.home_title)).assertIsDisplayed()
+        for (kind in ReyonKind.entries) {
+            rule.onNodeWithTag(homeDailyTag(kind)).performScrollTo().assertIsDisplayed()
+            rule.onNodeWithTag(homePracticeTag(kind)).performScrollTo().assertIsDisplayed()
         }
     }
 
@@ -80,9 +79,9 @@ class ReyonAppTest {
         rule.onNodeWithText(str(R.string.settings_title)).assertIsDisplayed()
         rule.onNodeWithText(str(R.string.about_version_fmt, "").trim(), substring = true)
             .assertIsDisplayed()
-        // Ayarlar ekranının kendi çubuğunda dişli olmamalı; geri oku Reyon'a döner.
+        // Ayarlar ekranının kendi çubuğunda ayar simgesi olmamalı; geri oku Görevler'e döner.
         rule.onNodeWithContentDescription(str(R.string.back)).performClick()
-        rule.onNodeWithText(str(R.string.reyon_kind_sales)).assertIsDisplayed()
+        rule.onNodeWithTag(HOME_TAG).assertIsDisplayed()
     }
 
     /**

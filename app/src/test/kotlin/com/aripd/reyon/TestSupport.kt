@@ -28,13 +28,6 @@ fun ComposeContentTestRule.setAppContent(content: @Composable () -> Unit) {
 fun str(@StringRes id: Int, vararg args: Any): String =
     ApplicationProvider.getApplicationContext<Context>().getString(id, *args)
 
-/**
- * GameTopBar başlıkları büyük harfle çizilir. Üretimdeki appLocale() gibi
- * yapılandırmanın yerelini kullanır: qualifiers = "tr" ile koşan bir test
- * Locale.getDefault()'a bakarsa "İ" yerine "I" bekler ve boşa düşer.
- */
-fun titleOf(@StringRes id: Int): String = str(id).uppercase(testLocale())
-
 /** Testin koştuğu yapılandırmanın yereli. */
 fun testLocale(): Locale =
     ApplicationProvider.getApplicationContext<Context>().resources.configuration.locales[0]

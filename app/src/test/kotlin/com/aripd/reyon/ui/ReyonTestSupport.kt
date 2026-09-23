@@ -2,58 +2,71 @@ package com.aripd.reyon.ui
 
 import android.content.Context
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onAllNodesWithContentDescription
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.test.core.app.ApplicationProvider
 import com.aripd.reyon.R
+import com.aripd.reyon.engine.ReyonLevel
 import com.aripd.reyon.str
 
 /**
  * Reyon ekran testlerinin ortak hijyeni. Robolectric aynı JVM'deki testler
  * arasında SharedPreferences'ı paylaşabiliyor ve görünüm modeli etkinlik
  * yok edilirken (test bittikten, @After çalıştıktan sonra) açık turu yeniden
- * kaydediyor. O yüzden her test önce turu bırakır ("Başa dön" durumu
- * boşaltır, sonraki kayıt boş kalır), sonra tercihleri temizler.
+ * kaydediyor. O yüzden her test önce turu bırakır (geri oku Görevler'e döner,
+ * tur saklanır ama ekran boşalır), sonra tercihleri temizler.
  */
 object ReyonTestSupport {
-    fun clearPrefs() {
-        ApplicationProvider.getApplicationContext<Context>()
+    /**
+     * Tercihleri temizler. "Nasıl oynanır" kartı ilk girişte kendiliğinden açılıp
+     * oyun alanının ortasını kapatıyor; oyun akışını sınayan testler için dört
+     * modun kartı görülmüş sayılır. Kartın kendisini [ReyonHomeTest] sınıyor.
+     */
+    fun clearPrefs(introsSeen: Boolean = true) {
+        val editor = ApplicationProvider.getApplicationContext<Context>()
             .getSharedPreferences("reyon_state", Context.MODE_PRIVATE)
             .edit()
             .clear()
-            .commit()
+        if (introsSeen) {
+            for (kind in ReyonKind.entries) editor.putBoolean("intro_seen_" + kind.name, true)
+        }
+        editor.commit()
     }
 }
 
-/** Ekran hangi durumda açılırsa açılsın menüye getirir ve tür çiplerini bekler. */
-fun ComposeContentTestRule.reyonOpenMenu() {
-    val back = str(R.string.reyon_to_menu)
-    val chip = str(R.string.reyon_kind_sales)
-    waitUntil(timeoutMillis = 30_000) {
-        onAllNodesWithText(back).fetchSemanticsNodes().isNotEmpty() ||
-            onAllNodesWithText(chip).fetchSemanticsNodes().isNotEmpty()
-    }
-    // Bitmiş bir tur geri yüklendiyse hem üst çubukta hem sonuç kartında "Başa dön" olur; ilki yeter.
-    if (onAllNodesWithText(back).fetchSemanticsNodes().isNotEmpty()) {
-        onAllNodesWithText(back).onFirst().performClick()
-        waitUntil(timeoutMillis = 10_000) { onAllNodesWithText(chip).fetchSemanticsNodes().isNotEmpty() }
+private fun ComposeContentTestRule.homeShown(): Boolean =
+    onAllNodesWithTag(HOME_TAG).fetchSemanticsNodes().isNotEmpty()
+
+private fun ComposeContentTestRule.backShown(): Boolean =
+    onAllNodesWithContentDescription(str(R.string.back)).fetchSemanticsNodes().isNotEmpty()
+
+/** Ekran hangi durumda açılırsa açılsın Görevler'e getirir. */
+fun ComposeContentTestRule.reyonOpenHome() {
+    waitUntil(timeoutMillis = 30_000) { homeShown() || backShown() }
+    if (!homeShown()) {
+        onAllNodesWithContentDescription(str(R.string.back)).onFirst().performClick()
+        waitUntil(timeoutMillis = 10_000) { homeShown() }
     }
 }
 
-/** Tür çipine basar; yeni türün görünüm modeli sızmış bir turu geri yüklediyse menüye döner. */
-fun ComposeContentTestRule.reyonPickKind(kindLabel: String) {
-    onNodeWithText(kindLabel).performClick()
-    reyonOpenMenu()
+/** Görevler'den alıştırma: formatı seçer, modun satırına dokunur. */
+fun ComposeContentTestRule.reyonStartPractice(kind: ReyonKind, level: ReyonLevel = ReyonLevel.KOLAY) {
+    reyonOpenHome()
+    // Kısa ekranda Görevler kayar: satırlar görünür alana getirilerek basılır.
+    onNodeWithText(str(formatName(level))).performScrollTo().performClick()
+    onNodeWithTag(homePracticeTag(kind)).performScrollTo().performClick()
 }
 
 /** Test sonunda açık turu bırakır; içerik hiç kurulmadıysa sessizce geçer. */
 fun ComposeContentTestRule.reyonLeaveRound() {
-    val back = str(R.string.reyon_to_menu)
     try {
-        if (onAllNodesWithText(back).fetchSemanticsNodes().isNotEmpty()) {
-            onAllNodesWithText(back).onFirst().performClick()
+        if (!homeShown() && backShown()) {
+            onAllNodesWithContentDescription(str(R.string.back)).onFirst().performClick()
             waitForIdle()
         }
     } catch (e: IllegalStateException) {
