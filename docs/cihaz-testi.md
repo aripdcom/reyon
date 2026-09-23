@@ -885,7 +885,7 @@ kullanıcının kararıyla reddedildi ve "bir daha sorma" durumuna alındı
 | Etiketler | ✅ Görevler, dört mod ve raporlarda "etiketsiz 0" |
 | Sonuç kartları | ✅ ağaçta okunuyor: "Raf satışa hazır", raf verimi, düzey; haftalık raporda "Hafta grafiği: 1. gün +62, …" |
 | Raf gözleri | ❌ dört modda tuval tek düğüm (v1.0.1'den açık) |
-| Alt eylem satırı | ❌ **sınırı sıfır**: Diziliş 3, Denetim 1, Sipariş raporu 2 düğüm — v0.28.2'den beri beklenen "TalkBack açıkken 0" tutmuyor |
+| Alt eylem satırı | ✅ elle: TalkBack'le dokunarak ve sağa kaydırarak ulaşılıyor, okunuyor (aşağıda). `uiautomator` ağacında ise sınırı sıfır: Diziliş 3, Denetim 1, Sipariş raporu 2 düğüm |
 | Y5 (360×640 dp) | ❌ TalkBack açıkken de son alıştırma satırı ağaçta 11 dp (y = 1096…1125), adı dışarıda |
 
 Alt satır için ölçülenler, sebep bulunamadı:
@@ -901,7 +901,15 @@ Alt satır için ölçülenler, sebep bulunamadı:
   doğru: uygulamanın semantiği sağlam, kayıp cihaza özgü.
 - Gizli klavye penceresi değil (yüzeyi yok, `mInputShown=false`).
 
-Dokunarak keşfin gerçekten bu düğmelere inip inmediği cihazda **elle** sınanmalı:
-`adb shell input tap` TalkBack'in keşfinden geçmiyor, dokunuş düğmeyi doğrudan
-çalıştırıyor (Kılavuz'a dokunmak ürün yerleştirdi). Ağaçta görünmez olan düğümü
-TalkBack da atlar; beklenen, alt satıra dokunarak ve kaydırarak inilememesi.
+**Elle sınama (kullanıcı, TalkBack açık, 2026-09-23): hepsi çalışıyor.** Diziliş'te
+Kılavuz, Geri al ve Raftan kaldır'a dokununca odak çerçevesi geliyor ve adı
+okunuyor; bir üründen sağa kaydırmak sırayla alt satıra iniyor; Denetim'de
+Kılavuz, Sipariş raporunda Görevler ve Yeni hafta da okunuyor.
+
+Yani sıfır sınır, `uiautomator`'ın bu cihazda gördüğü ağacın kusuru; TalkBack'in
+kullandığı düğümler sağlam. Sonuç: `cihaz_testi.py erisim`'in "sınırı sıfır …"
+sayısı SM-A515F'te alt satır için güvenilir bir ölçü değil — bundan sonra alt
+satırın erişilebilirliği TalkBack'le elle sınanır. (`adb shell input tap`
+TalkBack'in keşfinden geçmiyor, dokunuş düğmeyi doğrudan çalıştırıyor; keşfi
+betikle taklit etmek mümkün değil.) v0.28.2'nin "TalkBack açıkken sınırı sıfır 0"
+maddesi bu yüzden kapandı: ölçüt yanlıştı, davranış doğru.
