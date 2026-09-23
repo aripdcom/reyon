@@ -871,3 +871,37 @@ Cihazda şimdi yerel sürüm yapısı (`427beaaa…`) kurulu.
 
 `ReyonHomeTextTest` G2 ve G3'ü 14 dilde ölçüyor (eski Almanca metinle kırılıyor).
 Y3, Y4, G4, G5 çizim/yerleşim düzeltmeleri; cihazda ekran görüntüsüyle bakıldı.
+
+**E — TalkBack açık** (yapı `sha256=3f1c68a1…`). Samsung TalkBack 13.5 kullanıcı 0
+için geri yüklendi (`cmd package install-existing`). Açılışta telefon izni
+(`READ_PHONE_STATE`) istiyor ve her açılışta alt sayfayla yeniden soruyor;
+kullanıcının kararıyla reddedildi ve "bir daha sorma" durumuna alındı
+(`pm set-permission-flags … user-fixed`), ölçüm ancak ondan sonra temiz alınabildi.
+Ölçüm için TalkBack her ekranda açılıp kapatıldı; koşum sonunda kapalı.
+
+| Bakılan | Sonuç |
+| --- | --- |
+| Çubuklar ve alt pay | ✅ keşif açıkken durum ve gezinme çubuğu görünüyor, eylem satırının altında `ExplorationInset` payı var (ekranda y = 2186…2274) |
+| Etiketler | ✅ Görevler, dört mod ve raporlarda "etiketsiz 0" |
+| Sonuç kartları | ✅ ağaçta okunuyor: "Raf satışa hazır", raf verimi, düzey; haftalık raporda "Hafta grafiği: 1. gün +62, …" |
+| Raf gözleri | ❌ dört modda tuval tek düğüm (v1.0.1'den açık) |
+| Alt eylem satırı | ❌ **sınırı sıfır**: Diziliş 3, Denetim 1, Sipariş raporu 2 düğüm — v0.28.2'den beri beklenen "TalkBack açıkken 0" tutmuyor |
+| Y5 (360×640 dp) | ❌ TalkBack açıkken de son alıştırma satırı ağaçta 11 dp (y = 1096…1125), adı dışarıda |
+
+Alt satır için ölçülenler, sebep bulunamadı:
+
+- TalkBack açıkken Reyon'un erişilebilirlik penceresi ekranın tamamı
+  (`bounds=Rect(0, 0 - 1080, 2400)`); v1.0.1'deki "pencere 2186'da bitiyor"
+  açıklaması bu durumda geçerli değil. Ekranda eylem satırı y = 1999…2186
+  (düğmeler 2028…2154), yani pencerenin içinde.
+- Deney yapısında alt pay iki katına çıkarıldı, satır 88 px yukarı çıktı
+  (1911…2098): düğümler yine sıfır. Aynı ekranda Görevler'in 1783…1962'deki satırı
+  görünür geliyor. Kesim bir y sınırı gibi davranmıyor.
+- Robolectric'te aynı düğmeler (`AccessibilityNodeProvider`) görünür ve sınırları
+  doğru: uygulamanın semantiği sağlam, kayıp cihaza özgü.
+- Gizli klavye penceresi değil (yüzeyi yok, `mInputShown=false`).
+
+Dokunarak keşfin gerçekten bu düğmelere inip inmediği cihazda **elle** sınanmalı:
+`adb shell input tap` TalkBack'in keşfinden geçmiyor, dokunuş düğmeyi doğrudan
+çalıştırıyor (Kılavuz'a dokunmak ürün yerleştirdi). Ağaçta görünmez olan düğümü
+TalkBack da atlar; beklenen, alt satıra dokunarak ve kaydırarak inilememesi.
