@@ -20,8 +20,10 @@
 - [ ] `v1.0.0` etiketi it; `release.yml` imzalı APK + AAB üretsin
 - [ ] Yayın dosyalarını `dist/` altına indir ve `python3 tools/apk_dogrula.py` koştur
       (SHA256, manifestte paket/`versionName`, izin yokluğu, dex ve arsc'ta 14 dil,
-      v2 imza bloğu, AAB'de dil kaynakları). İmzanın kendisi CI'da `apksigner` ile
-      doğrulanır; parmak izi Release koşumunun kütüğünde.
+      v2 imza bloğu, AAB'de çeviriler). `release.yml` aynı denetimi Release'ten önce
+      koşar; elde tekrarlamak, indirilen dosyanın CI'ın denetlediği dosya olduğunu
+      gösterir. Aracın bastığı sertifika parmak izi keystore'unkiyle aynı olmalı:
+      `keytool -list -v -keystore reyon-release.jks -alias reyon | grep SHA256`
 - [ ] Cihazda koşum (`tools/cihaz_testi.py`), `docs/cihaz-testi.md` protokolü
 - [ ] Play Console: uygulamayı oluştur, kategori **Uygulamalar → Eğitim**
 - [ ] Play App Signing'i aç; yüklenen AAB `-play.aab` olan
