@@ -719,3 +719,114 @@ Satış (dolu raf, puan paneli 49/66), Sipariş (hafta sonucu, grafik; 218/323,
 
 Ekran boyutu, yoğunluk, uygulama dili ve erişilebilirlik ayarları koşumlardan
 sonra geri alındı.
+
+### 1.1.0 · FMCG tasarımı cihaz koşumu · 2026-09-23
+
+İki yapı, ikisi de PR #4'ün başı `144ae82`'den:
+
+- CI'ın debug APK'sı (`reyon-debug-apk`, koşum 35892200994):
+  `com.aripd.reyon 1.0.0 sha256=0d29503f40873c58790cb7a6a21fcc9c6ced64fa3c0e74a5002a096fc2b6a9e2`.
+  Temiz kurulum denetimleri ve A bununla.
+- Yerelde `assembleRelease` (R8 açık), yerel hata ayıklama anahtarıyla imzalı:
+  `sha256=427beaaad985095f69c86a378635e54c63b8a7a8b626a04110b3b68784442708`.
+  B, C, E, F ve Play ekran görüntüleri bununla — B'nin v1.0.1 (sürüm yapısı) ile
+  karşılaştırılabilmesi için; debug yapıda Compose çok daha yavaş (aşağıda).
+
+Sürüm adı iki yapıda da `1.0.0`: CI ve yerel derleme `-PappVersion` vermiyor, yapıyı
+özet ayırt ediyor. Cihaz SM-A515F, Android 13, yazı ölçeği 1,1.
+
+**1.1.0'a özgü bakılacaklar**
+
+| Madde | Sonuç |
+| --- | --- |
+| Görevler: günün vakası bugünün formatında | ✅ 23 Eylül → Süpermarket · 4×5. Dönüş (Market → Süpermarket → Hipermarket) cihazda tek gün gözlenebildi; kural `dailyLevel(epochDay)` ve `ReyonReportTest`'te |
+| Biten vaka düğmede onay ve sonuçla | ✅ "✓ Diziliş 0:48 · ✓ Denetim 0:33 · ✓ Satış 90/146 · ✓ Sipariş 519/558", sayaç 4/4; vaka raporunda "Yeniden dene" |
+| Alıştırma "son sonuç" sütunu | ✅ Market'te 1:03 · 0:35 · 68/89 · 309/325 |
+| Alıştırma formatı kapanıp açılınca duruyor | ✅ Hipermarket seçildi, `am force-stop` sonrası seçili; bitmiş bir günün vakasına girip çıkmak değiştirmiyor. Ama bkz. Y1 |
+| 360×640'ta son alıştırma satırına kaydırmayla ulaşılıyor | ✅ gözle; ⚠️ erişilebilirlik ağacında değil (Y5) |
+| "Nasıl çalışılır" kartı | ✅ dört modda: ilk girişte açık, ikinci girişte kapalı, bilgi simgesiyle yeniden açılıyor |
+| Tema: Açık / Koyu / Telefona göre | ✅ varsayılan Açık; iki temada da raf etiketi ve kural puanları okunuyor (`store/screenshots/*/6-satis-koyu.png`) |
+| Durum/gezinme çubuğu simgeleri temaya uyuyor | Koyu ✅ (açık simge). Açık temada gözlenemedi: uygulama çubukları gizliyor, kaydırınca geçici gösterilen çubuğa sistem kendi gri perdesini ve beyaz simgeyi çiziyor. Kod açık temada koyu simgeyi istiyor (`ReyonApp.kt`, `isAppearanceLightStatusBars = !dark`) |
+| Raporlar | ✅ Diziliş/Denetim süre + "Kişisel en iyi"; Satış uzmana göre yüzde ve düzey (68/89, %76, "İyi"); Sipariş haftalık rapor: grafik, hizmet düzeyi, stok devri, bulgular (309/325, %95, "Uzman düzeyi") |
+| Paylaşım kartı | ⚠️ yarım: paylaşım sayfası açılıyor, önizlemede açık zemin ve "Planogram kuruldu" görünüyor; işaret ve tanıtım satırı küçük önizlemede seçilemiyor, imzalı yapıda dosya çekilemiyor |
+| Ses: temiz kurulumda kapalı | ✅ Ayarlar "Sesi aç" diyor |
+| Simge: petrol zemin, yeni işaret | ✅ başlatıcıda. Tema simgesi: `monochrome` katmanı var (ön planla aynı çizim); One UI 5 onu tek renk çizmedi, gözlenemedi |
+
+**Bulgular (1.1.0)**
+
+- **Y1 — alıştırma formatı, açıkça seçilene dek son oynanan formatı izliyor.** Temiz
+  kurulumda Market seçili görünüyor ama kayıtlı değil; `ReyonStore.practiceLevel()`
+  kayıt yoksa `lastLevel()`'a düşüyor ve o her tur başında (günün vakası dahil,
+  `saveLast`) değişiyor. Cihazda: Market'te dört alıştırma, sonra günün vakaları
+  (Süpermarket) → Görevler'de alıştırma formatı Süpermarket'e geçti ve "son sonuç"
+  sütunu boşaldı. Formata bir kez dokunan kullanıcıda olmuyor.
+- **Y2 — Satış'ın sonuç başlığı "Diziliş tamam".** `reyon_sales_done_title`
+  (İngilizce "Layout complete"); 1.1.0'da "Diziliş" bir modun adı, Satış raporunda
+  yanlış moda gönderme gibi okunuyor.
+- **Y3 — haftalık raporda üst çubuktaki paylaş düğmesi ekranın sağından taşıyor**
+  (x 896–1069 / 1080; 14 dilde de, 360 dp'de de).
+- **Y4 — Denetim'de bulunan sapmanın bayrağı ürün adının üstüne biniyor**
+  ("Yer değişimi" çipi "Kuruyemiş"i örtüyor).
+- **Y5 — 360×640 dp'de son alıştırma satırı erişilebilirlik penceresinin dışında.**
+  Satır ekranda tam görünüyor, ama ağaçta sınırı y = 1096…1125 (14,5 dp) ve adı
+  dışarıda: çubuklar gizliyken alanın altı düşüyor (2026-09-10, Bulgu 3'ün aynısı).
+  `cihaz_testi.py reyon` bu yüzden 360×640'ta Sipariş'i açamıyor. TalkBack açıkken
+  çubuklar görünür ve alta pay verilir; cihazda TalkBack olmadığı için sınanamadı.
+
+**A — koşum ✅** (debug yapı). Dört modun alıştırması (Market) ve dört günün vakası
+(Süpermarket) sonuna kadar: Diziliş kılavuzla (1:03, 6 kez kılavuz), Denetim elle
+(0:35, 0 yanlış işaret, "Kişisel en iyi"), Satış 68/89 "İyi", Sipariş kılavuzla
+309/325 "Uzman düzeyi". Yarım tur Görevler'e dönüp aynı satıra dokununca, arka
+plandan ve `am force-stop`'tan sonra kaldığı yerden sürüyor; süreç ölümünden sonra
+açılış Görevler. `logcat AndroidRuntime:E` boş, FATAL/ANR 0.
+
+**B — kare hızı** (sürüm yapısı; 12 s pencereler).
+
+| Pencere | Kare | p50 / p90 / p99 | Kaçan vsync | Takılma | v1.0.1 |
+| --- | --- | --- | --- | --- | --- |
+| Diziliş, dokunmadan | 12 (1/s) | 48 ms | 0 | — | 34 ms |
+| Sipariş listesi, 16 sürükleme | 677 = 56,4 kare/s | 19 / 23 / 34 ms | 2 | %8,7 | 56,3 kare/s, 1 kaçan |
+| Adımlayıcı, 24 dokunuş | 490 = 40,8 kare/s | 23 / 24 / **73** ms | **7** | %8,4 | p99 30 ms, 0 kaçan |
+
+Kaydırma aynı (toplam ortanca 19,1 ms, GPU 14,2). Adımlayıcıda arada bir kare
+pahalı: 90p'de girdi→traversal 32 ms, çizim kaydı 13 ms — dokunuş başına bir
+yeniden oluşturma dalgası. Debug yapıda aynı pencere 33 kaçan vsync, p90 117 ms
+veriyordu: debug yapıyla ölçüm kıyaslanamaz.
+
+**C — giriş.** Görevler ve Ayarlar'da her dokunulabilir öğe ≥ 48 dp. 48 dp altı
+kalanlar (kaydırma kenarında yarım görünenler dışında): Diziliş brif satırları
+**33,1 dp** (v1.0.1 32,4), Satış kural satırları **45,3 dp** (v1.0.1 38,1 —
+iyileşti).
+
+**D — denge** (`:engine:probe`, bu dal). Bütün ölçüm sayıları v1.0.1 ile birebir
+aynı; yalnız süreler değişti (satış iyileştiricisi 13 / 22 / 43 ms).
+
+**E — erişilebilirlik ⚠️ yarım.** TalkBack cihazda hâlâ kurulu değil. Kapalıyken
+`erisim` Görevler ve dört modda "etiketsiz 0"; sınırı sıfır düğüm yalnız alt eylem
+satırları (Diziliş 3, Denetim 1, Satış 3, Sipariş 2). Raf gözleri hâlâ tek düğüm
+(v1.0.1 bulgusu açık).
+
+**F — diller** (14 dil, 360×640 dp; Görevler, dört mod, haftalık rapor).
+**v1.0.1 F1 ve F2 kapandı:** alt satırda hiçbir dilde kelime bölünmüyor ya da
+kırpılmıyor ("Raftan · kaldır", "Ongedaan · maken" boşlukta sarıyor). Format
+seçici fi, nl, de, ru'da sığıyor; KPI başlıkları uzun dillerde küçülerek sığıyor
+("VÄÄRÄT MERKINNÄT", "ЛОЖНЫЕ ОТМЕТКИ"). Arapça'da yerleşim sağdan sola, rakamlar
+Latin. Yeni bulgular:
+
+| # | Ne | Diller |
+| --- | --- | --- |
+| G1 | Günün vakası düğmesi bitince mod adı kırpılıyor: "Sipa… 402/558", "Orde… 402/558", "Best… 402/558", "Раскла… 0:47" | tr, en, de, nl, ru, fr, es ve çoğu dil |
+| G2 | Format seçicide format adı kırpılıyor: "Supermerca…", "Hipermerca…" | es, pt, it |
+| G3 | Alıştırma satırı alt yazısı kelime ortasından bölünüyor: "Bestandsentscheidunge·n" | de |
+| G4 | Haftalık rapor grafiğinin göstergesinde "эксперт 9,0" harf harf alt alta | ru |
+| G5 | Rapor KPI'sında uzman farkı satırlara dağılıyor: "−10 / puan", "−10 / pist." | tr, fi, pt |
+
+**Play ekran görüntüleri** `store/screenshots/{tr,en}/`, 1080×1920 (yoğunluk
+cihazınki, 411 × 731 dp), 1.1.0 arayüzüyle yeniden alındı; 1.0'ın yıldızlı kareleri
+silindi: `1-gorevler` (günün vakalarından ikisi bitmiş, alıştırma sonuçları),
+`2-dizilis` (brif + kısmen dolu raf, kılavuz satırı), `3-denetim` (planogram /
+mağaza rafı, bir sapma bulunmuş), `4-satis` (dolu raf, 98/118 %83), `5-siparis`
+(haftalık rapor, 301/327 "Uzman düzeyi"), `6-satis-koyu` (koyu tema).
+
+Ekran boyutu, yoğunluk, uygulama dili ve tema koşumlardan sonra geri alındı.
+Cihazda şimdi yerel sürüm yapısı (`427beaaa…`) kurulu.
