@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Disponi i prodotti come vuoi; la resa dello scaffale arriva dalle regole di vendita (altezza occhi, i pesanti in basso, i complementari accanto, la pulizia lontana dal cibo, blocchi di categoria e di marca). La disposizione dell’esperto è la migliore trovata dall’ottimizzatore; la tua resa è mostrata in proporzione a essa.</string>
-    <string name="reyon_sales_generating">Calcolo l’obiettivo…</string>
+    <string name="reyon_sales_generating">Calcolo la disposizione dell’esperto…</string>
     <string name="reyon_sales_score_label">Resa dello scaffale</string>
     <string name="reyon_sales_rules_label">Regole di vendita</string>
     <string name="reyon_sales_rule_position">Posizione</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s selezionato (domanda %2$d): tocca un posto sullo scaffale</string>
-    <string name="reyon_sales_pick_hint">Tocca un prodotto per vedere il dettaglio dei suoi punti</string>
+    <string name="reyon_sales_pick_hint">Tocca un prodotto per vedere il dettaglio della sua resa</string>
     <string name="sales_chip_fmt">×%1$d · domanda %2$d</string>
     <string name="rules_total_fmt">totale %1$d</string>
     <string name="reyon_sales_finish">Finisci</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">La mia disposizione</string>
     <string name="reyon_sales_review_target_fmt">Esperto (%1$d)</string>
     <string name="reyon_sales_back_to_result">Resoconto</string>
-    <string name="reyon_sales_board_desc_fmt">Scaffale vendite %1$d ripiani × %2$d posti, %3$d prodotti non sistemati, %4$d punti</string>
+    <string name="reyon_sales_board_desc_fmt">Scaffale vendite %1$d ripiani × %2$d posti, %3$d prodotti non sistemati, resa %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">Il piano dello scaffale è fissato; il tuo lavoro è la scorta. Ogni giorno decidi quante casse ordinare per prodotto: gli ordini arrivano la mattina dopo, quello che non entra torna indietro, la scorta che resta la sera costa magazzino, le unità scadute sono perdita. Il tuo profitto è confrontato con quello di un esperto che vede le stesse previsioni.</string>

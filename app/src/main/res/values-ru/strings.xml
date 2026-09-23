@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Расставь товары как хочешь; отдача полки идёт от правил продаж (уровень глаз, тяжёлое внизу, дополняющие рядом, химия подальше от еды, блоки категории и бренда). Раскладка эксперта — лучшая, что нашёл оптимизатор; твоя отдача полки показывается в доле от неё.</string>
-    <string name="reyon_sales_generating">Считаем цель…</string>
+    <string name="reyon_sales_generating">Считаем раскладку эксперта…</string>
     <string name="reyon_sales_score_label">Отдача полки</string>
     <string name="reyon_sales_rules_label">Правила продаж</string>
     <string name="reyon_sales_rule_position">Позиция</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s выбран (спрос %2$d): нажми на место на полке</string>
-    <string name="reyon_sales_pick_hint">Нажми на товар, чтобы увидеть разбор его очков</string>
+    <string name="reyon_sales_pick_hint">Нажми на товар, чтобы увидеть разбор его отдачи</string>
     <string name="sales_chip_fmt">×%1$d · спрос %2$d</string>
     <string name="rules_total_fmt">всего %1$d</string>
     <string name="reyon_sales_finish">Завершить</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">Моя раскладка</string>
     <string name="reyon_sales_review_target_fmt">Эксперт (%1$d)</string>
     <string name="reyon_sales_back_to_result">Отчёт</string>
-    <string name="reyon_sales_board_desc_fmt">Полка продаж %1$d полок × %2$d мест, %3$d товаров не расставлено, %4$d очков</string>
+    <string name="reyon_sales_board_desc_fmt">Полка продаж %1$d полок × %2$d мест, %3$d товаров не расставлено, отдача полки %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">План полки закреплён; твоя работа — запас. Каждый день решай, сколько ящиков заказать по каждому товару: заказы приходят на следующее утро, что не поместилось — возврат, запас, оставшийся вечером, стоит хранения, просроченные единицы — потеря. Твою прибыль сравнивают с прибылью эксперта, который видит те же прогнозы.</string>

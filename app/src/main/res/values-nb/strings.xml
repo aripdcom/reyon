@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Still opp varene som du vil; hylleavkastningen kommer fra salgsreglene (øyehøyde, tungt nederst, komplementære ved siden av hverandre, rengjøring borte fra mat, kategori- og merkeblokker). Ekspertens oppstilling er den beste optimereren fant; hylleavkastningen din vises i forhold til den.</string>
-    <string name="reyon_sales_generating">Beregner målet…</string>
+    <string name="reyon_sales_generating">Beregner ekspertens oppstilling…</string>
     <string name="reyon_sales_score_label">Hylleavkastning</string>
     <string name="reyon_sales_rules_label">Salgsregler</string>
     <string name="reyon_sales_rule_position">Plassering</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s valgt (etterspørsel %2$d): trykk på en plass i hylla</string>
-    <string name="reyon_sales_pick_hint">Trykk på en vare for å se hvordan poengene fordeler seg</string>
+    <string name="reyon_sales_pick_hint">Trykk på en vare for å se hvordan avkastningen fordeler seg</string>
     <string name="sales_chip_fmt">×%1$d · etterspørsel %2$d</string>
     <string name="rules_total_fmt">totalt %1$d</string>
     <string name="reyon_sales_finish">Ferdig</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">Min oppstilling</string>
     <string name="reyon_sales_review_target_fmt">Ekspert (%1$d)</string>
     <string name="reyon_sales_back_to_result">Rapport</string>
-    <string name="reyon_sales_board_desc_fmt">Salgshylle %1$d hyller × %2$d plasser, %3$d varer er ikke satt opp, %4$d poeng</string>
+    <string name="reyon_sales_board_desc_fmt">Salgshylle %1$d hyller × %2$d plasser, %3$d varer er ikke satt opp, hylleavkastning %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">Hylleplanen ligger fast; jobben din er lageret. Hver dag bestemmer du hvor mange kasser du bestiller per vare: bestillingene kommer neste morgen, det som ikke får plass går i retur, lager som står igjen om kvelden koster lagerleie, utgåtte enheter er tap. Fortjenesten din sammenlignes med en eksperts som ser de samme prognosene.</string>

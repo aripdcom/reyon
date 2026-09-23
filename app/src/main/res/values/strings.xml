@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Arrange the products as you like; the shelf yield comes from the sales rules (eye level, heavy items low, complements side by side, cleaning away from food, category and brand blocks). The expert’s layout is the best the optimizer found; your shelf yield is shown as a share of it.</string>
-    <string name="reyon_sales_generating">Computing the target…</string>
+    <string name="reyon_sales_generating">Computing the expert’s layout…</string>
     <string name="reyon_sales_score_label">Shelf yield</string>
     <string name="reyon_sales_rules_label">Sales rules</string>
     <string name="reyon_sales_rule_position">Position</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s selected (demand %2$d): tap a slot on the shelf</string>
-    <string name="reyon_sales_pick_hint">Tap a product to see its score breakdown</string>
+    <string name="reyon_sales_pick_hint">Tap a product to see its yield breakdown</string>
     <string name="sales_chip_fmt">×%1$d · demand %2$d</string>
     <string name="rules_total_fmt">total %1$d</string>
     <string name="reyon_sales_finish">Finish</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">My layout</string>
     <string name="reyon_sales_review_target_fmt">Expert (%1$d)</string>
     <string name="reyon_sales_back_to_result">Report</string>
-    <string name="reyon_sales_board_desc_fmt">Sales shelf %1$d shelves × %2$d slots, %3$d products unplaced, %4$d points</string>
+    <string name="reyon_sales_board_desc_fmt">Sales shelf %1$d shelves × %2$d slots, %3$d products unplaced, shelf yield %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">The shelf plan is set; your job is stock. Each day decide how many cases to order per product: orders arrive the next morning, what does not fit is returned, stock left at night pays holding, expired units are waste. Your profit is compared with that of an expert who sees the same forecasts.</string>

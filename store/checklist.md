@@ -3,8 +3,9 @@
 ## Depoda hazır
 
 - [x] `store/play/<14 dil>/{title,short,full}.txt` — sınırlar `tools/check_store.py` ile denetleniyor
-- [x] `store/play/release-notes/1.0.0.txt` — 14 dil, dil başına 500 karakterin altında
-- [x] `store/graphics/icon-512.png` (512×512, 32 bit) ve `feature-1024.png` (1024×500)
+- [x] `store/play/release-notes/1.0.0.txt` ve `1.1.0.txt` — 14 dil, dil başına 500 karakterin altında
+- [x] `store/graphics/icon-512.png` (512×512, 32 bit) ve `feature-1024.png` (1024×500) —
+      1.1.0 kimliğinde (petrol zemin, yeni işaret); `tools/gen_store_graphics.py` simgeden üretir
 - [x] `store/data-safety.md`, `store/icerik-derecelendirme.md`
 - [x] Gizlilik politikası: `site/gizlilik.html`, 14 dil
 
@@ -27,13 +28,16 @@
 - [ ] Cihazda koşum (`tools/cihaz_testi.py`), `docs/cihaz-testi.md` protokolü
 - [ ] Play Console: uygulamayı oluştur, kategori **Uygulamalar → Eğitim**
 - [ ] Play App Signing'i aç; yüklenen AAB `-play.aab` olan
-- [x] Ekran görüntüleri: telefon için en az 2 (1080×1920), her modun bir karesi önerilir
-      — `store/screenshots/{tr,en}/`, dört mod (docs/cihaz-testi.md, 2026-09-23)
+- [ ] Ekran görüntüleri: telefon için en az 2 (1080×1920), her modun bir karesi önerilir
+      — `store/screenshots/{tr,en}/` 1.0 arayüzünden (yıldızlı, menülü); 1.1.0 cihaz
+      koşumunda yeniden alınacak (docs/cihaz-testi.md, "1.1.0 · FMCG tasarımı")
 - [ ] Veri güvenliği formu ve IARC anketi (`store/` altındaki cevaplarla)
 - [ ] Gizlilik politikası URL'si: `https://aripdcom.github.io/reyon/gizlilik.html`
 
 ## Ekran görüntüsü önerisi
 
-Dört modun her birinden bir kare: Diziliş (brif + raf), Denetim (plan/raf ikilisi),
-Satış (puan paneli), Sipariş (hafta grafiği). Metin eklemeye gerek yok; arayüz
-zaten kullanıcının dilinde.
+Görevler ekranı ve dört modun her birinden bir kare: Görevler (günün vakası +
+alıştırma), Diziliş (brif + raf etiketli raf), Denetim (planogram/mağaza rafı ikilisi),
+Satış (raf verimi ve kurallar), Sipariş (haftalık rapor: grafik ve bulgular). Açık tema
+varsayılan; bir kare koyu temadan olabilir. Metin eklemeye gerek yok; arayüz zaten
+kullanıcının dilinde.

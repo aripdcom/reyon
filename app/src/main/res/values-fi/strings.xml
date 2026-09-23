@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Järjestä tuotteet haluamallasi tavalla; hyllytuotto tulee myyntisäännöistä (silmien korkeus, painavat alas, täydentävät vierekkäin, puhdistusaineet erilleen ruoasta, kategoria- ja merkkilohkot). Asiantuntijan järjestys on paras, jonka optimoija löysi; hyllytuottosi näytetään suhteessa siihen.</string>
-    <string name="reyon_sales_generating">Lasketaan tavoitetta…</string>
+    <string name="reyon_sales_generating">Lasketaan asiantuntijan järjestystä…</string>
     <string name="reyon_sales_score_label">Hyllytuotto</string>
     <string name="reyon_sales_rules_label">Myyntisäännöt</string>
     <string name="reyon_sales_rule_position">Sijainti</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s valittu (kysyntä %2$d): napauta paikkaa hyllyssä</string>
-    <string name="reyon_sales_pick_hint">Napauta tuotetta nähdäksesi sen pisteiden erittelyn</string>
+    <string name="reyon_sales_pick_hint">Napauta tuotetta nähdäksesi sen tuoton erittelyn</string>
     <string name="sales_chip_fmt">×%1$d · kysyntä %2$d</string>
     <string name="rules_total_fmt">yhteensä %1$d</string>
     <string name="reyon_sales_finish">Valmis</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">Oma järjestykseni</string>
     <string name="reyon_sales_review_target_fmt">Asiantuntija (%1$d)</string>
     <string name="reyon_sales_back_to_result">Raportti</string>
-    <string name="reyon_sales_board_desc_fmt">Myyntihylly %1$d hyllyä × %2$d paikkaa, %3$d tuotetta järjestämättä, %4$d pistettä</string>
+    <string name="reyon_sales_board_desc_fmt">Myyntihylly %1$d hyllyä × %2$d paikkaa, %3$d tuotetta järjestämättä, hyllytuotto %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">Hyllysuunnitelma on kiinteä; sinun työsi on varasto. Päätä joka päivä, montako laatikkoa tilaat tuotetta kohti: tilaukset saapuvat seuraavana aamuna, mikä ei mahdu palautuu, illaksi jäävä varasto maksaa varastointia, vanhentuneet yksiköt ovat tappiota. Voittoasi verrataan asiantuntijaan, joka näkee samat ennusteet.</string>

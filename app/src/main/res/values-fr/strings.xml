@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Dispose les produits comme tu veux ; le rendement du rayon vient des règles de vente (hauteur des yeux, lourds en bas, complémentaires côte à côte, entretien loin de l’alimentaire, blocs de catégorie et de marque). La disposition de l’expert est la meilleure trouvée par l’optimiseur ; ton rendement est affiché en proportion de celle-ci.</string>
-    <string name="reyon_sales_generating">Calcul de l’objectif…</string>
+    <string name="reyon_sales_generating">Calcul de l’implantation de l’expert…</string>
     <string name="reyon_sales_score_label">Rendement du rayon</string>
     <string name="reyon_sales_rules_label">Règles de vente</string>
     <string name="reyon_sales_rule_position">Position</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s : %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s sélectionné (demande %2$d) : appuie sur un emplacement du rayon</string>
-    <string name="reyon_sales_pick_hint">Appuie sur un produit pour voir le détail de ses points</string>
+    <string name="reyon_sales_pick_hint">Appuie sur un produit pour voir le détail de son rendement</string>
     <string name="sales_chip_fmt">×%1$d · demande %2$d</string>
     <string name="rules_total_fmt">total %1$d</string>
     <string name="reyon_sales_finish">Terminer</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">Ma disposition</string>
     <string name="reyon_sales_review_target_fmt">Expert (%1$d)</string>
     <string name="reyon_sales_back_to_result">Rapport</string>
-    <string name="reyon_sales_board_desc_fmt">Rayon de vente %1$d étagères × %2$d emplacements, %3$d produits non placés, %4$d points</string>
+    <string name="reyon_sales_board_desc_fmt">Rayon de vente %1$d étagères × %2$d emplacements, %3$d produits non placés, rendement %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">Le plan du rayon est fixé ; ton travail c’est le stock. Chaque jour, décide combien de cartons commander par produit : les commandes arrivent le lendemain matin, ce qui ne rentre pas est retourné, le stock qui reste le soir coûte du stockage, les unités périmées sont perdues. Ton bénéfice est comparé à celui d’un expert qui voit les mêmes prévisions.</string>

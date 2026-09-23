@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Stil varerne op, som du vil; hyldeafkastet kommer fra salgsreglerne (øjenhøjde, tunge nederst, komplementære ved siden af hinanden, rengøring væk fra mad, kategori- og mærkeblokke). Ekspertens opstilling er den bedste, optimeringen fandt; dit hyldeafkast vises i forhold til den.</string>
-    <string name="reyon_sales_generating">Beregner målet…</string>
+    <string name="reyon_sales_generating">Beregner ekspertens opstilling…</string>
     <string name="reyon_sales_score_label">Hyldeafkast</string>
     <string name="reyon_sales_rules_label">Salgsregler</string>
     <string name="reyon_sales_rule_position">Placering</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s valgt (efterspørgsel %2$d): tryk på en plads på hylden</string>
-    <string name="reyon_sales_pick_hint">Tryk på en vare for at se, hvordan dens point er fordelt</string>
+    <string name="reyon_sales_pick_hint">Tryk på en vare for at se, hvordan dens afkast er fordelt</string>
     <string name="sales_chip_fmt">×%1$d · efterspørgsel %2$d</string>
     <string name="rules_total_fmt">i alt %1$d</string>
     <string name="reyon_sales_finish">Færdig</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">Min opstilling</string>
     <string name="reyon_sales_review_target_fmt">Ekspert (%1$d)</string>
     <string name="reyon_sales_back_to_result">Rapport</string>
-    <string name="reyon_sales_board_desc_fmt">Salgshylde %1$d hylder × %2$d pladser, %3$d varer er ikke sat op, %4$d point</string>
+    <string name="reyon_sales_board_desc_fmt">Salgshylde %1$d hylder × %2$d pladser, %3$d varer er ikke sat op, hyldeafkast %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">Hyldeplanen ligger fast; dit job er lageret. Hver dag beslutter du, hvor mange kasser du bestiller pr. vare: bestillingerne kommer næste morgen, det der ikke er plads til returneres, lager der står tilbage om aftenen koster oplagring, udløbne enheder er tab. Din fortjeneste sammenlignes med en eksperts, der ser de samme prognoser.</string>

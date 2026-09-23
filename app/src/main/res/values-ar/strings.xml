@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">رتّب المنتجات كما تشاء؛ عائد الرف يأتي من قواعد البيع (مستوى النظر، الثقيل في الأسفل، المتكاملات جنباً إلى جنب، مواد التنظيف بعيداً عن الطعام، كتل الفئة والعلامة). ترتيب الخبير هو أفضل ما وجده المحسّن؛ ويُعرض عائد رفك نسبةً إليه.</string>
-    <string name="reyon_sales_generating">يجري حساب الهدف…</string>
+    <string name="reyon_sales_generating">يجري حساب ترتيب الخبير…</string>
     <string name="reyon_sales_score_label">عائد الرف</string>
     <string name="reyon_sales_rules_label">قواعد البيع</string>
     <string name="reyon_sales_rule_position">الموضع</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s مُختار (الطلب %2$d): المس موضعاً على الرف</string>
-    <string name="reyon_sales_pick_hint">المس منتجاً لترى تفصيل نقاطه</string>
+    <string name="reyon_sales_pick_hint">المس منتجاً لترى تفصيل عائده</string>
     <string name="sales_chip_fmt">×%1$d · الطلب %2$d</string>
     <string name="rules_total_fmt">المجموع %1$d</string>
     <string name="reyon_sales_finish">أنهِ</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">ترتيبي</string>
     <string name="reyon_sales_review_target_fmt">الخبير (%1$d)</string>
     <string name="reyon_sales_back_to_result">التقرير</string>
-    <string name="reyon_sales_board_desc_fmt">رف البيع %1$d رفاً × %2$d موضعاً، %3$d منتجاً لم يُرتَّب، %4$d نقطة</string>
+    <string name="reyon_sales_board_desc_fmt">رف البيع %1$d رفاً × %2$d موضعاً، %3$d منتجاً لم يُرتَّب، عائد الرف %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">مخطط الرف ثابت؛ عملك هو المخزون. كل يوم قرّر كم صندوقاً تطلب لكل منتج: الطلبيات تأتي صباح اليوم التالي، وما لا يتّسع يُرجَع، والمخزون الباقي في المساء يكلّف تخزيناً، والوحدات منتهية الصلاحية خسارة. يُقارن ربحك بربح خبير يرى التوقعات نفسها.</string>

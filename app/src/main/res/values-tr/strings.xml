@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Ürünleri istediğin gibi diz; raf verimi satış kurallarından gelir (göz hizası, ağırlar alta, tamamlayıcılar yan yana, temizlik gıdadan uzak, kategori ve marka blokları). Uzmanın dizilişi iyileştiricinin bulduğu en iyi diziliş; raf verimin ona oranla gösterilir.</string>
-    <string name="reyon_sales_generating">Hedef hesaplanıyor…</string>
+    <string name="reyon_sales_generating">Uzmanın dizilişi hesaplanıyor…</string>
     <string name="reyon_sales_score_label">Raf verimi</string>
     <string name="reyon_sales_rules_label">Satış kuralları</string>
     <string name="reyon_sales_rule_position">Konum</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s seçili (talep %2$d): rafta bir göze dokun</string>
-    <string name="reyon_sales_pick_hint">Bir ürüne dokun: puan dökümü burada görünür</string>
+    <string name="reyon_sales_pick_hint">Bir ürüne dokun: verim dökümü burada görünür</string>
     <string name="sales_chip_fmt">×%1$d · talep %2$d</string>
     <string name="rules_total_fmt">toplam %1$d</string>
     <string name="reyon_sales_finish">Tamamla</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">Benim dizilişim</string>
     <string name="reyon_sales_review_target_fmt">Uzman (%1$d)</string>
     <string name="reyon_sales_back_to_result">Rapor</string>
-    <string name="reyon_sales_board_desc_fmt">Satış rafı %1$d raf × %2$d göz, %3$d ürün yerleşmedi, %4$d puan</string>
+    <string name="reyon_sales_board_desc_fmt">Satış rafı %1$d raf × %2$d göz, %3$d ürün yerleşmedi, raf verimi %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">Raf planı hazır; işin stok. Her gün ürün başına kaç koli isteyeceğine karar ver: sipariş ertesi sabah gelir, rafa sığmayan iade olur, akşam kalan stok bekleme öder, raf ömrü dolan fire olur. Kârın, aynı tahminleri gören uzmanınkiyle karşılaştırılır.</string>

@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Coloca los productos como quieras; el rendimiento del estante viene de las reglas de venta (altura de los ojos, los pesados abajo, complementarios juntos, la limpieza lejos de la comida, bloques de categoría y de marca). La colocación del experto es la mejor que encontró el optimizador; tu rendimiento se muestra en proporción a ella.</string>
-    <string name="reyon_sales_generating">Calculando el objetivo…</string>
+    <string name="reyon_sales_generating">Calculando la disposición del experto…</string>
     <string name="reyon_sales_score_label">Rendimiento del estante</string>
     <string name="reyon_sales_rules_label">Reglas de venta</string>
     <string name="reyon_sales_rule_position">Posición</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s seleccionado (demanda %2$d): toca un hueco del estante</string>
-    <string name="reyon_sales_pick_hint">Toca un producto para ver el desglose de sus puntos</string>
+    <string name="reyon_sales_pick_hint">Toca un producto para ver el desglose de su rendimiento</string>
     <string name="sales_chip_fmt">×%1$d · demanda %2$d</string>
     <string name="rules_total_fmt">total %1$d</string>
     <string name="reyon_sales_finish">Terminar</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">Mi colocación</string>
     <string name="reyon_sales_review_target_fmt">Experto (%1$d)</string>
     <string name="reyon_sales_back_to_result">Informe</string>
-    <string name="reyon_sales_board_desc_fmt">Estante de ventas %1$d estantes × %2$d huecos, %3$d productos sin colocar, %4$d puntos</string>
+    <string name="reyon_sales_board_desc_fmt">Estante de ventas %1$d estantes × %2$d huecos, %3$d productos sin colocar, rendimiento %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">El plan del estante está fijo; tu trabajo es el stock. Cada día decide cuántas cajas pedir por producto: los pedidos llegan a la mañana siguiente, lo que no cabe se devuelve, el stock que queda por la noche cuesta almacenaje, las unidades caducadas son pérdida. Tu beneficio se compara con el de un experto que ve las mismas previsiones.</string>

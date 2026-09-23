@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Ställ upp varorna som du vill; hyllavkastningen kommer från försäljningsreglerna (ögonhöjd, tungt längst ner, komplement bredvid varandra, rengöring borta från mat, kategori- och märkesblock). Expertens uppställning är den bästa optimeraren hittade; din hyllavkastning visas i förhållande till den.</string>
-    <string name="reyon_sales_generating">Beräknar målet…</string>
+    <string name="reyon_sales_generating">Beräknar expertens uppställning…</string>
     <string name="reyon_sales_score_label">Hyllavkastning</string>
     <string name="reyon_sales_rules_label">Försäljningsregler</string>
     <string name="reyon_sales_rule_position">Placering</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s vald (efterfrågan %2$d): tryck på en plats i hyllan</string>
-    <string name="reyon_sales_pick_hint">Tryck på en vara för att se hur dess poäng fördelas</string>
+    <string name="reyon_sales_pick_hint">Tryck på en vara för att se hur dess avkastning fördelas</string>
     <string name="sales_chip_fmt">×%1$d · efterfrågan %2$d</string>
     <string name="rules_total_fmt">totalt %1$d</string>
     <string name="reyon_sales_finish">Klar</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">Min uppställning</string>
     <string name="reyon_sales_review_target_fmt">Expert (%1$d)</string>
     <string name="reyon_sales_back_to_result">Rapport</string>
-    <string name="reyon_sales_board_desc_fmt">Försäljningshylla %1$d hyllplan × %2$d platser, %3$d varor är inte uppställda, %4$d poäng</string>
+    <string name="reyon_sales_board_desc_fmt">Försäljningshylla %1$d hyllplan × %2$d platser, %3$d varor är inte uppställda, hyllavkastning %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">Hyllplanen ligger fast; ditt jobb är lagret. Bestäm varje dag hur många lådor du beställer per vara: beställningarna kommer nästa morgon, det som inte får plats går i retur, lager som står kvar på kvällen kostar lagerhållning, utgångna enheter är förlust. Din vinst jämförs med en experts som ser samma prognoser.</string>

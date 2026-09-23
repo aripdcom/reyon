@@ -235,7 +235,7 @@
 
     <!-- Reyon: Satış -->
     <string name="reyon_sales_intro">Arrume os produtos como quiser; o rendimento da prateleira vem das regras de venda (altura dos olhos, pesados embaixo, complementares lado a lado, limpeza longe da comida, blocos de categoria e de marca). A arrumação do especialista é a melhor que o otimizador encontrou; o seu rendimento é mostrado em proporção a ela.</string>
-    <string name="reyon_sales_generating">Calculando a meta…</string>
+    <string name="reyon_sales_generating">Calculando o arranjo do especialista…</string>
     <string name="reyon_sales_score_label">Rendimento da prateleira</string>
     <string name="reyon_sales_rules_label">Regras de venda</string>
     <string name="reyon_sales_rule_position">Posição</string>
@@ -252,7 +252,7 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s selecionado (procura %2$d): toque num espaço da prateleira</string>
-    <string name="reyon_sales_pick_hint">Toque num produto para ver a composição dos pontos dele</string>
+    <string name="reyon_sales_pick_hint">Toque num produto para ver a composição do rendimento dele</string>
     <string name="sales_chip_fmt">×%1$d · procura %2$d</string>
     <string name="rules_total_fmt">total %1$d</string>
     <string name="reyon_sales_finish">Terminar</string>
@@ -264,7 +264,7 @@
     <string name="reyon_sales_review_mine">Minha arrumação</string>
     <string name="reyon_sales_review_target_fmt">Especialista (%1$d)</string>
     <string name="reyon_sales_back_to_result">Relatório</string>
-    <string name="reyon_sales_board_desc_fmt">Prateleira de vendas %1$d prateleiras × %2$d espaços, %3$d produtos sem lugar, %4$d pontos</string>
+    <string name="reyon_sales_board_desc_fmt">Prateleira de vendas %1$d prateleiras × %2$d espaços, %3$d produtos sem lugar, rendimento %4$d</string>
 
     <!-- Reyon: Sipariş -->
     <string name="reyon_order_intro">O plano da prateleira está fixo; seu trabalho é o estoque. Todo dia decida quantas caixas pedir por produto: os pedidos chegam na manhã seguinte, o que não cabe é devolvido, o estoque que sobra à noite custa armazenagem, as unidades vencidas são perda. O seu lucro é comparado com o de um especialista que vê as mesmas previsões.</string>
