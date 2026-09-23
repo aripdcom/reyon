@@ -55,11 +55,12 @@ python3 tools/check_store.py     # Play metin sınırları ve dil kapsamı
 python3 tools/check_site.py      # gizlilik sayfası üreticisiyle aynı mı, bağlantılar tutarlı mı
 ```
 
-Yayın paketleri CI'da değil, etiketten sonra elde doğrulanır — indirilen dosya
-gerçekten beklenen paket mi:
+Yayın paketlerini `release.yml`, GitHub Release oluşturmadan önce
+`tools/apk_dogrula.py` ile denetler; denetim geçmezse etiketli sürüm yayımlanmaz.
+İndirilen bir sürüm için elde de koşulur:
 
 ```sh
-python3 tools/apk_dogrula.py     # dist/: SHA256, paket/sürüm, izin yokluğu, 14 dil, v2 imza
+python3 tools/apk_dogrula.py     # dist/: SHA256, paket/sürüm, izin yokluğu, 14 dil, v2 imza ve parmak izi
 ```
 
 ## Gizlilik
