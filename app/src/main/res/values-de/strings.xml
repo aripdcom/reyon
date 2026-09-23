@@ -256,7 +256,7 @@
     <string name="sales_chip_fmt">×%1$d · Nachfrage %2$d</string>
     <string name="rules_total_fmt">gesamt %1$d</string>
     <string name="reyon_sales_finish">Fertig</string>
-    <string name="reyon_sales_done_title">Belegung fertig</string>
+    <string name="reyon_sales_done_title">Regal verkaufsbereit</string>
     <string name="reyon_sales_result_fmt">Regalleistung %1$d / %2$d (%3$d%% des Profis)</string>
     <string name="reyon_sales_beat_target">Über dem Profi</string>
     <string name="reyon_sales_reopen">Weiter aufstellen</string>

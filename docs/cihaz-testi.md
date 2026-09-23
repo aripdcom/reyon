@@ -38,7 +38,8 @@ engellemek**. Asıl koruma, ölçülen doğruların değişmez testine çevrilme
 | Satış panelinin tavanı tepsiye iki sıra bırakır; tavan ile tepsi payı 72–308 dp arasında birebir tümler | `ReyonLayoutTest` |
 | Kısa ekranda brif ve kural satırları okunur, taşan satır dokununca açılır | `ReyonShortScreenTest` |
 | Uygulama Görevler ekranıyla açılır (dört modun günün vakası ve alıştırma satırı); dişli ayarları açar; tema seçimi ve sesin kapalı varsayılanı kalıcı | `ReyonAppTest` |
-| Günün vakası günün formatında açılır, alıştırma formatı hatırlanır, "Nasıl çalışılır" kartı ilk girişte bir kez açılır | `ReyonHomeTest` |
+| Günün vakası günün formatında açılır, alıştırma formatı hatırlanır ve günün vakası onu kaydırmaz, "Nasıl çalışılır" kartı ilk girişte bir kez açılır | `ReyonHomeTest` |
+| Biten günün vakası düğmesinde mod adı sonucun yanında kırpılmaz (360 dp, yazı ölçeği 1,1; 8 dil) | `ReyonDailyButtonTest` |
 | Düzey eşikleri (≥%90 · %75–89 · %50–74 · <%50), Sipariş bulguları, günün formatının dönüşü, "aynı vaka" kararı | `ReyonReportTest` |
 | Üç düğmeli alt satırın etiketleri 14 dilde kelime ortasından bölünmez (360 dp; yazı ölçeği 1,0 · 1,1 · 1,3) | `ReyonActionLabelTest` |
 | Metin kontrastı WCAG AA eşiğini tutar | `ThemeContrastTest` |
@@ -830,3 +831,22 @@ mağaza rafı, bir sapma bulunmuş), `4-satis` (dolu raf, 98/118 %83), `5-sipari
 
 Ekran boyutu, yoğunluk, uygulama dili ve tema koşumlardan sonra geri alındı.
 Cihazda şimdi yerel sürüm yapısı (`427beaaa…`) kurulu.
+
+**Düzeltildi: Y1, Y2, G1** (cihazda doğrulandı, yerel sürüm yapısı
+`sha256=819371d1454981c7472f1a198fe7244499eb8899d90211a72decda1e3878e29b`).
+
+- **Y1.** Görünüm modeli açılırken çözdüğü alıştırma formatını hemen yazıyor
+  (`ReyonViewModel`, `practiceLevel().also(store::savePracticeLevel)`): kayıt bir
+  kez oluşunca günün vakası onu kaydıramıyor. `ReyonHomeTest
+  .aDailyCaseDoesNotMoveAnUntouchedPracticeFormat` temiz kurulumu, Süpermarket
+  günün vakasını ve yeni süreci taklit ediyor; düzeltme çıkarılınca kırılıyor.
+- **Y2.** `reyon_sales_done_title` 14 dilde "raf satışa hazır" anlamına çevrildi
+  ("Raf satışa hazır", "Shelf ready for sale", "Regal verkaufsbereit", "Полка
+  готова к продаже"…); Türkçe, Rusça ve Arapça'da mod adıyla birebir aynıydı, öbür
+  dillerde aynı kökten. Cihazda Satış raporunun başlığı "Raf satışa hazır".
+- **G1.** Günün vakası düğmesinde ad ile sonuç sığıyorsa tek satırda, sığmıyorsa
+  sonuç ikinci satıra iniyor (`NameAndResult`); ad bütün genişliği alıyor.
+  `ReyonDailyButtonTest` 360 dp'de, yazı ölçeği 1,1'de sekiz dilde dört modun
+  adını ölçüyor; tek satıra zorlanınca sekizi de kırılıyor. Cihazda 360×640 dp,
+  tr/en/de/nl/ru: "Sipariş / 402/558", "Bestücken / 0:47", "Раскладка / 0:47" —
+  hiçbir ad kırpılmıyor.

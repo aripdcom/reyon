@@ -256,7 +256,7 @@
     <string name="sales_chip_fmt">×%1$d · domanda %2$d</string>
     <string name="rules_total_fmt">totale %1$d</string>
     <string name="reyon_sales_finish">Finisci</string>
-    <string name="reyon_sales_done_title">Disposizione conclusa</string>
+    <string name="reyon_sales_done_title">Scaffale pronto per la vendita</string>
     <string name="reyon_sales_result_fmt">resa %1$d / %2$d (%3$d%% dell’esperto)</string>
     <string name="reyon_sales_beat_target">Sopra l’esperto</string>
     <string name="reyon_sales_reopen">Continua a disporre</string>

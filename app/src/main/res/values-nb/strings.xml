@@ -256,7 +256,7 @@
     <string name="sales_chip_fmt">×%1$d · etterspørsel %2$d</string>
     <string name="rules_total_fmt">totalt %1$d</string>
     <string name="reyon_sales_finish">Ferdig</string>
-    <string name="reyon_sales_done_title">Oppstillingen er ferdig</string>
+    <string name="reyon_sales_done_title">Hylla er klar for salg</string>
     <string name="reyon_sales_result_fmt">hylleavkastning %1$d / %2$d (%3$d%% av eksperten)</string>
     <string name="reyon_sales_beat_target">Over eksperten</string>
     <string name="reyon_sales_reopen">Still opp videre</string>

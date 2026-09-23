@@ -32,6 +32,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -343,22 +344,58 @@ private fun DailyButton(row: HomeRow, ink: Color, modifier: Modifier, onClick: (
             Icon(imageVector = ReyonIcons.Check, contentDescription = null, tint = fg, modifier = Modifier.size(15.dp))
             Spacer(Modifier.size(6.dp))
         }
-        Text(
-            text = name,
-            style = MaterialTheme.typography.labelLarge,
-            color = fg,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.weight(1f),
-        )
-        Text(
-            text = result ?: start,
-            style = if (result != null) monoStyle(12.5f, 16f) else MaterialTheme.typography.bodySmall.copy(fontSize = 12.5.sp),
-            color = fg,
-            maxLines = 1,
-        )
+        NameAndResult(modifier = Modifier.weight(1f).padding(vertical = 6.dp)) {
+            Text(
+                text = name,
+                style = MaterialTheme.typography.labelLarge,
+                color = fg,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+            Text(
+                text = result ?: start,
+                style = if (result != null) monoStyle(12.5f, 16f) else MaterialTheme.typography.bodySmall.copy(fontSize = 12.5.sp),
+                color = fg,
+                maxLines = 1,
+            )
+        }
     }
 }
+
+/**
+ * Günün vakası düğmesinin adı ve sonucu: sığıyorsa tek satırda (ad solda, sonuç sağda),
+ * sığmıyorsa sonuç ikinci satıra iner ve ad bütün genişliği alır. Tek satıra zorlanınca
+ * 360 dp'de biten vakanın adı sonucun yanında kırpılıyordu: "Sipa… 402/558", "Раскла… 0:47"
+ * (docs/cihaz-testi.md, 1.1.0, G1).
+ */
+@Composable
+private fun NameAndResult(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+    Layout(content = content, modifier = modifier) { measurables, constraints ->
+        val loose = constraints.copy(minWidth = 0, minHeight = 0)
+        val result = measurables[1].measure(loose)
+        val gap = DAILY_NAME_GAP.roundToPx()
+        val nameNatural = measurables[0].maxIntrinsicWidth(constraints.maxHeight.coerceAtLeast(0))
+        val oneLine = nameNatural + gap + result.width <= constraints.maxWidth
+        val name = measurables[0].measure(
+            if (oneLine) loose.copy(maxWidth = constraints.maxWidth - gap - result.width) else loose,
+        )
+        val width = constraints.maxWidth
+        if (oneLine) {
+            val height = maxOf(name.height, result.height)
+            layout(width, height) {
+                name.placeRelative(0, (height - name.height) / 2)
+                result.placeRelative(width - result.width, (height - result.height) / 2)
+            }
+        } else {
+            layout(width, name.height + result.height) {
+                name.placeRelative(0, 0)
+                result.placeRelative(width - result.width, name.height)
+            }
+        }
+    }
+}
+
+private val DAILY_NAME_GAP = 8.dp
 
 @Composable
 private fun PracticeRow(row: HomeRow, last: Boolean, onClick: () -> Unit) {

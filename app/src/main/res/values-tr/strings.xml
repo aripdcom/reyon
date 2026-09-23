@@ -256,7 +256,7 @@
     <string name="sales_chip_fmt">×%1$d · talep %2$d</string>
     <string name="rules_total_fmt">toplam %1$d</string>
     <string name="reyon_sales_finish">Tamamla</string>
-    <string name="reyon_sales_done_title">Diziliş tamam</string>
+    <string name="reyon_sales_done_title">Raf satışa hazır</string>
     <string name="reyon_sales_result_fmt">raf verimi %1$d / %2$d (uzmanın yüzde %3$d kadarı)</string>
     <string name="reyon_sales_beat_target">Uzmanın üstünde</string>
     <string name="reyon_sales_reopen">Düzenlemeye dön</string>

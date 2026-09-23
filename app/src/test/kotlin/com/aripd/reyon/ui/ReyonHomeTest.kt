@@ -71,6 +71,20 @@ class ReyonHomeTest {
         rule.onNodeWithText(subtitle).assertIsDisplayed()
     }
 
+    /**
+     * Temiz kurulumda formata hiç dokunulmadan: alıştırma Market'te, sonra günün vakası
+     * Süpermarket'te açılıp süreç yeniden başlıyor. Seçim Market'te kalmalı (cihazda
+     * Süpermarket'e kayıyordu: docs/cihaz-testi.md, 1.1.0, Y1).
+     */
+    @Test
+    fun aDailyCaseDoesNotMoveAnUntouchedPracticeFormat() {
+        val app = ApplicationProvider.getApplicationContext<android.app.Application>()
+        assertEquals(ReyonLevel.KOLAY, ReyonViewModel(app).practiceLevel.value)
+        store.saveLast(ReyonLevel.ORTA, ReyonMode.DAILY)
+        assertEquals("kayıt: ${ReyonTestSupport.prefsDump()}", ReyonLevel.KOLAY, ReyonViewModel(app).practiceLevel.value)
+        assertEquals(ReyonLevel.KOLAY, store.practiceLevel())
+    }
+
     @Test
     fun theHowToCardOpensOnceOnTheFirstVisitAndAgainFromTheInfoButton() {
         ReyonTestSupport.clearPrefs(introsSeen = false)

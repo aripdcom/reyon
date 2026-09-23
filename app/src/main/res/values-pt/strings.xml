@@ -256,7 +256,7 @@
     <string name="sales_chip_fmt">×%1$d · procura %2$d</string>
     <string name="rules_total_fmt">total %1$d</string>
     <string name="reyon_sales_finish">Terminar</string>
-    <string name="reyon_sales_done_title">Arrumação concluída</string>
+    <string name="reyon_sales_done_title">Prateleira pronta para venda</string>
     <string name="reyon_sales_result_fmt">rendimento %1$d / %2$d (%3$d%% do especialista)</string>
     <string name="reyon_sales_beat_target">Acima do especialista</string>
     <string name="reyon_sales_reopen">Continuar arrumando</string>

@@ -256,7 +256,7 @@
     <string name="sales_chip_fmt">×%1$d · kysyntä %2$d</string>
     <string name="rules_total_fmt">yhteensä %1$d</string>
     <string name="reyon_sales_finish">Valmis</string>
-    <string name="reyon_sales_done_title">Järjestys valmis</string>
+    <string name="reyon_sales_done_title">Hylly myyntivalmis</string>
     <string name="reyon_sales_result_fmt">hyllytuotto %1$d / %2$d (%3$d%% asiantuntijasta)</string>
     <string name="reyon_sales_beat_target">Asiantuntijaa parempi</string>
     <string name="reyon_sales_reopen">Jatka järjestämistä</string>

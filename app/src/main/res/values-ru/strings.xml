@@ -256,7 +256,7 @@
     <string name="sales_chip_fmt">×%1$d · спрос %2$d</string>
     <string name="rules_total_fmt">всего %1$d</string>
     <string name="reyon_sales_finish">Завершить</string>
-    <string name="reyon_sales_done_title">Раскладка готова</string>
+    <string name="reyon_sales_done_title">Полка готова к продаже</string>
     <string name="reyon_sales_result_fmt">отдача полки %1$d / %2$d (%3$d%% от эксперта)</string>
     <string name="reyon_sales_beat_target">Выше эксперта</string>
     <string name="reyon_sales_reopen">Продолжить раскладку</string>

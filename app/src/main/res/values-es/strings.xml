@@ -256,7 +256,7 @@
     <string name="sales_chip_fmt">×%1$d · demanda %2$d</string>
     <string name="rules_total_fmt">total %1$d</string>
     <string name="reyon_sales_finish">Terminar</string>
-    <string name="reyon_sales_done_title">Colocación terminada</string>
+    <string name="reyon_sales_done_title">Estante listo para vender</string>
     <string name="reyon_sales_result_fmt">rendimiento %1$d / %2$d (%3$d%% del experto)</string>
     <string name="reyon_sales_beat_target">Por encima del experto</string>
     <string name="reyon_sales_reopen">Seguir colocando</string>
