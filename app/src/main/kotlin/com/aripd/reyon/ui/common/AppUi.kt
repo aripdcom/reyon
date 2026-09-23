@@ -3,6 +3,7 @@ package com.aripd.reyon.ui.common
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,13 +20,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextMeasurer
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -125,23 +131,65 @@ fun ScoreCard(
 }
 
 /**
- * Eylem düğmesinin etiketi: kutunun içinde kalır.
+ * Yan yana üç eylem düğmesinin iç payı. Material'ın 24 dp'lik yan payıyla 360 dp'de
+ * yazıya ~59 dp kalıyor ve "Tamamla", "Rückgängig", "Подсказка" gibi tek kelimeler
+ * ortasından bölünüyordu (docs/cihaz-testi.md, v1.0.1 F1); 8 dp ile ~91 dp kalır.
+ */
+val ActionRowPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
+
+/**
+ * Eylem düğmesinin etiketi: kutunun içinde kalır, kelimenin ortasından bölünmez.
  *
- * Uzun çeviriler yan yana üç düğmeye sığmıyor: Almanca "Rückgängig" ve
- * "Ins Tablett", 360 dp'de Türkçe "Tepsiye al" ikiye kırılıp hapın dışına
- * taşıyordu (v0.43.0 cihaz koşumu, F4). İki satıra izin verilir, sığmazsa
+ * Uzun çeviriler yan yana üç düğmeye sığmıyor. İki satıra izin verilir, ama satır
+ * yalnız boşlukta kırılmalı: punto, her kelime tek satıra sığana dek
+ * [ACTION_LABEL_MIN_SP]'ye kadar küçülür ([actionLabelSp]). Tabanda da sığmazsa
  * üç nokta konur; satır aralığı dar tutulur ki düğme fazla uzamasın.
  */
 @Composable
 fun ActionLabel(text: String) {
-    Text(
-        text = text,
-        maxLines = 2,
-        overflow = TextOverflow.Ellipsis,
-        textAlign = TextAlign.Center,
-        lineHeight = 16.sp,
-        style = MaterialTheme.typography.labelLarge,
-    )
+    val base = MaterialTheme.typography.labelLarge
+    BoxWithConstraints(contentAlignment = Alignment.Center) {
+        val measurer = rememberTextMeasurer()
+        val width = constraints.maxWidth
+        val sp = remember(text, width, base, measurer) { actionLabelSp(measurer, text, base, width) }
+        Text(
+            text = text,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            textAlign = TextAlign.Center,
+            style = actionLabelStyle(base, sp),
+        )
+    }
+}
+
+const val ACTION_LABEL_MIN_SP = 10f
+private const val ACTION_LABEL_LINE_HEIGHT = 16f / 14f
+
+internal fun actionLabelStyle(base: TextStyle, sp: Float): TextStyle =
+    base.copy(fontSize = sp.sp, lineHeight = (sp * ACTION_LABEL_LINE_HEIGHT).sp)
+
+/**
+ * [text]'in [maxWidth] piksele kelime bölünmeden, en çok iki satırda sığdığı en büyük
+ * punto (sp): [base]'in puntosundan 0,5 sp adımlarla [ACTION_LABEL_MIN_SP]'ye kadar.
+ * Genişlik sınırsızsa ya da tabanda da sığmıyorsa tabanı (ya da temel puntoyu) döndürür.
+ */
+internal fun actionLabelSp(measurer: TextMeasurer, text: String, base: TextStyle, maxWidth: Int): Float {
+    val top = base.fontSize.value
+    if (maxWidth == Constraints.Infinity || maxWidth <= 0) return top
+    val words = text.split(Regex("\\s+")).filter { it.isNotEmpty() }
+    var sp = top
+    while (sp > ACTION_LABEL_MIN_SP) {
+        if (actionLabelFits(measurer, text, words, actionLabelStyle(base, sp), maxWidth)) return sp
+        sp -= 0.5f
+    }
+    return ACTION_LABEL_MIN_SP
+}
+
+private fun actionLabelFits(measurer: TextMeasurer, text: String, words: List<String>, style: TextStyle, maxWidth: Int): Boolean {
+    val wordsFit = words.all { measurer.measure(it, style, softWrap = false, maxLines = 1).size.width <= maxWidth }
+    if (!wordsFit) return false
+    val whole = measurer.measure(text, style, maxLines = 2, constraints = Constraints(maxWidth = maxWidth))
+    return !whole.hasVisualOverflow
 }
 
 /**

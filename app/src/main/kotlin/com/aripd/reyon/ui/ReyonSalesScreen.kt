@@ -77,6 +77,7 @@ import com.aripd.reyon.engine.ReyonSalesState
 import com.aripd.reyon.engine.SalesRule
 import com.aripd.reyon.engine.SalesScore
 import com.aripd.reyon.ui.common.ActionLabel
+import com.aripd.reyon.ui.common.ActionRowPadding
 import com.aripd.reyon.ui.common.GameTopBar
 import com.aripd.reyon.ui.common.OverlayCard
 import com.aripd.reyon.ui.common.ScoreCard
@@ -312,6 +313,7 @@ internal fun ReyonSalesContent(
                     },
                     enabled = st.canUndo,
                     modifier = Modifier.weight(1f),
+                    contentPadding = ActionRowPadding,
                 ) {
                     ActionLabel(stringResource(R.string.undo))
                 }
@@ -319,6 +321,7 @@ internal fun ReyonSalesContent(
                     onClick = { if (viewModel.removeSelected()) haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove) },
                     enabled = selected >= 0 && st.isPlaced(selected),
                     modifier = Modifier.weight(1f),
+                    contentPadding = ActionRowPadding,
                 ) {
                     ActionLabel(stringResource(R.string.reyon_remove))
                 }
@@ -328,6 +331,7 @@ internal fun ReyonSalesContent(
                     },
                     enabled = st.isComplete,
                     modifier = Modifier.weight(1f),
+                    contentPadding = ActionRowPadding,
                 ) {
                     ActionLabel(stringResource(R.string.reyon_sales_finish))
                 }

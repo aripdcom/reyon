@@ -38,6 +38,7 @@ engellemek**. Asıl koruma, ölçülen doğruların değişmez testine çevrilme
 | Satış panelinin tavanı tepsiye iki sıra bırakır; tavan ile tepsi payı 72–308 dp arasında birebir tümler | `ReyonLayoutTest` |
 | Kısa ekranda brif ve kural satırları okunur, taşan satır dokununca açılır | `ReyonShortScreenTest` |
 | Uygulama açılışta doğrudan Reyon'a girer; dişli ayarları açar | `ReyonAppTest` |
+| Üç düğmeli alt satırın etiketleri 14 dilde kelime ortasından bölünmez (360 dp; yazı ölçeği 1,0 · 1,1 · 1,3) | `ReyonActionLabelTest` |
 | Metin kontrastı WCAG AA eşiğini tutar | `ThemeContrastTest` |
 
 Yeni bir ölçüm bulgusu düzeltildiğinde, mümkünse **paylı bir değişmez** olarak
@@ -659,6 +660,19 @@ Bulgular, hepsi 360 dp genişlikte:
 | F4 | Üst çubukta uygulama adı "REYO·N" diye bölünüyor ("Terug naar het begin" yer yiyor), dört modda da | nl |
 | F5 | Kurulum kartında zorluk çipi kırpılıyor: "Keskit…", "Слож…", "Makk…" / "Gemid…", "Vansk…" | fi, ru, nl, nb |
 | F6 | "Tepsiye al" ve karşılıkları iki satıra sarıyor (kelime sınırında), "koli 6 · Salı gelir" iki-üç satır | çoğu dil |
+
+**Düzeltildi (ölçüm bekliyor): F1.** Sebep yazı alanının darlığı: 360 dp'de düğme
+106,7 dp, Material'ın 24 dp'lik yan payları çıkınca yazıya ~59 dp kalıyordu ve
+bundan geniş tek kelime ortasından bölünüyordu. İki değişiklik: üç düğmeli
+satırlarda iç pay 8 dp (`ActionRowPadding`, yazı alanı ~91 dp); `ActionLabel`
+puntoyu, her kelime tek satıra sığana dek 0,5 sp adımlarla 10 sp'ye kadar
+küçültüyor (`actionLabelSp`), satır yalnız boşlukta kırılıyor.
+`ReyonActionLabelTest` 14 dilin dört etiketini gerçek fontla en dar düğmede
+ölçüyor: yazı ölçeği 1,0'da punto ≥ 12 sp, 1,1'de ≥ 11 sp, 1,3'te tabana inse de
+kelime bölünmüyor. Yalnız payı daraltmak 1,0'da yetiyor, 1,1 ve 1,3'te yetmiyor
+(punto küçültme kapatılınca test bu ikisinde kırılıyor). F2 de aynı değişiklikle
+kapanmalı: "Ongedaan maken" ve "Naar het bakje" artık iki satırda tam. Cihazda
+doğrulanacak: 360×640 dp'de 14 dilde alt satır, `store/screenshots` yeniden.
 
 F1–F4 kelimeyi bölüyor ya da gizliyor; F5 yalnız zorluk adını kırpıyor (seçili
 olan üst satırda tam yazıyor); F6 kabul edilebilir sarma. İngilizce, Danca (F3
