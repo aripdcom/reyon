@@ -419,14 +419,15 @@ REYON_ETIKET = {
     "brif": ["Planogram brifi", "Planogram brief"],
     "tepsi": ["Tepsi", "Tray"],
     "artır": ["Artır", "More"],
-    "raf": ["Reyon ", "Satış rafı ", "Sipariş rafı ", "Sales shelf ", "Order shelf "],
+    "raf": ["Reyon ", "Denetim rafı ", "Satış rafı ", "Sipariş rafı ",
+            "Audit shelf ", "Sales shelf ", "Order shelf "],
     "plan": ["Plan ", "Planogram "],
     "kural": ["Satış kuralları", "Sales rules"],
     "basa": ["Başa dön", "Back to start"],
 }
 REYON_BASLAT = {
     "diziliş": ["Başla", "Start"],
-    "denetim": ["Denetlemeye başla", "Start the audit"],
+    "denetim": ["Denetime başla", "Start the audit"],
     "satış": ["Dizmeye başla", "Start arranging"],
     "sipariş": ["Haftaya başla", "Start the week"],
 }
