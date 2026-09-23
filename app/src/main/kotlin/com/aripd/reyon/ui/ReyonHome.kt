@@ -59,6 +59,7 @@ import com.aripd.reyon.engine.ReyonLevel
 import com.aripd.reyon.platform.appLocale
 import com.aripd.reyon.platform.appString
 import com.aripd.reyon.ui.common.ButtonKind
+import com.aripd.reyon.ui.common.FitText
 import com.aripd.reyon.ui.common.GameTopBar
 import com.aripd.reyon.ui.common.OverlayCard
 import com.aripd.reyon.ui.common.ReyonButton
@@ -191,12 +192,14 @@ internal fun ReyonHome(
                 minHeight = 48.dp,
                 modifier = Modifier.padding(horizontal = 12.dp),
             ) { level, selected ->
-                Text(
+                // Sığmazsa küçülür: 360 dp'de "Supermerca…", "Hipermerca…" kırpılıyordu
+                // (es, pt, it; docs/cihaz-testi.md, 1.1.0, G2).
+                FitText(
                     text = stringResource(formatName(level)),
-                    style = MaterialTheme.typography.labelLarge,
-                    fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.labelLarge.copy(
+                        fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
+                    ),
+                    minSp = 11f,
                 )
                 Text(
                     text = appString(R.string.format_shelf_fmt, level.rows, level.cols),

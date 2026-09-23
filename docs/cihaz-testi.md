@@ -40,6 +40,7 @@ engellemek**. Asıl koruma, ölçülen doğruların değişmez testine çevrilme
 | Uygulama Görevler ekranıyla açılır (dört modun günün vakası ve alıştırma satırı); dişli ayarları açar; tema seçimi ve sesin kapalı varsayılanı kalıcı | `ReyonAppTest` |
 | Günün vakası günün formatında açılır, alıştırma formatı hatırlanır ve günün vakası onu kaydırmaz, "Nasıl çalışılır" kartı ilk girişte bir kez açılır | `ReyonHomeTest` |
 | Biten günün vakası düğmesinde mod adı sonucun yanında kırpılmaz (360 dp, yazı ölçeği 1,1; 8 dil) | `ReyonDailyButtonTest` |
+| Görevler'de format adı dilimine sığar, alıştırma alt yazısında kelime bölünmez (14 dil, 360 dp, yazı ölçeği 1,1) | `ReyonHomeTextTest` |
 | Düzey eşikleri (≥%90 · %75–89 · %50–74 · <%50), Sipariş bulguları, günün formatının dönüşü, "aynı vaka" kararı | `ReyonReportTest` |
 | Üç düğmeli alt satırın etiketleri 14 dilde kelime ortasından bölünmez (360 dp; yazı ölçeği 1,0 · 1,1 · 1,3) | `ReyonActionLabelTest` |
 | Metin kontrastı WCAG AA eşiğini tutar | `ThemeContrastTest` |
@@ -850,3 +851,23 @@ Cihazda şimdi yerel sürüm yapısı (`427beaaa…`) kurulu.
   adını ölçüyor; tek satıra zorlanınca sekizi de kırılıyor. Cihazda 360×640 dp,
   tr/en/de/nl/ru: "Sipariş / 402/558", "Bestücken / 0:47", "Раскладка / 0:47" —
   hiçbir ad kırpılmıyor.
+
+**Düzeltildi: Y3, Y4, G2–G5** (cihazda doğrulandı, yerel sürüm yapısı
+`sha256=3f1c68a1cb5cfd566082e7f6ce5cc8dcb3ac233bf710df92e9cec7a7456e8571`;
+360×640 dp).
+
+- **Y3.** Üst çubuktaki paylaş artık 48 dp'lik simge düğmesi (`ShareButton`,
+  `compact`), dişliyle aynı biçimde; kartların sağ kenarını aşmıyor.
+- **Y4.** Sapma bayrağı göz bölgesinin üst kenarında (`drawDeviationFlag`); ürün
+  adı açık kalıyor ("Yer değişimi" üstte, "Kuruyemiş" okunuyor).
+- **G2.** Format adı sığmazsa 11 sp'ye kadar küçülüyor (mevcut `FitText`): es, pt,
+  it'de "Supermercado", "Hipermercado", "Supermercato", "Ipermercato" tam.
+- **G3.** Almanca alıştırma alt yazısı "Bestand für die Woche planen" (önce
+  "Wöchentliche Bestandsentscheidungen": tek kelime satırdan genişti).
+- **G4.** Grafik göstergesi `FlowRow`: sığmayan öğe alt satıra geçiyor
+  (Rusça "эксперт 9,0" ikinci satırda, tek parça).
+- **G5.** KPI'daki fark `FlowRow` içinde ve tek satır: "· −10 puan", "· −10
+  pist.", "· −10 p.p." bütün olarak alt satıra iniyor.
+
+`ReyonHomeTextTest` G2 ve G3'ü 14 dilde ölçüyor (eski Almanca metinle kırılıyor).
+Y3, Y4, G4, G5 çizim/yerleşim düzeltmeleri; cihazda ekran görüntüsüyle bakıldı.

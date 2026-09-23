@@ -160,7 +160,7 @@
     <string name="home_puzzle_desc">Briefing lesen, Planogramm aufbauen</string>
     <string name="home_audit_desc">Regal mit dem Planogramm vergleichen</string>
     <string name="home_sales_desc">Regalleistung steigern</string>
-    <string name="home_order_desc">Wöchentliche Bestandsentscheidungen</string>
+    <string name="home_order_desc">Bestand für die Woche planen</string>
     <string name="howto_title">So geht’s</string>
     <string name="howto_ok">Verstanden</string>
     <string name="howto_format_fmt">%1$s: %2$s</string>

@@ -5,6 +5,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -666,6 +668,7 @@ private fun signedDecimal(v: Float): String {
 }
 
 /** Raporun küçük ölçüsü: başlık, değer, altında uzmanın değeri ve fark. */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ReportStat(label: String, value: String, expert: String, delta: Int, deltaText: String, modifier: Modifier = Modifier) {
     val tokens = Reyon.tokens
@@ -678,10 +681,14 @@ private fun ReportStat(label: String, value: String, expert: String, delta: Int,
         Column(modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 8.dp, bottom = 10.dp)) {
             FitText(text = label.uppercase(appLocale()), style = kpiLabelStyle(), color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(text = value, style = monoStyle(22f, 30f))
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            // Fark sığmazsa bütün olarak alt satıra geçer; satırda sıkışınca "−10 / puan" diye
+            // ikiye bölünüyordu (docs/cihaz-testi.md, 1.1.0, G5).
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(text = expert, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text(
                     text = "· $deltaText",
+                    maxLines = 1,
+                    softWrap = false,
                     style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
                     color = when {
                         delta < -5 -> tokens.bad
@@ -701,6 +708,7 @@ private fun ReportStat(label: String, value: String, expert: String, delta: Int,
  * Akşam stoğu 0.28.1 öncesi kayıtlarda tutulmuyordu; bilinmiyorsa yalnız
  * çubuklar çizilir (bkz. [DaySummary.evening]).
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun WeekChart(state: ReyonOrderState, result: OrderResult) {
     val history = state.history
@@ -784,7 +792,13 @@ private fun WeekChart(state: ReyonOrderState, result: OrderResult) {
                 )
             }
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(top = 6.dp), horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+        // Sığmayan öğe alt satıra geçer; tek satıra sıkıştırılınca sonuncusu harf harf
+        // alt alta diziliyordu ("эксперт 9,0"; docs/cihaz-testi.md, 1.1.0, G4).
+        FlowRow(
+            modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
             Legend(color = barUp, bar = true, text = stringResource(R.string.reyon_order_chart_profit))
             if (known) {
                 Legend(color = line, bar = false, text = stringResource(R.string.reyon_order_chart_turnover))
