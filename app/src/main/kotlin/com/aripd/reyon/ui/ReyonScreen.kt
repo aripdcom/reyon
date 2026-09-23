@@ -1,5 +1,6 @@
 package com.aripd.reyon.ui
 
+import android.app.Application
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
@@ -56,9 +57,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.aripd.reyon.R
 import com.aripd.reyon.engine.Board
 import com.aripd.reyon.engine.Brand
@@ -94,6 +99,26 @@ import com.aripd.reyon.ui.theme.Reyon
 import java.time.LocalDate
 
 /**
+ * Dört modun görünüm modelleri, o anki Application ile kurulur.
+ *
+ * Varsayılan fabrika (AndroidViewModelFactory.getInstance) ilk gördüğü
+ * Application'ı statik saklıyor ve sonraki her modeli onunla kuruyor. Uygulamada
+ * tek Application olduğu için fark etmez; Robolectric ise her testte yeni
+ * Application kuruyor ve modeller önceki testin kayıtlarına yazıp okuyordu
+ * (Görevler ekranı sonucu göremiyor, Sipariş önceki testin bitmiş haftasını
+ * açıyordu). Burada Application, modeli isteyen etkinliğin kendisinden gelir.
+ */
+internal val ReyonViewModels: ViewModelProvider.Factory = viewModelFactory {
+    initializer { ReyonViewModel(application()) }
+    initializer { ReyonAuditViewModel(application()) }
+    initializer { ReyonSalesViewModel(application()) }
+    initializer { ReyonOrderViewModel(application()) }
+}
+
+private fun CreationExtras.application(): Application =
+    checkNotNull(this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]) { "Application yok" }
+
+/**
  * Reyon: Görevler ve dört mod. Diziliş (planogram bulmacası), Denetim (uyum
  * sapmalarını bulma), Satış (raf verimi) ve Sipariş (stok haftası).
  *
@@ -106,14 +131,14 @@ fun ReyonScreen(
     highScore: Long,
     onScore: (Long) -> Unit,
     onExit: () -> Unit,
-    viewModel: ReyonViewModel = viewModel(),
+    viewModel: ReyonViewModel = viewModel(factory = ReyonViewModels),
 ) {
     val kind by viewModel.kind.collectAsStateWithLifecycle()
     val open by viewModel.screenOpen.collectAsStateWithLifecycle()
     val practiceLevel by viewModel.practiceLevel.collectAsStateWithLifecycle()
-    val auditVm: ReyonAuditViewModel = viewModel()
-    val salesVm: ReyonSalesViewModel = viewModel()
-    val orderVm: ReyonOrderViewModel = viewModel()
+    val auditVm: ReyonAuditViewModel = viewModel(factory = ReyonViewModels)
+    val salesVm: ReyonSalesViewModel = viewModel(factory = ReyonViewModels)
+    val orderVm: ReyonOrderViewModel = viewModel(factory = ReyonViewModels)
     val baseline = remember { highScore }
     var solvedSession by remember { mutableIntStateOf(0) }
     val latestOnScore by rememberUpdatedState(onScore)

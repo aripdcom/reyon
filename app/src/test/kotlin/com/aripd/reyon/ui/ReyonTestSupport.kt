@@ -20,11 +20,15 @@ import com.aripd.reyon.engine.ReyonLevel
 import com.aripd.reyon.str
 
 /**
- * Reyon ekran testlerinin ortak hijyeni. Robolectric aynı JVM'deki testler
- * arasında SharedPreferences'ı paylaşabiliyor ve görünüm modeli etkinlik
- * yok edilirken (test bittikten, @After çalıştıktan sonra) açık turu yeniden
- * kaydediyor. O yüzden her test önce turu bırakır (geri oku Görevler'e döner,
- * tur saklanır ama ekran boşalır), sonra tercihleri temizler.
+ * Reyon ekran testlerinin ortak hijyeni. Görünüm modeli etkinlik yok edilirken
+ * (test bittikten, @After çalıştıktan sonra) açık turu yeniden kaydediyor; o
+ * yüzden her test önce turu bırakır (geri oku Görevler'e döner, tur saklanır ama
+ * ekran boşalır), sonra tercihleri temizler.
+ *
+ * Testler arası sızıntının asıl nedeni varsayılan görünüm modeli fabrikasıydı:
+ * ilk testin Application'ını statik tutuyor, modeller sonraki testlerde de onun
+ * kayıtlarını kullanıyordu. Modeller artık [ReyonViewModels] ile o anki
+ * Application'dan kuruluyor; temizlik bu testin kaydını gerçekten temizliyor.
  */
 object ReyonTestSupport {
     /**
