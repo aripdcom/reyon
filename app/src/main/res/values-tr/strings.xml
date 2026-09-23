@@ -41,6 +41,10 @@
     <string name="settings_haptics">Titreşim</string>
     <string name="haptics_on">Titreşimi aç</string>
     <string name="haptics_off">Titreşimi kapat</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_light">Açık</string>
+    <string name="theme_dark">Koyu</string>
+    <string name="theme_system">Telefona göre</string>
 
     <!-- Paylaşım -->
     <string name="share">Paylaş</string>
@@ -69,8 +73,12 @@
     <string name="about_lic_androidx_desc">Compose, Material 3, Lifecycle, Activity ve Core kütüphaneleri. The Android Open Source Project.</string>
     <string name="about_lic_kotlin_name">Kotlin ve kotlinx.coroutines</string>
     <string name="about_lic_kotlin_desc">Dil standart kütüphanesi ve eşzamanlılık. JetBrains ve katkıda bulunanlar.</string>
+    <string name="about_lic_plex_name">IBM Plex</string>
+    <string name="about_lic_plex_desc">Yazı tipleri: Sans, Sans Condensed, Mono ve Sans Arabic. IBM Corp.</string>
     <string name="about_license_show">Apache 2.0 lisans metnini göster</string>
     <string name="about_license_hide">Lisans metnini gizle</string>
+    <string name="about_ofl_show">SIL Open Font License metnini göster</string>
+    <string name="about_ofl_hide">Yazı tipi lisansını gizle</string>
     <string name="about_app_license">Reyon\'un kaynak kodu GNU GPL v3 ile açıktır. \"Reyon\" adı ve logosu lisansa dahil değildir.</string>
     <string name="about_app_license_link">Lisans metni (GitHub)</string>
 

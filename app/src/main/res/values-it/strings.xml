@@ -41,6 +41,10 @@
     <string name="settings_haptics">Vibrazione</string>
     <string name="haptics_on">Attiva la vibrazione</string>
     <string name="haptics_off">Disattiva la vibrazione</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_light">Chiaro</string>
+    <string name="theme_dark">Scuro</string>
+    <string name="theme_system">Come il telefono</string>
 
     <!-- Paylaşım -->
     <string name="share">Condividi</string>
@@ -69,8 +73,12 @@
     <string name="about_lic_androidx_desc">Librerie Compose, Material 3, Lifecycle, Activity e Core. The Android Open Source Project.</string>
     <string name="about_lic_kotlin_name">Kotlin e kotlinx.coroutines</string>
     <string name="about_lic_kotlin_desc">Libreria standard del linguaggio e concorrenza. JetBrains e collaboratori.</string>
+    <string name="about_lic_plex_name">IBM Plex</string>
+    <string name="about_lic_plex_desc">Caratteri: Sans, Sans Condensed, Mono e Sans Arabic. IBM Corp.</string>
     <string name="about_license_show">Mostra il testo della licenza Apache 2.0</string>
     <string name="about_license_hide">Nascondi il testo della licenza</string>
+    <string name="about_ofl_show">Mostra il testo della SIL Open Font License</string>
+    <string name="about_ofl_hide">Nascondi la licenza dei caratteri</string>
     <string name="about_app_license">Il codice sorgente di Reyon è aperto con licenza GNU GPL v3. Il nome «Reyon» e il logo non fanno parte della licenza.</string>
     <string name="about_app_license_link">Testo della licenza (GitHub)</string>
 

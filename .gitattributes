@@ -4,6 +4,7 @@
 *.jar binary
 *.png binary
 *.webp binary
+*.ttf binary
 
 # Ses dosyaları ikili.
 *.wav binary

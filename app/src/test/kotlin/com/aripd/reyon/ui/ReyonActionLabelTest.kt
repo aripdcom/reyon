@@ -18,6 +18,7 @@ import com.aripd.reyon.platform.AppLocale
 import com.aripd.reyon.ui.common.ACTION_LABEL_MIN_SP
 import com.aripd.reyon.ui.common.actionLabelSp
 import com.aripd.reyon.ui.common.actionLabelStyle
+import com.aripd.reyon.ui.theme.ReyonTheme
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -34,7 +35,8 @@ import java.util.Locale
  * En dar gerçek düğme 360 dp telefonda: satırın yan payı 2 × 12, aralık 2 × 8,
  * düğmenin iç payı 2 × 8 ([com.aripd.reyon.ui.common.ActionRowPadding]) —
  * (360 − 24 − 16) / 3 − 16 ≈ 90,6 dp yazı alanı. Yazı ölçüleri Robolectric'in
- * yerel grafik kipinde gerçek fontla alınır.
+ * yerel grafik kipinde gerçek fontla alınır: uygulamanın teması (IBM Plex Sans)
+ * içinde, ekrandaki düğmeyle aynı yazıyla.
  */
 @RunWith(AndroidJUnit4::class)
 class ReyonActionLabelTest {
@@ -48,11 +50,13 @@ class ReyonActionLabelTest {
 
     private fun setUp(fontScale: Float) {
         rule.setContent {
-            val outer = LocalDensity.current
-            CompositionLocalProvider(LocalDensity provides Density(outer.density, fontScale)) {
-                density = outer.density
-                measurer = rememberTextMeasurer()
-                base = MaterialTheme.typography.labelLarge
+            ReyonTheme {
+                val outer = LocalDensity.current
+                CompositionLocalProvider(LocalDensity provides Density(outer.density, fontScale)) {
+                    density = outer.density
+                    measurer = rememberTextMeasurer()
+                    base = MaterialTheme.typography.labelLarge
+                }
             }
         }
         rule.waitForIdle()

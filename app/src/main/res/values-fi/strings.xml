@@ -41,6 +41,10 @@
     <string name="settings_haptics">Värinä</string>
     <string name="haptics_on">Laita värinä päälle</string>
     <string name="haptics_off">Laita värinä pois</string>
+    <string name="settings_theme">Teema</string>
+    <string name="theme_light">Vaalea</string>
+    <string name="theme_dark">Tumma</string>
+    <string name="theme_system">Puhelimen mukaan</string>
 
     <!-- Paylaşım -->
     <string name="share">Jaa</string>
@@ -69,8 +73,12 @@
     <string name="about_lic_androidx_desc">Kirjastot Compose, Material 3, Lifecycle, Activity ja Core. The Android Open Source Project.</string>
     <string name="about_lic_kotlin_name">Kotlin ja kotlinx.coroutines</string>
     <string name="about_lic_kotlin_desc">Kielen vakiokirjasto ja rinnakkaisuus. JetBrains ja avustajat.</string>
+    <string name="about_lic_plex_name">IBM Plex</string>
+    <string name="about_lic_plex_desc">Kirjasimet: Sans, Sans Condensed, Mono ja Sans Arabic. IBM Corp.</string>
     <string name="about_license_show">Näytä Apache 2.0 -lisenssin teksti</string>
     <string name="about_license_hide">Piilota lisenssiteksti</string>
+    <string name="about_ofl_show">Näytä SIL Open Font License -lisenssin teksti</string>
+    <string name="about_ofl_hide">Piilota kirjasinlisenssi</string>
     <string name="about_app_license">Reyonin lähdekoodi on avoin GNU GPL v3 -lisenssillä. Nimi ”Reyon” ja logo eivät kuulu lisenssiin.</string>
     <string name="about_app_license_link">Lisenssiteksti (GitHub)</string>
 

@@ -41,6 +41,10 @@
     <string name="settings_haptics">الاهتزاز</string>
     <string name="haptics_on">تشغيل الاهتزاز</string>
     <string name="haptics_off">إيقاف الاهتزاز</string>
+    <string name="settings_theme">المظهر</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_dark">داكن</string>
+    <string name="theme_system">حسب الهاتف</string>
 
     <!-- Paylaşım -->
     <string name="share">شارك</string>
@@ -69,8 +73,12 @@
     <string name="about_lic_androidx_desc">مكتبات Compose وMaterial 3 وLifecycle وActivity وCore. The Android Open Source Project.</string>
     <string name="about_lic_kotlin_name">Kotlin وkotlinx.coroutines</string>
     <string name="about_lic_kotlin_desc">المكتبة القياسية للغة والتزامن. JetBrains والمساهمون.</string>
+    <string name="about_lic_plex_name">IBM Plex</string>
+    <string name="about_lic_plex_desc">الخطوط: Sans وSans Condensed وMono وSans Arabic. IBM Corp.</string>
     <string name="about_license_show">أظهر نص ترخيص Apache 2.0</string>
     <string name="about_license_hide">أخفِ نص الترخيص</string>
+    <string name="about_ofl_show">أظهر نص ترخيص SIL Open Font License</string>
+    <string name="about_ofl_hide">أخفِ ترخيص الخطوط</string>
     <string name="about_app_license">شيفرة Reyon مفتوحة بترخيص GNU GPL v3. الاسم «Reyon» والشعار غير مشمولين بالترخيص.</string>
     <string name="about_app_license_link">نص الترخيص (GitHub)</string>
 

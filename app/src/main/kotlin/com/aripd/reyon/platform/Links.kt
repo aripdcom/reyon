@@ -20,6 +20,7 @@ object Links {
     const val LICENSE = "https://github.com/aripdcom/reyon/blob/main/LICENSE"
     const val ANDROIDX = "https://developer.android.com/jetpack"
     const val KOTLIN = "https://kotlinlang.org"
+    const val PLEX = "https://github.com/IBM/plex"
 
     /**
      * E-posta uygulamasını adresi doldurulmuş olarak açar.

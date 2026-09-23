@@ -2,6 +2,7 @@ package com.aripd.reyon.ui.about
 
 import androidx.activity.compose.BackHandler
 import androidx.annotation.StringRes
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,25 +31,33 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aripd.reyon.R
 import com.aripd.reyon.platform.Links
 import com.aripd.reyon.platform.appString
 import com.aripd.reyon.platform.installedVersion
+import com.aripd.reyon.ui.theme.Reyon
+import com.aripd.reyon.ui.theme.ThemeChoice
 import com.aripd.reyon.ui.common.GameTopBar
 
 /** Testlerin ayar satırlarını bulması için. */
 const val ABOUT_SOUND_TAG = "about_sound"
 const val ABOUT_HAPTICS_TAG = "about_haptics"
 const val ABOUT_LANGUAGE_TAG = "about_language"
+const val ABOUT_THEME_TAG = "about_theme"
 
 /** Uygulamada kullanılan açık kaynak bileşen; metinler yerelleştirilir. */
 private class OssComponent(
@@ -61,13 +70,14 @@ private class OssComponent(
 private val Components = listOf(
     OssComponent(R.string.about_lic_androidx_name, "Apache-2.0", R.string.about_lic_androidx_desc, Links.ANDROIDX),
     OssComponent(R.string.about_lic_kotlin_name, "Apache-2.0", R.string.about_lic_kotlin_desc, Links.KOTLIN),
+    OssComponent(R.string.about_lic_plex_name, "OFL-1.1", R.string.about_lic_plex_desc, Links.PLEX),
 )
 
 /**
- * Ayarlar ve Hakkında tek ekranda: ses, titreşim, dil; sonra sürüm, gizlilik
- * özeti, bağlantılar ve açık kaynak lisansları.
+ * Ayarlar ve Hakkında tek ekranda: tema, ses, titreşim, dil; sonra sürüm,
+ * gizlilik özeti, bağlantılar ve açık kaynak lisansları.
  *
- * Üç ayar da burada: uygulamanın ana menüsü yok, ekran üst çubuktaki dişliden
+ * Ayarların hepsi burada: ekran Görevler'in üst çubuğundaki ayar simgesinden
  * açılıyor. Uygulama ağa çıkmaz; bağlantılar cihazın tarayıcısında açılır.
  */
 @Composable
@@ -76,6 +86,8 @@ fun AboutScreen(
     onToggleSound: () -> Unit,
     hapticsOn: Boolean,
     onToggleHaptics: () -> Unit,
+    theme: ThemeChoice,
+    onTheme: (ThemeChoice) -> Unit,
     languageLabel: String,
     onLanguage: () -> Unit,
     onExit: () -> Unit,
@@ -86,6 +98,14 @@ fun AboutScreen(
     val apacheText = remember(showApache) {
         if (showApache) {
             context.resources.openRawResource(R.raw.license_apache2).bufferedReader().use { it.readText() }
+        } else {
+            ""
+        }
+    }
+    var showOfl by rememberSaveable { mutableStateOf(false) }
+    val oflText = remember(showOfl) {
+        if (showOfl) {
+            context.resources.openRawResource(R.raw.license_ofl).bufferedReader().use { it.readText() }
         } else {
             ""
         }
@@ -129,6 +149,7 @@ fun AboutScreen(
             }
 
             item { SectionTitle(stringResource(R.string.settings_title)) }
+            item { ThemeRow(theme = theme, onTheme = onTheme) }
             item {
                 ToggleRow(
                     label = stringResource(R.string.settings_sound),
@@ -190,13 +211,90 @@ fun AboutScreen(
                 }
                 if (showApache) {
                     Spacer(Modifier.height(8.dp))
-                    Text(
-                        text = apacheText,
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 11.sp,
-                        lineHeight = 15.sp,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f),
-                    )
+                    LicenseText(apacheText)
+                }
+            }
+            item {
+                OutlinedButton(onClick = { showOfl = !showOfl }, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(if (showOfl) R.string.about_ofl_hide else R.string.about_ofl_show))
+                }
+                if (showOfl) {
+                    Spacer(Modifier.height(8.dp))
+                    LicenseText(oflText)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun LicenseText(text: String) {
+    Text(
+        text = text,
+        fontFamily = FontFamily.Monospace,
+        fontSize = 11.sp,
+        lineHeight = 15.sp,
+        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f),
+    )
+}
+
+/**
+ * Tema seçimi: üç parçalı seçici. Her parça bir radyo düğmesi gibi duyurulur;
+ * seçili olan beyaz yüzeyde, ötekiler seçicinin zemininde durur.
+ */
+@Composable
+private fun ThemeRow(theme: ThemeChoice, onTheme: (ThemeChoice) -> Unit) {
+    val tokens = Reyon.tokens
+    Surface(
+        shape = RoundedCornerShape(14.dp),
+        color = MaterialTheme.colorScheme.surface,
+        border = BorderStroke(1.dp, tokens.line),
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag(ABOUT_THEME_TAG),
+    ) {
+        Column(modifier = Modifier.padding(start = 16.dp, end = 12.dp, top = 12.dp, bottom = 12.dp)) {
+            Text(
+                text = stringResource(R.string.settings_theme),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+            Spacer(Modifier.height(8.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(tokens.segment, RoundedCornerShape(10.dp))
+                    .padding(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                for ((choice, label) in listOf(
+                    ThemeChoice.LIGHT to R.string.theme_light,
+                    ThemeChoice.DARK to R.string.theme_dark,
+                    ThemeChoice.SYSTEM to R.string.theme_system,
+                )) {
+                    val selected = theme == choice
+                    Surface(
+                        onClick = { onTheme(choice) },
+                        shape = RoundedCornerShape(8.dp),
+                        color = if (selected) MaterialTheme.colorScheme.surface else Color.Transparent,
+                        shadowElevation = if (selected) 1.dp else 0.dp,
+                        modifier = Modifier
+                            .weight(1f)
+                            .semantics {
+                                role = Role.RadioButton
+                                this.selected = selected
+                            },
+                    ) {
+                        Text(
+                            text = stringResource(label),
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            textAlign = TextAlign.Center,
+                            maxLines = 2,
+                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 12.dp),
+                        )
+                    }
                 }
             }
         }

@@ -41,6 +41,10 @@
     <string name="settings_haptics">Vibration</string>
     <string name="haptics_on">Slå på vibration</string>
     <string name="haptics_off">Stäng av vibration</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_light">Ljust</string>
+    <string name="theme_dark">Mörkt</string>
+    <string name="theme_system">Som telefonen</string>
 
     <!-- Paylaşım -->
     <string name="share">Dela</string>
@@ -69,8 +73,12 @@
     <string name="about_lic_androidx_desc">Biblioteken Compose, Material 3, Lifecycle, Activity och Core. The Android Open Source Project.</string>
     <string name="about_lic_kotlin_name">Kotlin och kotlinx.coroutines</string>
     <string name="about_lic_kotlin_desc">Språkets standardbibliotek och samtidighet. JetBrains och bidragsgivare.</string>
+    <string name="about_lic_plex_name">IBM Plex</string>
+    <string name="about_lic_plex_desc">Typsnitt: Sans, Sans Condensed, Mono och Sans Arabic. IBM Corp.</string>
     <string name="about_license_show">Visa licenstexten för Apache 2.0</string>
     <string name="about_license_hide">Dölj licenstexten</string>
+    <string name="about_ofl_show">Visa texten till SIL Open Font License</string>
+    <string name="about_ofl_hide">Dölj typsnittslicensen</string>
     <string name="about_app_license">Källkoden till Reyon är öppen under GNU GPL v3. Namnet ”Reyon” och logotypen ingår inte i licensen.</string>
     <string name="about_app_license_link">Licenstext (GitHub)</string>
 

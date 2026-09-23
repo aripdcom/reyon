@@ -1,21 +1,32 @@
 package com.aripd.reyon
 
+import android.content.Context
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isSelected
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.aripd.reyon.platform.SettingsStore
 import com.aripd.reyon.ui.ReyonTestSupport
 import com.aripd.reyon.ui.reyonLeaveRound
 import com.aripd.reyon.ui.reyonOpenMenu
 import com.aripd.reyon.ui.about.ABOUT_LANGUAGE_TAG
 import com.aripd.reyon.ui.about.ABOUT_SOUND_TAG
+import com.aripd.reyon.ui.about.ABOUT_THEME_TAG
 import com.aripd.reyon.ui.settings.LANGUAGE_LIST_TAG
 import com.aripd.reyon.ui.theme.ReyonTheme
+import com.aripd.reyon.ui.theme.ThemeChoice
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -74,13 +85,41 @@ class ReyonAppTest {
         rule.onNodeWithText(str(R.string.reyon_kind_sales)).assertIsDisplayed()
     }
 
+    /**
+     * Ses satırı dokununca ne olacağını söyler ve dokunuşla tersine döner. Ses
+     * 1.1.0'dan beri varsayılan kapalı; ayar dosyası testler arasında
+     * paylaşılabildiği için başlangıç durumu okunur, varsayılmaz.
+     */
     @Test
     fun theSoundRowFlipsWhatItWillDo() {
         launch()
         rule.onNodeWithContentDescription(str(R.string.about_title)).performClick()
         rule.onNodeWithTag(ABOUT_SOUND_TAG).assertIsDisplayed()
-        rule.onNodeWithContentDescription(str(R.string.sound_off)).performClick()
-        rule.onNodeWithContentDescription(str(R.string.sound_on)).assertIsDisplayed()
+        val on = str(R.string.sound_on)
+        val off = str(R.string.sound_off)
+        val wasOff = rule.onAllNodesWithContentDescription(on).fetchSemanticsNodes().isNotEmpty()
+        rule.onNodeWithContentDescription(if (wasOff) on else off).performClick()
+        rule.onNodeWithContentDescription(if (wasOff) off else on).assertIsDisplayed()
+    }
+
+    @Test
+    fun soundIsOffByDefault() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        context.getSharedPreferences("reyon_settings", Context.MODE_PRIVATE).edit().clear().commit()
+        assertFalse(SettingsStore(context).soundEnabled)
+    }
+
+    @Test
+    fun theThemeRowSwitchesToDarkAndIsRemembered() {
+        launch()
+        rule.onNodeWithContentDescription(str(R.string.about_title)).performClick()
+        rule.onNodeWithTag(ABOUT_THEME_TAG).performScrollTo().assertIsDisplayed()
+        rule.onNodeWithText(str(R.string.theme_dark)).performClick()
+        rule.onNode(hasText(str(R.string.theme_dark)) and isSelected()).assertExists()
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        assertEquals(ThemeChoice.DARK, SettingsStore(context).theme)
+        rule.onNodeWithText(str(R.string.theme_light)).performClick()
+        assertEquals(ThemeChoice.LIGHT, SettingsStore(context).theme)
     }
 
     @Test

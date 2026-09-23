@@ -41,6 +41,10 @@
     <string name="settings_haptics">Вибрация</string>
     <string name="haptics_on">Включить вибрацию</string>
     <string name="haptics_off">Выключить вибрацию</string>
+    <string name="settings_theme">Тема</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="theme_system">Как в телефоне</string>
 
     <!-- Paylaşım -->
     <string name="share">Поделиться</string>
@@ -69,8 +73,12 @@
     <string name="about_lic_androidx_desc">Библиотеки Compose, Material 3, Lifecycle, Activity и Core. The Android Open Source Project.</string>
     <string name="about_lic_kotlin_name">Kotlin и kotlinx.coroutines</string>
     <string name="about_lic_kotlin_desc">Стандартная библиотека языка и параллелизм. JetBrains и участники.</string>
+    <string name="about_lic_plex_name">IBM Plex</string>
+    <string name="about_lic_plex_desc">Шрифты: Sans, Sans Condensed, Mono и Sans Arabic. IBM Corp.</string>
     <string name="about_license_show">Показать текст лицензии Apache 2.0</string>
     <string name="about_license_hide">Скрыть текст лицензии</string>
+    <string name="about_ofl_show">Показать текст лицензии SIL Open Font License</string>
+    <string name="about_ofl_hide">Скрыть лицензию шрифтов</string>
     <string name="about_app_license">Исходный код Reyon открыт по GNU GPL v3. Название «Reyon» и логотип в лицензию не входят.</string>
     <string name="about_app_license_link">Текст лицензии (GitHub)</string>
 

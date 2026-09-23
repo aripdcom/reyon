@@ -41,6 +41,10 @@
     <string name="settings_haptics">Trilling</string>
     <string name="haptics_on">Trilling aanzetten</string>
     <string name="haptics_off">Trilling uitzetten</string>
+    <string name="settings_theme">Thema</string>
+    <string name="theme_light">Licht</string>
+    <string name="theme_dark">Donker</string>
+    <string name="theme_system">Zoals telefoon</string>
 
     <!-- Paylaşım -->
     <string name="share">Delen</string>
@@ -69,8 +73,12 @@
     <string name="about_lic_androidx_desc">Bibliotheken Compose, Material 3, Lifecycle, Activity en Core. The Android Open Source Project.</string>
     <string name="about_lic_kotlin_name">Kotlin en kotlinx.coroutines</string>
     <string name="about_lic_kotlin_desc">Standaardbibliotheek van de taal en gelijktijdigheid. JetBrains en bijdragers.</string>
+    <string name="about_lic_plex_name">IBM Plex</string>
+    <string name="about_lic_plex_desc">Lettertypen: Sans, Sans Condensed, Mono en Sans Arabic. IBM Corp.</string>
     <string name="about_license_show">Licentietekst van Apache 2.0 tonen</string>
     <string name="about_license_hide">Licentietekst verbergen</string>
+    <string name="about_ofl_show">Tekst van de SIL Open Font License tonen</string>
+    <string name="about_ofl_hide">Letterlicentie verbergen</string>
     <string name="about_app_license">De broncode van Reyon is open onder de GNU GPL v3. De naam „Reyon” en het logo horen niet bij de licentie.</string>
     <string name="about_app_license_link">Licentietekst (GitHub)</string>
 
