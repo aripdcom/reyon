@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">na altura dos olhos (prateleira 2)</string>
     <string name="reyon_shelf_bottom_at">na prateleira de baixo</string>
     <string name="reyon_shelf_nth_at">na prateleira %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, espaço %2$d a partir da esquerda: %3$s</string>
+    <string name="reyon_slot_empty">vazio</string>
+    <string name="reyon_slot_selected">selecionado</string>
+    <string name="reyon_size_small">pequeno</string>
+    <string name="reyon_size_medium">médio</string>
+    <string name="reyon_size_large">grande</string>
     <string name="reyon_clue_placed">%1$s está %2$s (dado)</string>
     <string name="reyon_clue_on_shelf">%1$s está %2$s</string>
     <string name="reyon_clue_in_slot">%1$s ocupa o espaço %2$d a partir da esquerda</string>

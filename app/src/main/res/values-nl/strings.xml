@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">op ooghoogte (schap 2)</string>
     <string name="reyon_shelf_bottom_at">op het onderste schap</string>
     <string name="reyon_shelf_nth_at">op schap %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, plek %2$d van links: %3$s</string>
+    <string name="reyon_slot_empty">leeg</string>
+    <string name="reyon_slot_selected">geselecteerd</string>
+    <string name="reyon_size_small">klein</string>
+    <string name="reyon_size_medium">middel</string>
+    <string name="reyon_size_large">groot</string>
     <string name="reyon_clue_placed">%1$s staat %2$s (gegeven)</string>
     <string name="reyon_clue_on_shelf">%1$s staat %2$s</string>
     <string name="reyon_clue_in_slot">%1$s beslaat plek %2$d van links</string>

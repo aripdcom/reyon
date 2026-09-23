@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">at eye level (shelf 2)</string>
     <string name="reyon_shelf_bottom_at">on the bottom shelf</string>
     <string name="reyon_shelf_nth_at">on shelf %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, slot %2$d from the left: %3$s</string>
+    <string name="reyon_slot_empty">empty</string>
+    <string name="reyon_slot_selected">selected</string>
+    <string name="reyon_size_small">small</string>
+    <string name="reyon_size_medium">medium</string>
+    <string name="reyon_size_large">large</string>
     <string name="reyon_clue_placed">%1$s is %2$s (given)</string>
     <string name="reyon_clue_on_shelf">%1$s is %2$s</string>
     <string name="reyon_clue_in_slot">%1$s covers slot %2$d from the left</string>

@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">göz hizasında (2. raf)</string>
     <string name="reyon_shelf_bottom_at">en alt rafta</string>
     <string name="reyon_shelf_nth_at">%1$d. rafta</string>
+    <string name="reyon_slot_fmt">%1$s, soldan %2$d. göz: %3$s</string>
+    <string name="reyon_slot_empty">boş</string>
+    <string name="reyon_slot_selected">seçili</string>
+    <string name="reyon_size_small">küçük boy</string>
+    <string name="reyon_size_medium">orta boy</string>
+    <string name="reyon_size_large">büyük boy</string>
     <string name="reyon_clue_placed">%1$s %2$s (verili)</string>
     <string name="reyon_clue_on_shelf">%1$s %2$s</string>
     <string name="reyon_clue_in_slot">%1$s soldan %2$d. gözü kapsıyor</string>

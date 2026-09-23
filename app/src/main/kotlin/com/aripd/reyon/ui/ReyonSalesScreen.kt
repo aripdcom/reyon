@@ -373,53 +373,87 @@ private fun SalesCanvas(
     val desc = appString(R.string.reyon_sales_board_desc_fmt, rows, cols, unplaced, score.total)
     val target = remember(sales) { targetOf(sales) }
     val targetScore = remember(sales) { SalesScorer.score(sales.board, sales.products, target) }
-    Canvas(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height)
-            .clip(RoundedCornerShape(6.dp))
-            .semantics { contentDescription = desc }
-            .pointerInput(rows, cols) {
-                detectTapGestures(
-                    onTap = { pos ->
-                        val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
-                        currentTap(g.rowAt(pos.y), g.colAt(pos.x))
+    val selectedText = stringResource(R.string.reyon_slot_selected)
+    val removeText = stringResource(R.string.reyon_remove)
+    Box(modifier = Modifier.fillMaxWidth().height(height)) {
+        Canvas(
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(6.dp))
+                .semantics { contentDescription = desc }
+                .pointerInput(rows, cols) {
+                    detectTapGestures(
+                        onTap = { pos ->
+                            val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
+                            currentTap(g.rowAt(pos.y), g.colAt(pos.x))
+                        },
+                        onLongPress = { pos ->
+                            val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
+                            currentLong(g.rowAt(pos.y), g.colAt(pos.x))
+                        },
+                    )
+                },
+        ) {
+            @Suppress("UNUSED_VARIABLE")
+            val tick = version
+            val g = ShelfGeom(size.width, size.height, rows, cols, density)
+            drawGondola(g, colors)
+            val contributions = if (showTarget) targetScore.byProduct else score.byProduct
+            val placed = sales.products.mapNotNull { p ->
+                if (showTarget) {
+                    Triple(p, sales.board.rowOf(target[p.id]), sales.board.colOf(target[p.id]))
+                } else {
+                    state.placement(p.id)?.let { Triple(p, it.row, it.col) }
+                }
+            }
+            drawEmptySlots(g, occupiedMask(sales.board, placed), colors)
+            for ((p, row, col) in placed) {
+                val c = contributions[p.id]
+                drawPack(g, labeler, colors, names[p.id], texts.mark(p), p, p.facings, row, col)
+                drawShelfLabel(
+                    g, labeler, colors, p, p.facings, row, col, texts.code(p), texts.badges(p),
+                    value = signed(c),
+                    valueColor = when {
+                        c > 0 -> colors.tokens.labelOk
+                        c < 0 -> colors.tokens.labelBad
+                        else -> null
                     },
-                    onLongPress = { pos ->
-                        val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
-                        currentLong(g.rowAt(pos.y), g.colAt(pos.x))
-                    },
+                    highlighted = !showTarget && p.id == selected,
                 )
-            },
-    ) {
-        @Suppress("UNUSED_VARIABLE")
-        val tick = version
-        val g = ShelfGeom(size.width, size.height, rows, cols, density)
-        drawGondola(g, colors)
-        val contributions = if (showTarget) targetScore.byProduct else score.byProduct
-        val placed = sales.products.mapNotNull { p ->
-            if (showTarget) {
-                Triple(p, sales.board.rowOf(target[p.id]), sales.board.colOf(target[p.id]))
-            } else {
-                state.placement(p.id)?.let { Triple(p, it.row, it.col) }
+                if (!showTarget && p.id == selected) drawPackRing(g, p, p.facings, row, col, colors.tokens.attention)
             }
         }
-        drawEmptySlots(g, occupiedMask(sales.board, placed), colors)
-        for ((p, row, col) in placed) {
-            val c = contributions[p.id]
-            drawPack(g, labeler, colors, names[p.id], texts.mark(p), p, p.facings, row, col)
-            drawShelfLabel(
-                g, labeler, colors, p, p.facings, row, col, texts.code(p), texts.badges(p),
-                value = signed(c),
-                valueColor = when {
-                    c > 0 -> colors.tokens.labelOk
-                    c < 0 -> colors.tokens.labelBad
-                    else -> null
-                },
-                highlighted = !showTarget && p.id == selected,
-            )
-            if (!showTarget && p.id == selected) drawPackRing(g, p, p.facings, row, col, colors.tokens.attention)
-        }
+        // Gözler ekran okuyucuya tek tek: ürün ve verim katkısı ("Peynir, +14"), çift
+        // dokunuş = dokunuş, raftan kaldırma özel eylem.
+        @Suppress("UNUSED_VARIABLE")
+        val tick = version
+        val shown = if (showTarget) targetScore.byProduct else score.byProduct
+        ShelfSlots(
+            rows = rows,
+            cols = cols,
+            contents = List(rows * cols) { i ->
+                val row = i / cols
+                val col = i % cols
+                val id = if (showTarget) {
+                    sales.products.indexOfFirst { p ->
+                        val at = target[p.id]
+                        sales.board.rowOf(at) == row && col >= sales.board.colOf(at) && col < sales.board.colOf(at) + p.facings
+                    }
+                } else {
+                    state.occupant(row, col)
+                }
+                if (id < 0) {
+                    slotContent(res, null)
+                } else {
+                    slotContent(res, spokenProduct(res, sales.products[id]), signed(shown[id]), if (!showTarget && id == selected) selectedText else null)
+                }
+            },
+            onActivate = { row, col -> currentTap(row, col) },
+            modifier = Modifier.matchParentSize(),
+            removeLabel = if (showTarget) null else removeText,
+            removable = List(rows * cols) { state.occupant(it / cols, it % cols) >= 0 },
+            onRemove = { row, col -> currentLong(row, col) },
+        )
     }
 }
 

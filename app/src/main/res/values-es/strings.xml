@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">a la altura de los ojos (estante 2)</string>
     <string name="reyon_shelf_bottom_at">en el estante de abajo</string>
     <string name="reyon_shelf_nth_at">en el estante %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, hueco %2$d por la izquierda: %3$s</string>
+    <string name="reyon_slot_empty">vacío</string>
+    <string name="reyon_slot_selected">seleccionado</string>
+    <string name="reyon_size_small">pequeño</string>
+    <string name="reyon_size_medium">mediano</string>
+    <string name="reyon_size_large">grande</string>
     <string name="reyon_clue_placed">%1$s está %2$s (dado)</string>
     <string name="reyon_clue_on_shelf">%1$s está %2$s</string>
     <string name="reyon_clue_in_slot">%1$s ocupa el hueco %2$d por la izquierda</string>

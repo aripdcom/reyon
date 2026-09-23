@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">i øjenhøjde (hylde 2)</string>
     <string name="reyon_shelf_bottom_at">på den nederste hylde</string>
     <string name="reyon_shelf_nth_at">på hylde %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, plads %2$d fra venstre: %3$s</string>
+    <string name="reyon_slot_empty">tom</string>
+    <string name="reyon_slot_selected">valgt</string>
+    <string name="reyon_size_small">lille</string>
+    <string name="reyon_size_medium">mellem</string>
+    <string name="reyon_size_large">stor</string>
     <string name="reyon_clue_placed">%1$s står %2$s (givet)</string>
     <string name="reyon_clue_on_shelf">%1$s står %2$s</string>
     <string name="reyon_clue_in_slot">%1$s fylder plads %2$d fra venstre</string>

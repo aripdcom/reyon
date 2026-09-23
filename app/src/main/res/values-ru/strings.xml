@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">на уровень глаз (полка 2)</string>
     <string name="reyon_shelf_bottom_at">на нижнюю полку</string>
     <string name="reyon_shelf_nth_at">на полку %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, место %2$d слева: %3$s</string>
+    <string name="reyon_slot_empty">пусто</string>
+    <string name="reyon_slot_selected">выбрано</string>
+    <string name="reyon_size_small">маленький</string>
+    <string name="reyon_size_medium">средний</string>
+    <string name="reyon_size_large">большой</string>
     <string name="reyon_clue_placed">%1$s стоит %2$s (дано)</string>
     <string name="reyon_clue_on_shelf">%1$s стоит %2$s</string>
     <string name="reyon_clue_in_slot">%1$s занимает место %2$d слева</string>

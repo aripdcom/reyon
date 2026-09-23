@@ -41,6 +41,7 @@ engellemek**. Asıl koruma, ölçülen doğruların değişmez testine çevrilme
 | Günün vakası günün formatında açılır, alıştırma formatı hatırlanır ve günün vakası onu kaydırmaz, "Nasıl çalışılır" kartı ilk girişte bir kez açılır | `ReyonHomeTest` |
 | Biten günün vakası düğmesinde mod adı sonucun yanında kırpılmaz (360 dp, yazı ölçeği 1,1; 8 dil) | `ReyonDailyButtonTest` |
 | Görevler'de format adı dilimine sığar, alıştırma alt yazısında kelime bölünmez (14 dil, 360 dp, yazı ölçeği 1,1) | `ReyonHomeTextTest` |
+| Raf gözleri ekran okuyucuya tek tek açık: Diziliş ve Satış'ta göz düğümüyle ürün yerleşir ve özel eylemle kalkar, göz içeriği güncel kalır; Denetim'de iki rafın her gözü okunur | `ReyonShelfSlotsTest` |
 | Düzey eşikleri (≥%90 · %75–89 · %50–74 · <%50), Sipariş bulguları, günün formatının dönüşü, "aynı vaka" kararı | `ReyonReportTest` |
 | Üç düğmeli alt satırın etiketleri 14 dilde kelime ortasından bölünmez (360 dp; yazı ölçeği 1,0 · 1,1 · 1,3) | `ReyonActionLabelTest` |
 | Metin kontrastı WCAG AA eşiğini tutar | `ThemeContrastTest` |
@@ -884,7 +885,7 @@ kullanıcının kararıyla reddedildi ve "bir daha sorma" durumuna alındı
 | Çubuklar ve alt pay | ✅ keşif açıkken durum ve gezinme çubuğu görünüyor, eylem satırının altında `ExplorationInset` payı var (ekranda y = 2186…2274) |
 | Etiketler | ✅ Görevler, dört mod ve raporlarda "etiketsiz 0" |
 | Sonuç kartları | ✅ ağaçta okunuyor: "Raf satışa hazır", raf verimi, düzey; haftalık raporda "Hafta grafiği: 1. gün +62, …" |
-| Raf gözleri | ❌ dört modda tuval tek düğüm (v1.0.1'den açık) |
+| Raf gözleri | ❌ dört modda tuval tek düğüm (v1.0.1'den açık) — düzeltildi, aşağıda |
 | Alt eylem satırı | ✅ elle: TalkBack'le dokunarak ve sağa kaydırarak ulaşılıyor, okunuyor (aşağıda). `uiautomator` ağacında ise sınırı sıfır: Diziliş 3, Denetim 1, Sipariş raporu 2 düğüm |
 | Y5 (360×640 dp) | ❌ TalkBack açıkken de son alıştırma satırı ağaçta 11 dp (y = 1096…1125), adı dışarıda |
 
@@ -913,3 +914,21 @@ satırın erişilebilirliği TalkBack'le elle sınanır. (`adb shell input tap`
 TalkBack'in keşfinden geçmiyor, dokunuş düğmeyi doğrudan çalıştırıyor; keşfi
 betikle taklit etmek mümkün değil.) v0.28.2'nin "TalkBack açıkken sınırı sıfır 0"
 maddesi bu yüzden kapandı: ölçüt yanlıştı, davranış doğru.
+
+**Düzeltildi: raf gözleri ekran okuyucuya açık** (yapı
+`sha256=20b64c9f8f8b067d3d6a5295c5e1f01949651f2dea48078ca19c0c9e5235977c`). Tuvalin
+üstünde her göz için görünmez bir düğüm var (`ShelfSlots`, tuvalle aynı `ShelfGeom`):
+konumu ve içeriği okunuyor, çift dokunuş parmak dokunuşuyla aynı işi yapıyor, raftan
+kaldırma özel eylem ("Raftan kaldır"). Ürün tür, marka ve boyla okunuyor, çünkü marka
+ve boy rafta yalnız harf ve noktayla görünüyor (Denetim'in marka/boy sapmaları,
+Diziliş'in boy akışı kuralı). Satış'ta göz ürünün verim katkısını da okuyor,
+Denetim'de bulunan sapmanın türünü. Boy adları 14 dilde yeni (`reyon_size_*`).
+
+Cihazda (TalkBack kapalı, `uiautomator`): Diziliş ve Satış'ta 12, Denetim'de 24 göz
+düğümü — "göz hizası (2. raf), soldan 2. göz: Şampuan, Meltem, küçük boy, +43",
+"en üst raf, soldan 1. göz: Gazoz, Toros, orta boy". Düğümlerin dokunma işleyicisi yok;
+parmakla seçilen ürün boş göze dokununca yine yerleşiyor. İlk sürümde göz içeriği
+işlev olarak veriliyordu ve durum değişince yenilenmiyordu (ürün kalktıktan sonra
+göz eski ürünü okuyordu); `ReyonShelfSlotsTest` bunu yakaladı, içerik artık hazır
+liste. TalkBack'le elle oynanarak doğrulanacak: tepsiden ürün seç, boş göze çift
+dokun, özel eylemlerle raftan kaldır.

@@ -333,18 +333,29 @@ private fun PlanCanvas(state: ReyonAuditState, width: Dp, height: Dp, onTap: (()
     val labeler = remember(textMeasurer, colors.packFamily) { BlockLabeler(textMeasurer, colors.packFamily) }
     val currentTap by rememberUpdatedState(onTap)
     val desc = appString(R.string.reyon_audit_plan_desc_fmt, audit.rows, audit.cols)
-    Canvas(
-        modifier = Modifier
-            .size(width, height)
-            .clip(RoundedCornerShape(6.dp))
-            .semantics { contentDescription = desc }
-            .then(if (onTap != null) Modifier.pointerInput(Unit) { detectTapGestures { currentTap?.invoke() } } else Modifier),
-    ) {
-        val g = ShelfGeom(size.width, size.height, audit.rows, audit.cols, density, rail = false)
-        drawGondola(g, colors)
-        for (it in audit.planItems) {
-            drawPack(g, labeler, colors, ReyonText.kind(res, it.product.kind), texts.mark(it.product), it.product, it.facings, it.row, it.col)
+    Box(modifier = Modifier.size(width, height)) {
+        Canvas(
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(6.dp))
+                .semantics { contentDescription = desc }
+                .then(if (onTap != null) Modifier.pointerInput(Unit) { detectTapGestures { currentTap?.invoke() } } else Modifier),
+        ) {
+            val g = ShelfGeom(size.width, size.height, audit.rows, audit.cols, density, rail = false)
+            drawGondola(g, colors)
+            for (it in audit.planItems) {
+                drawPack(g, labeler, colors, ReyonText.kind(res, it.product.kind), texts.mark(it.product), it.product, it.facings, it.row, it.col)
+            }
         }
+        // Planogramın gözleri ekran okuyucuya tek tek: olması gereken ürün, markası ve boyu.
+        ShelfSlots(
+            rows = audit.rows,
+            cols = audit.cols,
+            contents = List(audit.rows * audit.cols) { slotContent(res, audit.planItemAt(it / audit.cols, it % audit.cols)?.let { p -> spokenProduct(res, p.product) }) },
+            onActivate = { _, _ -> currentTap?.invoke() },
+            modifier = Modifier.matchParentSize(),
+            rail = false,
+        )
     }
 }
 
@@ -362,33 +373,52 @@ private fun AuditCanvas(state: ReyonAuditState, version: Int, missSlot: Int, wid
     val labeler = remember(textMeasurer, colors.packFamily) { BlockLabeler(textMeasurer, colors.packFamily) }
     val typeNames = DeviationKind.entries.map { stringResource(deviationName(it)) }
     val desc = appString(R.string.reyon_audit_board_desc_fmt, rows, cols, state.foundCount, audit.deviations.size)
-    Canvas(
-        modifier = Modifier
-            .size(width, height)
-            .clip(RoundedCornerShape(6.dp))
-            .semantics { contentDescription = desc }
-            .pointerInput(rows, cols) {
-                detectTapGestures { pos ->
-                    val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
-                    currentTap(g.rowAt(pos.y), g.colAt(pos.x))
-                }
-            },
-    ) {
+    Box(modifier = Modifier.size(width, height)) {
+        Canvas(
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(6.dp))
+                .semantics { contentDescription = desc }
+                .pointerInput(rows, cols) {
+                    detectTapGestures { pos ->
+                        val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
+                        currentTap(g.rowAt(pos.y), g.colAt(pos.x))
+                    }
+                },
+        ) {
+            @Suppress("UNUSED_VARIABLE")
+            val tick = version
+            val g = ShelfGeom(size.width, size.height, rows, cols, density)
+            drawGondola(g, colors)
+            drawEmptySlots(g, itemsMask(audit.board, audit.items), colors)
+            for (it in audit.items) {
+                drawPack(g, labeler, colors, ReyonText.kind(res, it.product.kind), texts.mark(it.product), it.product, it.facings, it.row, it.col)
+                drawShelfLabel(g, labeler, colors, it.product, it.facings, it.row, it.col, texts.code(it.product), texts.badges(it.product))
+            }
+            for ((i, d) in audit.deviations.withIndex()) {
+                if (!state.isFound(i)) continue
+                drawMaskRing(g, d.slotMask, colors.tokens.bad)
+                drawDeviationFlag(g, labeler, colors, d.slotMask, typeNames[d.kind.ordinal])
+            }
+            if (missSlot >= 0) drawMaskRing(g, 1 shl missSlot, colors.tokens.warn)
+        }
+        // Mağaza rafının gözleri: raftaki ürün ve, bulunduysa, sapmanın türü; çift dokunuş
+        // gözü işaretler (parmak dokunuşuyla aynı).
         @Suppress("UNUSED_VARIABLE")
         val tick = version
-        val g = ShelfGeom(size.width, size.height, rows, cols, density)
-        drawGondola(g, colors)
-        drawEmptySlots(g, itemsMask(audit.board, audit.items), colors)
-        for (it in audit.items) {
-            drawPack(g, labeler, colors, ReyonText.kind(res, it.product.kind), texts.mark(it.product), it.product, it.facings, it.row, it.col)
-            drawShelfLabel(g, labeler, colors, it.product, it.facings, it.row, it.col, texts.code(it.product), texts.badges(it.product))
-        }
-        for ((i, d) in audit.deviations.withIndex()) {
-            if (!state.isFound(i)) continue
-            drawMaskRing(g, d.slotMask, colors.tokens.bad)
-            drawDeviationFlag(g, labeler, colors, d.slotMask, typeNames[d.kind.ordinal])
-        }
-        if (missSlot >= 0) drawMaskRing(g, 1 shl missSlot, colors.tokens.warn)
+        ShelfSlots(
+            rows = rows,
+            cols = cols,
+            contents = List(rows * cols) { i ->
+                val row = i / cols
+                val col = i % cols
+                val bit = 1 shl audit.board.idx(row, col)
+                val found = audit.deviations.withIndex().firstOrNull { (i, d) -> state.isFound(i) && d.slotMask and bit != 0 }
+                slotContent(res, audit.itemAt(row, col)?.let { spokenProduct(res, it.product) }, found?.let { typeNames[it.value.kind.ordinal] })
+            },
+            onActivate = { row, col -> currentTap(row, col) },
+            modifier = Modifier.matchParentSize(),
+        )
     }
 }
 
