@@ -6,6 +6,22 @@
     <!-- Sonuç paylaşımı da izinsizdir: kart önbelleğe yazılır, sistemin paylaşım
          sayfasına yalnızca o tek dosya için okuma yetkisi verilir (FileProvider). -->
 
+    <!-- androidx.core (1.9+) kendi kütüphane manifestinden uygulamanın paket adıyla
+         imza düzeyinde bir izin tanımlar ve kullanır: ContextCompat.registerReceiver
+         RECEIVER_NOT_EXPORTED ile çağrılınca API 33 altında alıcıyı onunla korur.
+         Reyon hiç yayın alıcısı kaydetmiyor; v1.0.0'ın dex'inde registerReceiver de
+         iznin adı da hiç geçmiyordu (R8 o yolu budamıştı). İzin ölü ağırlıktı ama
+         manifestte durdukça yukarıdaki sözü bozuyordu; tools/apk_dogrula.py artık
+         Release'ten önce bunu yakalıyor. Biri ileride registerReceiver(…,
+         RECEIVER_NOT_EXPORTED) eklerse bu iki satır kaldırılmalı, yoksa API 26–32'de
+         "Permission … is required" ile çöker. -->
+    <permission
+        android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        tools:node="remove" />
+    <uses-permission
+        android:name="${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        tools:node="remove" />
+
     <application
         android:allowBackup="true"
         android:appCategory="productivity"
