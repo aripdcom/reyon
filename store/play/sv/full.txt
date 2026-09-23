@@ -1,11 +1,15 @@
-Planogramträning: fyll hyllan, revidera den, styr försäljning och lager.
+Hyllsimulator för dagligvaror: planogram, kontroll, försäljning, lager.
 
-Ställ upp — Tryck på en vara och sedan på en plats i hyllan; håll nere för att skicka tillbaka den till brickan. Varje regel i briefingen blir ✓ när den stämmer; reglerna leder till exakt en uppställning, utan gissningar.
-Kontrollera — Planen överst, den riktiga hyllan nederst. Tryck på de platser där hyllan avviker från planen: en förväxling, en tom plats, en främmande vara, fel märke eller fel storlek, ett överspill. En felaktig tryckning räknas som fel.
-Försäljning — Ställ upp varorna som du vill; poängen kommer från försäljningsreglerna (ögonhöjd, tungt längst ner, komplement bredvid varandra, rengöring borta från mat, kategori- och märkesblock). Målet är den bästa uppställning optimeraren hittade; når du dit får du tre stjärnor.
-Beställning — Hyllplanen ligger fast; ditt jobb är lagret. Bestäm varje dag hur många lådor du beställer per vara: beställningarna kommer nästa morgon, det som inte får plats går i retur, lager som står kvar på kvällen kostar lagerhållning, utgångna enheter är förlust. Målet är den vinst en expert med samma prognoser skulle nå.
+Uppgifter — Varje dag väntar dagens fall i alla fyra lägen: alla arbetar med samma hylla, och butiksformatet växlar dagligen mellan Närbutik, Supermarket och Stormarknad. I övningen väljer du formatet själv.
 
-0 annonser · 0 spårare · 0 behörigheter
+Ställ upp — Tryck på en vara och sedan på en plats i hyllan; håll nere för att ta bort den från hyllan igen. Varje regel i briefingen bockas av när den stämmer; reglerna leder till exakt en uppställning, utan gissningar.
+Kontrollera — Planogrammet överst, butikens hylla nederst. Tryck på de platser där hyllan avviker från planogrammet: en förväxling, en tom plats, en främmande vara, fel märke eller fel storlek, ett överspill. En felaktig tryckning räknas som feltryck.
+Försäljning — Ställ upp varorna som du vill; hyllavkastningen kommer från försäljningsreglerna (ögonhöjd, tungt längst ner, komplement bredvid varandra, rengöring borta från mat, kategori- och märkesblock). Expertens uppställning är den bästa optimeraren hittade; din hyllavkastning visas i förhållande till den.
+Beställning — Hyllplanen ligger fast; ditt jobb är lagret. Bestäm varje dag hur många lådor du beställer per vara: beställningarna kommer nästa morgon, det som inte får plats går i retur, lager som står kvar på kvällen kostar lagerhållning, utgångna enheter är förlust. Din vinst jämförs med en experts som ser samma prognoser.
+
+Resultaten är rapporter, inte poäng: ditt resultat i förhållande till expertens, en nivå (Expertnivå, Bra, Under utveckling, Svag) och ditt personbästa. Veckorapporten för beställning visar servicenivå, lageromsättning och iakttagelser.
+
+Ljust och mörkt tema · 0 annonser · 0 spårare · 0 behörigheter
 
 Språk: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
 

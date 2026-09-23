@@ -18,9 +18,10 @@ Sınırları ve dil kapsamını `tools/check_store.py` denetler; CI her itmede �
 
 ## Kategori
 
-**Uygulamalar → Eğitim.** Reyon bir raf düzeni (planogram) alıştırmasıdır: kuralları
-çıkarma, plana uygunluk denetimi, satış düzeni ve stok kararı. Oyunlar kategorisindeki
-başarım ve liderlik tablosu özellikleri kullanılmıyor, kayıp yok.
+**Uygulamalar → Eğitim.** Reyon hızlı tüketim (FMCG) ekipleri için bir raf simülatörüdür:
+planogram kurma, plana uygunluk denetimi, satış düzeni ve stok kararı. Sonuçlar puan değil
+rapor (uzmana göre yüzde, düzey, kişisel en iyi). Oyunlar kategorisindeki başarım ve liderlik
+tablosu özellikleri kullanılmıyor, kayıp yok.
 
 ## Diller
 
@@ -49,7 +50,12 @@ istediği için kopyalarken aşağıdaki karşılığı seçin.
 ## Metinler nereden geliyor
 
 `title.txt` ve `short.txt` elle yazıldı. `full.txt`'in gövdesi uygulamanın kendi
-çevirilerinden derlendi: dört modun anlatımı (`reyon_*_intro`), söz çipleri
-(`chip_no_*`), gizlilik özeti (`about_privacy_summary`) ve lisans notu
+çevirilerinden derlendi: dört modun anlatımı (`reyon_kind_*` + `reyon_*_intro`), söz
+çipleri (`chip_no_*`), gizlilik özeti (`about_privacy_summary`) ve lisans notu
 (`about_app_license`). Böylece mağaza metni uygulamayla aynı şeyi söylüyor ve
 14 dilde aynı özenle çevrilmiş oluyor. Dosyalar artık elle düzenlenebilir.
+
+1.1.0'da (FMCG tasarımı) başlık ve kısa açıklama "planogram alıştırması" yerine raf
+simülatörü oldu; tam açıklamaya Görevler paragrafı (günün vakası, mağaza formatları) ve
+rapor paragrafı (düzey adları `band_*`, rapor terimleri `report_*`) eklendi, yıldız ve
+hedef dili kalktı. Mod satırları yine uygulamanın güncel giriş metinlerinden geliyor.

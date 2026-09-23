@@ -1,11 +1,15 @@
-Planogrammiharjoitus: täytä hylly, tarkasta, hallitse myyntiä ja varastoa.
+Päivittäistavarakaupan hyllysimulaattori: planogrammit, myynti, varasto.
 
-Järjestä — Napauta tuotetta ja sitten paikkaa hyllyssä; pitkä painallus lähettää sen takaisin alustalle. Jokainen briiffin sääntö muuttuu ✓:ksi, kun se pitää paikkansa; säännöt johtavat täsmälleen yhteen järjestykseen, ilman arvailua.
-Tarkasta — Suunnitelma ylhäällä, oikea hylly alhaalla. Napauta paikkoja, joissa hylly poikkeaa suunnitelmasta: vaihdos, tyhjä paikka, vieras tuote, väärä merkki tai koko, ylivuoto. Väärä napautus lasketaan virheeksi.
-Myynti — Järjestä tuotteet haluamallasi tavalla; pisteet tulevat myyntisäännöistä (silmien korkeus, painavat alas, täydentävät vierekkäin, puhdistusaineet erilleen ruoasta, kategoria- ja merkkilohkot). Tavoite on paras järjestys, jonka optimoija löysi; siihen yltäminen antaa kolme tähteä.
-Tilaus — Hyllysuunnitelma on kiinteä; sinun työsi on varasto. Päätä joka päivä, montako laatikkoa tilaat tuotetta kohti: tilaukset saapuvat seuraavana aamuna, mikä ei mahdu palautuu, illaksi jäävä varasto maksaa varastointia, vanhentuneet yksiköt ovat tappiota. Tavoite on asiantuntijan voitto samoilla ennusteilla.
+Tehtävät — Joka päivä odottaa päivän tapaus kaikissa neljässä tilassa: kaikki työskentelevät saman hyllyn kanssa, ja myymäläformaatti vaihtuu päivittäin: Lähikauppa, Supermarket, Hypermarket. Harjoituksessa valitset formaatin itse.
 
-0 mainosta · 0 seurainta · 0 lupaa
+Järjestä — Napauta tuotetta ja sitten paikkaa hyllyssä; pitkä painallus poistaa sen hyllystä. Jokainen briiffin sääntö kuitataan, kun se pitää paikkansa; säännöt johtavat täsmälleen yhteen järjestykseen, ilman arvailua.
+Tarkasta — Planogrammi ylhäällä, myymälän hylly alhaalla. Napauta paikkoja, joissa hylly poikkeaa planogrammista: vaihdos, tyhjä paikka, vieras tuote, väärä merkki tai koko, ylivuoto. Väärä napautus lasketaan vääräksi merkinnäksi.
+Myynti — Järjestä tuotteet haluamallasi tavalla; hyllytuotto tulee myyntisäännöistä (silmien korkeus, painavat alas, täydentävät vierekkäin, puhdistusaineet erilleen ruoasta, kategoria- ja merkkilohkot). Asiantuntijan järjestys on paras, jonka optimoija löysi; hyllytuottosi näytetään suhteessa siihen.
+Tilaus — Hyllysuunnitelma on kiinteä; sinun työsi on varasto. Päätä joka päivä, montako laatikkoa tilaat tuotetta kohti: tilaukset saapuvat seuraavana aamuna, mikä ei mahdu palautuu, illaksi jäävä varasto maksaa varastointia, vanhentuneet yksiköt ovat tappiota. Voittoasi verrataan asiantuntijaan, joka näkee samat ennusteet.
+
+Tulokset ovat raportteja, eivät pisteitä: tuloksesi suhteessa asiantuntijaan, taso (Asiantuntijataso, Hyvä, Kehittyvä, Heikko) ja oma ennätyksesi. Tilauksen viikkoraportti näyttää: palvelutaso, varaston kierto, havainnot.
+
+Vaalea ja tumma teema · 0 mainosta · 0 seurainta · 0 lupaa
 
 Kieli: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
 

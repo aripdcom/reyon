@@ -1,1 +1,1 @@
-Planogramm-Training: Regal bestücken, prüfen, Umsatz und Bestand steuern.
+FMCG-Regalsimulator: Planogramme, Regalprüfung, Abverkauf und Bestand.

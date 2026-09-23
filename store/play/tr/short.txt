@@ -1,1 +1,1 @@
-Planogram alıştırması: rafı diz, planı denet, satışı ve stoğu yönet.
+FMCG raf simülatörü: planogram, raf denetimi, satış ve stok yönetimi.

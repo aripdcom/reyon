@@ -1,11 +1,15 @@
-Prática de planograma: arrume a prateleira, audite, venda e faça o pedido.
+Simulador de prateleira: planogramas, auditoria, vendas e estoque.
 
-Arrumar — Toque num produto e depois num espaço da prateleira; toque longo devolve ao tabuleiro. Cada regra do briefing vira ✓ quando é cumprida; as regras levam a uma única arrumação, sem chute.
-Auditar — O plano em cima, a prateleira real embaixo. Toque nos espaços em que a prateleira se desvia do plano: uma troca, um espaço vazio, um produto estranho, uma marca ou um tamanho errados, um transbordo. Um toque errado conta como erro.
-Vendas — Arrume os produtos como quiser; os pontos vêm das regras de venda (altura dos olhos, pesados embaixo, complementares lado a lado, limpeza longe da comida, blocos de categoria e de marca). A meta é a melhor arrumação que o otimizador encontrou; alcançá-la dá três estrelas.
-Pedidos — O plano da prateleira está fixo; seu trabalho é o estoque. Todo dia decida quantas caixas pedir por produto: os pedidos chegam na manhã seguinte, o que não cabe é devolvido, o estoque que sobra à noite custa armazenagem, as unidades vencidas são perda. A meta é o lucro de um especialista que vê as mesmas previsões.
+Tarefas — Todo dia, um caso do dia nos quatro modos: todos trabalham com a mesma prateleira, e o formato de loja alterna entre Mercearia, Supermercado e Hipermercado. Na prática, você escolhe o formato.
 
-0 anúncios · 0 rastreadores · 0 permissões
+Arrumar — Toque num produto e depois num espaço da prateleira; toque longo tira da prateleira. Cada regra do briefing é marcada quando é cumprida; as regras levam a uma única arrumação, sem chute.
+Auditar — O planograma em cima, a prateleira da loja embaixo. Toque nos espaços em que a prateleira se desvia do planograma: uma troca, um espaço vazio, um produto estranho, uma marca ou um tamanho errados, um transbordo. Um toque errado conta como marca errada.
+Vendas — Arrume os produtos como quiser; o rendimento da prateleira vem das regras de venda (altura dos olhos, pesados embaixo, complementares lado a lado, limpeza longe da comida, blocos de categoria e de marca). A arrumação do especialista é a melhor que o otimizador encontrou; o seu rendimento é mostrado em proporção a ela.
+Pedidos — O plano da prateleira está fixo; seu trabalho é o estoque. Todo dia decida quantas caixas pedir por produto: os pedidos chegam na manhã seguinte, o que não cabe é devolvido, o estoque que sobra à noite custa armazenagem, as unidades vencidas são perda. O seu lucro é comparado com o de um especialista que vê as mesmas previsões.
+
+Os resultados são relatórios, não pontos: seu resultado em relação ao do especialista, um nível (Nível especialista, Bom, A melhorar, Fraco) e sua melhor marca pessoal. O relatório semanal de pedidos mostra o nível de serviço, o giro de estoque e as constatações.
+
+Tema claro e escuro · 0 anúncios · 0 rastreadores · 0 permissões
 
 Idioma: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
 

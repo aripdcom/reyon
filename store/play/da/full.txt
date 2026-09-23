@@ -1,11 +1,15 @@
-Planogramtræning: fyld hylden, revidér den, styr salg og lager.
+Hyldesimulator til dagligvarer: planogrammer, kontrol, salg og lager.
 
-Stil op — Tryk på en vare og derefter på en plads på hylden; hold nede for at sende den tilbage på bakken. Hver regel i briefingen bliver ✓, når den holder; reglerne fører til præcis én opstilling, uden gætteri.
-Kontrollér — Planen øverst, den rigtige hylde nederst. Tryk på de pladser, hvor hylden afviger fra planen: en ombytning, en tom plads, en fremmed vare, et forkert mærke eller en forkert størrelse, en overløbning. Et forkert tryk tæller som fejl.
-Salg — Stil varerne op, som du vil; pointene kommer fra salgsreglerne (øjenhøjde, tunge nederst, komplementære ved siden af hinanden, rengøring væk fra mad, kategori- og mærkeblokke). Målet er den bedste opstilling, optimeringen fandt; når du rammer det, får du tre stjerner.
-Bestilling — Hyldeplanen ligger fast; dit job er lageret. Hver dag beslutter du, hvor mange kasser du bestiller pr. vare: bestillingerne kommer næste morgen, det der ikke er plads til returneres, lager der står tilbage om aftenen koster oplagring, udløbne enheder er tab. Målet er den fortjeneste, en ekspert med de samme prognoser ville opnå.
+Opgaver — Hver dag venter dagens case i alle fire tilstande: alle arbejder med den samme hylde, og butiksformatet skifter dagligt mellem Købmand, Supermarked og Hypermarked. I øvelsen vælger du selv formatet.
 
-0 reklamer · 0 sporere · 0 tilladelser
+Stil op — Tryk på en vare og derefter på en plads på hylden; hold nede for at tage den af hylden igen. Hver regel i briefingen bliver afkrydset, når den holder; reglerne fører til præcis én opstilling, uden gætteri.
+Kontrollér — Planogrammet øverst, butikkens hylde nederst. Tryk på de pladser, hvor hylden afviger fra planogrammet: en ombytning, en tom plads, en fremmed vare, et forkert mærke eller en forkert størrelse, en overløbning. Et forkert tryk tæller som fejltryk.
+Salg — Stil varerne op, som du vil; hyldeafkastet kommer fra salgsreglerne (øjenhøjde, tunge nederst, komplementære ved siden af hinanden, rengøring væk fra mad, kategori- og mærkeblokke). Ekspertens opstilling er den bedste, optimeringen fandt; dit hyldeafkast vises i forhold til den.
+Bestilling — Hyldeplanen ligger fast; dit job er lageret. Hver dag beslutter du, hvor mange kasser du bestiller pr. vare: bestillingerne kommer næste morgen, det der ikke er plads til returneres, lager der står tilbage om aftenen koster oplagring, udløbne enheder er tab. Din fortjeneste sammenlignes med en eksperts, der ser de samme prognoser.
+
+Resultater er rapporter, ikke point: dit resultat i forhold til eksperten, et niveau (Ekspertniveau, God, Under udvikling, Svag) og din personlige rekord. Ugerapporten for bestilling viser serviceniveau, lageromsætning og fund.
+
+Lyst og mørkt tema · 0 reklamer · 0 sporere · 0 tilladelser
 
 Sprog: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
 
