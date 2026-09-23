@@ -7,7 +7,7 @@
 -->
 <resources>
     <string name="app_name">Reyon</string>
-    <string name="app_tagline">Puzle de planograma: deduce del briefing la única colocación correcta del estante</string>
+    <string name="app_tagline">Simulador de estantes para gran consumo</string>
 
     <!-- Ortak -->
     <string name="chip_no_ads">0 anuncios</string>

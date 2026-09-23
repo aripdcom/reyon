@@ -7,7 +7,7 @@
 -->
 <resources>
     <string name="app_name">Reyon</string>
-    <string name="app_tagline">Planogram-opgave: udled den ene rigtige hyldeopstilling af briefingen</string>
+    <string name="app_tagline">Hyldesimulator til dagligvarehandlen</string>
 
     <!-- Ortak -->
     <string name="chip_no_ads">0 reklamer</string>

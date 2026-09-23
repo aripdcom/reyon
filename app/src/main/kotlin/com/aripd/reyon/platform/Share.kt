@@ -215,13 +215,26 @@ object ShareCard {
         val x = badge.right + 36f
         val title = textPaint(44f, INK, fonts.semibold)
         val tagline = textPaint(32f, MUTED, fonts.regular)
+        val tagText = fitLine(context.getString(R.string.app_tagline), tagline, WIDTH - PAD - x, minSize = 24f)
         val titleH = title.lineHeight()
         val tagH = tagline.lineHeight()
         val blockTop = badge.centerY() - (titleH + 8f + tagH) / 2f
         canvas.drawText(context.getString(R.string.app_name), x, blockTop - title.fontMetrics.ascent, title)
-        canvas.drawText(
-            context.getString(R.string.app_tagline), x, blockTop + titleH + 8f - tagline.fontMetrics.ascent, tagline,
-        )
+        canvas.drawText(tagText, x, blockTop + titleH + 8f - tagline.fontMetrics.ascent, tagline)
+    }
+
+    /**
+     * Tek satırlık metni genişliğe sığdırır: yazı önce [minSize]'a kadar
+     * küçülür, o da yetmezse metnin sonu "…" ile kesilir. Kartın sağ kenarından
+     * taşan metin paylaşılan görselde yarım kelime olarak kalırdı.
+     */
+    private fun fitLine(text: String, paint: Paint, maxWidth: Float, minSize: Float): String {
+        val width = paint.measureText(text)
+        if (width > maxWidth) paint.textSize = max(minSize, paint.textSize * maxWidth / width)
+        if (paint.measureText(text) <= maxWidth) return text
+        val ellipsis = "…"
+        val end = paint.breakText(text, true, maxWidth - paint.measureText(ellipsis), null)
+        return text.substring(0, end).trimEnd() + ellipsis
     }
 
     /**

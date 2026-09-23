@@ -7,7 +7,7 @@
 -->
 <resources>
     <string name="app_name">Reyon</string>
-    <string name="app_tagline">Quebra-cabeça de planograma: deduza do briefing a única arrumação correta da prateleira</string>
+    <string name="app_tagline">Simulador de prateleira para bens de consumo</string>
 
     <!-- Ortak -->
     <string name="chip_no_ads">0 anúncios</string>

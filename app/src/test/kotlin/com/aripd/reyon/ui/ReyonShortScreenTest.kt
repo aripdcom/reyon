@@ -1,5 +1,6 @@
 package com.aripd.reyon.ui
 
+import androidx.compose.ui.test.ComposeTimeoutException
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -83,8 +84,14 @@ class ReyonShortScreenTest {
         rule.reyonStartPractice(kind)
     }
 
-    private fun awaitNodes(prefix: String) = rule.waitUntil(timeoutMillis = 30_000) {
-        rule.onAllNodes(hasContentDescription(prefix, substring = true)).fetchSemanticsNodes().isNotEmpty()
+    private fun awaitNodes(prefix: String) {
+        try {
+            rule.waitUntil(timeoutMillis = 30_000) {
+                rule.onAllNodes(hasContentDescription(prefix, substring = true)).fetchSemanticsNodes().isNotEmpty()
+            }
+        } catch (e: ComposeTimeoutException) {
+            throw AssertionError("\"$prefix\" gelmedi · ekran: ${rule.screenDump()}", e)
+        }
     }
 
     /** Erişilebilirlik kutuları; aynı ön ekle başlayan her düğüm için biri. */

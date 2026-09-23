@@ -65,7 +65,7 @@ class ReyonHomeTest {
     fun thePracticeFormatIsRememberedAndUsed() {
         rule.setAppContent { ReyonScreen(highScore = 0L, onScore = {}, onExit = {}) }
         rule.reyonStartPractice(ReyonKind.PUZZLE, ReyonLevel.ORTA)
-        assertEquals(ReyonLevel.ORTA, store.practiceLevel())
+        assertEquals("kayıt: ${ReyonTestSupport.prefsDump()}", ReyonLevel.ORTA, store.practiceLevel())
         rule.waitUntil(timeoutMillis = 30_000) { trayShown() }
         val subtitle = str(R.string.case_subtitle_fmt, str(R.string.format_supermarket), 4, 5, str(R.string.mode_free))
         rule.onNodeWithText(subtitle).assertIsDisplayed()

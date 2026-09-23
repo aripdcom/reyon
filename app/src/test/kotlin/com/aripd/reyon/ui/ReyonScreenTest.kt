@@ -1,5 +1,6 @@
 package com.aripd.reyon.ui
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,6 +15,7 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aripd.reyon.R
 import com.aripd.reyon.engine.OrderRules
@@ -21,6 +23,7 @@ import com.aripd.reyon.engine.ReyonLevel
 import com.aripd.reyon.setAppContent
 import com.aripd.reyon.str
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
 import org.junit.After
@@ -66,13 +69,21 @@ class ReyonScreenTest {
             rule.onNodeWithText(str(R.string.reyon_hint)).performClick()
         }
         rule.onNodeWithText(str(R.string.reyon_done_title)).assertIsDisplayed()
+        val store = ReyonStore(ApplicationProvider.getApplicationContext<Context>())
+        assertNotNull(
+            "alıştırmanın sonucu Market için kaydedilmeli · kayıt: ${ReyonTestSupport.prefsDump()}",
+            store.lastPractice(ReyonKind.PUZZLE, ReyonLevel.KOLAY),
+        )
 
         // Görevler'e dönüş: alıştırma satırı son sonucu (süre) gösterir.
         rule.onNodeWithText(str(R.string.nav_tasks)).performClick()
         rule.waitUntil(timeoutMillis = 10_000) { rule.onAllNodesWithTag(HOME_TAG).fetchSemanticsNodes().isNotEmpty() }
         val row = rule.onNodeWithTag(homePracticeTag(ReyonKind.PUZZLE)).fetchSemanticsNode()
         val texts = row.config.getOrNull(SemanticsProperties.Text)?.map { it.text }.orEmpty()
-        assertTrue("son sonuç süre olarak yazılmalı: $texts", texts.any { Regex("^\\d+:\\d{2}$").matches(it) })
+        assertTrue(
+            "son sonuç süre olarak yazılmalı: $texts · ekran: ${rule.screenDump()} · kayıt: ${ReyonTestSupport.prefsDump()}",
+            texts.any { Regex("^\\d+:\\d{2}$").matches(it) },
+        )
     }
 
     @Test

@@ -7,7 +7,7 @@
 -->
 <resources>
     <string name="app_name">Reyon</string>
-    <string name="app_tagline">Planogrampuzzel: leid uit de briefing de enige juiste schapindeling af</string>
+    <string name="app_tagline">FMCG-simulator voor schapbeheer</string>
 
     <!-- Ortak -->
     <string name="chip_no_ads">0 advertenties</string>

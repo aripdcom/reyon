@@ -7,7 +7,7 @@
 -->
 <resources>
     <string name="app_name">Reyon</string>
-    <string name="app_tagline">Головоломка планограммы: выведи из брифа единственную верную раскладку полки</string>
+    <string name="app_tagline">Симулятор управления полкой для FMCG</string>
 
     <!-- Ortak -->
     <string name="chip_no_ads">0 рекламы</string>

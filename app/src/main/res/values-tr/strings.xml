@@ -7,7 +7,7 @@
 -->
 <resources>
     <string name="app_name">Reyon</string>
-    <string name="app_tagline">Planogram bulmacası: brifteki kurallardan rafın tek doğru dizilişini çıkar</string>
+    <string name="app_tagline">FMCG raf yönetimi simülatörü</string>
 
     <!-- Ortak -->
     <string name="chip_no_ads">0 reklam</string>

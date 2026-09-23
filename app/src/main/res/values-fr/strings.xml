@@ -7,7 +7,7 @@
 -->
 <resources>
     <string name="app_name">Reyon</string>
-    <string name="app_tagline">Casse-tête de planogramme : déduis du briefing la seule disposition correcte du rayon</string>
+    <string name="app_tagline">Simulateur de gestion de rayon PGC</string>
 
     <!-- Ortak -->
     <string name="chip_no_ads">0 pub</string>
