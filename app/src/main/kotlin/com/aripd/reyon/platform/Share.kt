@@ -261,7 +261,6 @@ object ShareCard {
             )
         }
     }
-    }
 
     private fun drawFooter(context: Context, canvas: Canvas, height: Int, accent: Int, fonts: Fonts) {
         val baseline = height - PAD
