@@ -58,24 +58,23 @@ object ShareCard {
     private const val DIR = "shares"
     private const val KEEP_MS = 60L * 60L * 1000L
 
-    /** İşaretin dikdörtgenleri: sol, üst, genişlik, yükseklik (simgeden). */
+    /** İşaretin ambalajları: sol, üst, genişlik, yükseklik, 36 birimlik kutuda (simgeden). */
     private data class Shape(val x: Float, val y: Float, val w: Float, val h: Float)
 
-    private val MARK = listOf(
-        Shape(2f, 0f, 10f, 10f),
-        Shape(14f, 0f, 10f, 10f),
-        Shape(26f, 0f, 10f, 10f),
-        Shape(0f, 10f, 48f, 4f),
-        Shape(2f, 18f, 10f, 10f),
-        Shape(26f, 18f, 10f, 10f),
-        Shape(38f, 18f, 10f, 10f),
-        Shape(0f, 28f, 48f, 4f),
-        Shape(2f, 36f, 10f, 10f),
-        Shape(14f, 36f, 10f, 10f),
-        Shape(26f, 36f, 10f, 10f),
-        Shape(38f, 36f, 10f, 10f),
-        Shape(0f, 46f, 48f, 4f),
+    private val MARK_PACKS = listOf(
+        Shape(6f, 4f, 7f, 7f),
+        Shape(15f, 6f, 6f, 5f),
+        Shape(23f, 3f, 7f, 8f),
+        Shape(6f, 15f, 9f, 6f),
+        Shape(24f, 14f, 6f, 7f),
+        Shape(6f, 25f, 6f, 6f),
+        Shape(14f, 24f, 7f, 7f),
+        Shape(23f, 26f, 7f, 5f),
     )
+
+    /** Dikkat sarısındaki ambalaj; raf çizgileri y = 12, 22, 32, x 4–32. */
+    private const val MARK_ACCENT = 2
+    private val MARK_SHELVES = floatArrayOf(12f, 22f, 32f)
 
     // Kart her zaman açık temada: paylaşılan görsel, alıcının temasından bağımsız okunur.
     private val BG = 0xFFF3F2EE.toInt()
@@ -209,7 +208,7 @@ object ShareCard {
     private fun drawHeader(context: Context, canvas: Canvas, accent: Int, fonts: Fonts) {
         val badge = RectF(PAD, PAD, PAD + HEADER_H, PAD + HEADER_H)
         canvas.drawRoundRect(badge, 28f, 28f, fill(accent))
-        drawMark(canvas, badge, fill(0xFFFFFFFF.toInt()))
+        drawMark(canvas, badge, 0xFFFFFFFF.toInt())
         canvas.drawRect(RectF(badge.right + 36f, badge.bottom - 6f, badge.right + 36f + 96f, badge.bottom), fill(ATTENTION))
 
         val x = badge.right + 36f
@@ -238,20 +237,30 @@ object ShareCard {
     }
 
     /**
-     * Raf izleği: üç çıta ve üstlerindeki ürünler, ortadaki rafta bir göz boş.
-     * Uygulama simgesiyle (res/drawable/ic_launcher_foreground.xml) birebir
-     * aynı desen; oranlar oradaki 48×50 birimlik kutudan alındı.
+     * Raf izleği: üç raf çizgisi ve üstlerindeki ambalajlar, biri dikkat
+     * sarısında, ortadaki rafta bir göz boş. Uygulama simgesiyle
+     * (res/drawable/ic_launcher_foreground.xml) ve Görevler'in BrandMark'ıyla
+     * aynı desen; ölçüler oradaki 36 birimlik kutudan.
      */
-    private fun drawMark(canvas: Canvas, box: RectF, paint: Paint) {
-        val scale = box.width() * 0.60f / 48f
-        val left = box.centerX() - 48f * scale / 2f
-        val top = box.centerY() - 50f * scale / 2f
-        for ((x, y, w, h) in MARK) {
-            canvas.drawRect(
-                left + x * scale, top + y * scale,
-                left + (x + w) * scale, top + (y + h) * scale, paint,
+    private fun drawMark(canvas: Canvas, box: RectF, ink: Int) {
+        val scale = box.width() * 0.62f / 36f
+        val left = box.centerX() - 18f * scale
+        val top = box.centerY() - 18f * scale
+        val shelf = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = ink
+            style = Paint.Style.STROKE
+            strokeWidth = 2.5f * scale
+            strokeCap = Paint.Cap.ROUND
+        }
+        for (y in MARK_SHELVES) canvas.drawLine(left + 4f * scale, top + y * scale, left + 32f * scale, top + y * scale, shelf)
+        val corner = 1.5f * scale
+        MARK_PACKS.forEachIndexed { i, (x, y, w, h) ->
+            canvas.drawRoundRect(
+                RectF(left + x * scale, top + y * scale, left + (x + w) * scale, top + (y + h) * scale),
+                corner, corner, fill(if (i == MARK_ACCENT) ATTENTION else ink),
             )
         }
+    }
     }
 
     private fun drawFooter(context: Context, canvas: Canvas, height: Int, accent: Int, fonts: Fonts) {

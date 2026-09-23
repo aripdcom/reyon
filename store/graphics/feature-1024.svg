@@ -1,33 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500">
   <defs>
-    <radialGradient id="glow" cx="24%" cy="50%" r="58%">
-      <stop offset="0" stop-color="#60A5FA" stop-opacity="0.17"/>
-      <stop offset="1" stop-color="#60A5FA" stop-opacity="0"/>
-    </radialGradient>
+    <style>@font-face{font-family:"Reyon Plex";src:url("../../app/src/main/res/font/ibm_plex_sans_semibold.ttf")}</style>
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M40,0 V40 H0" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+      <path d="M40,0 V40 H0" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
     </pattern>
   </defs>
-  <rect width="1024" height="500" fill="#0B0F1A"/>
+  <rect width="1024" height="500" fill="#0F4C5C"/>
   <rect width="1024" height="500" fill="url(#grid)"/>
-  <rect width="1024" height="500" fill="url(#glow)"/>
-  <g fill="#60A5FA">
-  <rect x="140.00" y="125.00" width="50.00" height="50.00"/>
-  <rect x="200.00" y="125.00" width="50.00" height="50.00"/>
-  <rect x="260.00" y="125.00" width="50.00" height="50.00"/>
-  <rect x="130.00" y="175.00" width="240.00" height="20.00"/>
-  <rect x="140.00" y="215.00" width="50.00" height="50.00"/>
-  <rect x="260.00" y="215.00" width="50.00" height="50.00"/>
-  <rect x="320.00" y="215.00" width="50.00" height="50.00"/>
-  <rect x="130.00" y="265.00" width="240.00" height="20.00"/>
-  <rect x="140.00" y="305.00" width="50.00" height="50.00"/>
-  <rect x="200.00" y="305.00" width="50.00" height="50.00"/>
-  <rect x="260.00" y="305.00" width="50.00" height="50.00"/>
-  <rect x="320.00" y="305.00" width="50.00" height="50.00"/>
-  <rect x="130.00" y="355.00" width="240.00" height="20.00"/>
+  <g transform="translate(120.00,125.00) scale(6.94444)">
+    <path d="M4,12H32 M4,22H32 M4,32H32" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M7.5,4h4a1.5,1.5 0 0 1 1.5,1.5v4a1.5,1.5 0 0 1 -1.5,1.5h-4a1.5,1.5 0 0 1 -1.5,-1.5v-4a1.5,1.5 0 0 1 1.5,-1.5z M16.5,6h3a1.5,1.5 0 0 1 1.5,1.5v2a1.5,1.5 0 0 1 -1.5,1.5h-3a1.5,1.5 0 0 1 -1.5,-1.5v-2a1.5,1.5 0 0 1 1.5,-1.5z M7.5,15h6a1.5,1.5 0 0 1 1.5,1.5v3a1.5,1.5 0 0 1 -1.5,1.5h-6a1.5,1.5 0 0 1 -1.5,-1.5v-3a1.5,1.5 0 0 1 1.5,-1.5z M25.5,14h3a1.5,1.5 0 0 1 1.5,1.5v4a1.5,1.5 0 0 1 -1.5,1.5h-3a1.5,1.5 0 0 1 -1.5,-1.5v-4a1.5,1.5 0 0 1 1.5,-1.5z M7.5,25h3a1.5,1.5 0 0 1 1.5,1.5v3a1.5,1.5 0 0 1 -1.5,1.5h-3a1.5,1.5 0 0 1 -1.5,-1.5v-3a1.5,1.5 0 0 1 1.5,-1.5z M15.5,24h4a1.5,1.5 0 0 1 1.5,1.5v4a1.5,1.5 0 0 1 -1.5,1.5h-4a1.5,1.5 0 0 1 -1.5,-1.5v-4a1.5,1.5 0 0 1 1.5,-1.5z M24.5,26h4a1.5,1.5 0 0 1 1.5,1.5v2a1.5,1.5 0 0 1 -1.5,1.5h-4a1.5,1.5 0 0 1 -1.5,-1.5v-2a1.5,1.5 0 0 1 1.5,-1.5z" fill="#FFFFFF"/>
+    <path d="M24.5,3h4a1.5,1.5 0 0 1 1.5,1.5v5a1.5,1.5 0 0 1 -1.5,1.5h-4a1.5,1.5 0 0 1 -1.5,-1.5v-5a1.5,1.5 0 0 1 1.5,-1.5z" fill="#FFD23F"/>
   </g>
-  <text x="396" y="258" textLength="300" lengthAdjust="spacingAndGlyphs"
-        font-family="DejaVu Sans, Liberation Sans, Arial, sans-serif"
-        font-size="76" font-weight="bold" fill="#F4F7FB">REYON</text>
-  <rect x="396" y="292" width="300" height="6" fill="#60A5FA"/>
+  <text x="430" y="262" textLength="278" lengthAdjust="spacingAndGlyphs"
+        font-family="Reyon Plex, DejaVu Sans, Liberation Sans, sans-serif"
+        font-size="96" font-weight="600" fill="#FFFFFF">Reyon</text>
+  <rect x="430" y="296" width="120" height="8" fill="#FFD23F"/>
 </svg>

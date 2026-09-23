@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Üç raf çıtası ve üstlerindeki ürünler: ortadaki rafta bir göz boş, o boşluk
-     uygulamanın işi. Şekiller `M x,y h W v H h -W z` biçiminde yazılır; mağaza
-     görsellerini üreten tools/gen_store_graphics.py bu biçimi ayrıştırıyor —
-     desen değişirse üretici de sınanmalı. Güvenli alan 108'lik tuvalde 18-90
-     arası; işaret 29-79 aralığında duruyor. -->
+<!-- Reyon işareti, onaylanan 1.1.0 taslağındaki marka simgesinin aynısı: üç raf
+     çizgisi, üstlerinde ambalajlar, biri dikkat sarısında; ortadaki rafta bir göz
+     boş, o boşluk uygulamanın işi. Görevler ekranının BrandMark'ı ve paylaşım
+     kartı aynı deseni çiziyor.
+
+     Desen 36 birimlik kutuda yazılır; "mark" grubu onu 108'lik tuvalin 29-79
+     aralığına taşır (güvenli çember 21-87). tools/gen_store_graphics.py mağaza
+     görsellerini bu gruptan üretiyor: grup adı, dönüşümü ve 36 birimlik kutu
+     değişirse üretici de sınanmalı. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path
-        android:fillColor="#60A5FA"
-        android:pathData="M32,29h10v10h-10z M44,29h10v10h-10z M56,29h10v10h-10z M30,39h48v4h-48z M32,47h10v10h-10z M56,47h10v10h-10z M68,47h10v10h-10z M30,57h48v4h-48z M32,65h10v10h-10z M44,65h10v10h-10z M56,65h10v10h-10z M68,65h10v10h-10z M30,75h48v4h-48z" />
+    <group
+        android:name="mark"
+        android:translateX="29"
+        android:translateY="29"
+        android:scaleX="1.38889"
+        android:scaleY="1.38889">
+        <path
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="2.5"
+            android:strokeLineCap="round"
+            android:pathData="M4,12H32 M4,22H32 M4,32H32" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M7.5,4h4a1.5,1.5 0 0 1 1.5,1.5v4a1.5,1.5 0 0 1 -1.5,1.5h-4a1.5,1.5 0 0 1 -1.5,-1.5v-4a1.5,1.5 0 0 1 1.5,-1.5z M16.5,6h3a1.5,1.5 0 0 1 1.5,1.5v2a1.5,1.5 0 0 1 -1.5,1.5h-3a1.5,1.5 0 0 1 -1.5,-1.5v-2a1.5,1.5 0 0 1 1.5,-1.5z M7.5,15h6a1.5,1.5 0 0 1 1.5,1.5v3a1.5,1.5 0 0 1 -1.5,1.5h-6a1.5,1.5 0 0 1 -1.5,-1.5v-3a1.5,1.5 0 0 1 1.5,-1.5z M25.5,14h3a1.5,1.5 0 0 1 1.5,1.5v4a1.5,1.5 0 0 1 -1.5,1.5h-3a1.5,1.5 0 0 1 -1.5,-1.5v-4a1.5,1.5 0 0 1 1.5,-1.5z M7.5,25h3a1.5,1.5 0 0 1 1.5,1.5v3a1.5,1.5 0 0 1 -1.5,1.5h-3a1.5,1.5 0 0 1 -1.5,-1.5v-3a1.5,1.5 0 0 1 1.5,-1.5z M15.5,24h4a1.5,1.5 0 0 1 1.5,1.5v4a1.5,1.5 0 0 1 -1.5,1.5h-4a1.5,1.5 0 0 1 -1.5,-1.5v-4a1.5,1.5 0 0 1 1.5,-1.5z M24.5,26h4a1.5,1.5 0 0 1 1.5,1.5v2a1.5,1.5 0 0 1 -1.5,1.5h-4a1.5,1.5 0 0 1 -1.5,-1.5v-2a1.5,1.5 0 0 1 1.5,-1.5z" />
+        <path
+            android:fillColor="#FFD23F"
+            android:pathData="M24.5,3h4a1.5,1.5 0 0 1 1.5,1.5v5a1.5,1.5 0 0 1 -1.5,1.5h-4a1.5,1.5 0 0 1 -1.5,-1.5v-5a1.5,1.5 0 0 1 1.5,-1.5z" />
+    </group>
 </vector>

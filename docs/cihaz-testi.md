@@ -37,7 +37,9 @@ engellemek**. Asıl koruma, ölçülen doğruların değişmez testine çevrilme
 | Denetimde plan ve raf 360×640'ta da aynı genişlikte ve ekran içinde; plan büyütme açılıp kapanır | `ReyonAuditLayoutTest` |
 | Satış panelinin tavanı tepsiye iki sıra bırakır; tavan ile tepsi payı 72–308 dp arasında birebir tümler | `ReyonLayoutTest` |
 | Kısa ekranda brif ve kural satırları okunur, taşan satır dokununca açılır | `ReyonShortScreenTest` |
-| Uygulama açılışta doğrudan Reyon'a girer; dişli ayarları açar | `ReyonAppTest` |
+| Uygulama Görevler ekranıyla açılır (dört modun günün vakası ve alıştırma satırı); dişli ayarları açar; tema seçimi ve sesin kapalı varsayılanı kalıcı | `ReyonAppTest` |
+| Günün vakası günün formatında açılır, alıştırma formatı hatırlanır, "Nasıl çalışılır" kartı ilk girişte bir kez açılır | `ReyonHomeTest` |
+| Düzey eşikleri (≥%90 · %75–89 · %50–74 · <%50), Sipariş bulguları, günün formatının dönüşü, "aynı vaka" kararı | `ReyonReportTest` |
 | Üç düğmeli alt satırın etiketleri 14 dilde kelime ortasından bölünmez (360 dp; yazı ölçeği 1,0 · 1,1 · 1,3) | `ReyonActionLabelTest` |
 | Metin kontrastı WCAG AA eşiğini tutar | `ThemeContrastTest` |
 
@@ -64,9 +66,10 @@ python3 tools/cihaz_testi.py reyon              # Reyon koşumu
 
 ## A · Cihaz koşumu
 
-Açılış, dört modun her birinde bir tur, geri dönüş, yeniden açılış. Aranan:
-çökme yok (`logcat AndroidRuntime:E` boş), tur kaldığı yerden sürüyor, rekor
-yazılıyor.
+Açılış (Görevler), dört modun her birinde bir tur, geri dönüş, yeniden açılış.
+Aranan: çökme yok (`logcat AndroidRuntime:E` boş), yarım vaka aynı satıra
+dokununca kaldığı yerden sürüyor, sonuç Görevler'de satırına yazılıyor (günün
+vakasında düğmede, alıştırmada "son sonuç" sütununda).
 
 ## B · Kare hızı
 
@@ -98,6 +101,35 @@ keşfin ekranın altına inebilmesi.
 14 dilin her birinde: metin taşması, kırpma, iki satıra bölünen düğme etiketi,
 Arapça'da sağdan sola yerleşim ve rakamların Latin kalması. En dar durum
 360×640 dp; ekran `wm size 1080x1920` + `wm density 480` ile oraya getirilir.
+
+### 1.1.0 · FMCG tasarımı için ek bakılacaklar
+
+1.1.0 arayüzü baştan değiştirdi (Görevler, raf etiketi, raporlar, açık/koyu tema,
+IBM Plex). A–F'ye ek olarak:
+
+- **Görevler:** günün vakası bugünün formatında (Market → Süpermarket →
+  Hipermarket döner), biten vaka düğmede onay ve sonuçla; alıştırma formatı
+  seçimi uygulama kapanıp açılınca duruyor. 360×640 dp'de son alıştırma satırına
+  kaydırmayla ulaşılıyor.
+- **"Nasıl çalışılır" kartı:** her modun ilk girişinde bir kez, sonra yalnız
+  bilgi simgesiyle.
+- **Tema:** Ayarlar'da Açık / Koyu / Telefonun ayarı; durum ve gezinme çubuğu
+  simgeleri temaya uyuyor (koyu temada açık simge). İki temada da raf etiketi
+  okunuyor.
+- **Raporlar:** Diziliş/Denetim süre ve kişisel en iyi; Satış uzmana göre yüzde
+  ve düzey; Sipariş haftalık rapor (grafik, hizmet düzeyi, stok devri, bulgular).
+  360 dp'de grafik ve bulgular kırpılmıyor.
+- **Paylaşım kartı:** açık zemin, yeni işaret, tanıtım satırı kart içinde.
+- **Ses:** temiz kurulumda kapalı.
+- **Simge:** başlatıcıda petrol zemin, yeni işaret; tema simgesi (Android 13)
+  tek renk.
+- **F:** Görevler'in format seçicisi ("Hipermarket" ve karşılıkları) ve KPI
+  başlıkları uzun dillerde (fi, nl, de, ru) 360 dp'de kırpılıyor mu.
+- **Play ekran görüntüleri** `store/screenshots/{tr,en}/` yeniden alınacak:
+  eskileri yıldızlı, menülü 1.0 arayüzü.
+
+`python3 tools/cihaz_testi.py reyon` 1.1.0'da turu Görevler'den açıyor: Market
+formatını seçip modun alıştırma satırına dokunuyor, ilk girişteki kartı kapatıyor.
 
 ## Sonuç kütüğü
 
