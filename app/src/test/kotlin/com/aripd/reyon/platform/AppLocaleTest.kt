@@ -64,12 +64,9 @@ class AppLocaleTest {
         // uygulamayı Türkçe görüyordu. Japonca hiçbir zaman listeye girmeyeceği
         // için yedeğin İngilizce olduğunu güvenle gösterir.
         val english = stringIn("en", R.string.app_tagline)
-        assertEquals("varsayılan res/values İngilizce olmalı", "Planogram puzzle: deduce the one correct shelf layout from the brief", english)
+        assertEquals("varsayılan res/values İngilizce olmalı", "FMCG shelf management simulator", english)
         assertEquals("desteklenmeyen dil İngilizce\'ye düşmeli", english, stringIn("ja", R.string.app_tagline))
-        assertEquals(
-            "Planogram bulmacası: brifteki kurallardan rafın tek doğru dizilişini çıkar",
-            stringIn("tr", R.string.app_tagline),
-        )
+        assertEquals("FMCG raf yönetimi simülatörü", stringIn("tr", R.string.app_tagline))
     }
 
     @Test
@@ -84,9 +81,9 @@ class AppLocaleTest {
 
     @Test
     fun sharedDailyModeStringsStayTranslatable() {
-        // Dört modun üçü günlük tur açıyor; metin ortak bölümde, her dilde.
-        assertEquals("Daily", stringIn("en", R.string.mode_daily))
-        assertEquals("Günlük", stringIn("tr", R.string.mode_daily))
+        // Dört modun hepsinde günün vakası var; metin ortak bölümde, her dilde.
+        assertEquals("Case of the day", stringIn("en", R.string.mode_daily))
+        assertEquals("Günün vakası", stringIn("tr", R.string.mode_daily))
     }
 
     @Test

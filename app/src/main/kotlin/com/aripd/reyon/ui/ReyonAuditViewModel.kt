@@ -59,7 +59,8 @@ class ReyonAuditViewModel(application: Application) : AndroidViewModel(applicati
     private val _records = MutableStateFlow(loadRecords())
     val records: StateFlow<Map<ReyonLevel, ReyonStore.AuditRecord>> = _records.asStateFlow()
 
-    private val _timerPaused = MutableStateFlow(false)
+    /** Süre yalnız ekran önündeyken işler; ekran açılınca LifecycleResumeEffect çözer. */
+    private val _timerPaused = MutableStateFlow(true)
     private var generation = 0
     private var runMode = ReyonMode.FREE
     private var runDay = 0L
@@ -73,25 +74,6 @@ class ReyonAuditViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     init {
-        val saved = store.restoreAudit()
-        if (saved != null) {
-            val token = ++generation
-            _generating.value = true
-            viewModelScope.launch {
-                val audit = withContext(Dispatchers.Default) { ReyonAuditGenerator.generate(saved.seed, saved.level) }
-                if (token != generation) return@launch
-                val st = ReyonAuditState(audit)
-                st.restore(saved.snapshot)
-                runMode = saved.mode
-                runDay = saved.day
-                runSeed = saved.seed
-                _elapsed.value = saved.elapsed
-                _state.value = st
-                _generating.value = false
-                if (st.isComplete) store.clearAudit()
-                bump()
-            }
-        }
         viewModelScope.launch {
             while (true) {
                 combine(_state, _timerPaused, _result) { st, paused, result ->
@@ -103,6 +85,47 @@ class ReyonAuditViewModel(application: Application) : AndroidViewModel(applicati
                     _elapsed.update { it + 1 }
                 }
             }
+        }
+    }
+
+    /**
+     * Görevler'den açılış: aynı vaka bellekte ya da kayıtta yarım duruyorsa sürer,
+     * yoksa yenisi başlar ([ReyonViewModel.open] ile aynı kural).
+     */
+    fun open(mode: ReyonMode, level: ReyonLevel) {
+        _mode.value = mode
+        _level.value = level
+        store.saveLast(level, mode)
+        val day = todayEpoch()
+        val st = _state.value
+        if (st != null && sameCase(runMode, runDay, st.audit.level, mode, level, day)) return
+        if (_generating.value && pending?.let { sameCase(it.mode, it.day, it.level, mode, level, day) } == true) return
+        val saved = store.restoreAudit()
+        if (saved != null && sameCase(saved.mode, saved.day, saved.level, mode, level, day)) restore(saved) else newGame()
+    }
+
+    private var pending: ReyonStore.SavedAudit? = null
+
+    private fun restore(saved: ReyonStore.SavedAudit) {
+        val token = ++generation
+        pending = saved
+        _generating.value = true
+        _result.value = null
+        _missSlot.value = -1
+        viewModelScope.launch {
+            val audit = withContext(Dispatchers.Default) { ReyonAuditGenerator.generate(saved.seed, saved.level) }
+            if (token != generation) return@launch
+            val st = ReyonAuditState(audit)
+            st.restore(saved.snapshot)
+            runMode = saved.mode
+            runDay = saved.day
+            runSeed = saved.seed
+            _elapsed.value = saved.elapsed
+            _state.value = st
+            _generating.value = false
+            pending = null
+            if (st.isComplete) store.clearAudit()
+            bump()
         }
     }
 
@@ -124,6 +147,7 @@ class ReyonAuditViewModel(application: Application) : AndroidViewModel(applicati
         val day = todayEpoch()
         val seed = if (mode == ReyonMode.DAILY) ReyonAuditGenerator.dailySeed(day) else Random.nextLong()
         val token = ++generation
+        pending = ReyonStore.SavedAudit(seed, level, mode, day, IntArray(0), 0)
         _generating.value = true
         _result.value = null
         _missSlot.value = -1
@@ -136,6 +160,7 @@ class ReyonAuditViewModel(application: Application) : AndroidViewModel(applicati
             _elapsed.value = 0
             _state.value = ReyonAuditState(audit)
             _generating.value = false
+            pending = null
             persist()
             bump()
         }
@@ -146,6 +171,7 @@ class ReyonAuditViewModel(application: Application) : AndroidViewModel(applicati
     fun toMenu() {
         persist()
         generation++
+        pending = null
         _generating.value = false
         _state.value = null
         _result.value = null
@@ -203,6 +229,7 @@ class ReyonAuditViewModel(application: Application) : AndroidViewModel(applicati
                 _records.value = loadRecords()
             }
             if (clean && store.saveAuditBest(st.audit.level, time)) record = true
+            if (!daily) store.saveLastPractice(ReyonKind.AUDIT, st.audit.level, time, st.mistakes)
             _result.value = AuditResult(time, st.mistakes, st.hintsUsed, record, daily, runDay)
             store.clearAudit()
         } else {

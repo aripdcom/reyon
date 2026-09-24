@@ -88,13 +88,22 @@ object ReyonText {
         },
     )
 
-    fun level(res: Resources, level: ReyonLevel): String = res.getString(
-        when (level) {
-            ReyonLevel.KOLAY -> R.string.difficulty_easy
-            ReyonLevel.ORTA -> R.string.difficulty_medium
-            ReyonLevel.ZOR -> R.string.difficulty_hard
+    /** Mağaza formatının adı: Market, Süpermarket, Hipermarket. */
+    fun level(res: Resources, level: ReyonLevel): String = res.getString(formatName(level))
+
+    /** Raf etiketindeki kategori kodu: iki harf, dilin kendi kısaltması ("KH", "BR"). */
+    fun categoryCode(res: Resources, category: Category): String = res.getString(
+        when (category) {
+            Category.ICECEK -> R.string.reyon_cat_code_icecek
+            Category.ATISTIRMALIK -> R.string.reyon_cat_code_atistirmalik
+            Category.KAHVALTILIK -> R.string.reyon_cat_code_kahvaltilik
+            Category.TEMIZLIK -> R.string.reyon_cat_code_temizlik
+            Category.BAKIM -> R.string.reyon_cat_code_bakim
         },
     )
+
+    /** Ambalajın sol üstündeki marka işareti: markanın baş harfi. */
+    fun brandMark(res: Resources, brand: Brand): String = brand(res, brand).take(1)
 
     /** Raf adı, bulunma hâlinde: "en üst rafta", "göz hizasında (2. raf)", "3. rafta", "en alt rafta". */
     fun shelfAt(res: Resources, row: Int, rows: Int): String = when {

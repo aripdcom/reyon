@@ -1,1 +1,1 @@
-Planogram practice: arrange the shelf, audit it, run sales and ordering.
+FMCG shelf simulator: planograms, shelf audits, sales and stock.

@@ -1,33 +1,36 @@
 # Reyon
 
-Android için planogram alıştırması: raf dizilişini kurallardan çıkar, planı denet,
-satış düzenini kur, stok kararını ver. Dört mod, 14 dil, çevrimdışı; reklam yok,
-izleyici yok, tek bir izin bile yok.
+Android için FMCG raf simülatörü: planogramı kur, rafı denetle, raf verimini artır,
+haftalık stoğu yönet. Dört mod, 14 dil, çevrimdışı; reklam yok, izleyici yok, tek bir
+izin bile yok.
 
 [![CI](https://github.com/aripdcom/reyon/actions/workflows/ci.yml/badge.svg)](https://github.com/aripdcom/reyon/actions/workflows/ci.yml)
 
-- **Site:** https://aripdcom.github.io/reyon
-- **Gizlilik:** https://aripdcom.github.io/reyon/gizlilik.html
+- **Site:** https://reyon.aripd.com
+- **Gizlilik:** https://reyon.aripd.com/gizlilik.html
 - **APK:** [en yeni sürüm](https://github.com/aripdcom/reyon/releases/latest/download/reyon.apk)
 
 ## Dört mod
 
 | Mod | İş |
 | --- | --- |
-| **Diziliş** | Brifteki kurallardan rafın tek doğru dizilişini çıkar. Her kural tutunca ✓ olur; tahmin gerekmez, çıkarım yeter. |
-| **Denetim** | Üstte planogram, altta gerçek raf. Sapmaları bul: yer değişimi, boş göz, yabancı ürün, yanlış marka ya da boy, taşma. |
-| **Satış** | Rafı istediğin gibi diz; puan satış kurallarından gelir (göz hizası, ağırlar alta, tamamlayıcılar yan yana, temizlik gıdadan uzak, kategori ve marka blokları). Hedef, iyileştiricinin bulduğu en iyi diziliş. |
-| **Sipariş** | Plan hazır, iş stokta. Her gün ürün başına kaç koli isteyeceğine karar ver: iade, bekleme maliyeti ve fire hesaba girer. Hedef, aynı tahminleri gören uzmanın kârı. |
+| **Diziliş** | Brifteki kurallardan planogramı kur. Kurallar tek bir dizilişe götürür; tahmin gerekmez, çıkarım yeter. |
+| **Denetim** | Üstte planogram, altta mağaza rafı. Sapmaları işaretle: yer değişimi, boş göz, yabancı ürün, yanlış marka ya da boy, taşma. |
+| **Satış** | Rafı satış kurallarına göre diz (göz hizası, ağırlar alta, tamamlayıcılar yan yana, temizlik gıdadan uzak, kategori ve marka blokları). Raf verimi, iyileştiricinin bulduğu uzman dizilişiyle karşılaştırılır. |
+| **Sipariş** | Planogram hazır, iş stokta. Bir hafta boyunca her gün ürün başına koli siparişi ver: iade, bekleme maliyeti ve fire hesaba girer. Haftalık rapor kârı, hizmet düzeyini ve stok devrini aynı tahminleri gören uzmanla karşılaştırır. |
 
-Her modun günlük turu (cihaz tarihinden üretilir, sunucu yok) ve serbest turu var;
-zorluk seçilir.
+Uygulama Görevler ekranında açılır: her gün dört modda günün vakası (cihaz tarihinden
+üretilir, sunucu yok; format günden güne Market, Süpermarket, Hipermarket arasında
+döner) ve seçilen mağaza formatında alıştırma. Sonuçlar puan değil rapor: uzmana göre
+yüzde, düzey (Uzman düzeyi, İyi, Gelişmeli, Zayıf) ve kişisel en iyi.
 
 ## Yapı
 
 ```
 engine/    saf Kotlin/JVM motor — hiçbir bağımlılığı yok (üretici, çözücü, kurallar,
            denetim, satış puanı, sipariş simülasyonu) + testler + denge ölçümü
-app/       Android uygulaması: Compose arayüz, 14 dil, paylaşım kartı, ayarlar
+app/       Android uygulaması: Compose arayüz (açık/koyu tema, IBM Plex), 14 dil,
+           paylaşım kartı, ayarlar
 site/      proje sayfası ve 14 dilde gizlilik politikası (GitHub Pages)
 store/     Play listeleme metinleri, görseller, form cevapları
 tools/     metin/mağaza/site denetimleri, yayın paketi doğrulaması, gizlilik ve
@@ -67,7 +70,7 @@ python3 tools/apk_dogrula.py     # dist/: SHA256, paket/sürüm, izin yokluğu, 
 
 Uygulama ağa hiç bağlanmaz ve manifestte tek bir `uses-permission` taşımaz.
 İlerleme ve ayarlar yalnızca cihazda, uygulamanın özel alanında durur; uygulama
-kaldırılınca gider. Ayrıntı: [gizlilik politikası](https://aripdcom.github.io/reyon/gizlilik.html).
+kaldırılınca gider. Ayrıntı: [gizlilik politikası](https://reyon.aripd.com/gizlilik.html).
 
 ## Lisans
 

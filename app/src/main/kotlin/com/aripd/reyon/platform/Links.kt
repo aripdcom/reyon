@@ -11,15 +11,17 @@ import com.aripd.reyon.R
 object Links {
     const val CONTACT = "reyon@aripd.com"
 
-    // Site şimdilik proje sayfasında; kendi alan adı bağlanınca burası ve
-    // tools/check_site.py'deki karşılığı birlikte değişir.
-    const val SITE = "https://aripdcom.github.io/reyon"
-    const val PRIVACY = "https://aripdcom.github.io/reyon/gizlilik.html"
+    // Site kendi alan adında (GitHub Pages, Settings → Pages'te tanımlı özel alan
+    // adı). tools/check_site.py sitedeki kendi bağlantıların bu adla uyuştuğunu
+    // denetliyor; alan adı değişirse ikisi birlikte değişir.
+    const val SITE = "https://reyon.aripd.com"
+    const val PRIVACY = "https://reyon.aripd.com/gizlilik.html"
     const val SOURCE = "https://github.com/aripdcom/reyon"
     const val REPORT = "https://github.com/aripdcom/reyon/issues/new"
     const val LICENSE = "https://github.com/aripdcom/reyon/blob/main/LICENSE"
     const val ANDROIDX = "https://developer.android.com/jetpack"
     const val KOTLIN = "https://kotlinlang.org"
+    const val PLEX = "https://github.com/IBM/plex"
 
     /**
      * E-posta uygulamasını adresi doldurulmuş olarak açar.

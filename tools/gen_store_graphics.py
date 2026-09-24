@@ -2,9 +2,10 @@
 """Play Console'un istediği iki görseli üretir: simge ve öne çıkan görsel.
 
 Kaynak, uygulamanın kendi simgesidir: `res/drawable/ic_launcher_foreground.xml`
-içindeki raf izleği (üç tahta ve ürün blokları), `res/values/colors.xml`
-içindeki arka plan rengiyle. Değerler oradan okunur, elle kopyalanmaz — simge
-değişirse görseller de değişir.
+içindeki "mark" grubu (üç raf çizgisi, ambalajlar, biri dikkat sarısında),
+`res/values/colors.xml` içindeki arka plan rengiyle. Değerler oradan okunur, elle
+kopyalanmaz — simge değişirse görseller de değişir. Yazı, uygulamanın kendi IBM
+Plex dosyasından (`res/font/ibm_plex_sans_semibold.ttf`) çizilir.
 
 Çıktılar (store/graphics/):
   icon-512.png      512×512, 32 bit. Play kendi maskesini uygular
@@ -25,6 +26,11 @@ import zlib
 OUT = 'store/graphics'
 FOREGROUND = 'app/src/main/res/drawable/ic_launcher_foreground.xml'
 COLORS = 'app/src/main/res/values/colors.xml'
+FONT = 'app/src/main/res/font/ibm_plex_sans_semibold.ttf'
+
+# İşaret 36 birimlik kutuda yazılır; simgedeki "mark" grubu onu tuvale taşır.
+MARK_BOX = 36.0
+ATTENTION = '#FFD23F'
 
 # Uyarlanır simgenin 108 birimlik tuvalinde görünen alan ortadaki 72 birim;
 # mağaza simgesi o alanın tamamını kaplar.
@@ -49,88 +55,97 @@ CHROME_CANDIDATES = [
 MARKER = (255, 0, 255)
 
 
-def icon_source():
-    """Simge çiziminden (arka plan, renk, dikdörtgenler).
+def attr(tag, name, default=None):
+    m = re.search(r'android:' + name + r'="([^"]*)"', tag)
+    return m.group(1) if m else default
 
-    Her şekil `M x,y h W v H h -W z`: raf çıtaları uzun ve ince, ürünler kare.
-    Boyut şekil başına okunur, tek bir kenar varsayılmaz.
+
+def icon_source():
+    """Simge çiziminden (arka plan, işaret grubunun dönüşümü, SVG yolları).
+
+    VectorDrawable'ın pathData'sı SVG yol diliyle aynı; yollar olduğu gibi
+    taşınır. Grubun dışında şekil olmamalı ve yolların başlangıç noktaları
+    36 birimlik kutunun içinde kalmalı: öne çıkan görsel işaretin yerini bu
+    kutudan hesaplıyor.
     """
     src = open(FOREGROUND, encoding='utf-8').read()
-    color = re.search(r'android:fillColor="(#[0-9A-Fa-f]+)"', src).group(1)
-    data = re.search(r'android:pathData="([^"]+)"', src).group(1)
-    shapes = [(float(x), float(y), float(w), float(h))
-              for x, y, w, h in re.findall(r'M([\d.]+),([\d.]+)h([\d.]+)v([\d.]+)', data)]
-    if not shapes:
-        sys.exit(f'{FOREGROUND}: beklenen `M x,y h W v H` biçiminde şekil yok')
+    group = re.search(r'<group\b([^>]*android:name="mark"[^>]*)>(.*?)</group>', src, re.S)
+    if not group:
+        sys.exit(f'{FOREGROUND}: "mark" grubu yok')
+    outside = src[:group.start()] + src[group.end():]
+    if '<path' in outside:
+        sys.exit(f'{FOREGROUND}: "mark" grubunun dışında şekil var; üretici onu çizmez')
+    head = group.group(1)
+    transform = (float(attr(head, 'translateX', '0')), float(attr(head, 'translateY', '0')),
+                 float(attr(head, 'scaleX', '1')), float(attr(head, 'scaleY', '1')))
+    paths = []
+    for tag in re.findall(r'<path\b([^>]*)/>', group.group(2), re.S):
+        data = attr(tag, 'pathData')
+        for x, y in re.findall(r'M([\d.]+),([\d.]+)', data):
+            if not (0 <= float(x) <= MARK_BOX and 0 <= float(y) <= MARK_BOX):
+                sys.exit(f'{FOREGROUND}: ({x},{y}) {MARK_BOX:g} birimlik kutunun dışında')
+        fill, stroke = attr(tag, 'fillColor'), attr(tag, 'strokeColor')
+        style = f'fill="{fill}"' if fill else 'fill="none"'
+        if stroke:
+            style += (f' stroke="{stroke}" stroke-width="{attr(tag, "strokeWidth", "1")}"'
+                      f' stroke-linecap="{attr(tag, "strokeLineCap", "butt")}"')
+        paths.append(f'<path d="{data}" {style}/>')
+    if not paths:
+        sys.exit(f'{FOREGROUND}: "mark" grubunda yol yok')
     background = re.search(r'name="ic_launcher_background">(#[0-9A-Fa-f]+)<',
                            open(COLORS, encoding='utf-8').read()).group(1)
-    return background, color, shapes
+    return background, transform, paths
 
 
-def blocks(shapes, scale, dx, dy):
-    """Şekilleri hedef ölçeğe taşınmış <rect> dizisine çevirir."""
-    return '\n'.join(
-        f'  <rect x="{x * scale + dx:.2f}" y="{y * scale + dy:.2f}" '
-        f'width="{w * scale:.2f}" height="{h * scale:.2f}"/>'
-        for x, y, w, h in shapes)
+def mark_group(paths, x, y, size):
+    """İşareti (x, y) köşesine, size piksel kenarlı kutuya yerleştiren <g>."""
+    scale = size / MARK_BOX
+    body = '\n'.join('    ' + p for p in paths)
+    return f'  <g transform="translate({x:.2f},{y:.2f}) scale({scale:.5f})">\n{body}\n  </g>'
 
 
-def bounds(shapes):
-    """(sol, üst, genişlik, yükseklik) — şekillerin kapladığı kutu."""
-    left = min(x for x, _, _, _ in shapes)
-    top = min(y for _, y, _, _ in shapes)
-    right = max(x + w for x, _, w, _ in shapes)
-    bottom = max(y + h for _, y, _, h in shapes)
-    return left, top, right - left, bottom - top
-
-
-def icon_svg(background, color, shapes):
+def icon_svg(background, transform, paths):
+    """512×512: uyarlanır simgenin görünen 72 birimi (18–90) tüm kareyi kaplar."""
     side = 512
-    scale = side / VISIBLE
-    left, top, width, height = bounds(shapes)
-    dx = (side - width * scale) / 2 - left * scale
-    dy = (side - height * scale) / 2 - top * scale
+    unit = side / VISIBLE
+    tx, ty, sx, _ = transform
+    x = (tx - (CANVAS - VISIBLE) / 2) * unit
+    y = (ty - (CANVAS - VISIBLE) / 2) * unit
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{side}" height="{side}">\n'
             f'  <rect width="{side}" height="{side}" fill="{background}"/>\n'
-            f'  <g fill="{color}">\n{blocks(shapes, scale, dx, dy)}\n  </g>\n'
+            f'{mark_group(paths, x, y, MARK_BOX * sx * unit)}\n'
             f'</svg>\n')
 
 
-def feature_svg(background, color, shapes):
+def feature_svg(background, transform, paths, font_url):
     """1024×500 öne çıkan görsel. Uygulamanın adından başka metin yok: tek
     görsel 14 dilin hepsinde geçerli olsun diye.
 
-    Yazının genişliği `textLength` ile çivilenir; böylece DejaVu kurulu
-    olmayan bir makinede de yerleşim aynı çıkar, yazı tipi değişse bile
-    taşma olmaz.
+    Yazı uygulamanın IBM Plex dosyasıyla çizilir; genişliği `textLength` ile
+    çivili, yazı tipi yüklenmese bile yerleşim kaymaz. Altındaki sarı çizgi
+    paylaşım kartındaki gibi dikkat rengi.
     """
     w, h = 1024, 500
-    mark = 240.0
-    left, top, width, height = bounds(shapes)
-    scale = mark / width
-    dx = 130 - left * scale
-    dy = (h - height * scale) / 2 - top * scale
-    text_x, text_w = 396, 300
+    mark = 250.0
+    x, y = 120.0, (h - mark) / 2
+    # 278 px: "Reyon"un IBM Plex Sans SemiBold 96 px'teki doğal genişliği
+    # (ilerleme genişlikleri toplamı 2897/1000 em). Yazı tipi yüklenince harfler
+    # esnemez; yüklenmezse yedek yazı aynı genişliğe oturur.
+    text_x, text_w = 430, 278
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}">
   <defs>
-    <radialGradient id="glow" cx="24%" cy="50%" r="58%">
-      <stop offset="0" stop-color="{color}" stop-opacity="0.17"/>
-      <stop offset="1" stop-color="{color}" stop-opacity="0"/>
-    </radialGradient>
+    <style>@font-face{{font-family:"Reyon Plex";src:url("{font_url}")}}</style>
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M40,0 V40 H0" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+      <path d="M40,0 V40 H0" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
     </pattern>
   </defs>
   <rect width="{w}" height="{h}" fill="{background}"/>
   <rect width="{w}" height="{h}" fill="url(#grid)"/>
-  <rect width="{w}" height="{h}" fill="url(#glow)"/>
-  <g fill="{color}">
-{blocks(shapes, scale, dx, dy)}
-  </g>
-  <text x="{text_x}" y="258" textLength="{text_w}" lengthAdjust="spacingAndGlyphs"
-        font-family="DejaVu Sans, Liberation Sans, Arial, sans-serif"
-        font-size="76" font-weight="bold" fill="#F4F7FB">REYON</text>
-  <rect x="{text_x}" y="292" width="{text_w}" height="6" fill="{color}"/>
+{mark_group(paths, x, y, mark)}
+  <text x="{text_x}" y="262" textLength="{text_w}" lengthAdjust="spacingAndGlyphs"
+        font-family="Reyon Plex, DejaVu Sans, Liberation Sans, sans-serif"
+        font-size="96" font-weight="600" fill="#FFFFFF">Reyon</text>
+  <rect x="{text_x}" y="296" width="120" height="8" fill="{ATTENTION}"/>
 </svg>
 '''
 
@@ -243,13 +258,14 @@ def main():
     if not chrome:
         sys.exit('Chromium bulunamadı; yolu REYON_CHROME ile ver')
     os.makedirs(OUT, exist_ok=True)
-    background, color, shapes = icon_source()
-    left, top, width, height = bounds(shapes)
-    print(f'simge kaynağı: {len(shapes)} şekil, {width:g}×{height:g} birim, '
-          f'{color} / {background}')
+    background, transform, paths = icon_source()
+    # Göreli yol: SVG depoda makineden bağımsız kalsın; sayfa da aynı klasörden açılıyor.
+    font_url = os.path.relpath(FONT, OUT)
+    print(f'simge kaynağı: {len(paths)} yol, işaret {MARK_BOX * transform[2]:.0f} birim, '
+          f'zemin {background}')
     for name, svg, (w, h), rgba in (
-        ('icon-512', icon_svg(background, color, shapes), (512, 512), True),
-        ('feature-1024', feature_svg(background, color, shapes), (1024, 500), False),
+        ('icon-512', icon_svg(background, transform, paths), (512, 512), True),
+        ('feature-1024', feature_svg(background, transform, paths, font_url), (1024, 500), False),
     ):
         svg_path = os.path.join(OUT, f'{name}.svg')
         png_path = os.path.join(OUT, f'{name}.png')

@@ -1,11 +1,15 @@
-Planogram practice: arrange the shelf, audit it, run sales and ordering.
+FMCG shelf simulator: planograms, shelf audits, sales and stock.
 
-Arrange — Tap a product, then tap a slot on the shelf; long-press to send it back to the tray. Each brief rule turns ✓ when it holds; the rules lead to a single layout, no guessing.
-Audit — Plan on top, the real shelf below. Tap the slots where the shelf deviates from the plan: a swap, an empty slot, a foreign product, a wrong brand or size, a spill. A wrong tap counts as a mistake.
-Sales — Arrange the products as you like; points come from the sales rules (eye level, heavy items low, complements side by side, cleaning away from food, category and brand blocks). The target is the best layout the optimizer found; reaching it earns three stars.
-Ordering — The shelf plan is set; your job is stock. Each day decide how many cases to order per product: orders arrive the next morning, what does not fit is returned, stock left at night pays holding, expired units are waste. The target is the profit of an expert seeing the same forecasts.
+Tasks — A case of the day in each of the four modes: everyone works the same shelf, and the store format rotates daily between Market, Supermarket and Hypermarket. In practice you pick the format.
 
-0 ads · 0 trackers · 0 permissions
+Arrange — Tap a product, then tap a slot on the shelf; long-press to take it off the shelf. Each brief rule is ticked when it holds; the rules lead to a single layout, no guessing.
+Audit — Planogram on top, the store shelf below. Tap the slots where the shelf deviates from the planogram: a swap, an empty slot, a foreign product, a wrong brand or size, a spill. A wrong tap counts as a wrong mark.
+Sales — Arrange the products as you like; the shelf yield comes from the sales rules (eye level, heavy items low, complements side by side, cleaning away from food, category and brand blocks). The expert’s layout is the best the optimizer found; your shelf yield is shown as a share of it.
+Ordering — The shelf plan is set; your job is stock. Each day decide how many cases to order per product: orders arrive the next morning, what does not fit is returned, stock left at night pays holding, expired units are waste. Your profit is compared with that of an expert who sees the same forecasts.
+
+Results are reports, not scores: your result as a share of the expert’s, a level (Expert level, Good, Developing, Weak) and your personal best. The weekly ordering report shows service level, stock turnover and findings.
+
+Light and dark theme · 0 ads · 0 trackers · 0 permissions
 
 Language: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
 

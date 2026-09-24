@@ -80,24 +80,44 @@ class ReyonOrderViewModel(application: Application) : AndroidViewModel(applicati
         return ReyonLevel.entries.mapNotNull { l -> store.orderDailyRecord(today, l)?.let { l to it } }.toMap()
     }
 
-    init {
+    /**
+     * Görevler'den açılış: aynı hafta bellekte ya da kayıtta duruyorsa sürer (bitmişse
+     * rapor yeniden gösterilir), yoksa yenisi başlar ([ReyonViewModel.open] ile aynı kural).
+     */
+    fun open(mode: ReyonMode, level: ReyonLevel) {
+        _mode.value = mode
+        _level.value = level
+        store.saveLast(level, mode)
+        val day = todayEpoch()
+        val st = _state.value
+        if (st != null && sameCase(runMode, runDay, st.order.level, mode, level, day)) return
+        if (_generating.value && pending?.let { sameCase(it.mode, it.day, it.level, mode, level, day) } == true) return
         val saved = store.restoreOrder()
-        if (saved != null) {
-            val token = ++generation
-            _generating.value = true
-            viewModelScope.launch {
-                val week = withContext(Dispatchers.Default) { ReyonOrderGenerator.generate(saved.seed, saved.level) }
-                if (token != generation) return@launch
-                val st = ReyonOrderState(week)
-                st.restore(saved.snapshot)
-                runMode = saved.mode
-                runDay = saved.day
-                runSeed = saved.seed
-                _state.value = st
-                _generating.value = false
-                if (st.isComplete) _result.value = resultOf(st, record = false)
-                bump()
-            }
+        if (saved != null && sameCase(saved.mode, saved.day, saved.level, mode, level, day)) restore(saved) else newGame()
+    }
+
+    private var pending: ReyonStore.SavedOrder? = null
+
+    private fun restore(saved: ReyonStore.SavedOrder) {
+        val token = ++generation
+        pending = saved
+        _generating.value = true
+        _result.value = null
+        _summary.value = null
+        _hinted.value = -1
+        viewModelScope.launch {
+            val week = withContext(Dispatchers.Default) { ReyonOrderGenerator.generate(saved.seed, saved.level) }
+            if (token != generation) return@launch
+            val st = ReyonOrderState(week)
+            st.restore(saved.snapshot)
+            runMode = saved.mode
+            runDay = saved.day
+            runSeed = saved.seed
+            _state.value = st
+            _generating.value = false
+            pending = null
+            if (st.isComplete) _result.value = resultOf(st, record = false)
+            bump()
         }
     }
 
@@ -119,6 +139,7 @@ class ReyonOrderViewModel(application: Application) : AndroidViewModel(applicati
         val day = todayEpoch()
         val seed = if (mode == ReyonMode.DAILY) ReyonOrderGenerator.dailySeed(day) else Random.nextLong()
         val token = ++generation
+        pending = ReyonStore.SavedOrder(seed, level, mode, day, IntArray(0))
         _generating.value = true
         _result.value = null
         _summary.value = null
@@ -131,6 +152,7 @@ class ReyonOrderViewModel(application: Application) : AndroidViewModel(applicati
             runSeed = seed
             _state.value = ReyonOrderState(week)
             _generating.value = false
+            pending = null
             persist()
             bump()
         }
@@ -141,6 +163,7 @@ class ReyonOrderViewModel(application: Application) : AndroidViewModel(applicati
     fun toMenu() {
         persist()
         generation++
+        pending = null
         _generating.value = false
         _state.value = null
         _result.value = null
@@ -201,6 +224,7 @@ class ReyonOrderViewModel(application: Application) : AndroidViewModel(applicati
         } else {
             val percent = if (target > 0) score * 100 / target else 0
             if (store.saveOrderBest(st.order.level, percent)) record = true
+            store.saveLastPractice(ReyonKind.ORDER, st.order.level, score, target)
         }
         _result.value = resultOf(st, record)
     }

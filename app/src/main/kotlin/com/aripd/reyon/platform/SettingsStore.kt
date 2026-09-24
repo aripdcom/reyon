@@ -1,6 +1,7 @@
 package com.aripd.reyon.platform
 
 import android.content.Context
+import com.aripd.reyon.ui.theme.ThemeChoice
 
 /** Platform ayarları; yalnızca cihazda saklanır. */
 class SettingsStore(context: Context) {
@@ -10,8 +11,12 @@ class SettingsStore(context: Context) {
     private val prefs = (context.applicationContext ?: context)
         .getSharedPreferences("reyon_settings", Context.MODE_PRIVATE)
 
+    /**
+     * Ses efektleri. Varsayılan kapalı (1.1.0): uygulama mağazada, eğitimde ve
+     * toplantıda açılıyor; ses isteyen ayarlardan açar.
+     */
     var soundEnabled: Boolean
-        get() = prefs.getBoolean(KEY_SOUND, true)
+        get() = prefs.getBoolean(KEY_SOUND, false)
         set(value) {
             prefs.edit().putBoolean(KEY_SOUND, value).apply()
         }
@@ -20,6 +25,13 @@ class SettingsStore(context: Context) {
         get() = prefs.getBoolean(KEY_HAPTICS, true)
         set(value) {
             prefs.edit().putBoolean(KEY_HAPTICS, value).apply()
+        }
+
+    /** Tema: açık (varsayılan), koyu ya da telefonun ayarı. */
+    var theme: ThemeChoice
+        get() = ThemeChoice.entries.firstOrNull { it.name == prefs.getString(KEY_THEME, null) } ?: ThemeChoice.LIGHT
+        set(value) {
+            prefs.edit().putString(KEY_THEME, value.name).apply()
         }
 
     /**
@@ -38,5 +50,6 @@ class SettingsStore(context: Context) {
         const val KEY_SOUND = "sound_enabled"
         const val KEY_HAPTICS = "haptics_enabled"
         const val KEY_LANGUAGE = "language"
+        const val KEY_THEME = "theme"
     }
 }

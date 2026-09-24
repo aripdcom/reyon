@@ -1,5 +1,6 @@
 package com.aripd.reyon.ui
 
+import androidx.compose.ui.test.ComposeTimeoutException
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -78,18 +79,19 @@ class ReyonShortScreenTest {
      */
     private val PANEL_SLACK = 4.dp
 
-    private fun startRound(kindLabel: String, startLabel: String) {
+    private fun startRound(kind: ReyonKind) {
         rule.setAppContent { ReyonScreen(highScore = 0L, onScore = {}, onExit = {}) }
-        rule.reyonOpenMenu()
-        rule.reyonPickKind(kindLabel)
-        // Kısa ekranda menü kartı kayar; düğmeler görünür alana getirilerek basılır.
-        rule.onNodeWithText(str(R.string.mode_free)).performScrollTo().performClick()
-        rule.onNodeWithText(str(R.string.difficulty_easy)).performScrollTo().performClick()
-        rule.onNodeWithText(startLabel).performScrollTo().performClick()
+        rule.reyonStartPractice(kind)
     }
 
-    private fun awaitNodes(prefix: String) = rule.waitUntil(timeoutMillis = 30_000) {
-        rule.onAllNodes(hasContentDescription(prefix, substring = true)).fetchSemanticsNodes().isNotEmpty()
+    private fun awaitNodes(prefix: String) {
+        try {
+            rule.waitUntil(timeoutMillis = 30_000) {
+                rule.onAllNodes(hasContentDescription(prefix, substring = true)).fetchSemanticsNodes().isNotEmpty()
+            }
+        } catch (e: ComposeTimeoutException) {
+            throw AssertionError("\"$prefix\" gelmedi · ekran: ${rule.screenDump()}", e)
+        }
     }
 
     /** Erişilebilirlik kutuları; aynı ön ekle başlayan her düğüm için biri. */
@@ -158,12 +160,12 @@ class ReyonShortScreenTest {
     fun theBriefIsDrawnOnAVeryShortPhone() = assertTheBriefIsDrawn()
 
     private fun assertTheBriefIsDrawn() {
-        startRound(str(R.string.reyon_kind_puzzle), str(R.string.reyon_start))
+        startRound(ReyonKind.PUZZLE)
         val briefPrefix = str(R.string.reyon_brief_label) + ":"
         awaitNodes(briefPrefix)
         val brief = describedBounds(briefPrefix)
         assertPanelIsNotStarved("brif", brief)
-        // Kural satırı bir satırlık bodySmall metni + 3 dp dolgu, yani en az 20 dp;
+        // Kural satırı en az 32 dp (bir satırlık metin ve dolgu); eşik 20 dp,
         // bozukken 13 dp ölçülmüştü.
         assertTrue("brif boş olmamalı", brief.isNotEmpty())
         assertRowsAreReadable("brif", brief, least = 1, min = 20.dp)
@@ -174,7 +176,7 @@ class ReyonShortScreenTest {
         assertTrue("raf ekranın içinde olmalı: $shelf / $root", shelf.bottom <= root.bottom)
         val firstClue = brief.first { it.height >= 20.dp }
         assertTrue("brif rafın altında olmalı: $firstClue / $shelf", firstClue.top >= shelf.bottom)
-        // Tepsi de duruyor: ürün seçilemezse bulmaca çözülemez.
+        // Yerleştirilecek ürünler de duruyor: ürün seçilemezse bulmaca çözülemez.
         val tray = describedBounds(trayPrefix).filter { it.height >= 20.dp }
         assertTrue("tepside okunur ürün olmalı", tray.isNotEmpty())
         assertTrue("tepsi brifin altında olmalı", tray.all { it.top >= firstClue.top })
@@ -182,7 +184,7 @@ class ReyonShortScreenTest {
 
     @Test
     fun theSalesRulesPanelIsDrawnOnAShortPhone() {
-        startRound(str(R.string.reyon_kind_sales), str(R.string.reyon_sales_start))
+        startRound(ReyonKind.SALES)
         awaitNodes(trayPrefix)
         val rules = textBounds(
             R.string.reyon_sales_rule_position,
@@ -216,7 +218,7 @@ class ReyonShortScreenTest {
      */
     @Test
     fun aClippedSalesRuleOpensOnTap() {
-        startRound(str(R.string.reyon_kind_sales), str(R.string.reyon_sales_start))
+        startRound(ReyonKind.SALES)
         awaitNodes(trayPrefix)
         val name = str(R.string.reyon_sales_rule_position)
         val descHeight = { rule.onNodeWithText(str(R.string.reyon_sales_rule_position_desc)).getBoundsInRoot().height }
@@ -245,7 +247,7 @@ class ReyonShortScreenTest {
      */
     @Test
     fun theOrderListIsUsableOnAShortPhone() {
-        startRound(str(R.string.reyon_kind_order), str(R.string.reyon_order_start))
+        startRound(ReyonKind.ORDER)
         val morePrefix = str(R.string.reyon_order_more) + ":"
         awaitNodes(morePrefix)
         // PANEL_MIN garantisi burada aranmıyor: garantiyi tepsi yer vererek

@@ -4,19 +4,18 @@ import android.app.Activity
 import android.content.ClipData
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
-import android.graphics.RadialGradient
 import android.graphics.RectF
-import android.graphics.Shader
 import android.graphics.Typeface
-import android.os.Build
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
 import androidx.core.content.FileProvider
+import androidx.core.content.res.ResourcesCompat
 import com.aripd.reyon.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -59,31 +58,47 @@ object ShareCard {
     private const val DIR = "shares"
     private const val KEEP_MS = 60L * 60L * 1000L
 
-    /** İşaretin dikdörtgenleri: sol, üst, genişlik, yükseklik (simgeden). */
+    /** İşaretin ambalajları: sol, üst, genişlik, yükseklik, 36 birimlik kutuda (simgeden). */
     private data class Shape(val x: Float, val y: Float, val w: Float, val h: Float)
 
-    private val MARK = listOf(
-        Shape(2f, 0f, 10f, 10f),
-        Shape(14f, 0f, 10f, 10f),
-        Shape(26f, 0f, 10f, 10f),
-        Shape(0f, 10f, 48f, 4f),
-        Shape(2f, 18f, 10f, 10f),
-        Shape(26f, 18f, 10f, 10f),
-        Shape(38f, 18f, 10f, 10f),
-        Shape(0f, 28f, 48f, 4f),
-        Shape(2f, 36f, 10f, 10f),
-        Shape(14f, 36f, 10f, 10f),
-        Shape(26f, 36f, 10f, 10f),
-        Shape(38f, 36f, 10f, 10f),
-        Shape(0f, 46f, 48f, 4f),
+    private val MARK_PACKS = listOf(
+        Shape(6f, 4f, 7f, 7f),
+        Shape(15f, 6f, 6f, 5f),
+        Shape(23f, 3f, 7f, 8f),
+        Shape(6f, 15f, 9f, 6f),
+        Shape(24f, 14f, 6f, 7f),
+        Shape(6f, 25f, 6f, 6f),
+        Shape(14f, 24f, 7f, 7f),
+        Shape(23f, 26f, 7f, 5f),
     )
 
-    private val BG = 0xFF0B0F1A.toInt()
-    private val INK = 0xFFE4EAF5.toInt()
-    private val MUTED = 0xFFAAB4C8.toInt()
-    private val SECONDARY = 0xFFA78BFA.toInt()
-    /** Kart vurgusu: uygulamanın kendi rengi. */
-    private val ACCENT = 0xFF60A5FA.toInt()
+    /** Dikkat sarısındaki ambalaj; raf çizgileri y = 12, 22, 32, x 4–32. */
+    private const val MARK_ACCENT = 2
+    private val MARK_SHELVES = floatArrayOf(12f, 22f, 32f)
+
+    // Kart her zaman açık temada: paylaşılan görsel, alıcının temasından bağımsız okunur.
+    private val BG = 0xFFF3F2EE.toInt()
+    private val INK = 0xFF17201D.toInt()
+    private val MUTED = 0xFF56615C.toInt()
+    /** Dikkat sarısı: rozetin yanında ince çizgi, tek vurgu. */
+    private val ATTENTION = 0xFFFFD23F.toInt()
+    /** Kart vurgusu: uygulamanın marka rengi. */
+    private val ACCENT = 0xFF0F4C5C.toInt()
+
+    /** Kartın yazıları: IBM Plex Sans; yüklenemezse sistem yazısı. */
+    private class Fonts(val regular: Typeface, val semibold: Typeface) {
+        fun of(weight: Int): Typeface = if (weight >= 600) semibold else regular
+    }
+
+    private fun fonts(context: Context): Fonts {
+        fun load(id: Int, fallback: Typeface): Typeface =
+            try {
+                ResourcesCompat.getFont(context, id) ?: fallback
+            } catch (e: Resources.NotFoundException) {
+                fallback
+            }
+        return Fonts(load(R.font.ibm_plex_sans_regular, Typeface.DEFAULT), load(R.font.ibm_plex_sans_semibold, Typeface.DEFAULT_BOLD))
+    }
 
     /** Kartı üretir (IO'da), önbelleğe yazar ve paylaşım sayfasını açar. */
     suspend fun share(context: Context, content: ShareContent) {
@@ -127,14 +142,15 @@ object ShareCard {
     fun render(context: Context, content: ShareContent): Bitmap {
         val accent = ACCENT
         val maxW = WIDTH - 2 * PAD
+        val fonts = fonts(context)
 
         // Uygulamanın adı kartın başlığında zaten yazıyor; içerik bloğunda
         // ikinci kez tekrarlamak yer yiyor.
         val blocks = ArrayList<Block>()
-        blocks += textBlock(content.headline, size = 96f, color = INK, weight = 900, maxWidth = maxW, fit = true)
+        blocks += textBlock(content.headline, size = 88f, color = INK, typeface = fonts.semibold, maxWidth = maxW, fit = true)
         if (content.details.isNotEmpty()) {
             blocks += gap(18f)
-            blocks += textBlock(content.details.joinToString(" · "), size = 40f, color = MUTED, weight = 500, maxWidth = maxW)
+            blocks += textBlock(content.details.joinToString(" · "), size = 40f, color = MUTED, typeface = fonts.regular, maxWidth = maxW)
         }
         val board = content.board
         val extra = content.extraText
@@ -145,7 +161,7 @@ object ShareCard {
             }
         } else if (!extra.isNullOrBlank()) {
             blocks += gap(48f)
-            blocks += textBlock(extra, size = 60f, color = INK, weight = 500, maxWidth = maxW, lineSpacing = 1.12f)
+            blocks += textBlock(extra, size = 60f, color = INK, typeface = fonts.regular, maxWidth = maxW, lineSpacing = 1.12f)
         }
 
         val middleH = blocks.sumOf { it.height.toDouble() }.toFloat()
@@ -154,15 +170,15 @@ object ShareCard {
 
         val bitmap = Bitmap.createBitmap(WIDTH, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-        drawBackground(canvas, height, accent)
-        drawHeader(context, canvas, accent)
+        drawBackground(canvas)
+        drawHeader(context, canvas, accent, fonts)
         // Kısa kartlarda orta blok başlıkla altbilgi arasında ortalanır.
         var y = PAD + HEADER_H + SECTION_GAP + (height - needed) / 2f
         for (block in blocks) {
             block.draw(canvas, y)
             y += block.height
         }
-        drawFooter(context, canvas, height, accent)
+        drawFooter(context, canvas, height, accent, fonts)
         return bitmap
     }
 
@@ -185,66 +201,73 @@ object ShareCard {
 
     private fun gap(height: Float) = Block(height) { _, _ -> }
 
-    private fun drawBackground(canvas: Canvas, height: Int, accent: Int) {
+    private fun drawBackground(canvas: Canvas) {
         canvas.drawColor(BG)
-        val h = height.toFloat()
-        val w = WIDTH.toFloat()
-        val glow = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            shader = RadialGradient(
-                w * 0.92f, -80f, 860f,
-                intArrayOf(withAlpha(accent, 0x70), withAlpha(accent, 0x00)), null, Shader.TileMode.CLAMP,
-            )
-        }
-        canvas.drawRect(0f, 0f, w, h, glow)
-        val glow2 = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            shader = RadialGradient(
-                60f, h + 60f, 760f,
-                intArrayOf(withAlpha(SECONDARY, 0x40), withAlpha(SECONDARY, 0x00)), null, Shader.TileMode.CLAMP,
-            )
-        }
-        canvas.drawRect(0f, 0f, w, h, glow2)
     }
 
-    private fun drawHeader(context: Context, canvas: Canvas, accent: Int) {
+    private fun drawHeader(context: Context, canvas: Canvas, accent: Int, fonts: Fonts) {
         val badge = RectF(PAD, PAD, PAD + HEADER_H, PAD + HEADER_H)
         canvas.drawRoundRect(badge, 28f, 28f, fill(accent))
-        drawMark(canvas, badge, fill(BG))
+        drawMark(canvas, badge, 0xFFFFFFFF.toInt())
+        canvas.drawRect(RectF(badge.right + 36f, badge.bottom - 6f, badge.right + 36f + 96f, badge.bottom), fill(ATTENTION))
 
         val x = badge.right + 36f
-        val title = textPaint(44f, INK, 700)
-        val tagline = textPaint(32f, MUTED, 400)
+        val title = textPaint(44f, INK, fonts.semibold)
+        val tagline = textPaint(32f, MUTED, fonts.regular)
+        val tagText = fitLine(context.getString(R.string.app_tagline), tagline, WIDTH - PAD - x, minSize = 24f)
         val titleH = title.lineHeight()
         val tagH = tagline.lineHeight()
         val blockTop = badge.centerY() - (titleH + 8f + tagH) / 2f
         canvas.drawText(context.getString(R.string.app_name), x, blockTop - title.fontMetrics.ascent, title)
-        canvas.drawText(
-            context.getString(R.string.app_tagline), x, blockTop + titleH + 8f - tagline.fontMetrics.ascent, tagline,
-        )
+        canvas.drawText(tagText, x, blockTop + titleH + 8f - tagline.fontMetrics.ascent, tagline)
     }
 
     /**
-     * Raf izleği: üç çıta ve üstlerindeki ürünler, ortadaki rafta bir göz boş.
-     * Uygulama simgesiyle (res/drawable/ic_launcher_foreground.xml) birebir
-     * aynı desen; oranlar oradaki 48×50 birimlik kutudan alındı.
+     * Tek satırlık metni genişliğe sığdırır: yazı önce [minSize]'a kadar
+     * küçülür, o da yetmezse metnin sonu "…" ile kesilir. Kartın sağ kenarından
+     * taşan metin paylaşılan görselde yarım kelime olarak kalırdı.
      */
-    private fun drawMark(canvas: Canvas, box: RectF, paint: Paint) {
-        val scale = box.width() * 0.60f / 48f
-        val left = box.centerX() - 48f * scale / 2f
-        val top = box.centerY() - 50f * scale / 2f
-        for ((x, y, w, h) in MARK) {
-            canvas.drawRect(
-                left + x * scale, top + y * scale,
-                left + (x + w) * scale, top + (y + h) * scale, paint,
+    private fun fitLine(text: String, paint: Paint, maxWidth: Float, minSize: Float): String {
+        val width = paint.measureText(text)
+        if (width > maxWidth) paint.textSize = max(minSize, paint.textSize * maxWidth / width)
+        if (paint.measureText(text) <= maxWidth) return text
+        val ellipsis = "…"
+        val end = paint.breakText(text, true, maxWidth - paint.measureText(ellipsis), null)
+        return text.substring(0, end).trimEnd() + ellipsis
+    }
+
+    /**
+     * Raf izleği: üç raf çizgisi ve üstlerindeki ambalajlar, biri dikkat
+     * sarısında, ortadaki rafta bir göz boş. Uygulama simgesiyle
+     * (res/drawable/ic_launcher_foreground.xml) ve Görevler'in BrandMark'ıyla
+     * aynı desen; ölçüler oradaki 36 birimlik kutudan.
+     */
+    private fun drawMark(canvas: Canvas, box: RectF, ink: Int) {
+        val scale = box.width() * 0.62f / 36f
+        val left = box.centerX() - 18f * scale
+        val top = box.centerY() - 18f * scale
+        val shelf = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = ink
+            style = Paint.Style.STROKE
+            strokeWidth = 2.5f * scale
+            strokeCap = Paint.Cap.ROUND
+        }
+        for (y in MARK_SHELVES) canvas.drawLine(left + 4f * scale, top + y * scale, left + 32f * scale, top + y * scale, shelf)
+        val corner = 1.5f * scale
+        MARK_PACKS.forEachIndexed { i, (x, y, w, h) ->
+            canvas.drawRoundRect(
+                RectF(left + x * scale, top + y * scale, left + (x + w) * scale, top + (y + h) * scale),
+                corner, corner, fill(if (i == MARK_ACCENT) ATTENTION else ink),
             )
         }
     }
 
-    private fun drawFooter(context: Context, canvas: Canvas, height: Int, accent: Int) {
+    private fun drawFooter(context: Context, canvas: Canvas, height: Int, accent: Int, fonts: Fonts) {
         val baseline = height - PAD
         val chips = listOf(R.string.chip_no_ads, R.string.chip_no_trackers, R.string.chip_no_permissions)
             .joinToString(" · ") { context.getString(it) }
-        canvas.drawText(chips, PAD, baseline, textPaint(30f, MUTED, 500))
-        val link = textPaint(30f, withAlpha(accent, 0xCC), 500).apply { textAlign = Paint.Align.RIGHT }
+        canvas.drawText(chips, PAD, baseline, textPaint(30f, MUTED, fonts.regular))
+        val link = textPaint(30f, accent, fonts.semibold).apply { textAlign = Paint.Align.RIGHT }
         val shortLink = context.getString(R.string.share_link).removePrefix("https://").removePrefix("http://")
         canvas.drawText(shortLink, WIDTH - PAD, baseline, link)
     }
@@ -265,7 +288,7 @@ object ShareCard {
         text: String,
         size: Float,
         color: Int,
-        weight: Int,
+        typeface: Typeface,
         maxWidth: Float,
         spacing: Float = 0f,
         fit: Boolean = false,
@@ -274,7 +297,7 @@ object ShareCard {
         val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
             this.color = color
             textSize = size
-            typeface = typefaceOf(weight)
+            this.typeface = typeface
             letterSpacing = spacing
         }
         if (fit) {
@@ -295,20 +318,11 @@ object ShareCard {
 
     private fun fill(color: Int): Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { this.color = color }
 
-    private fun textPaint(size: Float, color: Int, weight: Int): Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private fun textPaint(size: Float, color: Int, typeface: Typeface): Paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         this.color = color
         textSize = size
-        typeface = typefaceOf(weight)
+        this.typeface = typeface
     }
-
-    private fun typefaceOf(weight: Int): Typeface =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            Typeface.create(Typeface.DEFAULT, weight, false)
-        } else if (weight >= 600) {
-            Typeface.DEFAULT_BOLD
-        } else {
-            Typeface.DEFAULT
-        }
 
     private fun Paint.lineHeight(): Float = fontMetrics.descent - fontMetrics.ascent
 
@@ -317,7 +331,6 @@ object ShareCard {
         canvas.drawText(text, cx, cy - (fm.ascent + fm.descent) / 2f, paint)
     }
 
-    private fun withAlpha(color: Int, alpha: Int): Int = (color and 0x00FFFFFF) or (alpha shl 24)
 }
 
 /** Tahta ressamları için ortak küçük yardımcılar (android.graphics). */

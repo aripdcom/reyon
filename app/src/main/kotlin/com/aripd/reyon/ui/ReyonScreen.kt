@@ -1,5 +1,6 @@
 package com.aripd.reyon.ui
 
+import android.app.Application
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
@@ -13,7 +14,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,16 +23,13 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -45,56 +42,105 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.annotation.StringRes
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.aripd.reyon.R
-import com.aripd.reyon.platform.LocalHaptics
-import com.aripd.reyon.platform.LocalSound
-import com.aripd.reyon.platform.Sfx
-import com.aripd.reyon.platform.ShareContent
+import com.aripd.reyon.engine.Board
+import com.aripd.reyon.engine.Brand
+import com.aripd.reyon.engine.Category
 import com.aripd.reyon.engine.ClueStatus
+import com.aripd.reyon.engine.Product
 import com.aripd.reyon.engine.ReyonHint
 import com.aripd.reyon.engine.ReyonLevel
 import com.aripd.reyon.engine.ReyonState
 import com.aripd.reyon.engine.Rules
-import com.aripd.reyon.ui.common.ActionLabel
-import com.aripd.reyon.ui.common.ActionRowPadding
+import com.aripd.reyon.platform.LocalHaptics
+import com.aripd.reyon.platform.LocalSound
+import com.aripd.reyon.platform.Sfx
+import com.aripd.reyon.platform.ShareContent
+import com.aripd.reyon.platform.appString
+import com.aripd.reyon.ui.common.ActionBar
+import com.aripd.reyon.ui.common.BannerTone
+import com.aripd.reyon.ui.common.ButtonKind
 import com.aripd.reyon.ui.common.GameTopBar
+import com.aripd.reyon.ui.common.GuideBanner
+import com.aripd.reyon.ui.common.KpiRow
+import com.aripd.reyon.ui.common.KpiTile
 import com.aripd.reyon.ui.common.OverlayCard
-import com.aripd.reyon.ui.common.ScoreCard
+import com.aripd.reyon.ui.common.ReyonButton
+import com.aripd.reyon.ui.common.ReyonCard
+import com.aripd.reyon.ui.common.ReyonIcons
+import com.aripd.reyon.ui.common.SectionHeader
 import com.aripd.reyon.ui.common.ShareButton
 import com.aripd.reyon.ui.common.formatTime
 import com.aripd.reyon.ui.common.modeShareLabel
-import com.aripd.reyon.platform.appString
+import com.aripd.reyon.ui.common.monoStyle
+import com.aripd.reyon.ui.theme.Reyon
+import java.time.LocalDate
 
 /**
- * Reyon: dört tür, tek ekran. Diziliş (planogram bulmacası), Denetim (uyum
- * sapmalarını bulma), Satış (serbest diziliş) ve Sipariş (stok haftası).
- * Rekor = tamamlanan tur sayısı.
+ * Dört modun görünüm modelleri, o anki Application ile kurulur.
+ *
+ * Varsayılan fabrika (AndroidViewModelFactory.getInstance) ilk gördüğü
+ * Application'ı statik saklıyor ve sonraki her modeli onunla kuruyor. Uygulamada
+ * tek Application olduğu için fark etmez; Robolectric ise her testte yeni
+ * Application kuruyor ve modeller önceki testin kayıtlarına yazıp okuyordu
+ * (Görevler ekranı sonucu göremiyor, Sipariş önceki testin bitmiş haftasını
+ * açıyordu). Burada Application, modeli isteyen etkinliğin kendisinden gelir.
+ */
+internal val ReyonViewModels: ViewModelProvider.Factory = viewModelFactory {
+    initializer { ReyonViewModel(application()) }
+    initializer { ReyonAuditViewModel(application()) }
+    initializer { ReyonSalesViewModel(application()) }
+    initializer { ReyonOrderViewModel(application()) }
+}
+
+private fun CreationExtras.application(): Application =
+    checkNotNull(this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]) { "Application yok" }
+
+/**
+ * Reyon: Görevler ve dört mod. Diziliş (planogram bulmacası), Denetim (uyum
+ * sapmalarını bulma), Satış (raf verimi) ve Sipariş (stok haftası).
+ *
+ * Açılışta Görevler; bir vakaya dokununca o modun ekranı açılır, geri oku
+ * Görevler'e döner (yarım vaka saklanır, aynı vakaya dokununca sürer). Rekor =
+ * tamamlanan vaka sayısı.
  */
 @Composable
 fun ReyonScreen(
     highScore: Long,
     onScore: (Long) -> Unit,
     onExit: () -> Unit,
-    viewModel: ReyonViewModel = viewModel(),
+    viewModel: ReyonViewModel = viewModel(factory = ReyonViewModels),
 ) {
     val kind by viewModel.kind.collectAsStateWithLifecycle()
+    val open by viewModel.screenOpen.collectAsStateWithLifecycle()
+    val practiceLevel by viewModel.practiceLevel.collectAsStateWithLifecycle()
+    val auditVm: ReyonAuditViewModel = viewModel(factory = ReyonViewModels)
+    val salesVm: ReyonSalesViewModel = viewModel(factory = ReyonViewModels)
+    val orderVm: ReyonOrderViewModel = viewModel(factory = ReyonViewModels)
     val baseline = remember { highScore }
     var solvedSession by remember { mutableIntStateOf(0) }
     val latestOnScore by rememberUpdatedState(onScore)
@@ -102,45 +148,52 @@ fun ReyonScreen(
         solvedSession++
         latestOnScore(baseline + solvedSession)
     }
-    if (kind == ReyonKind.ORDER) {
-        ReyonOrderContent(
-            solved = baseline + solvedSession,
-            onCompleted = onCompleted,
-            onKind = viewModel::setKind,
+    // Görevler'e her dönüşte satırlar kayıtlardan yeniden okunur.
+    var refresh by remember { mutableIntStateOf(0) }
+    val onBack: () -> Unit = {
+        when (kind) {
+            ReyonKind.PUZZLE -> viewModel.toMenu()
+            ReyonKind.AUDIT -> auditVm.toMenu()
+            ReyonKind.SALES -> salesVm.toMenu()
+            ReyonKind.ORDER -> orderVm.toMenu()
+        }
+        viewModel.closeScreen()
+        refresh++
+    }
+    val start: (ReyonKind, ReyonMode, ReyonLevel) -> Unit = { k, mode, level ->
+        when (k) {
+            ReyonKind.PUZZLE -> viewModel.open(mode, level)
+            ReyonKind.AUDIT -> auditVm.open(mode, level)
+            ReyonKind.SALES -> salesVm.open(mode, level)
+            ReyonKind.ORDER -> orderVm.open(mode, level)
+        }
+        viewModel.openScreen(k)
+    }
+
+    if (!open) {
+        ReyonHome(
+            practiceLevel = practiceLevel,
+            onPracticeLevel = viewModel::setPracticeLevel,
+            onDaily = { k -> start(k, ReyonMode.DAILY, dailyLevel(LocalDate.now().toEpochDay())) },
+            onPractice = { k -> start(k, ReyonMode.FREE, practiceLevel) },
             onExit = onExit,
-        )
-    } else if (kind == ReyonKind.SALES) {
-        ReyonSalesContent(
-            solved = baseline + solvedSession,
-            onCompleted = onCompleted,
-            onKind = viewModel::setKind,
-            onExit = onExit,
-        )
-    } else if (kind == ReyonKind.AUDIT) {
-        ReyonAuditContent(
-            solved = baseline + solvedSession,
-            onCompleted = onCompleted,
-            onKind = viewModel::setKind,
-            onExit = onExit,
+            refresh = refresh,
         )
     } else {
-        ReyonPuzzleContent(
-            viewModel = viewModel,
-            solved = baseline + solvedSession,
-            onCompleted = onCompleted,
-            onKind = viewModel::setKind,
-            onExit = onExit,
-        )
+        when (kind) {
+            ReyonKind.PUZZLE -> ReyonPuzzleContent(viewModel = viewModel, onCompleted = onCompleted, onBack = onBack)
+            ReyonKind.AUDIT -> ReyonAuditContent(onCompleted = onCompleted, onBack = onBack, viewModel = auditVm)
+            ReyonKind.SALES -> ReyonSalesContent(onCompleted = onCompleted, onBack = onBack, viewModel = salesVm)
+            ReyonKind.ORDER -> ReyonOrderContent(onCompleted = onCompleted, onBack = onBack, viewModel = orderVm)
+        }
     }
 }
 
 @Composable
 private fun ReyonPuzzleContent(
     viewModel: ReyonViewModel,
-    solved: Long,
     onCompleted: () -> Unit,
-    onKind: (ReyonKind) -> Unit,
-    onExit: () -> Unit,
+    onBack: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val version by viewModel.version.collectAsStateWithLifecycle()
@@ -152,16 +205,14 @@ private fun ReyonPuzzleContent(
     val result by viewModel.result.collectAsStateWithLifecycle()
     val level by viewModel.level.collectAsStateWithLifecycle()
     val mode by viewModel.mode.collectAsStateWithLifecycle()
-    val records by viewModel.records.collectAsStateWithLifecycle()
     val haptics = LocalHaptics.current
     val sound = LocalSound.current
-    val res = LocalContext.current.resources
 
-    // Aynı çözüm ikinci kez sayılmasın: döndürmede de, menüye gidip dönüşte
+    // Aynı çözüm ikinci kez sayılmasın: döndürmede de, Görevler'e gidip dönüşte
     // de, mod değişiminde de. Sayaç mevcut durumdan başlar, çünkü ViewModel
     // Activity'ye bağlıdır ve sonucu ekrandan çıkınca da taşır. Kaydedilen
-    // durum burada yetmez: kökte SaveableStateHolder yok, menüye dönüşte
-    // kayıt silinir (doğru örnek: SudokuScreen).
+    // durum burada yetmez: kökte SaveableStateHolder yok, Görevler'e dönüşte
+    // kayıt silinir.
     var countedSeed by remember {
         mutableLongStateOf(state?.puzzle?.seed?.takeIf { result != null } ?: Long.MIN_VALUE)
     }
@@ -179,11 +230,13 @@ private fun ReyonPuzzleContent(
         viewModel.setPaused(false)
         onPauseOrDispose { viewModel.setPaused(true) }
     }
-    BackHandler { onExit() }
+    BackHandler { onBack() }
 
     val st = state
+    var howTo by rememberHowTo(ReyonKind.PUZZLE)
     @Suppress("UNUSED_VARIABLE")
     val tick = version
+    val shownLevel = st?.puzzle?.level ?: level
 
     Column(
         modifier = Modifier
@@ -191,34 +244,31 @@ private fun ReyonPuzzleContent(
             .background(MaterialTheme.colorScheme.background)
             .safeDrawingPadding(),
     ) {
-        GameTopBar(title = stringResource(R.string.app_name), onExit = onExit) {
-            if (st != null) {
-                TextButton(onClick = viewModel::toMenu) {
-                    Text(stringResource(R.string.reyon_to_menu))
-                }
-            }
-        }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
+        GameTopBar(
+            title = stringResource(R.string.reyon_kind_puzzle),
+            subtitle = caseSubtitle(shownLevel, mode == ReyonMode.DAILY),
+            onExit = onBack,
         ) {
-            ScoreCard(
+            HowToButton { howTo = true }
+        }
+        val satisfied = st?.let { s -> s.puzzle.brief.count { s.status(it) == ClueStatus.SATISFIED } }
+        KpiRow {
+            KpiTile(
+                label = stringResource(R.string.kpi_brief),
+                value = satisfied?.toString() ?: "—",
+                unit = st?.let { "/${it.puzzle.brief.size}" },
+                valueColor = if (st != null && satisfied == st.puzzle.brief.size) Reyon.tokens.ok else Color.Unspecified,
+                modifier = Modifier.weight(1f),
+            )
+            KpiTile(
+                label = stringResource(R.string.kpi_placed),
+                value = st?.placedCount?.toString() ?: "—",
+                unit = st?.let { "/${it.puzzle.products.size}" },
+                modifier = Modifier.weight(1f),
+            )
+            KpiTile(
                 label = stringResource(R.string.time_label),
                 value = formatTime(elapsed),
-                modifier = Modifier.weight(1f),
-                highlight = true,
-            )
-            ScoreCard(
-                label = stringResource(R.string.difficulty_label),
-                value = st?.let { ReyonText.level(res, it.puzzle.level) } ?: "—",
-                modifier = Modifier.weight(1f),
-            )
-            ScoreCard(
-                label = stringResource(R.string.solved_label),
-                value = solved.toString(),
                 modifier = Modifier.weight(1f),
             )
         }
@@ -227,7 +277,7 @@ private fun ReyonPuzzleContent(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 6.dp),
+                .padding(horizontal = 12.dp),
             contentAlignment = Alignment.Center,
         ) {
             if (st != null) {
@@ -270,8 +320,8 @@ private fun ReyonPuzzleContent(
                         },
                     )
                     HintLine(state = st, hint = lastHint)
-                    // Brif ile tepsi kalan yüksekliği paylaşıyor; "kalan" burada
-                    // ölçülüyor, böylece ipucu satırı da hesaba giriyor.
+                    // Brif ile yerleştirilecek ürünler kalan yüksekliği paylaşıyor; "kalan"
+                    // burada ölçülüyor, böylece kılavuz bandı da hesaba giriyor.
                     BoxWithConstraints(modifier = Modifier.weight(1f).fillMaxWidth()) {
                         val trayH = trayHeight(maxHeight)
                         Column(modifier = Modifier.fillMaxSize()) {
@@ -299,50 +349,50 @@ private fun ReyonPuzzleContent(
                 }
             }
             when {
-                st == null && generating -> OverlayCard {
+                st == null -> OverlayCard {
                     CircularProgressIndicator()
                     Text(stringResource(R.string.reyon_generating))
                 }
-                st == null -> MenuCard(
-                    level = level,
-                    mode = mode,
-                    records = records,
-                    bestTime = viewModel.bestTime(level),
-                    onKind = onKind,
-                    onLevel = viewModel::setLevel,
-                    onMode = viewModel::setMode,
-                    onStart = viewModel::newGame,
-                    onExit = onExit,
-                )
                 result != null -> SolvedCard(
                     state = st,
                     result = result!!,
                     onRetry = viewModel::retry,
-                    onMenu = viewModel::toMenu,
-                    onExit = onExit,
+                    onBack = onBack,
                 )
+                howTo -> HowToCard(ReyonKind.PUZZLE, shownLevel) { howTo = false }
             }
         }
 
         if (st != null && result == null) {
-            Controls(
-                canUndo = st.canUndo,
-                canRemove = selected >= 0 && st.isPlaced(selected),
-                onUndo = {
-                    haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    viewModel.undo()
-                },
-                onRemove = {
-                    if (viewModel.removeSelected()) haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                },
-                onHint = {
-                    val h = viewModel.hint()
-                    if (h != null) {
-                        haptics.performHapticFeedback(HapticFeedbackType.LongPress)
-                        sound?.play(Sfx.CLEAR, volume = 0.6f)
-                    }
-                },
-            )
+            ActionBar {
+                ReyonButton(
+                    text = stringResource(R.string.undo),
+                    onClick = {
+                        haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        viewModel.undo()
+                    },
+                    enabled = st.canUndo,
+                    modifier = Modifier.weight(1f),
+                )
+                ReyonButton(
+                    text = stringResource(R.string.reyon_remove),
+                    onClick = { if (viewModel.removeSelected()) haptics.performHapticFeedback(HapticFeedbackType.TextHandleMove) },
+                    enabled = selected >= 0 && st.isPlaced(selected),
+                    modifier = Modifier.weight(1f),
+                )
+                ReyonButton(
+                    text = stringResource(R.string.reyon_hint),
+                    onClick = {
+                        val h = viewModel.hint()
+                        if (h != null) {
+                            haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                            sound?.play(Sfx.CLEAR, volume = 0.6f)
+                        }
+                    },
+                    kind = ButtonKind.TONAL,
+                    modifier = Modifier.weight(1f),
+                )
+            }
         }
     }
 }
@@ -350,6 +400,35 @@ private fun ReyonPuzzleContent(
 // ---------------------------------------------------------------------------
 // Raf
 // ---------------------------------------------------------------------------
+
+/** Ürünlerin kapladığı gözlerin maskesi; boş gözler kesikli çizilir. */
+internal fun occupiedMask(board: Board, placed: List<Triple<Product, Int, Int>>, facings: (Product) -> Int = { it.facings }): Int {
+    var mask = 0
+    for ((p, row, col) in placed) mask = mask or board.mask(board.idx(row, col), facings(p))
+    return mask
+}
+
+/** Rozet metinleri ve kategori kodları; tuval bunları bir kez okur. */
+internal class ShelfTexts(val codes: List<String>, val marks: List<String>, val eye: String, val heavy: String) {
+    fun badges(p: Product) = LabelBadges(p.premium, p.heavy, if (p.premium) eye else if (p.heavy) heavy else null)
+    fun code(p: Product) = codes[p.category.ordinal]
+    fun mark(p: Product) = marks[p.brand.ordinal]
+}
+
+@Composable
+internal fun rememberShelfTexts(): ShelfTexts {
+    val res = LocalContext.current.resources
+    val eye = stringResource(R.string.reyon_badge_eye)
+    val heavy = stringResource(R.string.reyon_badge_heavy)
+    return remember(res, eye, heavy) {
+        ShelfTexts(
+            Category.entries.map { ReyonText.categoryCode(res, it) },
+            Brand.entries.map { ReyonText.brandMark(res, it) },
+            eye,
+            heavy,
+        )
+    }
+}
 
 @Composable
 private fun ShelfCanvas(
@@ -369,53 +448,76 @@ private fun ShelfCanvas(
     val res = LocalContext.current.resources
     val currentTap by rememberUpdatedState(onTap)
     val currentLong by rememberUpdatedState(onLongPress)
+    val colors = rememberShelfColors()
+    val texts = rememberShelfTexts()
     val textMeasurer = rememberTextMeasurer()
-    val labeler = remember(textMeasurer) { BlockLabeler(textMeasurer) }
-    val path = remember { Path() }
+    val labeler = remember(textMeasurer, colors.packFamily) { BlockLabeler(textMeasurer, colors.packFamily) }
+    val names = remember(puzzle, res) { puzzle.products.map { ReyonText.kind(res, it.kind) } }
     val unplaced = puzzle.products.size - state.placedCount
     val desc = appString(R.string.reyon_board_desc_fmt, rows, cols, unplaced)
-    Canvas(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height)
-            .clip(RoundedCornerShape(12.dp))
-            .background(ReyonPalette.BoardBg)
-            .semantics { contentDescription = desc }
-            .pointerInput(rows, cols) {
-                detectTapGestures(
-                    onTap = { pos ->
-                        val col = (pos.x / (size.width / cols.toFloat())).toInt().coerceIn(0, cols - 1)
-                        val row = (pos.y / (size.height / rows.toFloat())).toInt().coerceIn(0, rows - 1)
-                        currentTap(row, col)
-                    },
-                    onLongPress = { pos ->
-                        val col = (pos.x / (size.width / cols.toFloat())).toInt().coerceIn(0, cols - 1)
-                        val row = (pos.y / (size.height / rows.toFloat())).toInt().coerceIn(0, rows - 1)
-                        currentLong(row, col)
-                    },
-                )
-            },
-    ) {
+    val selectedText = stringResource(R.string.reyon_slot_selected)
+    val removeText = stringResource(R.string.reyon_remove)
+    Box(modifier = Modifier.fillMaxWidth().height(height)) {
+        Canvas(
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(6.dp))
+                .semantics { contentDescription = desc }
+                .pointerInput(rows, cols) {
+                    detectTapGestures(
+                        onTap = { pos ->
+                            val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
+                            currentTap(g.rowAt(pos.y), g.colAt(pos.x))
+                        },
+                        onLongPress = { pos ->
+                            val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
+                            currentLong(g.rowAt(pos.y), g.colAt(pos.x))
+                        },
+                    )
+                },
+        ) {
+            @Suppress("UNUSED_VARIABLE")
+            val tick = version
+            val g = ShelfGeom(size.width, size.height, rows, cols, density)
+            drawGondola(g, colors)
+            val placed = puzzle.products.mapNotNull { p -> state.placement(p.id)?.let { Triple(p, it.row, it.col) } }
+            drawEmptySlots(g, occupiedMask(puzzle.board, placed), colors)
+            for ((p, row, col) in placed) {
+                drawPack(g, labeler, colors, names[p.id], texts.mark(p), p, p.facings, row, col, pinned = state.isLocked(p.id))
+                drawShelfLabel(g, labeler, colors, p, p.facings, row, col, texts.code(p), texts.badges(p), highlighted = p.id == selected)
+            }
+            for ((p, row, col) in placed) {
+                val ring = when {
+                    p.id == selected -> colors.tokens.attention
+                    p.id == hinted -> colors.tokens.attention
+                    p.id in violated -> colors.tokens.bad
+                    p.id in highlighted -> colors.highlight
+                    else -> null
+                }
+                if (ring != null) drawPackRing(g, p, p.facings, row, col, ring, width = if (p.id == selected) 3.dp.toPx() else 2.5.dp.toPx())
+            }
+        }
+        // Gözler ekran okuyucuya tek tek: konum, içerik, çift dokunuş = dokunuş, kaldırma özel eylem.
         @Suppress("UNUSED_VARIABLE")
         val tick = version
-        val g = ShelfGeom(size.width, size.height, rows, cols)
-        drawShelfFrame(g)
-        for (p in puzzle.products) {
-            val pl = state.placement(p.id) ?: continue
-            val ring = when {
-                p.id == selected -> ReyonPalette.SelectedRing
-                p.id == hinted -> ReyonPalette.HintRing
-                p.id in violated -> ReyonPalette.ViolatedRing
-                p.id in highlighted -> ReyonPalette.HighlightRing
-                else -> null
-            }
-            drawBlock(g, path, labeler, ReyonText.kind(res, p.kind), p, p.facings, pl.row, pl.col, ring = ring, locked = state.isLocked(p.id))
-        }
+        val occupants = List(rows * cols) { state.occupant(it / cols, it % cols) }
+        ShelfSlots(
+            rows = rows,
+            cols = cols,
+            contents = occupants.map { id ->
+                slotContent(res, if (id >= 0) spokenProduct(res, puzzle.products[id]) else null, if (id >= 0 && id == selected) selectedText else null)
+            },
+            onActivate = { row, col -> currentTap(row, col) },
+            modifier = Modifier.matchParentSize(),
+            removeLabel = removeText,
+            removable = occupants.map { it >= 0 && !state.isLocked(it) },
+            onRemove = { row, col -> currentLong(row, col) },
+        )
     }
 }
 
 // ---------------------------------------------------------------------------
-// Brif, tepsi, ipucu satırı, kontroller
+// Brif, yerleştirilecek ürünler, kılavuz bandı
 // ---------------------------------------------------------------------------
 
 @Composable
@@ -427,46 +529,82 @@ private fun Brief(
     modifier: Modifier = Modifier,
 ) {
     val res = LocalContext.current.resources
+    val tokens = Reyon.tokens
     @Suppress("UNUSED_VARIABLE")
     val tick = version
     val briefLabel = stringResource(R.string.reyon_brief_label)
+    val statuses = state.puzzle.brief.map { state.status(it) }
+    val satisfied = statuses.count { it == ClueStatus.SATISFIED }
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 6.dp)
+            .padding(top = 8.dp)
             .verticalScroll(rememberScrollState()),
     ) {
-        Text(
-            text = briefLabel,
-            style = MaterialTheme.typography.labelSmall,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-            modifier = Modifier.padding(start = 4.dp, bottom = 2.dp),
+        SectionHeader(
+            title = briefLabel,
+            trailing = appString(R.string.brief_satisfied_fmt, satisfied, statuses.size),
+            trailingColor = if (satisfied == statuses.size) tokens.ok else Color.Unspecified,
+            trailingBold = satisfied == statuses.size,
+            modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 4.dp),
         )
-        state.puzzle.brief.forEachIndexed { index, clue ->
-            val status = state.status(clue)
-            val (glyph, color) = when (status) {
-                ClueStatus.PENDING -> "○" to MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
-                ClueStatus.SATISFIED -> "✓" to ReyonPalette.Satisfied
-                ClueStatus.VIOLATED -> "✗" to ReyonPalette.Violated
-            }
-            val text = ReyonText.clue(res, state.puzzle, clue)
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(if (index == highlightClue) MaterialTheme.colorScheme.primary.copy(alpha = 0.18f) else Color.Transparent)
-                    .clickable { onToggle(index) }
-                    .padding(horizontal = 6.dp, vertical = 3.dp)
-                    .semantics { contentDescription = "$briefLabel: $glyph $text" },
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(text = glyph, color = color, fontWeight = FontWeight.Bold, modifier = Modifier.width(18.dp))
-                Text(
-                    text = text,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = if (status == ClueStatus.VIOLATED) ReyonPalette.Violated else MaterialTheme.colorScheme.onSurface.copy(alpha = if (status == ClueStatus.SATISFIED) 0.6f else 0.9f),
+        ReyonCard {
+            state.puzzle.brief.forEachIndexed { index, clue ->
+                val status = statuses[index]
+                val text = ReyonText.clue(res, state.puzzle, clue)
+                val statusWord = stringResource(
+                    when (status) {
+                        ClueStatus.PENDING -> R.string.brief_status_pending
+                        ClueStatus.SATISFIED -> R.string.brief_status_ok
+                        ClueStatus.VIOLATED -> R.string.brief_status_broken
+                    },
                 )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(if (index == highlightClue) tokens.brandWeak else Color.Transparent)
+                        .clickable { onToggle(index) }
+                        .heightIn(min = 32.dp)
+                        .padding(horizontal = 10.dp, vertical = 4.dp)
+                        .semantics { contentDescription = "$briefLabel: $statusWord · $text" },
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                ) {
+                    StatusDot(status)
+                    Text(
+                        text = text,
+                        style = MaterialTheme.typography.bodyMedium.copy(fontSize = 13.5.sp, lineHeight = 18.sp),
+                        color = if (status == ClueStatus.VIOLATED) tokens.bad else MaterialTheme.colorScheme.onSurface,
+                    )
+                }
+                if (index < state.puzzle.brief.lastIndex) {
+                    Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(tokens.divider))
+                }
+            }
+        }
+    }
+}
+
+/** Kuralın durumu: sağlandı (onay), bozuluyor (çarpı), bekliyor (boş halka). */
+@Composable
+private fun StatusDot(status: ClueStatus) {
+    val tokens = Reyon.tokens
+    val (bg, fg) = when (status) {
+        ClueStatus.SATISFIED -> tokens.okWeak to tokens.ok
+        ClueStatus.VIOLATED -> tokens.badWeak to tokens.bad
+        ClueStatus.PENDING -> Color.Transparent to tokens.line
+    }
+    Box(
+        modifier = Modifier
+            .size(20.dp)
+            .background(bg, RoundedCornerShape(10.dp)),
+        contentAlignment = Alignment.Center,
+    ) {
+        when (status) {
+            ClueStatus.SATISFIED -> Icon(ReyonIcons.Check, contentDescription = null, tint = fg, modifier = Modifier.size(13.dp))
+            ClueStatus.VIOLATED -> Text("✕", color = fg, fontWeight = FontWeight.SemiBold, fontSize = 11.sp)
+            ClueStatus.PENDING -> Canvas(modifier = Modifier.size(18.dp)) {
+                drawCircle(fg, radius = size.minDimension / 2f - 1.dp.toPx(), style = Stroke(width = 1.5.dp.toPx()))
             }
         }
     }
@@ -476,26 +614,100 @@ private fun Brief(
 private fun HintLine(state: ReyonState, hint: ReyonHint?) {
     if (hint == null) return
     val res = LocalContext.current.resources
-    val text = when (hint) {
-        is ReyonHint.Wrong -> appString(R.string.reyon_hint_wrong_fmt, ReyonText.kind(res, state.puzzle.products[hint.product].kind))
-        is ReyonHint.Place -> appString(
-            R.string.reyon_hint_place_fmt,
-            ReyonText.kind(res, state.puzzle.products[hint.product].kind),
-            ReyonText.shelfAt(res, hint.row, state.puzzle.rows),
+    val guide = stringResource(R.string.reyon_hint)
+    when (hint) {
+        is ReyonHint.Wrong -> GuideBanner(
+            title = guide,
+            body = appString(R.string.reyon_hint_wrong_fmt, ReyonText.kind(res, state.puzzle.products[hint.product].kind)),
+            tone = BannerTone.WARN,
+            modifier = Modifier.padding(top = 8.dp),
+        )
+        is ReyonHint.Place -> GuideBanner(
+            title = guide,
+            body = appString(
+                R.string.reyon_hint_place_fmt,
+                ReyonText.kind(res, state.puzzle.products[hint.product].kind),
+                ReyonText.shelfAt(res, hint.row, state.puzzle.rows),
+            ),
+            modifier = Modifier.padding(top = 8.dp),
         )
     }
-    Text(
-        text = text,
-        style = MaterialTheme.typography.labelSmall,
-        color = ReyonPalette.HintRing,
-        textAlign = TextAlign.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 4.dp),
-    )
 }
 
+/**
+ * Yerleştirilecek ürünler: ambalaj rengi ve boyunda küçük bir örnek, ad, yüz
+ * sayısı; göz hizası ve ağır ürünlerde rozet simgesi. Seçili ürün dikkat
+ * sarısıyla çerçevelenir.
+ */
 @OptIn(ExperimentalLayoutApi::class)
+@Composable
+internal fun ProductChips(
+    products: List<Product>,
+    selected: Int,
+    onSelect: (Int) -> Unit,
+    ringOf: (Product) -> Color?,
+    detail: @Composable (Product) -> String,
+    modifier: Modifier = Modifier,
+) {
+    val res = LocalContext.current.resources
+    val tokens = Reyon.tokens
+    val trayLabel = stringResource(R.string.reyon_tray_label)
+    val eye = stringResource(R.string.reyon_badge_eye)
+    val heavy = stringResource(R.string.reyon_badge_heavy)
+    Column(modifier = modifier.fillMaxWidth().padding(top = 8.dp).verticalScroll(rememberScrollState())) {
+        SectionHeader(
+            title = if (products.isEmpty()) stringResource(R.string.reyon_tray_empty) else trayLabel,
+            trailing = if (products.isEmpty()) null else appString(R.string.tray_count_fmt, products.size),
+            modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 6.dp),
+        )
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            for (p in products) {
+                val name = ReyonText.kind(res, p.kind)
+                val extra = listOfNotNull(if (p.premium) eye else null, if (p.heavy) heavy else null).joinToString(", ")
+                val desc = "$trayLabel: " + appString(R.string.reyon_tray_item_fmt, name, p.facings) + if (extra.isEmpty()) "" else ", $extra"
+                val isSelected = p.id == selected
+                val ring = if (isSelected) tokens.attention else ringOf(p)
+                Surface(
+                    onClick = { onSelect(p.id) },
+                    shape = RoundedCornerShape(8.dp),
+                    color = MaterialTheme.colorScheme.surface,
+                    border = BorderStroke(if (ring != null) 2.dp else 1.dp, ring ?: tokens.line),
+                    // Ekran okuyucu tek cümle okur: etiket ve seçili durumu. İçteki yazılar
+                    // gizli; etiket onları zaten içeriyor, yoksa "Ayran", "×2" tekrar okunuyordu.
+                    modifier = Modifier.semantics {
+                        contentDescription = desc
+                        this.selected = isSelected
+                    },
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .clearAndSetSemantics {}
+                            .heightIn(min = 40.dp)
+                            .padding(horizontal = 10.dp, vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(7.dp),
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .width(11.dp)
+                                .height(10.dp + 4.dp * p.size)
+                                .background(tokens.pack(p.brand), RoundedCornerShape(topStart = 2.dp, topEnd = 2.dp, bottomStart = 1.dp, bottomEnd = 1.dp)),
+                        )
+                        Text(text = name, style = MaterialTheme.typography.labelLarge, fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal)
+                        Text(text = detail(p), style = monoStyle(12f, 16f), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        if (p.premium) Icon(ReyonIcons.Eye, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(14.dp))
+                        if (p.heavy) Icon(ReyonIcons.Heavy, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(14.dp))
+                    }
+                }
+            }
+        }
+    }
+}
+
 @Composable
 private fun Tray(
     state: ReyonState,
@@ -506,268 +718,83 @@ private fun Tray(
     onSelect: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val res = LocalContext.current.resources
     @Suppress("UNUSED_VARIABLE")
     val tick = version
-    val trayLabel = stringResource(R.string.reyon_tray_label)
-    val pending = state.puzzle.products.filter { !state.isPlaced(it.id) }
-    Column(modifier = modifier.fillMaxWidth().padding(top = 6.dp).verticalScroll(rememberScrollState())) {
-        Text(
-            text = if (pending.isEmpty()) stringResource(R.string.reyon_tray_empty) else trayLabel,
-            style = MaterialTheme.typography.labelSmall,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-            modifier = Modifier.padding(start = 4.dp, bottom = 2.dp),
-        )
-        FlowRow(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp),
-        ) {
-            for (p in pending) {
-                val name = ReyonText.kind(res, p.kind)
-                val desc = "$trayLabel: " + appString(R.string.reyon_tray_item_fmt, name, p.facings)
-                val isSelected = p.id == selected
-                val ring = when {
-                    isSelected -> ReyonPalette.SelectedRing
-                    p.id == wrongHint -> ReyonPalette.HintRing
-                    p.id in highlighted -> ReyonPalette.HighlightRing
-                    else -> Color.Transparent
-                }
-                Surface(
-                    onClick = { onSelect(p.id) },
-                    shape = RoundedCornerShape(10.dp),
-                    color = if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.28f) else MaterialTheme.colorScheme.surfaceVariant,
-                    border = BorderStroke(2.dp, ring),
-                    modifier = Modifier.semantics { contentDescription = desc },
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(5.dp),
-                    ) {
-                        Box(modifier = Modifier.size(10.dp).clip(CircleShape).background(brandColor(p.brand)))
-                        Text(
-                            text = name,
-                            style = MaterialTheme.typography.labelMedium,
-                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.onSurface,
-                        )
-                        Text(
-                            text = buildString {
-                                append("×${p.facings} ")
-                                repeat(p.size) { append('•') }
-                                if (p.premium) append(" ★")
-                                if (p.heavy) append(" ▼")
-                            },
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
-                        )
-                    }
-                }
+    val tokens = Reyon.tokens
+    val highlight = MaterialTheme.colorScheme.primary
+    ProductChips(
+        products = state.puzzle.products.filter { !state.isPlaced(it.id) },
+        selected = selected,
+        onSelect = onSelect,
+        ringOf = { p ->
+            when (p.id) {
+                wrongHint -> tokens.warn
+                in highlighted -> highlight
+                else -> null
             }
-        }
-    }
-}
-
-@Composable
-private fun Controls(canUndo: Boolean, canRemove: Boolean, onUndo: () -> Unit, onRemove: () -> Unit, onHint: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        OutlinedButton(onClick = onUndo, enabled = canUndo, modifier = Modifier.weight(1f), contentPadding = ActionRowPadding) {
-            ActionLabel(stringResource(R.string.undo))
-        }
-        OutlinedButton(onClick = onRemove, enabled = canRemove, modifier = Modifier.weight(1f), contentPadding = ActionRowPadding) {
-            ActionLabel(stringResource(R.string.reyon_remove))
-        }
-        Button(onClick = onHint, modifier = Modifier.weight(1f), contentPadding = ActionRowPadding) {
-            ActionLabel(stringResource(R.string.reyon_hint))
-        }
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Kartlar (ortak parçalar Denetim'de de kullanılır)
-// ---------------------------------------------------------------------------
-
-@Composable
-internal fun Chip(label: String, selected: Boolean, modifier: Modifier = Modifier, compact: Boolean = false, onClick: () -> Unit) {
-    Surface(
-        onClick = onClick,
-        shape = CircleShape,
-        color = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.28f) else MaterialTheme.colorScheme.surfaceVariant,
+        },
+        detail = { p -> appString(R.string.facings_fmt, p.facings) },
         modifier = modifier,
-    ) {
-        Text(
-            text = label,
-            style = if (compact) MaterialTheme.typography.labelMedium else MaterialTheme.typography.labelLarge,
-            fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
-            textAlign = TextAlign.Center,
-            maxLines = 1,
-            softWrap = false,
-            overflow = TextOverflow.Ellipsis,
-            color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(horizontal = if (compact) 4.dp else 10.dp, vertical = 8.dp),
-        )
-    }
+    )
 }
 
-/**
- * Dört tür çipi tek satıra bu genişliğin altında sığmıyor ("Denetim" 360 dp'de
- * kırpılıyordu). Kart içi genişlik 411 dp'de 299 dp, 360 dp'de 248 dp.
- */
-internal val KIND_CHIPS_ONE_ROW_MIN = 280.dp
-
-private fun kindLabel(kind: ReyonKind): Int = when (kind) {
-    ReyonKind.PUZZLE -> R.string.reyon_kind_puzzle
-    ReyonKind.AUDIT -> R.string.reyon_kind_audit
-    ReyonKind.SALES -> R.string.reyon_kind_sales
-    ReyonKind.ORDER -> R.string.reyon_kind_order
-}
-
-/** Tür seçimi: Diziliş / Denetim / Satış / Sipariş. Geniş kartta tek sıkı satır, dar kartta iki satır. */
-@Composable
-internal fun KindChips(kind: ReyonKind, onKind: (ReyonKind) -> Unit) {
-    BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
-        val perRow = if (maxWidth < KIND_CHIPS_ONE_ROW_MIN) 2 else 4
-        Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            for (rowKinds in ReyonKind.entries.chunked(perRow)) {
-                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                    for (k in rowKinds) {
-                        Chip(stringResource(kindLabel(k)), kind == k, Modifier.weight(1f), compact = perRow == 4) { onKind(k) }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-internal fun ModeAndLevelChips(mode: ReyonMode, level: ReyonLevel, onMode: (ReyonMode) -> Unit, onLevel: (ReyonLevel) -> Unit) {
-    val res = LocalContext.current.resources
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        Chip(stringResource(R.string.mode_daily), mode == ReyonMode.DAILY, Modifier.weight(1f)) { onMode(ReyonMode.DAILY) }
-        Chip(stringResource(R.string.mode_free), mode == ReyonMode.FREE, Modifier.weight(1f)) { onMode(ReyonMode.FREE) }
-    }
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        for (l in ReyonLevel.entries) {
-            Chip(ReyonText.level(res, l), level == l, Modifier.weight(1f)) { onLevel(l) }
-        }
-    }
-}
-
-@Composable
-private fun MenuCard(
-    level: ReyonLevel,
-    mode: ReyonMode,
-    records: Map<ReyonLevel, ReyonStore.Record>,
-    bestTime: Int,
-    onKind: (ReyonKind) -> Unit,
-    onLevel: (ReyonLevel) -> Unit,
-    onMode: (ReyonMode) -> Unit,
-    onStart: () -> Unit,
-    onExit: () -> Unit,
-) {
-    OverlayCard {
-        Text(
-            text = stringResource(R.string.app_name),
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold,
-        )
-        KindChips(kind = ReyonKind.PUZZLE, onKind = onKind)
-        Text(
-            text = stringResource(R.string.reyon_intro),
-            style = MaterialTheme.typography.bodySmall,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
-        )
-        ModeAndLevelChips(mode = mode, level = level, onMode = onMode, onLevel = onLevel)
-        Text(
-            text = appString(R.string.reyon_level_desc_fmt, level.rows, level.cols, level.products.first, level.products.last),
-            style = MaterialTheme.typography.labelSmall,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-        )
-        val record = records[level]
-        val info = when {
-            mode == ReyonMode.DAILY && record != null ->
-                appString(R.string.reyon_daily_done_fmt, formatTime(record.time), record.hints)
-            mode == ReyonMode.DAILY -> stringResource(R.string.reyon_daily_desc)
-            bestTime > 0 -> appString(R.string.reyon_best_fmt, formatTime(bestTime))
-            else -> stringResource(R.string.reyon_free_desc)
-        }
-        Text(
-            text = info,
-            style = MaterialTheme.typography.bodySmall,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.primary,
-        )
-        Spacer(Modifier.height(4.dp))
-        Button(onClick = onStart, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(if (mode == ReyonMode.DAILY && record != null) R.string.reyon_play_again else R.string.reyon_start))
-        }
-        TextButton(onClick = onExit, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(R.string.exit_app))
-        }
-    }
-}
+// ---------------------------------------------------------------------------
+// Rapor
+// ---------------------------------------------------------------------------
 
 @Composable
 private fun SolvedCard(
     state: ReyonState,
     result: ReyonResult,
     onRetry: () -> Unit,
-    onMenu: () -> Unit,
-    onExit: () -> Unit,
+    onBack: () -> Unit,
 ) {
     val res = LocalContext.current.resources
     val time = formatTime(result.time)
-    val details = appString(R.string.reyon_result_fmt, ReyonText.level(res, state.puzzle.level), result.hints)
+    val levelName = ReyonText.level(res, state.puzzle.level)
+    val details = appString(R.string.reyon_result_fmt, levelName, result.hints)
     OverlayCard {
         Text(
-            text = stringResource(R.string.congrats),
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold,
+            text = stringResource(R.string.reyon_done_title),
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Center,
         )
-        Text(
-            text = time,
-            style = MaterialTheme.typography.displaySmall,
-            fontWeight = FontWeight.Black,
-            color = MaterialTheme.colorScheme.primary,
-        )
-        if (result.record) {
-            Text(
-                text = stringResource(R.string.new_record),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.secondary,
-            )
-        }
+        Text(text = time, style = monoStyle(36f, 44f), color = MaterialTheme.colorScheme.primary)
+        if (result.record) PersonalBestPill()
         Text(
             text = details,
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         ShareButton(
             ShareContent(
-                headline = stringResource(R.string.share_solved),
+                headline = stringResource(R.string.reyon_done_title),
                 details = listOf(details, appString(R.string.time_fmt, time), modeShareLabel(result.daily, result.day)),
                 board = reyonPainter(state, res),
             ),
         )
-        Spacer(Modifier.height(4.dp))
-        Button(onClick = onRetry, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(R.string.same_difficulty))
-        }
-        OutlinedButton(onClick = onMenu, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(R.string.reyon_to_menu))
-        }
-        TextButton(onClick = onExit, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(R.string.exit_app))
-        }
+        ReportButtons(daily = result.daily, newLabel = R.string.report_new_case, onBack = onBack, onRetry = onRetry)
+    }
+}
+
+/**
+ * Raporun altındaki iki düğme: Görevler'e dön ve yeni vaka. Günün vakasında yeni
+ * vaka aynı rafı yeniden açar (tohum gün); o yüzden "Yeniden dene" yazar.
+ */
+@Composable
+internal fun ReportButtons(daily: Boolean, @StringRes newLabel: Int, onBack: () -> Unit, onRetry: () -> Unit) {
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        ReyonButton(
+            text = stringResource(R.string.nav_tasks),
+            onClick = onBack,
+            modifier = Modifier.weight(1f),
+        )
+        ReyonButton(
+            text = stringResource(if (daily) R.string.report_try_again else newLabel),
+            onClick = onRetry,
+            kind = ButtonKind.PRIMARY,
+            modifier = Modifier.weight(1f),
+        )
     }
 }

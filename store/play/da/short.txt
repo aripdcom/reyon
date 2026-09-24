@@ -1,1 +1,1 @@
-Planogramtræning: fyld hylden, revidér den, styr salg og lager.
+Hyldesimulator til dagligvarer: planogrammer, kontrol, salg og lager.

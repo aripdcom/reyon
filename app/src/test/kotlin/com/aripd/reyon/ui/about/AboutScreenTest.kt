@@ -14,6 +14,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aripd.reyon.R
 import com.aripd.reyon.setAppContent
 import com.aripd.reyon.str
+import com.aripd.reyon.ui.theme.ThemeChoice
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -37,6 +38,8 @@ class AboutScreenTest {
                 onToggleSound = onToggleSound,
                 hapticsOn = hapticsOn,
                 onToggleHaptics = {},
+                theme = ThemeChoice.LIGHT,
+                onTheme = {},
                 languageLabel = "Türkçe",
                 onLanguage = onLanguage,
                 onExit = {},

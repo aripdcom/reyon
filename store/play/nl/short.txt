@@ -1,1 +1,1 @@
-Planogram oefenen: schap vullen, controleren, verkoop en voorraad sturen.
+FMCG-schapsimulator: planogrammen, schapcontrole, verkoop en voorraad.

@@ -1,11 +1,15 @@
-Planogram alıştırması: rafı diz, planı denet, satışı ve stoğu yönet.
+FMCG raf simülatörü: planogram, raf denetimi, satış ve stok yönetimi.
 
-Diziliş — Ürüne dokun, sonra rafta bir göze dokun; uzun basınca ürün tepsiye döner. Brifteki her kural tutunca ✓ olur; kurallar tek bir dizilişe götürür, tahmin gerekmez.
-Denetim — Üstte plan, altta gerçek raf. Rafın plandan saptığı gözlere dokun: yer değişimi, boş göz, yabancı ürün, yanlış marka ya da boy, taşma. Yanlış dokunuş hata sayılır.
-Satış — Ürünleri istediğin gibi diz; puan satış kurallarından gelir (göz hizası, ağırlar alta, tamamlayıcılar yan yana, temizlik gıdadan uzak, kategori ve marka blokları). Hedef iyileştiricinin en iyi dizilişi; hedefe ulaşan üç yıldız alır.
-Sipariş — Raf planı hazır; işin stok. Her gün ürün başına kaç koli isteyeceğine karar ver: sipariş ertesi sabah gelir, rafa sığmayan iade olur, akşam kalan stok bekleme öder, raf ömrü dolan fire olur. Hedef, aynı tahminleri gören uzmanın kârı.
+Görevler — Her gün dört modda günün vakası: herkes aynı rafla çalışır, format günden güne Market, Süpermarket ve Hipermarket arasında döner. Alıştırmada formatı sen seçersin.
 
-0 reklam · 0 izleyici · 0 izin
+Diziliş — Ürüne dokun, sonra rafta bir göze dokun; uzun basınca ürün raftan kalkar. Brifteki her kural tutunca işaretlenir; kurallar tek bir dizilişe götürür, tahmin gerekmez.
+Denetim — Üstte planogram, altta mağaza rafı. Rafın planogramdan saptığı gözlere dokun: yer değişimi, boş göz, yabancı ürün, yanlış marka ya da boy, taşma. Yanlış dokunuş yanlış işaret sayılır.
+Satış — Ürünleri istediğin gibi diz; raf verimi satış kurallarından gelir (göz hizası, ağırlar alta, tamamlayıcılar yan yana, temizlik gıdadan uzak, kategori ve marka blokları). Uzmanın dizilişi iyileştiricinin bulduğu en iyi diziliş; raf verimin ona oranla gösterilir.
+Sipariş — Raf planı hazır; işin stok. Her gün ürün başına kaç koli isteyeceğine karar ver: sipariş ertesi sabah gelir, rafa sığmayan iade olur, akşam kalan stok bekleme öder, raf ömrü dolan fire olur. Kârın, aynı tahminleri gören uzmanınkiyle karşılaştırılır.
+
+Sonuçlar puan değil rapor: uzmana göre yüzde, düzey (Uzman düzeyi, İyi, Gelişmeli, Zayıf) ve kişisel en iyi. Sipariş'in haftalık raporu hizmet düzeyini, stok devrini ve bulguları gösterir.
+
+Açık ve koyu tema · 0 reklam · 0 izleyici · 0 izin
 
 Dil: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
 

@@ -1,1 +1,1 @@
-Prática de planograma: arrume a prateleira, audite, venda e faça o pedido.
+Simulador de prateleira: planogramas, auditoria, vendas e estoque.

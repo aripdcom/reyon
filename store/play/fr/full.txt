@@ -1,11 +1,15 @@
-Planogramme : ranger le rayon, l'auditer, gérer ventes et stock.
+Simulateur de rayon PGC : planogrammes, contrôle, ventes et stock.
 
-Ranger — Appuie sur un produit, puis sur un emplacement du rayon ; appui long pour le renvoyer sur le plateau. Chaque règle du briefing passe au ✓ quand elle est respectée ; les règles mènent à une seule disposition, sans deviner.
-Contrôler — Le plan en haut, le vrai rayon en bas. Appuie sur les emplacements où le rayon s’écarte du plan : un échange, un emplacement vide, un produit étranger, une marque ou une taille fausse, un débordement. Un appui faux compte comme une erreur.
-Ventes — Dispose les produits comme tu veux ; les points viennent des règles de vente (hauteur des yeux, lourds en bas, complémentaires côte à côte, entretien loin de l’alimentaire, blocs de catégorie et de marque). L’objectif est la meilleure disposition trouvée par l’optimiseur ; l’atteindre donne trois étoiles.
-Commander — Le plan du rayon est fixé ; ton travail c’est le stock. Chaque jour, décide combien de cartons commander par produit : les commandes arrivent le lendemain matin, ce qui ne rentre pas est retourné, le stock qui reste le soir coûte du stockage, les unités périmées sont perdues. L’objectif est le bénéfice d’un expert qui voit les mêmes prévisions.
+Tâches — Chaque jour, un cas du jour dans les quatre modes : tout le monde travaille sur le même rayon, et le format de magasin alterne entre Supérette, Supermarché et Hypermarché. En entraînement, tu choisis le format.
 
-0 pub · 0 traceur · 0 autorisation
+Ranger — Appuie sur un produit, puis sur un emplacement du rayon ; appui long pour le retirer du rayon. Chaque règle du briefing est cochée quand elle est respectée ; les règles mènent à une seule disposition, sans deviner.
+Contrôler — Le planogramme en haut, le rayon du magasin en bas. Appuie sur les emplacements où le rayon s’écarte du planogramme : un échange, un emplacement vide, un produit étranger, une marque ou une taille fausse, un débordement. Un appui faux compte comme un faux signalement.
+Ventes — Dispose les produits comme tu veux ; le rendement du rayon vient des règles de vente (hauteur des yeux, lourds en bas, complémentaires côte à côte, entretien loin de l’alimentaire, blocs de catégorie et de marque). La disposition de l’expert est la meilleure trouvée par l’optimiseur ; ton rendement est affiché en proportion de celle-ci.
+Commander — Le plan du rayon est fixé ; ton travail c’est le stock. Chaque jour, décide combien de cartons commander par produit : les commandes arrivent le lendemain matin, ce qui ne rentre pas est retourné, le stock qui reste le soir coûte du stockage, les unités périmées sont perdues. Ton bénéfice est comparé à celui d’un expert qui voit les mêmes prévisions.
+
+Les résultats sont des rapports, pas des scores : ton résultat par rapport à l’expert, un niveau (Niveau expert, Bon, À améliorer, Faible) et ton record personnel. Le rapport hebdomadaire des commandes montre le taux de service, la rotation du stock et les constats.
+
+Thème clair et sombre · 0 pub · 0 traceur · 0 autorisation
 
 Langue: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
 

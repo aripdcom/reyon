@@ -228,7 +228,7 @@ def kaydir() -> None:
 
 
 def uygulamayi_ac(paket: str) -> None:
-    """Uygulamayı baştan açar. Ana menü yok: açılış doğrudan Reyon."""
+    """Uygulamayı baştan açar. Açılış Görevler ekranı."""
     # Uzun koşumda ekran uyursa okumalar kilit ekranını görür.
     kabuk("input keyevent KEYCODE_WAKEUP")
     kabuk("wm dismiss-keyguard")
@@ -242,8 +242,25 @@ def uygulamayi_ac(paket: str) -> None:
 # Komutlar
 # ---------------------------------------------------------------------------
 
+def derleme_uyarisi(paket: str) -> None:
+    """Kare ölçümü derlenmemiş yapıda anlamsız: adb ile kurulan APK JIT ile çalışır.
+
+    Play'den kurulan uygulama başlangıç profiliyle önceden derlenir; adb ile kurulan
+    `status=verify` kalır ve yeniden oluşturma kareleri iki kata yakın uzar
+    (docs/cihaz-testi.md, 1.1.0 B). Ölçümden önce:
+    `adb shell cmd package compile -m speed-profile -f com.aripd.reyon`
+    """
+    satir = next((s for s in kabuk("dumpsys package dexopt").split(paket, 1)[-1].splitlines() if "status=" in s), "")
+    m = re.search(r"status=([\w-]+)", satir)
+    durum = m.group(1) if m else "?"
+    if durum not in ("speed-profile", "speed", "everything"):
+        print(f"UYARI: {paket} derlenmemiş (status={durum}); kare süreleri Play kurulumunu temsil etmez.")
+        print(f"       Önce: adb shell cmd package compile -m speed-profile -f {paket}\n")
+
+
 def komut_kare(args) -> None:
     """Kare hızı ve takılma (jank) oranı; oyun OYNANIRKEN çağrılmalı."""
+    derleme_uyarisi(args.paket)
     kabuk(f"dumpsys gfxinfo {args.paket} reset")
     kabuk(f"sleep {args.sure}")
     cikti = kabuk(f"dumpsys gfxinfo {args.paket}")
@@ -409,27 +426,24 @@ def komut_erisim(args) -> None:
 # Reyon'un kısa ekran yerleşimi: docs/cihaz-testi.md, "v0.43.2" bölümü G1-G6.
 # Etiketler arayüz dilinden geliyor; cihaz Türkçe ya da İngilizce olabilir diye
 # ikisi de aranıyor. Başka bir dildeyse --brif/--tepsi/--artir ile verilebilir.
+# 1.1.0'dan beri tur Görevler ekranından açılıyor: format (Market) seçilir,
+# modun alıştırma satırına dokunulur.
 REYON_ETIKET = {
     "diziliş": ["Diziliş", "Arrange"],
     "denetim": ["Denetim", "Audit"],
     "satış": ["Satış", "Sales"],
     "sipariş": ["Sipariş", "Ordering"],
-    "serbest": ["Serbest", "Free play"],
-    "kolay": ["Kolay", "Easy"],
+    "market": ["Market"],
+    "alıştırma": ["Alıştırma", "Practice"],
+    "anladım": ["Anladım", "Got it"],
+    "geri": ["Geri", "Back"],
     "brif": ["Planogram brifi", "Planogram brief"],
-    "tepsi": ["Tepsi", "Tray"],
+    "tepsi": ["Yerleştirilecek ürünler", "Products to place"],
     "artır": ["Artır", "More"],
     "raf": ["Reyon ", "Denetim rafı ", "Satış rafı ", "Sipariş rafı ",
             "Audit shelf ", "Sales shelf ", "Order shelf "],
     "plan": ["Plan ", "Planogram "],
     "kural": ["Satış kuralları", "Sales rules"],
-    "basa": ["Başa dön", "Back to start"],
-}
-REYON_BASLAT = {
-    "diziliş": ["Başla", "Start"],
-    "denetim": ["Denetime başla", "Start the audit"],
-    "satış": ["Dizmeye başla", "Start arranging"],
-    "sipariş": ["Haftaya başla", "Start the week"],
 }
 
 
@@ -454,44 +468,58 @@ def on_ekli(ogeler: list[dict], anahtar: str, ek: str = ": ") -> list[dict]:
     return [o for o in ogeler if any(o["t"].startswith(p) for p in onler)]
 
 
-def reyon_kurulum_karti() -> None:
-    """Sürmekte olan turdan kurulum kartına döner.
+def reyon_gorevler() -> None:
+    """Açık turdan Görevler ekranına döner.
 
-    Reyon yarım kalan turu saklıyor: oyundan çıkıp yeniden girince tur
-    kaldığı yerden açılıyor ve mod çipleri ekranda olmuyor.
+    Reyon yarım kalan turu saklıyor; uygulama yine de her açılışta Görevler'le
+    başlıyor. Bir tur açıksa üst çubuktaki geri oku Görevler'e götürür.
     """
     for _ in range(3):
         ogeler = arayuz()
-        if any(o["t"] in REYON_ETIKET["diziliş"] for o in ogeler):
+        if any(o["t"] in REYON_ETIKET["market"] for o in ogeler):
             return
-        geri = next((o for o in ogeler if o["t"] in REYON_ETIKET["basa"]), None)
+        geri = next((o for o in ogeler if o["t"] in REYON_ETIKET["geri"]), None)
         if not geri:
             return
         dokun(geri)
 
 
 def reyon_turu_ac(tur: str) -> bool:
-    """Reyon menüsünde türü, serbest modu ve Kolay'ı seçip turu başlatır."""
-    for grup, hedefler in (("tur", REYON_ETIKET[tur]), ("mod", REYON_ETIKET["serbest"]),
-                           ("zorluk", REYON_ETIKET["kolay"]), ("baslat", REYON_BASLAT[tur])):
-        for deneme in range(6):
-            ogeler = arayuz()
-            oge = next((o for o in ogeler if o["t"] in hedefler), None)
-            if oge:
-                dokun(oge)
-                break
-            # Mod çipine dokunmak o modun yarım turunu açabiliyor: kurulum
-            # kartına dönülür. Kısa ekranda kart kaydığı için de aranır.
-            reyon_kurulum_karti()
-            if any(o["t"] in hedefler for o in arayuz()):
-                continue
-            kaydir()
-        else:
-            print(f"    {tur}: {grup} düğmesi bulunamadı ({'/'.join(hedefler)})")
-            return False
-    # Bulmaca arka planda üretiliyor; raf gelene dek bekle.
+    """Görevler'de Market formatını seçip türün alıştırma satırından turu açar."""
+    reyon_gorevler()
+    for deneme in range(4):
+        ogeler = arayuz()
+        market = next((o for o in ogeler if o["t"] in REYON_ETIKET["market"]), None)
+        if market:
+            dokun(market)
+            break
+        kaydir()
+    else:
+        print(f"    {tur}: Market formatı bulunamadı")
+        return False
+    # Türün adı hem günün vakası düğmesinde hem alıştırma satırında geçiyor;
+    # alıştırma satırı "Alıştırma" başlığının altında, en alttaki eşleşme o.
+    for deneme in range(4):
+        ogeler = arayuz()
+        baslik = next((o for o in ogeler if o["t"] in REYON_ETIKET["alıştırma"]), None)
+        adaylar = [o for o in ogeler if o["t"] in REYON_ETIKET[tur]
+                   and (baslik is None or o["cy"] > baslik["cy"])]
+        if baslik and adaylar:
+            dokun(max(adaylar, key=lambda o: o["cy"]))
+            break
+        kaydir()
+    else:
+        print(f"    {tur}: alıştırma satırı bulunamadı ({'/'.join(REYON_ETIKET[tur])})")
+        return False
+    # Tur arka planda üretiliyor; raf gelene dek bekle. Modun ilk girişinde
+    # "Nasıl çalışılır" kartı rafın üstüne açılır, kapatılır.
     for _ in range(20):
-        if on_ekli(arayuz(), "raf", ek=""):
+        ogeler = arayuz()
+        kart = next((o for o in ogeler if o["t"] in REYON_ETIKET["anladım"]), None)
+        if kart:
+            dokun(kart)
+            continue
+        if on_ekli(ogeler, "raf", ek=""):
             return True
         time.sleep(1.5)
     print(f"    {tur}: raf tuvali gelmedi (üretim uzun sürdü ya da tur açılmadı)")
@@ -501,7 +529,6 @@ def reyon_turu_ac(tur: str) -> bool:
 def reyon_olc(tur: str, olcek: float) -> dict:
     """Bir turu açıp panelin, rafın ve tepsinin kutularını dp olarak döndürür."""
     uygulamayi_ac(PAKET)
-    reyon_kurulum_karti()
     if not reyon_turu_ac(tur):
         return {}
     ogeler = arayuz(hepsi=True)

@@ -1,1 +1,1 @@
-Planogramträning: fyll hyllan, revidera den, styr försäljning och lager.
+Hyllsimulator för dagligvaror: planogram, kontroll, försäljning, lager.

@@ -3,10 +3,18 @@ package com.aripd.reyon.ui
 import android.content.Context
 import com.aripd.reyon.engine.ReyonLevel
 
+/** Vaka türü: günün vakası (herkes aynı rafla) ya da alıştırma (rastgele raf). */
 enum class ReyonMode { DAILY, FREE }
 
 /** Oyun türü: diziliş bulmacası, uyum denetimi, satış dizilişi, sipariş haftası. */
 enum class ReyonKind { PUZZLE, AUDIT, SALES, ORDER }
+
+/**
+ * Günün vakalarının mağaza formatı. Herkes aynı rafla çalışsın diye format
+ * kullanıcıya bırakılmaz, günden türer: Market, Süpermarket, Hipermarket sırayla
+ * döner. Dört mod aynı gün aynı formatta.
+ */
+fun dailyLevel(epochDay: Long): ReyonLevel = ReyonLevel.entries[Math.floorMod(epochDay, ReyonLevel.entries.size.toLong()).toInt()]
 
 /**
  * Reyon kalıcı durumu: son seçilen zorluk ve mod, devam eden bulmaca
@@ -246,6 +254,39 @@ class ReyonStore(context: Context) {
         return true
     }
 
+    /**
+     * Alıştırmanın son sonucu, tür ve format başına: iki sayı. Diziliş ve Denetim'de
+     * süre (saniye) ve kılavuz ya da yanlış işaret; Satış ve Sipariş'te puan ve
+     * uzmanın puanı. Görevler ekranının "son sonuç" sütunu bunu okur.
+     */
+    data class Practice(val value: Int, val other: Int)
+
+    fun lastPractice(kind: ReyonKind, level: ReyonLevel): Practice? {
+        val key = KEY_PRACTICE + kind.name + "_" + level.name
+        if (!prefs.contains(key + "_v")) return null
+        return Practice(prefs.getInt(key + "_v", 0), prefs.getInt(key + "_o", 0))
+    }
+
+    fun saveLastPractice(kind: ReyonKind, level: ReyonLevel, value: Int, other: Int) {
+        val key = KEY_PRACTICE + kind.name + "_" + level.name
+        prefs.edit().putInt(key + "_v", value).putInt(key + "_o", other).apply()
+    }
+
+    /** Modun "nasıl oynanır" kartı görüldü mü; ilk girişte bir kez kendiliğinden açılır. */
+    fun introSeen(kind: ReyonKind): Boolean = prefs.getBoolean(KEY_INTRO + kind.name, false)
+
+    fun markIntroSeen(kind: ReyonKind) {
+        prefs.edit().putBoolean(KEY_INTRO + kind.name, true).apply()
+    }
+
+    /** Görevler'de seçili alıştırma formatı; ilk açılışta son oynanan format. */
+    fun practiceLevel(): ReyonLevel =
+        ReyonLevel.entries.firstOrNull { it.name == prefs.getString(KEY_PRACTICE_LEVEL, null) } ?: lastLevel()
+
+    fun savePracticeLevel(level: ReyonLevel) {
+        prefs.edit().putString(KEY_PRACTICE_LEVEL, level.name).apply()
+    }
+
     fun lastLevel(): ReyonLevel =
         ReyonLevel.entries.firstOrNull { it.name == prefs.getString(KEY_LEVEL, null) } ?: ReyonLevel.KOLAY
 
@@ -370,5 +411,8 @@ class ReyonStore(context: Context) {
         const val KEY_O_DAILY_SCORE = "order_daily_score_"
         const val KEY_O_DAILY_TARGET = "order_daily_target_"
         const val KEY_O_BEST = "order_best_"
+        const val KEY_PRACTICE = "practice_"
+        const val KEY_PRACTICE_LEVEL = "practice_level"
+        const val KEY_INTRO = "intro_seen_"
     }
 }

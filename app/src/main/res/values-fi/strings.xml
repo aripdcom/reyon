@@ -7,27 +7,27 @@
 -->
 <resources>
     <string name="app_name">Reyon</string>
-    <string name="app_tagline">Planogrammipulma: päättele briiffistä ainoa oikea hyllyjärjestys</string>
+    <string name="app_tagline">Päivittäistavarakaupan hyllysimulaattori</string>
 
     <!-- Ortak -->
     <string name="chip_no_ads">0 mainosta</string>
     <string name="chip_no_trackers">0 seurainta</string>
     <string name="chip_no_permissions">0 lupaa</string>
-    <string name="new_record">Uusi ennätys! 🏆</string>
-    <string name="exit_app">Poistu</string>
     <string name="back">Takaisin</string>
-    <string name="congrats">Hienoa työtä! 🎉</string>
     <string name="undo">Kumoa</string>
-    <string name="solved_label">Ratkaistut</string>
-    <string name="mode_daily">Päivittäinen</string>
-    <string name="mode_free">Vapaa</string>
-    <string name="difficulty_easy">Helppo</string>
-    <string name="difficulty_medium">Keskitaso</string>
-    <string name="difficulty_hard">Vaikea</string>
-    <string name="difficulty_label">Taso</string>
-    <string name="same_difficulty">Uusi samalla tasolla</string>
+    <string name="mode_daily">Päivän tapaus</string>
+    <string name="mode_free">Harjoitus</string>
     <string name="time_label">Aika</string>
     <string name="time_fmt">Aika: %1$s</string>
+    <string name="nav_tasks">Tehtävät</string>
+    <string name="format_market">Lähikauppa</string>
+    <string name="format_supermarket">Supermarket</string>
+    <string name="format_hypermarket">Hypermarket</string>
+    <string name="format_shelf_fmt">%1$d×%2$d hylly</string>
+    <string name="case_subtitle_fmt">%1$s · %2$d×%3$d hylly · %4$s</string>
+    <string name="kpi_brief">Briiffi</string>
+    <string name="kpi_placed">Sijoitettu</string>
+    <string name="percent_fmt">%1$d%%</string>
 
     <!-- Ayarlar -->
     <string name="settings_title">Asetukset</string>
@@ -41,16 +41,18 @@
     <string name="settings_haptics">Värinä</string>
     <string name="haptics_on">Laita värinä päälle</string>
     <string name="haptics_off">Laita värinä pois</string>
+    <string name="settings_theme">Teema</string>
+    <string name="theme_light">Vaalea</string>
+    <string name="theme_dark">Tumma</string>
+    <string name="theme_system">Puhelimen mukaan</string>
 
     <!-- Paylaşım -->
     <string name="share">Jaa</string>
     <string name="share_chooser">Jaa tulos</string>
     <string name="share_failed">Jakamista ei voitu avata</string>
     <string name="share_tagline">Reyon: nolla mainoksia, nolla lupia, nolla seurantaa. Ilmainen ja avoin lähdekoodi:</string>
-    <string name="share_link">https://aripdcom.github.io/reyon</string>
-    <string name="share_solved">Ratkaistu!</string>
-    <string name="share_score_fmt">%1$s pistettä</string>
-    <string name="share_daily_fmt">Päivittäinen · %1$s</string>
+    <string name="share_link">https://reyon.aripd.com</string>
+    <string name="share_daily_fmt">Päivän tapaus · %1$s</string>
 
     <!-- Hakkında -->
     <string name="about_title">Tietoja</string>
@@ -69,31 +71,37 @@
     <string name="about_lic_androidx_desc">Kirjastot Compose, Material 3, Lifecycle, Activity ja Core. The Android Open Source Project.</string>
     <string name="about_lic_kotlin_name">Kotlin ja kotlinx.coroutines</string>
     <string name="about_lic_kotlin_desc">Kielen vakiokirjasto ja rinnakkaisuus. JetBrains ja avustajat.</string>
+    <string name="about_lic_plex_name">IBM Plex</string>
+    <string name="about_lic_plex_desc">Kirjasimet: Sans, Sans Condensed, Mono ja Sans Arabic. IBM Corp.</string>
     <string name="about_license_show">Näytä Apache 2.0 -lisenssin teksti</string>
     <string name="about_license_hide">Piilota lisenssiteksti</string>
+    <string name="about_ofl_show">Näytä SIL Open Font License -lisenssin teksti</string>
+    <string name="about_ofl_hide">Piilota kirjasinlisenssi</string>
     <string name="about_app_license">Reyonin lähdekoodi on avoin GNU GPL v3 -lisenssillä. Nimi ”Reyon” ja logo eivät kuulu lisenssiin.</string>
     <string name="about_app_license_link">Lisenssiteksti (GitHub)</string>
 
     <!-- Reyon: Diziliş -->
-    <string name="reyon_intro">Napauta tuotetta ja sitten paikkaa hyllyssä; pitkä painallus lähettää sen takaisin alustalle. Jokainen briiffin sääntö muuttuu ✓:ksi, kun se pitää paikkansa; säännöt johtavat täsmälleen yhteen järjestykseen, ilman arvailua.</string>
+    <string name="reyon_intro">Napauta tuotetta ja sitten paikkaa hyllyssä; pitkä painallus poistaa sen hyllystä. Jokainen briiffin sääntö kuitataan, kun se pitää paikkansa; säännöt johtavat täsmälleen yhteen järjestykseen, ilman arvailua.</string>
     <string name="reyon_level_desc_fmt">%1$d hyllyä × %2$d paikkaa · %3$d–%4$d tuotetta</string>
-    <string name="reyon_daily_desc">Tänään kaikki järjestävät saman hyllyn; aikasi kirjataan.</string>
-    <string name="reyon_daily_done_fmt">Ratkaistu tänään: %1$s · %2$d vihjettä</string>
-    <string name="reyon_free_desc">Satunnainen hylly; ilman vihjeitä tehdyt ratkaisut lasketaan ennätykseksi.</string>
-    <string name="reyon_best_fmt">Paras aika: %1$s</string>
-    <string name="reyon_start">Aloita</string>
-    <string name="reyon_play_again">Järjestä uudestaan</string>
-    <string name="reyon_to_menu">Takaisin alkuun</string>
     <string name="reyon_generating">Valmistellaan hyllyä…</string>
     <string name="reyon_brief_label">Planogrammibriiffi</string>
-    <string name="reyon_tray_label">Alusta</string>
+    <string name="reyon_tray_label">Sijoitettavat</string>
     <string name="reyon_tray_empty">Kaikki tuotteet ovat hyllyssä</string>
     <string name="reyon_tray_item_fmt">%1$s, %2$d etuosaa</string>
-    <string name="reyon_hint">Vihje</string>
-    <string name="reyon_remove">Alustalle</string>
-    <string name="reyon_hint_wrong_fmt">%1$s oli väärässä paikassa ja palasi alustalle</string>
-    <string name="reyon_hint_place_fmt">Vihje: %1$s kuuluu %2$s</string>
-    <string name="reyon_result_fmt">%1$s · %2$d vihjettä</string>
+    <string name="reyon_done_title">Planogrammi valmis</string>
+    <string name="brief_satisfied_fmt">%1$d/%2$d täyttyy</string>
+    <string name="brief_status_ok">täyttyy</string>
+    <string name="brief_status_broken">rikkoutuu</string>
+    <string name="brief_status_pending">avoin</string>
+    <string name="tray_count_fmt">%1$d jäljellä</string>
+    <string name="facings_fmt">×%1$d</string>
+    <string name="reyon_badge_eye">silmien korkeus</string>
+    <string name="reyon_badge_heavy">painava</string>
+    <string name="reyon_hint">Opas</string>
+    <string name="reyon_remove">Poista hyllystä</string>
+    <string name="reyon_hint_wrong_fmt">%1$s oli väärässä paikassa; se on taas sijoitettava</string>
+    <string name="reyon_hint_place_fmt">%1$s kuuluu %2$s</string>
+    <string name="reyon_result_fmt">%1$s · opas %2$d kertaa</string>
     <string name="reyon_board_desc_fmt">Reyon %1$d hyllyä × %2$d paikkaa, %3$d tuotetta järjestämättä</string>
     <string name="reyon_shelf_top">ylin hylly</string>
     <string name="reyon_shelf_eye">silmien korkeus (hylly 2)</string>
@@ -103,6 +111,12 @@
     <string name="reyon_shelf_eye_at">silmien korkeudelle (hylly 2)</string>
     <string name="reyon_shelf_bottom_at">alimmalle hyllylle</string>
     <string name="reyon_shelf_nth_at">hyllylle %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, paikka %2$d vasemmalta: %3$s</string>
+    <string name="reyon_slot_empty">tyhjä</string>
+    <string name="reyon_slot_selected">valittu</string>
+    <string name="reyon_size_small">pieni</string>
+    <string name="reyon_size_medium">keskikoko</string>
+    <string name="reyon_size_large">iso</string>
     <string name="reyon_clue_placed">%1$s on %2$s (annettu)</string>
     <string name="reyon_clue_on_shelf">%1$s on %2$s</string>
     <string name="reyon_clue_in_slot">%1$s vie paikan %2$d vasemmalta</string>
@@ -113,17 +127,22 @@
     <string name="reyon_clue_same_shelf">%1$s ja %2$s jakavat hyllyn</string>
     <string name="reyon_clue_different_shelf">%1$s ja %2$s ovat eri hyllyillä</string>
     <string name="reyon_clue_above">%1$s on hyllyllä heti %2$s yläpuolella, suoraan sen päällä</string>
-    <string name="reyon_clue_eye_level">★ Korkean katteen tuotteet ovat silmien korkeudella (hylly 2)</string>
-    <string name="reyon_clue_heavy_bottom">▼ Painavat tuotteet kuuluvat alimmalle hyllylle</string>
+    <string name="reyon_clue_eye_level">Korkean katteen tuotteet (merkintä ”silmien korkeus”) ovat silmien korkeudella (hylly 2)</string>
+    <string name="reyon_clue_heavy_bottom">Painavat tuotteet (merkintä ”painava”) kuuluvat alimmalle hyllylle</string>
     <string name="reyon_clue_category_block">%1$s muodostavat yhden lohkon: sama hylly, vierekkäin</string>
     <string name="reyon_clue_categories_apart">%1$s ja %2$s eivät koskaan jaa hyllyä</string>
     <string name="reyon_clue_brand_vertical">%1$s muodostaa pystylohkon: pinottuna peräkkäisille hyllyille</string>
-    <string name="reyon_clue_size_flow">Kokojen %1$s kasvavat vasemmalta oikealle (• pieni, ••• iso)</string>
+    <string name="reyon_clue_size_flow">Kokojen %1$s kasvavat vasemmalta oikealle (matala pakkaus pieni, korkea pakkaus iso)</string>
     <string name="reyon_cat_icecek">Juomat</string>
     <string name="reyon_cat_atistirmalik">Naposteltavat</string>
     <string name="reyon_cat_kahvaltilik">Aamiainen</string>
     <string name="reyon_cat_temizlik">Puhdistusaineet</string>
     <string name="reyon_cat_bakim">Henkilökohtainen hygienia</string>
+    <string name="reyon_cat_code_icecek">JU</string>
+    <string name="reyon_cat_code_atistirmalik">NA</string>
+    <string name="reyon_cat_code_kahvaltilik">AA</string>
+    <string name="reyon_cat_code_temizlik">PU</string>
+    <string name="reyon_cat_code_bakim">HY</string>
     <string name="reyon_brand_a">Toros</string>
     <string name="reyon_brand_b">Ege</string>
     <string name="reyon_brand_c">Kuzey</string>
@@ -132,6 +151,25 @@
     <string name="reyon_kind_audit">Tarkasta</string>
     <string name="reyon_kind_sales">Myynti</string>
     <string name="reyon_kind_order">Tilaus</string>
+    <string name="home_title">Tehtävät</string>
+    <string name="home_subtitle">Reyon · kenttäsimulaattori</string>
+    <string name="home_daily_title">Päivän tapaukset</string>
+    <string name="home_daily_progress_fmt">%1$s · %2$d/%3$d</string>
+    <string name="home_daily_desc">Kaikki työskentelevät saman hyllyn kanssa; tuloksesi tallennetaan.</string>
+    <string name="home_daily_format_fmt">Tänään: %1$s · %2$d×%3$d hylly</string>
+    <string name="home_daily_done_desc_fmt">%1$s, valmis: %2$s</string>
+    <string name="home_start">Aloita</string>
+    <string name="home_format_title">Myymäläformaatti</string>
+    <string name="home_format_hint">harjoitukseen</string>
+    <string name="home_practice_title">Harjoitus</string>
+    <string name="home_last_result">viimeisin tulos</string>
+    <string name="home_puzzle_desc">Lue briiffi, rakenna planogrammi</string>
+    <string name="home_audit_desc">Vertaa hyllyä planogrammiin</string>
+    <string name="home_sales_desc">Nosta hyllytuottoa</string>
+    <string name="home_order_desc">Viikon varastopäätökset</string>
+    <string name="howto_title">Näin se toimii</string>
+    <string name="howto_ok">Selvä</string>
+    <string name="howto_format_fmt">%1$s: %2$s</string>
 
     <!-- Ürün adları -->
     <string name="reyon_kind_kola">Kola</string>
@@ -171,20 +209,23 @@
     <string name="reyon_kind_pamuk">Pumpuli</string>
 
     <!-- Reyon: Denetim -->
-    <string name="reyon_audit_intro">Suunnitelma ylhäällä, oikea hylly alhaalla. Napauta paikkoja, joissa hylly poikkeaa suunnitelmasta: vaihdos, tyhjä paikka, vieras tuote, väärä merkki tai koko, ylivuoto. Väärä napautus lasketaan virheeksi.</string>
+    <string name="reyon_audit_intro">Planogrammi ylhäällä, myymälän hylly alhaalla. Napauta paikkoja, joissa hylly poikkeaa planogrammista: vaihdos, tyhjä paikka, vieras tuote, väärä merkki tai koko, ylivuoto. Väärä napautus lasketaan vääräksi merkinnäksi.</string>
     <string name="reyon_audit_level_desc_fmt">%1$d hyllyä × %2$d paikkaa · %3$d poikkeamaa</string>
-    <string name="reyon_audit_daily_desc">Tänään kaikki tarkastavat saman hyllyn; aikasi ja virheesi kirjataan.</string>
-    <string name="reyon_audit_daily_done_fmt">Tarkastettu tänään: %1$s · %2$d virhettä</string>
-    <string name="reyon_audit_free_desc">Satunnainen hylly; virheettömät ja vihjeettömät tarkastukset lasketaan ennätykseksi.</string>
-    <string name="reyon_audit_start">Aloita tarkastus</string>
     <string name="reyon_audit_generating">Valmistellaan tarkastusta…</string>
-    <string name="reyon_audit_plan_label">Suunnitelma</string>
-    <string name="reyon_audit_shelf_label">Hylly: napauta poikkeamia</string>
+    <string name="reyon_audit_plan_label">Planogrammi</string>
+    <string name="reyon_audit_shelf_label">Myymälän hylly</string>
+    <string name="reyon_audit_shelf_hint">napauta poikkeamia</string>
+    <string name="dev_type_swap">Vaihdos</string>
+    <string name="dev_type_gap">Tyhjä paikka</string>
+    <string name="dev_type_foreign">Vieras tuote</string>
+    <string name="dev_type_brand">Väärä merkki</string>
+    <string name="dev_type_size">Väärä koko</string>
+    <string name="dev_type_spill">Ylivuoto</string>
     <string name="reyon_audit_found_label">Löydetyt</string>
-    <string name="reyon_audit_mistakes_label">Virheet</string>
+    <string name="reyon_audit_mistakes_label">Väärät merkinnät</string>
     <string name="reyon_audit_remaining_fmt">%1$d vielä löydettävänä</string>
     <string name="reyon_audit_done_title">Tarkastus valmis</string>
-    <string name="reyon_audit_result_fmt">%1$s · %2$d virhettä · %3$d vihjettä</string>
+    <string name="reyon_audit_result_fmt">%1$s · %2$d väärää merkintää · opas %3$d kertaa</string>
     <string name="reyon_audit_board_desc_fmt">Tarkastushylly %1$d hyllyä × %2$d paikkaa, %3$d/%4$d poikkeamaa löydetty</string>
     <string name="reyon_audit_plan_desc_fmt">Suunnitelma %1$d hyllyä × %2$d paikkaa</string>
     <string name="reyon_audit_plan_zoom_hint">napauta suurentaaksesi</string>
@@ -199,18 +240,12 @@
     <string name="reyon_dev_spill_fmt">Ylivuoto: %1$s vuotaa %2$s päälle</string>
 
     <!-- Reyon: Satış -->
-    <string name="reyon_sales_intro">Järjestä tuotteet haluamallasi tavalla; pisteet tulevat myyntisäännöistä (silmien korkeus, painavat alas, täydentävät vierekkäin, puhdistusaineet erilleen ruoasta, kategoria- ja merkkilohkot). Tavoite on paras järjestys, jonka optimoija löysi; siihen yltäminen antaa kolme tähteä.</string>
-    <string name="reyon_sales_daily_desc">Tänään kaikki järjestävät samat tuotteet; päivän paras tuloksesi kirjataan.</string>
-    <string name="reyon_sales_daily_done_fmt">Tänään: %1$d / %2$d pistettä · %3$s</string>
-    <string name="reyon_sales_free_desc">Satunnainen tuotejoukko; osuus tavoitteesta lasketaan ennätykseksi.</string>
-    <string name="reyon_sales_best_fmt">Ennätys: %1$d%% tavoitteesta</string>
-    <string name="reyon_sales_start">Aloita järjestäminen</string>
-    <string name="reyon_sales_generating">Lasketaan tavoitetta…</string>
-    <string name="reyon_sales_score_label">Pisteet</string>
-    <string name="reyon_sales_target_label">Tavoite</string>
+    <string name="reyon_sales_intro">Järjestä tuotteet haluamallasi tavalla; hyllytuotto tulee myyntisäännöistä (silmien korkeus, painavat alas, täydentävät vierekkäin, puhdistusaineet erilleen ruoasta, kategoria- ja merkkilohkot). Asiantuntijan järjestys on paras, jonka optimoija löysi; hyllytuottosi näytetään suhteessa siihen.</string>
+    <string name="reyon_sales_generating">Lasketaan asiantuntijan järjestystä…</string>
+    <string name="reyon_sales_score_label">Hyllytuotto</string>
     <string name="reyon_sales_rules_label">Myyntisäännöt</string>
     <string name="reyon_sales_rule_position">Sijainti</string>
-    <string name="reyon_sales_rule_position_desc">kysyntä × etuosat × hyllykerroin: silmien korkeus ×3, ylä ja keski ×2, ala ×1 · ▼ painava vain alas ×3 · ★ vain silmien korkeudelle ×4</string>
+    <string name="reyon_sales_rule_position_desc">kysyntä × etuosat × hyllykerroin: silmien korkeus ×3, ylä ja keski ×2, ala ×1 · painava vain alas ×3 · korkea kate vain silmien korkeudelle ×4</string>
     <string name="reyon_sales_rule_complement">Täydentävät</string>
     <string name="reyon_sales_rule_complement_desc">parit kuten sipsit ja dippi vierekkäin +6, päällekkäin +3</string>
     <string name="reyon_sales_rule_conflict">Ristiriita</string>
@@ -223,31 +258,27 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s valittu (kysyntä %2$d): napauta paikkaa hyllyssä</string>
-    <string name="reyon_sales_pick_hint">Napauta tuotetta nähdäksesi sen pisteiden erittelyn</string>
-    <string name="reyon_sales_demand_fmt">kysyntä %1$d</string>
+    <string name="reyon_sales_pick_hint">Napauta tuotetta nähdäksesi sen tuoton erittelyn</string>
+    <string name="sales_chip_fmt">×%1$d · kysyntä %2$d</string>
+    <string name="rules_total_fmt">yhteensä %1$d</string>
     <string name="reyon_sales_finish">Valmis</string>
-    <string name="reyon_sales_done_title">Järjestys valmis</string>
-    <string name="reyon_sales_result_fmt">%1$d / %2$d pistettä (%3$d%% tavoitteesta)</string>
-    <string name="reyon_sales_beat_target">Ylitit tavoitteen! 🏆</string>
+    <string name="reyon_sales_done_title">Hylly myyntivalmis</string>
+    <string name="reyon_sales_result_fmt">hyllytuotto %1$d / %2$d (%3$d%% asiantuntijasta)</string>
+    <string name="reyon_sales_beat_target">Asiantuntijaa parempi</string>
     <string name="reyon_sales_reopen">Jatka järjestämistä</string>
-    <string name="reyon_sales_show_target">Näytä tavoite</string>
+    <string name="reyon_sales_show_target">Asiantuntijan järjestys</string>
     <string name="reyon_sales_review_mine">Oma järjestykseni</string>
-    <string name="reyon_sales_review_target_fmt">Tavoite (%1$d)</string>
-    <string name="reyon_sales_back_to_result">Tulos</string>
-    <string name="reyon_sales_board_desc_fmt">Myyntihylly %1$d hyllyä × %2$d paikkaa, %3$d tuotetta järjestämättä, %4$d pistettä</string>
+    <string name="reyon_sales_review_target_fmt">Asiantuntija (%1$d)</string>
+    <string name="reyon_sales_back_to_result">Raportti</string>
+    <string name="reyon_sales_board_desc_fmt">Myyntihylly %1$d hyllyä × %2$d paikkaa, %3$d tuotetta järjestämättä, hyllytuotto %4$d</string>
 
     <!-- Reyon: Sipariş -->
-    <string name="reyon_order_intro">Hyllysuunnitelma on kiinteä; sinun työsi on varasto. Päätä joka päivä, montako laatikkoa tilaat tuotetta kohti: tilaukset saapuvat seuraavana aamuna, mikä ei mahdu palautuu, illaksi jäävä varasto maksaa varastointia, vanhentuneet yksiköt ovat tappiota. Tavoite on asiantuntijan voitto samoilla ennusteilla.</string>
+    <string name="reyon_order_intro">Hyllysuunnitelma on kiinteä; sinun työsi on varasto. Päätä joka päivä, montako laatikkoa tilaat tuotetta kohti: tilaukset saapuvat seuraavana aamuna, mikä ei mahdu palautuu, illaksi jäävä varasto maksaa varastointia, vanhentuneet yksiköt ovat tappiota. Voittoasi verrataan asiantuntijaan, joka näkee samat ennusteet.</string>
     <string name="reyon_order_level_desc_fmt">%1$d hyllyä × %2$d paikkaa · %3$d päivää · %4$d kampanjaa</string>
-    <string name="reyon_order_daily_desc">Tänään kaikki pelaavat saman viikon; päivän paras voittosi kirjataan.</string>
-    <string name="reyon_order_daily_done_fmt">Tänään: %1$d / %2$d voittoa · %3$s</string>
-    <string name="reyon_order_free_desc">Satunnainen viikko; osuus tavoitteesta lasketaan ennätykseksi.</string>
-    <string name="reyon_order_best_fmt">Ennätys: %1$d%% tavoitteesta</string>
-    <string name="reyon_order_start">Aloita viikko</string>
     <string name="reyon_order_generating">Valmistellaan viikkoa…</string>
     <string name="reyon_order_day_label">Päivä</string>
     <string name="reyon_order_profit_label">Voitto</string>
-    <string name="reyon_order_target_label">Tavoite</string>
+    <string name="reyon_order_target_label">Asiantuntija</string>
     <string name="reyon_order_dow_1">Maanantai</string>
     <string name="reyon_order_dow_2">Tiistai</string>
     <string name="reyon_order_dow_3">Keskiviikko</string>
@@ -281,19 +312,43 @@
     <string name="reyon_order_sum_delivered_fmt">Aamun toimitus: %1$d yksikköä</string>
     <string name="reyon_order_sum_profit_fmt">Päivän voitto %1$+d · yhteensä %2$d</string>
     <string name="reyon_order_continue">Jatka</string>
-    <string name="reyon_order_done_title">Viikko valmis</string>
-    <string name="reyon_order_result_fmt">%1$d / %2$d voittoa (%3$d%% tavoitteesta)</string>
-    <string name="reyon_order_stats_fmt">Varaston kierto %1$s (asiantuntija %2$s) · palveluaste %3$d%% (asiantuntija %4$d%%)</string>
+    <string name="reyon_order_done_title">Viikkoraportti</string>
+    <string name="reyon_order_result_fmt">%1$d / %2$d voittoa (%3$d%% asiantuntijasta)</string>
     <string name="reyon_order_chart_profit">Päivittäinen voitto</string>
     <string name="reyon_order_chart_turnover">Kierto</string>
     <string name="reyon_order_chart_expert_fmt">asiantuntija %1$s</string>
     <string name="reyon_order_chart_day_fmt">päivä %1$d %2$+d</string>
     <string name="reyon_order_chart_desc_fmt">Viikkokaavio: %1$s · varaston kierto %2$s (asiantuntija %3$s)</string>
-    <string name="reyon_order_beat_target">Voitit asiantuntijan! 🏆</string>
-    <string name="reyon_order_rules">Myynti +4 yksiköltä (★ +6) · varastointi −1 yksiköltä yöltä · tappio −2 (★ −4) · palautus −1</string>
+    <string name="reyon_order_beat_target">Asiantuntijaa parempi</string>
+    <string name="reyon_order_rules">Myynti +4 yksiköltä (korkea kate +6) · varastointi −1 yksiköltä yöltä · tappio −2 (korkea kate −4) · palautus −1</string>
     <string name="reyon_order_board_desc_fmt">Tilaushylly %1$d hyllyä × %2$d paikkaa, päivä %3$d, voitto %4$d</string>
     <string name="reyon_order_item_desc_fmt">%1$s: varasto %2$d/%3$d, tilaus %4$d laatikkoa</string>
     <string name="reyon_order_hint_fmt">Asiantuntija: %2$d laatikkoa %1$s</string>
     <string name="reyon_order_hint_none">Tilauksesi vastaavat asiantuntijan tilauksia</string>
     <string name="reyon_order_share_fmt">Varaston kierto %1$s</string>
+    <string name="band_expert">Asiantuntijataso</string>
+    <string name="band_good">Hyvä</string>
+    <string name="band_developing">Kehittyvä</string>
+    <string name="band_weak">Heikko</string>
+    <string name="report_personal_best">Oma ennätys</string>
+    <string name="report_per_expert_fmt">/ %1$d asiantuntija</string>
+    <string name="report_of_expert_fmt">%1$d%% asiantuntijasta</string>
+    <string name="report_expert_is_fmt">asiantuntija = %1$d%%</string>
+    <string name="report_new_case">Uusi tapaus</string>
+    <string name="report_new_week">Uusi viikko</string>
+    <string name="report_try_again">Yritä uudelleen</string>
+    <string name="report_week_profit">Viikon voitto</string>
+    <string name="report_service_level">Palvelutaso</string>
+    <string name="report_turnover">Varaston kierto</string>
+    <string name="report_expert_value_fmt">asiantuntija %1$s</string>
+    <string name="report_points_fmt">%1$s pist.</string>
+    <string name="report_chart_title">Päivän voitto ja varaston kierto</string>
+    <string name="report_findings">Havainnot</string>
+    <string name="report_order_subtitle_fmt">%1$s · %2$s · %3$d päivää</string>
+    <string name="report_service_low_fmt">Palvelutaso on %1$d pistettä asiantuntijaa alempana: joinakin päivinä et pystynyt vastaamaan kysyntään.</string>
+    <string name="report_service_ok">Palvelutaso on asiantuntijan tasolla: vastasit kysyntään.</string>
+    <string name="report_turnover_low_fmt">Varaston kierto on %1$s asiantuntijaa hitaampi: hyllyllä odotti tarpeettoman paljon varastoa.</string>
+    <string name="report_turnover_tight">Varaston kierto on asiantuntijaa nopeampi, mutta palvelu heikkeni: varasto oli liian tiukka.</string>
+    <string name="report_turnover_ok">Varaston kierto on lähellä asiantuntijan tasoa: varasto kiersi tehokkaasti.</string>
+    <string name="report_wrong_mix">Yhdessä ne viittaavat siihen, että tilaukset menivät vääriin tuotteisiin.</string>
 </resources>

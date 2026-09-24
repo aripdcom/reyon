@@ -1,1 +1,1 @@
-Planogramma: sistema lo scaffale, verificalo, gestisci vendite e scorte.
+Simulatore dello scaffale: planogrammi, controllo, vendite e scorte.

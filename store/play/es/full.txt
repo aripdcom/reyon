@@ -1,11 +1,15 @@
-Práctica de planograma: coloca el estante, audítalo, vende y pide stock.
+Simulador de estantes de gran consumo: planogramas, auditoría, ventas, stock.
 
-Colocar — Toca un producto y luego un hueco del estante; pulsación larga para devolverlo a la bandeja. Cada regla del briefing pasa a ✓ cuando se cumple; las reglas llevan a una sola colocación, sin adivinar.
-Auditar — El plan arriba, el estante real abajo. Toca los huecos donde el estante se desvía del plan: un cambio, un hueco vacío, un producto ajeno, una marca o un tamaño equivocados, un desborde. Un toque equivocado cuenta como fallo.
-Ventas — Coloca los productos como quieras; los puntos vienen de las reglas de venta (altura de los ojos, los pesados abajo, complementarios juntos, la limpieza lejos de la comida, bloques de categoría y de marca). El objetivo es la mejor colocación que encontró el optimizador; alcanzarlo da tres estrellas.
-Pedidos — El plan del estante está fijo; tu trabajo es el stock. Cada día decide cuántas cajas pedir por producto: los pedidos llegan a la mañana siguiente, lo que no cabe se devuelve, el stock que queda por la noche cuesta almacenaje, las unidades caducadas son pérdida. El objetivo es el beneficio de un experto que ve las mismas previsiones.
+Tareas — Cada día, un caso del día en los cuatro modos: todos trabajan con el mismo estante y el formato de tienda cambia a diario entre Tienda, Supermercado e Hipermercado. En la práctica eliges tú el formato.
 
-0 anuncios · 0 rastreadores · 0 permisos
+Colocar — Toca un producto y luego un hueco del estante; pulsación larga para quitarlo del estante. Cada regla del briefing se marca cuando se cumple; las reglas llevan a una sola colocación, sin adivinar.
+Auditar — El planograma arriba, el estante de la tienda abajo. Toca los huecos donde el estante se desvía del planograma: un cambio, un hueco vacío, un producto ajeno, una marca o un tamaño equivocados, un desborde. Un toque equivocado cuenta como marca errónea.
+Ventas — Coloca los productos como quieras; el rendimiento del estante viene de las reglas de venta (altura de los ojos, los pesados abajo, complementarios juntos, la limpieza lejos de la comida, bloques de categoría y de marca). La colocación del experto es la mejor que encontró el optimizador; tu rendimiento se muestra en proporción a ella.
+Pedidos — El plan del estante está fijo; tu trabajo es el stock. Cada día decide cuántas cajas pedir por producto: los pedidos llegan a la mañana siguiente, lo que no cabe se devuelve, el stock que queda por la noche cuesta almacenaje, las unidades caducadas son pérdida. Tu beneficio se compara con el de un experto que ve las mismas previsiones.
+
+Los resultados son informes, no puntos: tu resultado frente al del experto, un nivel (Nivel experto, Bueno, Mejorable, Débil) y tu mejor marca personal. El informe semanal de pedidos muestra el nivel de servicio, la rotación de stock y los hallazgos.
+
+Tema claro y oscuro · 0 anuncios · 0 rastreadores · 0 permisos
 
 Idioma: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
 

@@ -1,9 +1,10 @@
 name: Pages
 
-# site/ klasörünü GitHub Pages'e yayınlar (aripdcom.github.io/reyon).
-# Depo ayarlarında Pages kaynağı "GitHub Actions" olmalı. Kendi alan adı
-# bağlanınca Settings → Pages'ten tanımlanır ve platform/Links.kt ile
-# tools/check_site.py'deki adresler birlikte güncellenir.
+# site/ klasörünü GitHub Pages'e yayınlar (reyon.aripd.com; özel alan adı
+# Settings → Pages'te tanımlı, aripdcom.github.io/reyon oraya yönleniyor).
+# Depo ayarlarında Pages kaynağı "GitHub Actions" olmalı. Alan adı değişirse
+# platform/Links.kt ve tools/check_site.py'nin denetlediği adresler birlikte
+# güncellenir.
 
 on:
   push:

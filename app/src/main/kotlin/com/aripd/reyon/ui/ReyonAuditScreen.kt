@@ -1,6 +1,8 @@
 package com.aripd.reyon.ui
 
 import androidx.activity.compose.BackHandler
+import androidx.annotation.StringRes
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -8,11 +10,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
@@ -20,12 +22,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -38,66 +39,64 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aripd.reyon.R
+import com.aripd.reyon.engine.AuditTap
+import com.aripd.reyon.engine.Board
+import com.aripd.reyon.engine.DeviationKind
+import com.aripd.reyon.engine.ReyonAuditState
+import com.aripd.reyon.engine.ShelfItem
 import com.aripd.reyon.platform.LocalHaptics
 import com.aripd.reyon.platform.LocalSound
 import com.aripd.reyon.platform.Sfx
 import com.aripd.reyon.platform.ShareContent
-import com.aripd.reyon.engine.AuditTap
-import com.aripd.reyon.engine.ReyonAuditGenerator
-import com.aripd.reyon.engine.ReyonAuditState
-import com.aripd.reyon.engine.ReyonLevel
+import com.aripd.reyon.platform.appString
+import com.aripd.reyon.ui.common.ActionBar
+import com.aripd.reyon.ui.common.ButtonKind
 import com.aripd.reyon.ui.common.GameTopBar
+import com.aripd.reyon.ui.common.KpiRow
+import com.aripd.reyon.ui.common.KpiTile
 import com.aripd.reyon.ui.common.OverlayCard
-import com.aripd.reyon.ui.common.ScoreCard
+import com.aripd.reyon.ui.common.ReyonButton
+import com.aripd.reyon.ui.common.ReyonIcons
+import com.aripd.reyon.ui.common.SectionHeader
 import com.aripd.reyon.ui.common.ShareButton
 import com.aripd.reyon.ui.common.formatTime
 import com.aripd.reyon.ui.common.modeShareLabel
+import com.aripd.reyon.ui.common.monoStyle
+import com.aripd.reyon.ui.theme.Reyon
 import kotlinx.coroutines.delay
-import com.aripd.reyon.platform.appString
 
-/** Denetim modu: üstte plan, altta sapmalı gerçek raf; sapmalara dokunulur. */
+/** Denetim modu: üstte planogram, altında sapmalı mağaza rafı; sapmalara dokunulur. */
 @Composable
 internal fun ReyonAuditContent(
-    solved: Long,
     onCompleted: () -> Unit,
-    onKind: (ReyonKind) -> Unit,
-    onExit: () -> Unit,
-    viewModel: ReyonAuditViewModel = viewModel(),
+    onBack: () -> Unit,
+    viewModel: ReyonAuditViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val version by viewModel.version.collectAsStateWithLifecycle()
-    val generating by viewModel.generating.collectAsStateWithLifecycle()
     val elapsed by viewModel.elapsed.collectAsStateWithLifecycle()
     val result by viewModel.result.collectAsStateWithLifecycle()
     val missSlot by viewModel.missSlot.collectAsStateWithLifecycle()
     val level by viewModel.level.collectAsStateWithLifecycle()
     val mode by viewModel.mode.collectAsStateWithLifecycle()
-    val records by viewModel.records.collectAsStateWithLifecycle()
     val haptics = LocalHaptics.current
     val sound = LocalSound.current
-    val res = LocalContext.current.resources
 
-    // Aynı çözüm ikinci kez sayılmasın: döndürmede de, menüye gidip dönüşte
-    // de, mod değişiminde de. Sayaç mevcut durumdan başlar, çünkü ViewModel
-    // Activity'ye bağlıdır ve sonucu ekrandan çıkınca da taşır. Kaydedilen
-    // durum burada yetmez: kökte SaveableStateHolder yok, menüye dönüşte
-    // kayıt silinir (doğru örnek: SudokuScreen).
+    // Aynı denetim ikinci kez sayılmasın (bkz. ReyonPuzzleContent).
     var countedSeed by remember {
         mutableLongStateOf(state?.audit?.seed?.takeIf { result != null } ?: Long.MIN_VALUE)
     }
@@ -123,14 +122,16 @@ internal fun ReyonAuditContent(
     }
 
     val st = state
+    var howTo by rememberHowTo(ReyonKind.AUDIT)
     // Plan büyütme: küçük ekranda planı okumak için; geri tuşu önce bunu kapatır.
     var planZoom by remember { mutableStateOf(false) }
     LaunchedEffect(st, result) { planZoom = false }
     BackHandler {
-        if (planZoom) planZoom = false else onExit()
+        if (planZoom) planZoom = false else onBack()
     }
     @Suppress("UNUSED_VARIABLE")
     val tick = version
+    val shownLevel = st?.audit?.level ?: level
 
     Column(
         modifier = Modifier
@@ -138,34 +139,29 @@ internal fun ReyonAuditContent(
             .background(MaterialTheme.colorScheme.background)
             .safeDrawingPadding(),
     ) {
-        GameTopBar(title = stringResource(R.string.app_name), onExit = onExit) {
-            if (st != null) {
-                TextButton(onClick = viewModel::toMenu) {
-                    Text(stringResource(R.string.reyon_to_menu))
-                }
-            }
-        }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
+        GameTopBar(
+            title = stringResource(R.string.reyon_kind_audit),
+            subtitle = caseSubtitle(shownLevel, mode == ReyonMode.DAILY),
+            onExit = onBack,
         ) {
-            ScoreCard(
-                label = stringResource(R.string.time_label),
-                value = formatTime(elapsed),
-                modifier = Modifier.weight(1f),
-                highlight = true,
-            )
-            ScoreCard(
+            HowToButton { howTo = true }
+        }
+        KpiRow {
+            KpiTile(
                 label = stringResource(R.string.reyon_audit_found_label),
-                value = st?.let { "${it.foundCount}/${it.audit.deviations.size}" } ?: "—",
+                value = st?.foundCount?.toString() ?: "—",
+                unit = st?.let { "/${it.audit.deviations.size}" },
                 modifier = Modifier.weight(1f),
             )
-            ScoreCard(
+            KpiTile(
                 label = stringResource(R.string.reyon_audit_mistakes_label),
                 value = st?.mistakes?.toString() ?: "—",
+                valueColor = if ((st?.mistakes ?: 0) > 0) Reyon.tokens.warn else Color.Unspecified,
+                modifier = Modifier.weight(1f),
+            )
+            KpiTile(
+                label = stringResource(R.string.time_label),
+                value = formatTime(elapsed),
                 modifier = Modifier.weight(1f),
             )
         }
@@ -174,25 +170,24 @@ internal fun ReyonAuditContent(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 6.dp),
+                .padding(horizontal = 12.dp),
             contentAlignment = Alignment.Center,
         ) {
             if (st != null) {
                 BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
                     val layout = auditLayout(maxWidth, maxHeight, st.audit.rows, st.audit.cols)
                     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Row(modifier = Modifier.width(layout.width), verticalAlignment = Alignment.CenterVertically) {
-                            SectionLabel(stringResource(R.string.reyon_audit_plan_label))
-                            Spacer(Modifier.weight(1f))
-                            Text(
-                                text = stringResource(R.string.reyon_audit_plan_zoom_hint),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f),
-                                modifier = Modifier.padding(end = 4.dp),
-                            )
-                        }
+                        SectionHeader(
+                            title = stringResource(R.string.reyon_audit_plan_label),
+                            trailing = stringResource(R.string.reyon_audit_plan_zoom_hint),
+                            modifier = Modifier.width(layout.width).padding(start = 4.dp, end = 4.dp, top = 2.dp, bottom = 4.dp),
+                        )
                         PlanCanvas(state = st, width = layout.width, height = layout.planHeight, onTap = { planZoom = true })
-                        SectionLabel(stringResource(R.string.reyon_audit_shelf_label), modifier = Modifier.width(layout.width))
+                        SectionHeader(
+                            title = stringResource(R.string.reyon_audit_shelf_label),
+                            trailing = stringResource(R.string.reyon_audit_shelf_hint),
+                            modifier = Modifier.width(layout.width).padding(start = 4.dp, end = 4.dp, top = 8.dp, bottom = 4.dp),
+                        )
                         AuditCanvas(
                             state = st,
                             version = version,
@@ -221,72 +216,45 @@ internal fun ReyonAuditContent(
                 }
             }
             when {
-                st == null && generating -> OverlayCard {
+                st == null -> OverlayCard {
                     CircularProgressIndicator()
                     Text(stringResource(R.string.reyon_audit_generating))
                 }
-                st == null -> AuditMenuCard(
-                    level = level,
-                    mode = mode,
-                    records = records,
-                    bestTime = viewModel.bestTime(level),
-                    onKind = onKind,
-                    onLevel = viewModel::setLevel,
-                    onMode = viewModel::setMode,
-                    onStart = viewModel::newGame,
-                    onExit = onExit,
-                )
                 result != null -> AuditDoneCard(
                     state = st,
                     result = result!!,
                     onRetry = viewModel::retry,
-                    onMenu = viewModel::toMenu,
-                    onExit = onExit,
+                    onBack = onBack,
                 )
+                howTo -> HowToCard(ReyonKind.AUDIT, shownLevel) { howTo = false }
             }
         }
 
         if (st != null && result == null) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 12.dp, vertical = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
+            ActionBar {
+                val left = st.audit.deviations.size - st.foundCount
                 Text(
-                    text = appString(R.string.reyon_audit_remaining_fmt, st.audit.deviations.size - st.foundCount),
-                    style = MaterialTheme.typography.labelSmall,
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                    text = appString(R.string.reyon_audit_remaining_fmt, left),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
                         .weight(1f)
-                        .align(Alignment.CenterVertically),
+                        .padding(start = 4.dp),
                 )
-                Button(
+                ReyonButton(
+                    text = stringResource(R.string.reyon_hint),
                     onClick = {
                         if (viewModel.hint() != null) {
                             haptics.performHapticFeedback(HapticFeedbackType.LongPress)
                             sound?.play(Sfx.CLEAR, volume = 0.6f)
                         }
                     },
+                    kind = ButtonKind.TONAL,
                     modifier = Modifier.weight(1f),
-                ) {
-                    Text(stringResource(R.string.reyon_hint))
-                }
+                )
             }
         }
     }
-}
-
-@Composable
-private fun SectionLabel(text: String, modifier: Modifier = Modifier) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.labelSmall,
-        fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-        modifier = modifier.padding(start = 4.dp, top = 4.dp, bottom = 2.dp),
-    )
 }
 
 /** Plan ve raf tuvallerinin boyutları (dp). */
@@ -314,7 +282,7 @@ internal fun auditLayout(maxWidth: Dp, maxHeight: Dp, rows: Int, cols: Int): Aud
 internal const val SHELF_ROW_MIN = 0.62f
 internal const val SHELF_ROW_MAX = 0.9f
 internal const val PLAN_RATIO = 0.85f
-internal val SECTION_LABEL_HEIGHT = 22.dp
+internal val SECTION_LABEL_HEIGHT = 28.dp
 internal val FOUND_LIST_MIN = 26.dp
 
 /** Büyütülmüş plan: içerik alanını kaplayan karartma, ortada geniş plan; dokununca kapanır. */
@@ -329,47 +297,69 @@ private fun PlanZoom(state: ReyonAuditState, maxWidth: Dp, maxHeight: Dp, onClos
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xCC000000))
+            .background(MaterialTheme.colorScheme.scrim.copy(alpha = 0.8f))
             .pointerInput(Unit) { detectTapGestures { onClose() } }
             .semantics { contentDescription = desc },
         contentAlignment = Alignment.Center,
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            SectionLabel(stringResource(R.string.reyon_audit_plan_label), modifier = Modifier.width(width))
+            Text(
+                text = stringResource(R.string.reyon_audit_plan_label),
+                style = MaterialTheme.typography.titleSmall,
+                color = Color.White,
+                modifier = Modifier
+                    .width(width)
+                    .padding(start = 4.dp, bottom = 4.dp),
+            )
             PlanCanvas(state = state, width = width, height = width * audit.rows / audit.cols * f, onTap = null)
             Text(
                 text = stringResource(R.string.reyon_audit_plan_zoom_close),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                style = MaterialTheme.typography.labelMedium,
+                color = Color.White.copy(alpha = 0.85f),
                 modifier = Modifier.padding(top = 8.dp),
             )
         }
     }
 }
 
+/** Planogram: etiketsiz, raptiyesiz; ürünlerin olması gereken yeri. */
 @Composable
 private fun PlanCanvas(state: ReyonAuditState, width: Dp, height: Dp, onTap: (() -> Unit)?) {
     val audit = state.audit
     val res = LocalContext.current.resources
+    val colors = rememberShelfColors()
+    val texts = rememberShelfTexts()
     val textMeasurer = rememberTextMeasurer()
-    val labeler = remember(textMeasurer) { BlockLabeler(textMeasurer) }
-    val path = remember { Path() }
+    val labeler = remember(textMeasurer, colors.packFamily) { BlockLabeler(textMeasurer, colors.packFamily) }
     val currentTap by rememberUpdatedState(onTap)
     val desc = appString(R.string.reyon_audit_plan_desc_fmt, audit.rows, audit.cols)
-    Canvas(
-        modifier = Modifier
-            .size(width, height)
-            .clip(RoundedCornerShape(12.dp))
-            .background(ReyonPalette.BoardBg)
-            .semantics { contentDescription = desc }
-            .then(if (onTap != null) Modifier.pointerInput(Unit) { detectTapGestures { currentTap?.invoke() } } else Modifier),
-    ) {
-        val g = ShelfGeom(size.width, size.height, audit.rows, audit.cols)
-        drawShelfFrame(g)
-        for (it in audit.planItems) drawBlock(g, path, labeler, ReyonText.kind(res, it.product.kind), it.product, it.facings, it.row, it.col)
+    Box(modifier = Modifier.size(width, height)) {
+        Canvas(
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(6.dp))
+                .semantics { contentDescription = desc }
+                .then(if (onTap != null) Modifier.pointerInput(Unit) { detectTapGestures { currentTap?.invoke() } } else Modifier),
+        ) {
+            val g = ShelfGeom(size.width, size.height, audit.rows, audit.cols, density, rail = false)
+            drawGondola(g, colors)
+            for (it in audit.planItems) {
+                drawPack(g, labeler, colors, ReyonText.kind(res, it.product.kind), texts.mark(it.product), it.product, it.facings, it.row, it.col)
+            }
+        }
+        // Planogramın gözleri ekran okuyucuya tek tek: olması gereken ürün, markası ve boyu.
+        ShelfSlots(
+            rows = audit.rows,
+            cols = audit.cols,
+            contents = List(audit.rows * audit.cols) { slotContent(res, audit.planItemAt(it / audit.cols, it % audit.cols)?.let { p -> spokenProduct(res, p.product) }) },
+            onActivate = { _, _ -> currentTap?.invoke() },
+            modifier = Modifier.matchParentSize(),
+            rail = false,
+        )
     }
 }
 
+/** Mağaza rafı: sapmalar dokunulana dek çizimde saklı; bulunanlar kırmızı çerçeve ve türüyle. */
 @Composable
 private fun AuditCanvas(state: ReyonAuditState, version: Int, missSlot: Int, width: Dp, height: Dp, onTap: (Int, Int) -> Unit) {
     val audit = state.audit
@@ -377,120 +367,143 @@ private fun AuditCanvas(state: ReyonAuditState, version: Int, missSlot: Int, wid
     val cols = audit.cols
     val res = LocalContext.current.resources
     val currentTap by rememberUpdatedState(onTap)
+    val colors = rememberShelfColors()
+    val texts = rememberShelfTexts()
     val textMeasurer = rememberTextMeasurer()
-    val labeler = remember(textMeasurer) { BlockLabeler(textMeasurer) }
-    val path = remember { Path() }
+    val labeler = remember(textMeasurer, colors.packFamily) { BlockLabeler(textMeasurer, colors.packFamily) }
+    val typeNames = DeviationKind.entries.map { stringResource(deviationName(it)) }
     val desc = appString(R.string.reyon_audit_board_desc_fmt, rows, cols, state.foundCount, audit.deviations.size)
-    Canvas(
-        modifier = Modifier
-            .size(width, height)
-            .clip(RoundedCornerShape(12.dp))
-            .background(ReyonPalette.BoardBg)
-            .semantics { contentDescription = desc }
-            .pointerInput(rows, cols) {
-                detectTapGestures { pos ->
-                    val col = (pos.x / (size.width / cols.toFloat())).toInt().coerceIn(0, cols - 1)
-                    val row = (pos.y / (size.height / rows.toFloat())).toInt().coerceIn(0, rows - 1)
-                    currentTap(row, col)
-                }
-            },
-    ) {
+    Box(modifier = Modifier.size(width, height)) {
+        Canvas(
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(6.dp))
+                .semantics { contentDescription = desc }
+                .pointerInput(rows, cols) {
+                    detectTapGestures { pos ->
+                        val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
+                        currentTap(g.rowAt(pos.y), g.colAt(pos.x))
+                    }
+                },
+        ) {
+            @Suppress("UNUSED_VARIABLE")
+            val tick = version
+            val g = ShelfGeom(size.width, size.height, rows, cols, density)
+            drawGondola(g, colors)
+            drawEmptySlots(g, itemsMask(audit.board, audit.items), colors)
+            for (it in audit.items) {
+                drawPack(g, labeler, colors, ReyonText.kind(res, it.product.kind), texts.mark(it.product), it.product, it.facings, it.row, it.col)
+                drawShelfLabel(g, labeler, colors, it.product, it.facings, it.row, it.col, texts.code(it.product), texts.badges(it.product))
+            }
+            for ((i, d) in audit.deviations.withIndex()) {
+                if (!state.isFound(i)) continue
+                drawMaskRing(g, d.slotMask, colors.tokens.bad)
+                drawDeviationFlag(g, labeler, colors, d.slotMask, typeNames[d.kind.ordinal])
+            }
+            if (missSlot >= 0) drawMaskRing(g, 1 shl missSlot, colors.tokens.warn)
+        }
+        // Mağaza rafının gözleri: raftaki ürün ve, bulunduysa, sapmanın türü; çift dokunuş
+        // gözü işaretler (parmak dokunuşuyla aynı).
         @Suppress("UNUSED_VARIABLE")
         val tick = version
-        val g = ShelfGeom(size.width, size.height, rows, cols)
-        drawShelfFrame(g)
-        for (it in audit.items) drawBlock(g, path, labeler, ReyonText.kind(res, it.product.kind), it.product, it.facings, it.row, it.col)
-        for ((i, d) in audit.deviations.withIndex()) {
-            if (state.isFound(i)) drawMaskRing(g, d.slotMask, ReyonPalette.FoundRing)
-        }
-        if (missSlot >= 0) drawMaskRing(g, 1 shl missSlot, ReyonPalette.MissRing)
+        ShelfSlots(
+            rows = rows,
+            cols = cols,
+            contents = List(rows * cols) { i ->
+                val row = i / cols
+                val col = i % cols
+                val bit = 1 shl audit.board.idx(row, col)
+                val found = audit.deviations.withIndex().firstOrNull { (i, d) -> state.isFound(i) && d.slotMask and bit != 0 }
+                slotContent(res, audit.itemAt(row, col)?.let { spokenProduct(res, it.product) }, found?.let { typeNames[it.value.kind.ordinal] })
+            },
+            onActivate = { row, col -> currentTap(row, col) },
+            modifier = Modifier.matchParentSize(),
+        )
     }
 }
 
+internal fun itemsMask(board: Board, items: List<ShelfItem>): Int {
+    var mask = 0
+    for (it in items) mask = mask or board.mask(board.idx(it.row, it.col), it.facings)
+    return mask
+}
+
+/** Sapma türünün kısa adı: raftaki bayrakta ve tür listesinde. */
+@StringRes
+internal fun deviationName(kind: DeviationKind): Int = when (kind) {
+    DeviationKind.SWAP -> R.string.dev_type_swap
+    DeviationKind.GAP -> R.string.dev_type_gap
+    DeviationKind.FOREIGN -> R.string.dev_type_foreign
+    DeviationKind.BRAND -> R.string.dev_type_brand
+    DeviationKind.SIZE -> R.string.dev_type_size
+    DeviationKind.SPILL -> R.string.dev_type_spill
+}
+
+/**
+ * Sapma türleri ve bulunanlar: üstte bu denetimde aranan türler (bulunan tür
+ * kırmızı zeminli), altında bulunan her sapmanın açıklaması, en son bulunan
+ * en üstte.
+ */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun FoundList(state: ReyonAuditState, version: Int, modifier: Modifier = Modifier) {
     val res = LocalContext.current.resources
+    val tokens = Reyon.tokens
     @Suppress("UNUSED_VARIABLE")
     val tick = version
     val audit = state.audit
+    val kinds = audit.deviations.map { it.kind }.distinct().sortedBy { it.ordinal }
+    val foundKinds = state.foundOrder.map { audit.deviations[it].kind }.toSet()
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 4.dp)
+            .padding(top = 8.dp)
             .verticalScroll(rememberScrollState()),
     ) {
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            for (k in kinds) {
+                val found = k in foundKinds
+                Surface(
+                    shape = RoundedCornerShape(6.dp),
+                    color = if (found) tokens.badWeak else MaterialTheme.colorScheme.surface,
+                    border = BorderStroke(1.dp, if (found) tokens.badWeak else tokens.line),
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        if (found) Icon(ReyonIcons.Flag, contentDescription = null, tint = tokens.onBadWeak, modifier = Modifier.size(13.dp))
+                        Text(
+                            text = stringResource(deviationName(k)),
+                            style = MaterialTheme.typography.labelMedium.copy(fontSize = 12.sp),
+                            color = if (found) tokens.onBadWeak else MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+            }
+        }
         // En son bulunan en üstte: liste tek satıra sığsa bile son bulgu görünür.
         for (i in state.foundOrder.asReversed()) {
             val d = audit.deviations[i]
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 6.dp, vertical = 2.dp),
+                    .padding(horizontal = 4.dp, vertical = 3.dp),
                 verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                Text(text = "✓", color = ReyonPalette.Satisfied, fontWeight = FontWeight.Bold, modifier = Modifier.width(18.dp))
+                Icon(ReyonIcons.Check, contentDescription = null, tint = tokens.ok, modifier = Modifier.size(16.dp))
                 Text(
                     text = ReyonText.deviation(res, audit, d),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.85f),
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp, lineHeight = 17.sp),
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
             }
-        }
-    }
-}
-
-@Composable
-private fun AuditMenuCard(
-    level: ReyonLevel,
-    mode: ReyonMode,
-    records: Map<ReyonLevel, ReyonStore.AuditRecord>,
-    bestTime: Int,
-    onKind: (ReyonKind) -> Unit,
-    onLevel: (ReyonLevel) -> Unit,
-    onMode: (ReyonMode) -> Unit,
-    onStart: () -> Unit,
-    onExit: () -> Unit,
-) {
-    OverlayCard {
-        Text(
-            text = stringResource(R.string.app_name),
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold,
-        )
-        KindChips(kind = ReyonKind.AUDIT, onKind = onKind)
-        Text(
-            text = stringResource(R.string.reyon_audit_intro),
-            style = MaterialTheme.typography.bodySmall,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
-        )
-        ModeAndLevelChips(mode = mode, level = level, onMode = onMode, onLevel = onLevel)
-        Text(
-            text = appString(R.string.reyon_audit_level_desc_fmt, level.rows, level.cols, ReyonAuditGenerator.count(level)),
-            style = MaterialTheme.typography.labelSmall,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-        )
-        val record = records[level]
-        val info = when {
-            mode == ReyonMode.DAILY && record != null ->
-                appString(R.string.reyon_audit_daily_done_fmt, formatTime(record.time), record.mistakes)
-            mode == ReyonMode.DAILY -> stringResource(R.string.reyon_audit_daily_desc)
-            bestTime > 0 -> appString(R.string.reyon_best_fmt, formatTime(bestTime))
-            else -> stringResource(R.string.reyon_audit_free_desc)
-        }
-        Text(
-            text = info,
-            style = MaterialTheme.typography.bodySmall,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.primary,
-        )
-        Spacer(Modifier.height(4.dp))
-        Button(onClick = onStart, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(if (mode == ReyonMode.DAILY && record != null) R.string.reyon_play_again else R.string.reyon_audit_start))
-        }
-        TextButton(onClick = onExit, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(R.string.exit_app))
         }
     }
 }
@@ -500,8 +513,7 @@ private fun AuditDoneCard(
     state: ReyonAuditState,
     result: AuditResult,
     onRetry: () -> Unit,
-    onMenu: () -> Unit,
-    onExit: () -> Unit,
+    onBack: () -> Unit,
 ) {
     val res = LocalContext.current.resources
     val time = formatTime(result.time)
@@ -509,27 +521,16 @@ private fun AuditDoneCard(
     OverlayCard {
         Text(
             text = stringResource(R.string.reyon_audit_done_title),
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Center,
         )
-        Text(
-            text = time,
-            style = MaterialTheme.typography.displaySmall,
-            fontWeight = FontWeight.Black,
-            color = MaterialTheme.colorScheme.primary,
-        )
-        if (result.record) {
-            Text(
-                text = stringResource(R.string.new_record),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.secondary,
-            )
-        }
+        Text(text = time, style = monoStyle(36f, 44f), color = MaterialTheme.colorScheme.primary)
+        if (result.record) PersonalBestPill()
         Text(
             text = details,
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         ShareButton(
             ShareContent(
@@ -538,15 +539,6 @@ private fun AuditDoneCard(
                 board = auditPainter(state, res),
             ),
         )
-        Spacer(Modifier.height(4.dp))
-        Button(onClick = onRetry, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(R.string.same_difficulty))
-        }
-        OutlinedButton(onClick = onMenu, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(R.string.reyon_to_menu))
-        }
-        TextButton(onClick = onExit, modifier = Modifier.fillMaxWidth()) {
-            Text(stringResource(R.string.exit_app))
-        }
+        ReportButtons(daily = result.daily, newLabel = R.string.report_new_case, onBack = onBack, onRetry = onRetry)
     }
 }

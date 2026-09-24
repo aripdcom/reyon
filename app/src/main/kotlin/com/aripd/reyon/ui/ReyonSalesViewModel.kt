@@ -69,24 +69,44 @@ class ReyonSalesViewModel(application: Application) : AndroidViewModel(applicati
         return ReyonLevel.entries.mapNotNull { l -> store.salesDailyRecord(today, l)?.let { l to it } }.toMap()
     }
 
-    init {
+    /**
+     * Görevler'den açılış: aynı vaka bellekte ya da kayıtta duruyorsa sürer (bitmişse
+     * sonucu yeniden gösterilir), yoksa yenisi başlar ([ReyonViewModel.open] ile aynı kural).
+     */
+    fun open(mode: ReyonMode, level: ReyonLevel) {
+        _mode.value = mode
+        _level.value = level
+        store.saveLast(level, mode)
+        val day = todayEpoch()
+        val st = _state.value
+        if (st != null && sameCase(runMode, runDay, st.sales.level, mode, level, day)) return
+        if (_generating.value && pending?.let { sameCase(it.mode, it.day, it.level, mode, level, day) } == true) return
         val saved = store.restoreSales()
-        if (saved != null) {
-            val token = ++generation
-            _generating.value = true
-            viewModelScope.launch {
-                val sales = withContext(Dispatchers.Default) { ReyonSalesGenerator.generate(saved.seed, saved.level) }
-                if (token != generation) return@launch
-                val st = ReyonSalesState(sales)
-                st.restore(saved.snapshot, saved.finished)
-                runMode = saved.mode
-                runDay = saved.day
-                runSeed = saved.seed
-                _state.value = st
-                _generating.value = false
-                if (st.finished) _result.value = resultOf(st, record = false)
-                bump()
-            }
+        if (saved != null && sameCase(saved.mode, saved.day, saved.level, mode, level, day)) restore(saved) else newGame()
+    }
+
+    private var pending: ReyonStore.SavedSales? = null
+
+    private fun restore(saved: ReyonStore.SavedSales) {
+        val token = ++generation
+        pending = saved
+        _generating.value = true
+        _result.value = null
+        _review.value = SalesReview.RESULT
+        _selected.value = -1
+        viewModelScope.launch {
+            val sales = withContext(Dispatchers.Default) { ReyonSalesGenerator.generate(saved.seed, saved.level) }
+            if (token != generation) return@launch
+            val st = ReyonSalesState(sales)
+            st.restore(saved.snapshot, saved.finished)
+            runMode = saved.mode
+            runDay = saved.day
+            runSeed = saved.seed
+            _state.value = st
+            _generating.value = false
+            pending = null
+            if (st.finished) _result.value = resultOf(st, record = false)
+            bump()
         }
     }
 
@@ -108,6 +128,7 @@ class ReyonSalesViewModel(application: Application) : AndroidViewModel(applicati
         val day = todayEpoch()
         val seed = if (mode == ReyonMode.DAILY) ReyonSalesGenerator.dailySeed(day) else Random.nextLong()
         val token = ++generation
+        pending = ReyonStore.SavedSales(seed, level, mode, day, IntArray(0), false)
         _generating.value = true
         _result.value = null
         _review.value = SalesReview.RESULT
@@ -120,6 +141,7 @@ class ReyonSalesViewModel(application: Application) : AndroidViewModel(applicati
             runSeed = seed
             _state.value = ReyonSalesState(sales)
             _generating.value = false
+            pending = null
             persist()
             bump()
         }
@@ -130,6 +152,7 @@ class ReyonSalesViewModel(application: Application) : AndroidViewModel(applicati
     fun toMenu() {
         persist()
         generation++
+        pending = null
         _generating.value = false
         _state.value = null
         _result.value = null
@@ -210,6 +233,7 @@ class ReyonSalesViewModel(application: Application) : AndroidViewModel(applicati
         } else {
             val percent = if (target > 0) score * 100 / target else 0
             if (store.saveSalesBest(st.sales.level, percent)) record = true
+            store.saveLastPractice(ReyonKind.SALES, st.sales.level, score, target)
         }
         val r = resultOf(st, record)
         _result.value = r

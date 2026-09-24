@@ -6,6 +6,7 @@ import android.content.res.Resources
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aripd.reyon.R
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -81,16 +82,16 @@ class StringResourceTest {
      * ekrana `%` olarak inmesini String.format sağlıyor. Metin argümansız
      * okunursa kullanıcı `%%` görür — testin koruduğu şey bu.
      *
-     * İşaretin kendisi yalnız onu yazan dilde aranır: yüzde taşıyan beş
-     * anahtarın hepsinde Türkçe cümleyi "hedefin yüzde 80 kadarı" diye kurar ve
-     * `%` hiç yazmaz. Bu bilinçli bir üslup farkı — `tools/check_strings.py` de
-     * `%%`'yi biçim belirteci paritesinden ayrı tutar — ama testin dili açıkça
-     * seçmesini gerektirir, çünkü Robolectric'in varsayılan dili Türkçe.
-     * Çift yüzdenin ekrana inmemesi ise dilden bağımsız: on dört dil de bakılır.
+     * İşaretin yeri dile göre: İngilizce "80% of the expert", Türkçe "uzmana oran
+     * %80" (Türkçe yüzde işaretini sayının önüne yazar). Cümle içinde Türkçe
+     * "yüzde 80" diye kurar ve `%` hiç yazmaz; bu bilinçli üslup farkı
+     * `tools/check_strings.py`'de de `%%`'yi biçim belirteci paritesinden ayırıyor.
+     * Test dili açıkça seçer, çünkü Robolectric'in varsayılan dili Türkçe. Çift
+     * yüzdenin ekrana inmemesi ise dilden bağımsız: on dört dil de bakılır.
      */
     @Test
     fun percentSignsCollapseWhenFormatted() {
-        val id = R.string.reyon_sales_best_fmt
+        val id = R.string.report_of_expert_fmt
         val english = resourcesIn("en")
 
         val raw = english.getString(id)
@@ -98,10 +99,14 @@ class StringResourceTest {
 
         val formatted = appText(english, id, 80)
         assertTrue("yüzde ekrana inmeli: $formatted", formatted.contains("80%"))
+        assertEquals("%74", appText(resourcesIn("tr"), R.string.percent_fmt, 74))
+        assertEquals("74%", appText(english, R.string.percent_fmt, 74))
 
         for (tag in AppLocale.TAGS) {
-            val text = appText(resourcesIn(tag), id, 80)
-            assertFalse("çift yüzde kalmamalı ($tag): $text", text.contains("%%"))
+            for (key in listOf(id, R.string.percent_fmt, R.string.report_expert_is_fmt)) {
+                val text = appText(resourcesIn(tag), key, 80)
+                assertFalse("çift yüzde kalmamalı ($tag): $text", text.contains("%%"))
+            }
         }
     }
 }

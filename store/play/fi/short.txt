@@ -1,1 +1,1 @@
-Planogrammiharjoitus: täytä hylly, tarkasta, hallitse myyntiä ja varastoa.
+Päivittäistavarakaupan hyllysimulaattori: planogrammit, myynti, varasto.

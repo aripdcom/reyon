@@ -1,1 +1,1 @@
-Planogramme : ranger le rayon, l'auditer, gérer ventes et stock.
+Simulateur de rayon PGC : planogrammes, contrôle, ventes et stock.

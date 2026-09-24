@@ -3,150 +3,181 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#F3F6FB" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0B0F1A" media="(prefers-color-scheme: dark)">
-<title>Reyon · planogram alıştırması</title>
-<meta name="description" content="Reyon: Android için planogram alıştırması. Diziliş, Denetim, Satış ve Sipariş — dört mod, 14 dil, sıfır reklam, sıfır izin, çevrimdışı.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B0F1A'/%3E%3Cg fill='%2360A5FA'%3E%3Crect x='6.2' y='8.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='10.2' y='8.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='14.2' y='8.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='18.2' y='8.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='22.2' y='8.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='6.2' y='16.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='10.2' y='16.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='14.2' y='16.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='18.2' y='16.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='22.2' y='16.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='6.2' y='24.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='10.2' y='24.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='14.2' y='24.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='18.2' y='24.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='22.2' y='24.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='6.2' y='4.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='10.2' y='4.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='14.2' y='12.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='18.2' y='12.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='22.2' y='12.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='6.2' y='20.2' width='3.6' height='3.6' rx='0.9'/%3E%3Crect x='14.2' y='20.2' width='3.6' height='3.6' rx='0.9'/%3E%3C/g%3E%3C/svg%3E">
+<meta name="theme-color" content="#F3F2EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111513" media="(prefers-color-scheme: dark)">
+<title>Reyon · FMCG raf simülatörü</title>
+<meta name="description" content="Reyon: Android için FMCG raf simülatörü. Diziliş, Denetim, Satış ve Sipariş — günün vakası, mağaza formatları, uzmana göre rapor; 14 dil, sıfır reklam, sıfır izin, çevrimdışı.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Crect width='36' height='36' rx='8' fill='%230F4C5C'/%3E%3Cg transform='translate(5 5) scale(0.7222)'%3E%3Cpath d='M4 12h28M4 22h28M4 32h28' stroke='%23fff' stroke-width='2.5' stroke-linecap='round'/%3E%3Cg fill='%23fff'%3E%3Crect x='6' y='4' width='7' height='7' rx='1.5'/%3E%3Crect x='15' y='6' width='6' height='5' rx='1.5'/%3E%3Crect x='6' y='15' width='9' height='6' rx='1.5'/%3E%3Crect x='24' y='14' width='6' height='7' rx='1.5'/%3E%3Crect x='6' y='25' width='6' height='6' rx='1.5'/%3E%3Crect x='14' y='24' width='7' height='7' rx='1.5'/%3E%3Crect x='23' y='26' width='7' height='5' rx='1.5'/%3E%3C/g%3E%3Crect x='23' y='3' width='7' height='8' rx='1.5' fill='%23FFD23F'/%3E%3C/g%3E%3C/svg%3E">
 <style>
-  /* Tema: düğme yok; sistem tercihine (prefers-color-scheme) uyulur. */
+  /* Uygulamanın 1.1.0 renkleri. Tema düğmesi yok; sistem tercihine uyulur. */
   :root {
     color-scheme: light dark;
-    --bg: #F3F6FB;
+    --bg: #F3F2EE;
     --surface: #FFFFFF;
-    --surface-2: #E8EDF5;
-    --text: #0F1828;
-    --muted: #5A6577;
-    --title: #2563EB;
-    --btn-bg: #2563EB;
-    --btn-fg: #FFFFFF;
-    --card-border: rgba(15, 24, 40, 0.06);
-    --card-shadow: 0 8px 24px rgba(15, 24, 40, 0.07);
+    --text: #17201D;
+    --muted: #56615C;
+    --line: #DDDAD2;
+    --brand: #0F4C5C;
+    --on-brand: #FFFFFF;
+    --brand-weak: #E3EEF0;
+    --on-brand-weak: #0F4C5C;
+    --attention: #FFD23F;
+    --expert-bg: #E4F2EA; --expert-fg: #145C38;
+    --good-bg: #E3EEF0; --good-fg: #0F4C5C;
+    --dev-bg: #FDF0E1; --dev-fg: #8A4308;
+    --weak-bg: #FBE7E5; --weak-fg: #8F1C13;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0B0F1A;
-      --surface: #111827;
-      --surface-2: #1B2437;
-      --text: #E4EAF5;
-      --muted: #AAB4C8;
-      --title: #60A5FA;
-      --btn-bg: #60A5FA;
-      --btn-fg: #06121D;
-      --card-border: rgba(255, 255, 255, 0.05);
-      --card-shadow: none;
+      --bg: #111513;
+      --surface: #1A1F1D;
+      --text: #E6EBE8;
+      --muted: #A3ADA8;
+      --line: #2E3532;
+      --brand: #7CC4D2;
+      --on-brand: #0B1F24;
+      --brand-weak: #1C3A41;
+      --on-brand-weak: #BFE3EA;
+      --expert-bg: #16372A; --expert-fg: #9FDDBA;
+      --good-bg: #1C3A41; --good-fg: #BFE3EA;
+      --dev-bg: #3D2A12; --dev-fg: #F2C08A;
+      --weak-bg: #43201C; --weak-fg: #F4ADA5;
     }
   }
   * { box-sizing: border-box; margin: 0; }
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     line-height: 1.55;
   }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 20px 64px; }
-  header h1 {
-    font-size: 64px;
-    font-weight: 900;
-    letter-spacing: 6px;
-    color: var(--title);
-    line-height: 1.1;
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
+  header .brand { display: flex; align-items: center; gap: 18px; }
+  .mark {
+    flex: 0 0 auto;
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    background: #0F4C5C;
+    display: grid; place-items: center;
   }
-  header h1 .sub {
-    display: block;
-    font-size: 19px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-  header p.tagline { font-size: 19px; color: var(--muted); margin-top: 6px; }
+  header h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  header h1 .sub { display: block; font-size: 18px; font-weight: 500; letter-spacing: 0; color: var(--muted); margin-top: 4px; }
+  header p.tagline { font-size: 18px; color: var(--muted); margin-top: 18px; max-width: 620px; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
   .chip {
-    background: var(--surface-2);
+    background: var(--surface);
+    border: 1px solid var(--line);
     color: var(--muted);
-    border-radius: 999px;
-    padding: 6px 14px;
+    border-radius: 8px;
+    padding: 4px 10px;
     font-size: 13px;
     font-weight: 600;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
   }
   .cta { margin-top: 24px; display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
   .btn {
-    background: var(--btn-bg);
-    color: var(--btn-fg);
-    font-weight: 700;
+    background: var(--brand);
+    color: var(--on-brand);
+    font-weight: 600;
     text-decoration: none;
-    padding: 14px 26px;
-    border-radius: 999px;
+    padding: 13px 24px;
+    border-radius: 10px;
     font-size: 16px;
     white-space: nowrap;
   }
-  .btn:hover { filter: brightness(1.08); }
-  .cta a.all { color: var(--title); font-size: 14px; text-decoration: none; }
+  .btn:hover { filter: brightness(1.1); }
+  .cta a.all { color: var(--brand); font-size: 14px; text-decoration: none; }
   .cta a.all:hover { text-decoration: underline; }
-  main { margin-top: 36px; display: grid; gap: 34px; }
+  main { margin-top: 40px; display: grid; gap: 36px; }
   section h2 {
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: 2.5px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--title);
+    color: var(--brand);
+    margin-bottom: 6px;
   }
-  section p.lead { color: var(--muted); font-size: 15px; margin: 2px 0 14px; }
-  .cards { display: grid; gap: 14px; }
+  section p.lead { color: var(--muted); font-size: 15px; margin-bottom: 14px; }
+  .cards { display: grid; gap: 10px; }
   .card {
     background: var(--surface);
-    border: 1px solid var(--card-border);
-    box-shadow: var(--card-shadow);
-    border-radius: 24px;
-    padding: 22px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
     display: flex;
-    gap: 18px;
-    align-items: center;
-    background-image: linear-gradient(90deg, rgba(96, 165, 250, 0.10), transparent 60%);
+    gap: 14px;
+    align-items: flex-start;
   }
-  .art {
+  .icon {
     flex: 0 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 13px);
-    grid-auto-rows: 13px;
-    gap: 2px;
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--brand-weak);
+    color: var(--on-brand-weak);
+    display: grid; place-items: center;
   }
-  .art i { border-radius: 3px; background: rgba(96, 165, 250, 0.9); }
-  .art i.plank { background: rgba(96, 165, 250, 0.35); }
-  .card h3 { font-size: 22px; }
+  .card h3 { font-size: 17px; font-weight: 600; }
   .card .info { flex: 1 1 auto; min-width: 0; }
   .card .info p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+  .bands { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .band {
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 600;
+  }
+  .band span { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 14px; white-space: nowrap; }
+  .band.expert { background: var(--expert-bg); color: var(--expert-fg); }
+  .band.good { background: var(--good-bg); color: var(--good-fg); }
+  .band.dev { background: var(--dev-bg); color: var(--dev-fg); }
+  .band.weak { background: var(--weak-bg); color: var(--weak-fg); }
   .note {
     background: var(--surface);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
     padding: 16px 18px;
     color: var(--muted);
-    font-size: 14px;
+    font-size: 15px;
   }
   .note strong { color: var(--text); }
   footer {
     margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
     color: var(--muted);
     font-size: 14px;
     display: flex;
     flex-wrap: wrap;
     gap: 6px 18px;
   }
-  footer a { color: var(--title); text-decoration: none; }
+  footer a { color: var(--brand); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
   @media (max-width: 540px) {
-    header h1 { font-size: 48px; }
+    header h1 { font-size: 36px; }
+    .mark { width: 52px; height: 52px; border-radius: 13px; }
     .btn { width: 100%; text-align: center; }
+    .bands { grid-template-columns: minmax(0, 1fr); }
   }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-planogram" viewBox="0 0 24 24"><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2H5a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2zM3 10h18M3 15h18M10 4v6M14 10v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-audit" viewBox="0 0 24 24"><path d="M7 4h10a2 2 0 0 1 2 2v13a2 2 0 0 1 -2 2H7a2 2 0 0 1 -2 -2V6a2 2 0 0 1 2 -2zM9 3h6v3H9zM9 13l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sales" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-order" viewBox="0 0 24 24"><path d="M3 7.5l9-4.5 9 4.5v9l-9 4.5-9-4.5zM3 7.5l9 4.5 9-4.5M12 12v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
 <div class="wrap">
   <header>
-    <h1>Reyon<span class="sub">planogram alıştırması</span></h1>
-    <p class="tagline">Raf dizilişini kurallardan çıkar, planı denet, satışı ve stoğu yönet. Dört mod, 14 dil, çevrimdışı.</p>
+    <div class="brand">
+      <div class="mark" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 36 36" fill="none"><path d="M4 12h28M4 22h28M4 32h28" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/><g fill="#FFFFFF"><rect x="6" y="4" width="7" height="7" rx="1.5"/><rect x="15" y="6" width="6" height="5" rx="1.5"/><rect x="6" y="15" width="9" height="6" rx="1.5"/><rect x="24" y="14" width="6" height="7" rx="1.5"/><rect x="6" y="25" width="6" height="6" rx="1.5"/><rect x="14" y="24" width="7" height="7" rx="1.5"/><rect x="23" y="26" width="7" height="5" rx="1.5"/></g><rect x="23" y="3" width="7" height="8" rx="1.5" fill="#FFD23F"/></svg>
+      </div>
+      <h1>Reyon<span class="sub">FMCG raf simülatörü</span></h1>
+    </div>
+    <p class="tagline">Planogramı kur, rafı denetle, raf verimini artır, haftalık stoğu yönet. Dört mod, 14 dil, çevrimdışı.</p>
     <div class="chips">
       <span class="chip">0 reklam</span>
       <span class="chip">0 izleyici</span>
@@ -161,79 +192,90 @@
 
   <main>
     <section lang="tr">
-      <h2>Dört mod</h2>
-      <p class="lead">Aynı raf, dört farklı iş. Her modun günlük turu ve serbest turu var; zorluk seçilir.</p>
+      <h2>Görevler</h2>
+      <p class="lead">Her gün dört modda günün vakası: herkes aynı rafla çalışır, format günden güne Market, Süpermarket ve Hipermarket arasında döner. Alıştırmada formatı sen seçersin.</p>
       <div class="cards">
       <article class="card">
-        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-planogram"/></svg></div>
         <div class="info">
           <h3>Diziliş</h3>
-          <p>Brifteki kurallardan rafın tek doğru dizilişini çıkar. Her kural tutunca ✓ olur; tahmin gerekmez, çıkarım yeter.</p>
+          <p>Brifteki kurallardan planogramı kur: ürünü seç, raftaki göze yerleştir. Kurallar tek bir dizilişe götürür, tahmin gerekmez.</p>
         </div>
       </article>
       <article class="card">
-        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-audit"/></svg></div>
         <div class="info">
           <h3>Denetim</h3>
-          <p>Üstte planogram, altta gerçek raf. Sapmaları bul: yer değişimi, boş göz, yabancı ürün, yanlış marka ya da boy, taşma.</p>
+          <p>Üstte planogram, altta mağaza rafı. Sapmaları işaretle: yer değişimi, boş göz, yabancı ürün, yanlış marka ya da boy, taşma.</p>
         </div>
       </article>
       <article class="card">
-        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-sales"/></svg></div>
         <div class="info">
           <h3>Satış</h3>
-          <p>Rafı istediğin gibi diz; puan satış kurallarından gelir — göz hizası, ağırlar alta, tamamlayıcılar yan yana, temizlik gıdadan uzak.</p>
+          <p>Rafı satış kurallarına göre diz: göz hizası, ağır ürünler altta, tamamlayıcılar yan yana, temizlik gıdadan uzak. Raf verimin uzmanın dizilişiyle karşılaştırılır.</p>
         </div>
       </article>
       <article class="card">
-        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-order"/></svg></div>
         <div class="info">
           <h3>Sipariş</h3>
-          <p>Plan hazır, iş stokta. Her gün kaç koli isteyeceğine karar ver: iade, bekleme maliyeti ve fire hesabı tutmalı.</p>
+          <p>Planogram hazır, iş stokta. Bir hafta boyunca her gün koli siparişi ver: iade, bekleme maliyeti ve fire hesabı tutmalı.</p>
         </div>
       </article>
       </div>
     </section>
 
     <section lang="tr">
-      <h2>Nasıl çalışır</h2>
+      <h2>Sonuç: rapor</h2>
+      <p class="lead">Yıldız ve rekor yok. Sonuç, aynı vakayı çözen uzmana oranla verilir; yanında kişisel en iyin durur. Sipariş'in haftalık raporu hizmet düzeyini, stok devrini ve bulguları gösterir.</p>
+      <div class="bands">
+        <div class="band expert">Uzman düzeyi <span>≥ %90</span></div>
+        <div class="band good">İyi <span>%75–89</span></div>
+        <div class="band dev">Gelişmeli <span>%50–74</span></div>
+        <div class="band weak">Zayıf <span>&lt; %50</span></div>
+      </div>
+    </section>
+
+    <section lang="tr">
+      <h2>Cihazda kalır</h2>
       <div class="note">
-        <strong>Cihazda kalır.</strong> Reyon ağa bağlanmaz, izin istemez, hiçbir veri toplamaz. Turlar ve
-        rekorlar yalnızca telefonunuzda durur. Günlük turlar cihaz tarihinden çevrimdışı üretilir.
-        Uygulamanın dili içinden seçilir: 14 dilin tümü kutuda gelir.
+        <strong>Ağa bağlanmaz.</strong> Reyon izin istemez, hiçbir veri toplamaz. Vakalar ve sonuçlar
+        yalnızca telefonunuzda durur; günün vakaları cihaz tarihinden çevrimdışı üretilir. Uygulamanın
+        dili içinden seçilir, 14 dilin tümü kutuda gelir. Açık ve koyu tema, ses varsayılan kapalı.
       </div>
     </section>
 
     <section lang="en">
       <h2>In English</h2>
-      <p class="lead">Reyon is a planogram exercise for Android: four modes, 14 languages, no ads, no permissions, no network.</p>
+      <p class="lead">Reyon is an FMCG shelf simulator for Android: a case of the day in each of four modes, practice in three store formats (Market, Supermarket, Hypermarket), results as reports against an expert. 14 languages, no ads, no permissions, no network.</p>
       <div class="cards">
       <article class="card">
-        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-planogram"/></svg></div>
         <div class="info">
           <h3>Arrange</h3>
-          <p>Deduce the one correct shelf layout from the brief. Every rule turns ✓ when it holds — inference, never guessing.</p>
+          <p>Build the planogram from the brief: pick a product, place it in a slot. The rules lead to a single layout, no guessing.</p>
         </div>
       </article>
       <article class="card">
-        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-audit"/></svg></div>
         <div class="info">
           <h3>Audit</h3>
-          <p>Planogram on top, the real shelf below. Find the deviations: a swap, an empty slot, a foreign product, a wrong brand or size, a spill.</p>
+          <p>Planogram on top, the store shelf below. Mark the deviations: a swap, an empty slot, a foreign product, a wrong brand or size, a spill.</p>
         </div>
       </article>
       <article class="card">
-        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-sales"/></svg></div>
         <div class="info">
           <h3>Sales</h3>
-          <p>Arrange the shelf as you like; points come from the sales rules — eye level, heavy items low, complements side by side, cleaning away from food.</p>
+          <p>Arrange the shelf by the sales rules: eye level, heavy items low, complements side by side, cleaning away from food. Your shelf yield is compared with the expert’s layout.</p>
         </div>
       </article>
       <article class="card">
-        <div class="art" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i class="plank"></i><i></i><i></i><i></i><i></i></div>
+        <div class="icon" aria-hidden="true"><svg width="22" height="22"><use href="#i-order"/></svg></div>
         <div class="info">
           <h3>Ordering</h3>
-          <p>The plan is set; the work is stock. Decide how many cases to order each day: returns, holding cost and waste all count.</p>
+          <p>The planogram is set; the work is stock. Order cases every day for a week: returns, holding cost and waste all count. The weekly report shows service level, stock turnover and findings.</p>
         </div>
       </article>
       </div>

@@ -1,5 +1,6 @@
 package com.aripd.reyon.ui
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,9 +10,12 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.aripd.reyon.R
 import com.aripd.reyon.engine.OrderRules
@@ -19,6 +23,7 @@ import com.aripd.reyon.engine.ReyonLevel
 import com.aripd.reyon.setAppContent
 import com.aripd.reyon.str
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
 import org.junit.After
@@ -42,16 +47,10 @@ class ReyonScreenTest {
         ReyonTestSupport.clearPrefs()
     }
 
-    private fun openMenu() = rule.reyonOpenMenu()
-
     @Test
     fun hintsPlaceProductsUndoReturnsThemAndThePuzzleGetsSolved() {
         rule.setAppContent { ReyonScreen(highScore = 0L, onScore = {}, onExit = {}) }
-        openMenu()
-        rule.reyonPickKind(str(R.string.reyon_kind_puzzle))
-        rule.onNodeWithText(str(R.string.mode_free)).performClick()
-        rule.onNodeWithText(str(R.string.difficulty_easy)).performClick()
-        rule.onNodeWithText(str(R.string.reyon_start)).performClick()
+        rule.reyonStartPractice(ReyonKind.PUZZLE)
 
         val trayPrefix = str(R.string.reyon_tray_label) + ":"
         fun trayItems() = rule.onAllNodes(hasContentDescription(trayPrefix, substring = true))
@@ -69,7 +68,22 @@ class ReyonScreenTest {
         while (trayItems().fetchSemanticsNodes().isNotEmpty() && guard++ < 20) {
             rule.onNodeWithText(str(R.string.reyon_hint)).performClick()
         }
-        rule.onNodeWithText(str(R.string.congrats)).assertIsDisplayed()
+        rule.onNodeWithText(str(R.string.reyon_done_title)).assertIsDisplayed()
+        val store = ReyonStore(ApplicationProvider.getApplicationContext<Context>())
+        assertNotNull(
+            "alıştırmanın sonucu Market için kaydedilmeli · kayıt: ${ReyonTestSupport.prefsDump()}",
+            store.lastPractice(ReyonKind.PUZZLE, ReyonLevel.KOLAY),
+        )
+
+        // Görevler'e dönüş: alıştırma satırı son sonucu (süre) gösterir.
+        rule.onNodeWithText(str(R.string.nav_tasks)).performClick()
+        rule.waitUntil(timeoutMillis = 10_000) { rule.onAllNodesWithTag(HOME_TAG).fetchSemanticsNodes().isNotEmpty() }
+        val row = rule.onNodeWithTag(homePracticeTag(ReyonKind.PUZZLE)).fetchSemanticsNode()
+        val texts = row.config.getOrNull(SemanticsProperties.Text)?.map { it.text }.orEmpty()
+        assertTrue(
+            "son sonuç süre olarak yazılmalı: $texts · ekran: ${rule.screenDump()} · kayıt: ${ReyonTestSupport.prefsDump()}",
+            texts.any { Regex("^\\d+:\\d{2}$").matches(it) },
+        )
     }
 
     @Test
@@ -79,11 +93,7 @@ class ReyonScreenTest {
         val scores = mutableListOf<Long>()
         var shown by mutableStateOf(true)
         rule.setAppContent { if (shown) ReyonScreen(highScore = 0L, onScore = { scores += it }, onExit = {}) }
-        openMenu()
-        rule.reyonPickKind(str(R.string.reyon_kind_puzzle))
-        rule.onNodeWithText(str(R.string.mode_free)).performClick()
-        rule.onNodeWithText(str(R.string.difficulty_easy)).performClick()
-        rule.onNodeWithText(str(R.string.reyon_start)).performClick()
+        rule.reyonStartPractice(ReyonKind.PUZZLE)
 
         val trayPrefix = str(R.string.reyon_tray_label) + ":"
         fun trayItems() = rule.onAllNodes(hasContentDescription(trayPrefix, substring = true))
@@ -92,33 +102,29 @@ class ReyonScreenTest {
         while (trayItems().fetchSemanticsNodes().isNotEmpty() && guard++ < 20) {
             rule.onNodeWithText(str(R.string.reyon_hint)).performClick()
         }
-        rule.onNodeWithText(str(R.string.congrats)).assertIsDisplayed()
+        rule.onNodeWithText(str(R.string.reyon_done_title)).assertIsDisplayed()
         assertEquals(listOf(1L), scores)
 
-        // Ekranı bileşimden çıkarıp geri koymak menüye gidip dönmenin ta kendisi:
+        // Ekranı bileşimden çıkarıp geri koymak Görevler'e gidip dönmenin ta kendisi:
         // kökte SaveableStateHolder yok, görünüm modeli Activity'de yaşamaya devam eder.
         rule.runOnIdle { shown = false }
         rule.waitForIdle()
         rule.runOnIdle { shown = true }
-        rule.onNodeWithText(str(R.string.congrats)).assertIsDisplayed()
+        rule.onNodeWithText(str(R.string.reyon_done_title)).assertIsDisplayed()
         assertEquals("yeniden giriş çözümü bir daha saymamalı", listOf(1L), scores)
     }
 
     @Test
     fun auditHintsRevealEveryDeviation() {
         rule.setAppContent { ReyonScreen(highScore = 0L, onScore = {}, onExit = {}) }
-        openMenu()
-        rule.reyonPickKind(str(R.string.reyon_kind_audit))
-        rule.onNodeWithText(str(R.string.mode_free)).performClick()
-        rule.onNodeWithText(str(R.string.difficulty_easy)).performClick()
-        rule.onNodeWithText(str(R.string.reyon_audit_start)).performClick()
+        rule.reyonStartPractice(ReyonKind.AUDIT)
 
         val shelfDesc = str(R.string.reyon_audit_board_desc_fmt, 0, 0, 0, 0).substringBefore(' ')
         fun shelf() = rule.onAllNodes(hasContentDescription(shelfDesc, substring = true))
         rule.waitUntil(timeoutMillis = 30_000) { shelf().fetchSemanticsNodes().isNotEmpty() }
         rule.onNodeWithText(str(R.string.reyon_audit_plan_label)).assertIsDisplayed()
 
-        // Her ipucu bir sapma açar; Kolay'da iki sapma var.
+        // Her kılavuz adımı bir sapma açar; Market'te iki sapma var.
         var guard = 0
         while (rule.onAllNodesWithText(str(R.string.reyon_audit_done_title)).fetchSemanticsNodes().isEmpty() && guard++ < 8) {
             rule.onNodeWithText(str(R.string.reyon_hint)).performClick()
@@ -129,11 +135,7 @@ class ReyonScreenTest {
     @Test
     fun orderStepperClosesDaysAndTheWeekEnds() {
         rule.setAppContent { ReyonScreen(highScore = 0L, onScore = {}, onExit = {}) }
-        openMenu()
-        rule.reyonPickKind(str(R.string.reyon_kind_order))
-        rule.onNodeWithText(str(R.string.mode_free)).performClick()
-        rule.onNodeWithText(str(R.string.difficulty_easy)).performClick()
-        rule.onNodeWithText(str(R.string.reyon_order_start)).performClick()
+        rule.reyonStartPractice(ReyonKind.ORDER)
 
         val boardPrefix = str(R.string.reyon_order_board_desc_fmt, 0, 0, 0, 0).substringBefore(' ')
         rule.waitUntil(timeoutMillis = 30_000) {
@@ -162,7 +164,7 @@ class ReyonScreenTest {
         rule.onNodeWithText(str(R.string.reyon_order_continue)).assertIsDisplayed()
         rule.onNodeWithText(str(R.string.reyon_order_continue)).performClick()
 
-        // Kalan günler: uzman ipuçlarıyla sipariş ver, kapat; Kolay beş gün.
+        // Kalan günler: kılavuzla (uzmanın önerisi) sipariş ver, kapat; Market beş gün.
         val done = str(R.string.reyon_order_done_title)
         val closeWeek = str(R.string.reyon_order_close_week)
         val closeDay = str(R.string.reyon_order_close_day)
@@ -178,7 +180,7 @@ class ReyonScreenTest {
         }
         rule.onNodeWithText(done).assertIsDisplayed()
 
-        // Sonuç kartındaki hafta grafiği: kapanan her gün ve devir açıklamada olmalı.
+        // Haftalık rapordaki grafik: kapanan her gün ve devir açıklamada olmalı.
         val chartPrefix = str(R.string.reyon_order_chart_desc_fmt, "", "", "").substringBefore(':')
         val chart = rule.onAllNodes(hasContentDescription(chartPrefix, substring = true)).fetchSemanticsNodes()
         assertTrue("hafta grafiği görünmeli", chart.isNotEmpty())
@@ -190,11 +192,7 @@ class ReyonScreenTest {
     @Test
     fun salesPlacesAProductByTappingTheShelfAndUndoReturnsIt() {
         rule.setAppContent { ReyonScreen(highScore = 0L, onScore = {}, onExit = {}) }
-        openMenu()
-        rule.reyonPickKind(str(R.string.reyon_kind_sales))
-        rule.onNodeWithText(str(R.string.mode_free)).performClick()
-        rule.onNodeWithText(str(R.string.difficulty_easy)).performClick()
-        rule.onNodeWithText(str(R.string.reyon_sales_start)).performClick()
+        rule.reyonStartPractice(ReyonKind.SALES)
 
         val trayPrefix = str(R.string.reyon_tray_label) + ":"
         fun trayItems() = rule.onAllNodes(hasContentDescription(trayPrefix, substring = true))

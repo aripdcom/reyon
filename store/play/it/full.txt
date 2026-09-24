@@ -1,11 +1,15 @@
-Planogramma: sistema lo scaffale, verificalo, gestisci vendite e scorte.
+Simulatore dello scaffale: planogrammi, controllo, vendite e scorte.
 
-Sistemare — Tocca un prodotto e poi un posto sullo scaffale; una pressione lunga lo rimanda sul vassoio. Ogni regola del briefing diventa ✓ quando è rispettata; le regole portano a una sola disposizione, senza tirare a indovinare.
-Controllare — Il piano in alto, lo scaffale reale in basso. Tocca i posti in cui lo scaffale si discosta dal piano: uno scambio, un posto vuoto, un prodotto estraneo, una marca o una misura sbagliate, un’invasione. Un tocco sbagliato conta come errore.
-Vendite — Disponi i prodotti come vuoi; i punti arrivano dalle regole di vendita (altezza occhi, i pesanti in basso, i complementari accanto, la pulizia lontana dal cibo, blocchi di categoria e di marca). L’obiettivo è la disposizione migliore trovata dall’ottimizzatore; raggiungerlo dà tre stelle.
-Ordini — Il piano dello scaffale è fissato; il tuo lavoro è la scorta. Ogni giorno decidi quante casse ordinare per prodotto: gli ordini arrivano la mattina dopo, quello che non entra torna indietro, la scorta che resta la sera costa magazzino, le unità scadute sono perdita. L’obiettivo è il profitto di un esperto che vede le stesse previsioni.
+Compiti — Ogni giorno un caso del giorno in tutte e quattro le modalità: tutti lavorano sullo stesso scaffale e il formato del negozio cambia ogni giorno tra Minimarket, Supermercato e Ipermercato. Nell’esercizio scegli tu il formato.
 
-0 pubblicità · 0 tracker · 0 permessi
+Sistemare — Tocca un prodotto e poi un posto sullo scaffale; una pressione lunga lo toglie dallo scaffale. Ogni regola del briefing viene spuntata quando è rispettata; le regole portano a una sola disposizione, senza tirare a indovinare.
+Controllare — Il planogramma in alto, lo scaffale del negozio in basso. Tocca i posti in cui lo scaffale si discosta dal planogramma: uno scambio, un posto vuoto, un prodotto estraneo, una marca o una misura sbagliate, un’invasione. Un tocco sbagliato conta come segnalazione errata.
+Vendite — Disponi i prodotti come vuoi; la resa dello scaffale arriva dalle regole di vendita (altezza occhi, i pesanti in basso, i complementari accanto, la pulizia lontana dal cibo, blocchi di categoria e di marca). La disposizione dell’esperto è la migliore trovata dall’ottimizzatore; la tua resa è mostrata in proporzione a essa.
+Ordini — Il piano dello scaffale è fissato; il tuo lavoro è la scorta. Ogni giorno decidi quante casse ordinare per prodotto: gli ordini arrivano la mattina dopo, quello che non entra torna indietro, la scorta che resta la sera costa magazzino, le unità scadute sono perdita. Il tuo profitto è confrontato con quello di un esperto che vede le stesse previsioni.
+
+I risultati sono rapporti, non punteggi: il tuo risultato rispetto a quello dell’esperto, un livello (Livello esperto, Buono, Da migliorare, Debole) e il tuo record personale. Il rapporto settimanale degli ordini mostra il livello di servizio, la rotazione delle scorte e le osservazioni.
+
+Tema chiaro e scuro · 0 pubblicità · 0 tracker · 0 permessi
 
 Lingua: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
 

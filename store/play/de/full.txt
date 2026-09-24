@@ -1,11 +1,15 @@
-Planogramm-Training: Regal bestücken, prüfen, Umsatz und Bestand steuern.
+FMCG-Regalsimulator: Planogramme, Regalprüfung, Abverkauf und Bestand.
 
-Bestücken — Tippe ein Produkt an, dann einen Platz im Regal; lang drücken schickt es zurück ins Tablett. Jede Regel des Briefings wird ✓, sobald sie gilt; die Regeln führen zu genau einer Belegung, ohne Raten.
-Prüfen — Oben der Plan, unten das echte Regal. Tippe die Plätze an, an denen das Regal vom Plan abweicht: ein Tausch, ein leerer Platz, ein fremdes Produkt, eine falsche Marke oder Größe, ein Überlaufen. Ein falscher Tipp zählt als Fehler.
-Verkauf — Stell die Produkte auf, wie du willst; die Punkte kommen aus den Verkaufsregeln (Augenhöhe, Schweres nach unten, Ergänzungen nebeneinander, Reinigungsmittel weg von Lebensmitteln, Kategorie- und Markenblöcke). Das Ziel ist die beste Belegung, die der Optimierer gefunden hat; wer sie erreicht, bekommt drei Sterne.
-Bestellen — Der Regalplan steht; deine Aufgabe ist der Bestand. Entscheide jeden Tag, wie viele Kisten du pro Produkt bestellst: Bestellungen kommen am nächsten Morgen, was nicht passt, geht zurück, was abends im Regal bleibt, kostet Lagergeld, Abgelaufenes ist Verlust. Das Ziel ist der Gewinn eines Profis, der dieselben Prognosen sieht.
+Aufgaben — Jeden Tag ein Fall des Tages in allen vier Modi: Alle arbeiten am selben Regal, das Ladenformat wechselt täglich zwischen Markt, Supermarkt und Hypermarkt. In der Übung wählst du das Format selbst.
 
-0 Werbung · 0 Tracker · 0 Berechtigungen
+Bestücken — Tippe ein Produkt an, dann einen Platz im Regal; lang drücken nimmt es wieder aus dem Regal. Jede Regel des Briefings wird abgehakt, sobald sie gilt; die Regeln führen zu genau einer Belegung, ohne Raten.
+Prüfen — Oben das Planogramm, unten das Ladenregal. Tippe die Plätze an, an denen das Regal vom Planogramm abweicht: ein Tausch, ein leerer Platz, ein fremdes Produkt, eine falsche Marke oder Größe, ein Überlaufen. Tippst du daneben, zählt das als Fehltipp.
+Verkauf — Stell die Produkte auf, wie du willst; die Regalleistung kommt aus den Verkaufsregeln (Augenhöhe, Schweres nach unten, Ergänzungen nebeneinander, Reinigungsmittel weg von Lebensmitteln, Kategorie- und Markenblöcke). Die Belegung des Profis ist die beste, die der Optimierer gefunden hat; deine Regalleistung wird im Verhältnis dazu gezeigt.
+Bestellen — Der Regalplan steht; deine Aufgabe ist der Bestand. Entscheide jeden Tag, wie viele Kisten du pro Produkt bestellst: Bestellungen kommen am nächsten Morgen, was nicht passt, geht zurück, was abends im Regal bleibt, kostet Lagergeld, Abgelaufenes ist Verlust. Dein Gewinn wird mit dem eines Profis verglichen, der dieselben Prognosen sieht.
+
+Ergebnisse sind Berichte statt Punkte: dein Ergebnis im Verhältnis zum Profi, eine Stufe (Profi-Niveau, Gut, Ausbaufähig, Schwach) und deine persönliche Bestleistung. Der Wochenbericht beim Bestellen zeigt Servicegrad, Lagerumschlag und Befunde.
+
+Helles und dunkles Design · 0 Werbung · 0 Tracker · 0 Berechtigungen
 
 Sprache: English · Türkçe · Deutsch · Français · Nederlands · Español · Português · Italiano · Dansk · Svenska · Norsk bokmål · Suomi · Русский · العربية
 

@@ -7,27 +7,27 @@
 -->
 <resources>
     <string name="app_name">Reyon</string>
-    <string name="app_tagline">Planogram puzzle: deduce the one correct shelf layout from the brief</string>
+    <string name="app_tagline">FMCG shelf management simulator</string>
 
     <!-- Ortak -->
     <string name="chip_no_ads">0 ads</string>
     <string name="chip_no_trackers">0 trackers</string>
     <string name="chip_no_permissions">0 permissions</string>
-    <string name="new_record">New record! 🏆</string>
-    <string name="exit_app">Exit</string>
     <string name="back">Back</string>
-    <string name="congrats">Well done! 🎉</string>
     <string name="undo">Undo</string>
-    <string name="solved_label">Solved</string>
-    <string name="mode_daily">Daily</string>
-    <string name="mode_free">Free play</string>
-    <string name="difficulty_easy">Easy</string>
-    <string name="difficulty_medium">Medium</string>
-    <string name="difficulty_hard">Hard</string>
-    <string name="difficulty_label">Difficulty</string>
-    <string name="same_difficulty">New at same difficulty</string>
+    <string name="mode_daily">Case of the day</string>
+    <string name="mode_free">Practice</string>
     <string name="time_label">Time</string>
     <string name="time_fmt">Time: %1$s</string>
+    <string name="nav_tasks">Tasks</string>
+    <string name="format_market">Market</string>
+    <string name="format_supermarket">Supermarket</string>
+    <string name="format_hypermarket">Hypermarket</string>
+    <string name="format_shelf_fmt">%1$d×%2$d shelf</string>
+    <string name="case_subtitle_fmt">%1$s · %2$d×%3$d shelf · %4$s</string>
+    <string name="kpi_brief">Brief</string>
+    <string name="kpi_placed">Placed</string>
+    <string name="percent_fmt">%1$d%%</string>
 
     <!-- Ayarlar -->
     <string name="settings_title">Settings</string>
@@ -41,16 +41,18 @@
     <string name="settings_haptics">Vibration</string>
     <string name="haptics_on">Turn haptics on</string>
     <string name="haptics_off">Turn haptics off</string>
+    <string name="settings_theme">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system">Phone’s setting</string>
 
     <!-- Paylaşım -->
     <string name="share">Share</string>
     <string name="share_chooser">Share result</string>
     <string name="share_failed">Could not open sharing</string>
     <string name="share_tagline">Reyon: zero ads, zero permissions, zero trackers. Free and open source:</string>
-    <string name="share_link">https://aripdcom.github.io/reyon</string>
-    <string name="share_solved">Solved!</string>
-    <string name="share_score_fmt">%1$s points</string>
-    <string name="share_daily_fmt">Daily · %1$s</string>
+    <string name="share_link">https://reyon.aripd.com</string>
+    <string name="share_daily_fmt">Case of the day · %1$s</string>
 
     <!-- Hakkında -->
     <string name="about_title">About</string>
@@ -69,31 +71,37 @@
     <string name="about_lic_androidx_desc">Compose, Material 3, Lifecycle, Activity and Core libraries. The Android Open Source Project.</string>
     <string name="about_lic_kotlin_name">Kotlin and kotlinx.coroutines</string>
     <string name="about_lic_kotlin_desc">Language standard library and concurrency. JetBrains and contributors.</string>
+    <string name="about_lic_plex_name">IBM Plex</string>
+    <string name="about_lic_plex_desc">Typefaces: Sans, Sans Condensed, Mono and Sans Arabic. IBM Corp.</string>
     <string name="about_license_show">Show the Apache 2.0 license text</string>
     <string name="about_license_hide">Hide the license text</string>
+    <string name="about_ofl_show">Show the SIL Open Font License text</string>
+    <string name="about_ofl_hide">Hide the font license text</string>
     <string name="about_app_license">The source code of Reyon is open under the GNU GPL v3. The \"Reyon\" name and logo are not part of the license.</string>
     <string name="about_app_license_link">License text (GitHub)</string>
 
     <!-- Reyon: Diziliş -->
-    <string name="reyon_intro">Tap a product, then tap a slot on the shelf; long-press to send it back to the tray. Each brief rule turns ✓ when it holds; the rules lead to a single layout, no guessing.</string>
+    <string name="reyon_intro">Tap a product, then tap a slot on the shelf; long-press to take it off the shelf. Each brief rule is ticked when it holds; the rules lead to a single layout, no guessing.</string>
     <string name="reyon_level_desc_fmt">%1$d shelves × %2$d slots · %3$d–%4$d products</string>
-    <string name="reyon_daily_desc">Everyone arranges the same shelf today; your time is recorded.</string>
-    <string name="reyon_daily_done_fmt">Solved today: %1$s · %2$d hints</string>
-    <string name="reyon_free_desc">Random shelf; hint-free solves count as records.</string>
-    <string name="reyon_best_fmt">Best time: %1$s</string>
-    <string name="reyon_start">Start</string>
-    <string name="reyon_play_again">Arrange again</string>
-    <string name="reyon_to_menu">Back to start</string>
     <string name="reyon_generating">Preparing the shelf…</string>
     <string name="reyon_brief_label">Planogram brief</string>
-    <string name="reyon_tray_label">Tray</string>
+    <string name="reyon_tray_label">Products to place</string>
     <string name="reyon_tray_empty">All products are on the shelf</string>
     <string name="reyon_tray_item_fmt">%1$s, %2$d facings</string>
-    <string name="reyon_hint">Hint</string>
-    <string name="reyon_remove">To tray</string>
-    <string name="reyon_hint_wrong_fmt">%1$s was misplaced and went back to the tray</string>
-    <string name="reyon_hint_place_fmt">Hint: %1$s goes %2$s</string>
-    <string name="reyon_result_fmt">%1$s · %2$d hints</string>
+    <string name="reyon_done_title">Planogram built</string>
+    <string name="brief_satisfied_fmt">%1$d/%2$d met</string>
+    <string name="brief_status_ok">met</string>
+    <string name="brief_status_broken">broken</string>
+    <string name="brief_status_pending">open</string>
+    <string name="tray_count_fmt">%1$d left</string>
+    <string name="facings_fmt">×%1$d</string>
+    <string name="reyon_badge_eye">eye level</string>
+    <string name="reyon_badge_heavy">heavy</string>
+    <string name="reyon_hint">Guide</string>
+    <string name="reyon_remove">Off the shelf</string>
+    <string name="reyon_hint_wrong_fmt">%1$s was misplaced; it is back among the products to place</string>
+    <string name="reyon_hint_place_fmt">%1$s goes %2$s</string>
+    <string name="reyon_result_fmt">%1$s · guide used %2$d times</string>
     <string name="reyon_board_desc_fmt">Reyon %1$d shelves × %2$d slots, %3$d products unplaced</string>
     <string name="reyon_shelf_top">top shelf</string>
     <string name="reyon_shelf_eye">eye level (shelf 2)</string>
@@ -103,6 +111,12 @@
     <string name="reyon_shelf_eye_at">at eye level (shelf 2)</string>
     <string name="reyon_shelf_bottom_at">on the bottom shelf</string>
     <string name="reyon_shelf_nth_at">on shelf %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, slot %2$d from the left: %3$s</string>
+    <string name="reyon_slot_empty">empty</string>
+    <string name="reyon_slot_selected">selected</string>
+    <string name="reyon_size_small">small</string>
+    <string name="reyon_size_medium">medium</string>
+    <string name="reyon_size_large">large</string>
     <string name="reyon_clue_placed">%1$s is %2$s (given)</string>
     <string name="reyon_clue_on_shelf">%1$s is %2$s</string>
     <string name="reyon_clue_in_slot">%1$s covers slot %2$d from the left</string>
@@ -113,17 +127,22 @@
     <string name="reyon_clue_same_shelf">%1$s and %2$s share a shelf</string>
     <string name="reyon_clue_different_shelf">%1$s and %2$s are on different shelves</string>
     <string name="reyon_clue_above">%1$s is on the shelf right above %2$s, stacked over it</string>
-    <string name="reyon_clue_eye_level">★ High-margin products sit at eye level (shelf 2)</string>
-    <string name="reyon_clue_heavy_bottom">▼ Heavy products go on the bottom shelf</string>
+    <string name="reyon_clue_eye_level">High-margin products (eye level badge) sit at eye level (shelf 2)</string>
+    <string name="reyon_clue_heavy_bottom">Heavy products (heavy badge) go on the bottom shelf</string>
     <string name="reyon_clue_category_block">%1$s form one block: same shelf, side by side</string>
     <string name="reyon_clue_categories_apart">%1$s and %2$s never share a shelf</string>
     <string name="reyon_clue_brand_vertical">%1$s is a vertical block: stacked across consecutive shelves</string>
-    <string name="reyon_clue_size_flow">%1$s sizes grow from left to right (• small, ••• large)</string>
+    <string name="reyon_clue_size_flow">%1$s sizes grow from left to right (short pack small, tall pack large)</string>
     <string name="reyon_cat_icecek">Drinks</string>
     <string name="reyon_cat_atistirmalik">Snacks</string>
     <string name="reyon_cat_kahvaltilik">Breakfast items</string>
     <string name="reyon_cat_temizlik">Cleaning products</string>
     <string name="reyon_cat_bakim">Personal care products</string>
+    <string name="reyon_cat_code_icecek">DR</string>
+    <string name="reyon_cat_code_atistirmalik">SN</string>
+    <string name="reyon_cat_code_kahvaltilik">BR</string>
+    <string name="reyon_cat_code_temizlik">CL</string>
+    <string name="reyon_cat_code_bakim">PC</string>
     <string name="reyon_brand_a">Toros</string>
     <string name="reyon_brand_b">Ege</string>
     <string name="reyon_brand_c">Kuzey</string>
@@ -132,6 +151,25 @@
     <string name="reyon_kind_audit">Audit</string>
     <string name="reyon_kind_sales">Sales</string>
     <string name="reyon_kind_order">Ordering</string>
+    <string name="home_title">Tasks</string>
+    <string name="home_subtitle">Reyon · field simulator</string>
+    <string name="home_daily_title">Cases of the day</string>
+    <string name="home_daily_progress_fmt">%1$s · %2$d/%3$d</string>
+    <string name="home_daily_desc">Everyone works the same shelf; your result is recorded.</string>
+    <string name="home_daily_format_fmt">Today: %1$s · %2$d×%3$d shelf</string>
+    <string name="home_daily_done_desc_fmt">%1$s, done: %2$s</string>
+    <string name="home_start">Start</string>
+    <string name="home_format_title">Store format</string>
+    <string name="home_format_hint">for practice</string>
+    <string name="home_practice_title">Practice</string>
+    <string name="home_last_result">last result</string>
+    <string name="home_puzzle_desc">Read the brief, build the planogram</string>
+    <string name="home_audit_desc">Compare the shelf with the planogram</string>
+    <string name="home_sales_desc">Raise the shelf yield</string>
+    <string name="home_order_desc">Weekly stock decisions</string>
+    <string name="howto_title">How it works</string>
+    <string name="howto_ok">Got it</string>
+    <string name="howto_format_fmt">%1$s: %2$s</string>
 
     <!-- Ürün adları -->
     <string name="reyon_kind_kola">Cola</string>
@@ -171,20 +209,23 @@
     <string name="reyon_kind_pamuk">Cotton</string>
 
     <!-- Reyon: Denetim -->
-    <string name="reyon_audit_intro">Plan on top, the real shelf below. Tap the slots where the shelf deviates from the plan: a swap, an empty slot, a foreign product, a wrong brand or size, a spill. A wrong tap counts as a mistake.</string>
+    <string name="reyon_audit_intro">Planogram on top, the store shelf below. Tap the slots where the shelf deviates from the planogram: a swap, an empty slot, a foreign product, a wrong brand or size, a spill. A wrong tap counts as a wrong mark.</string>
     <string name="reyon_audit_level_desc_fmt">%1$d shelves × %2$d slots · %3$d deviations</string>
-    <string name="reyon_audit_daily_desc">Everyone audits the same shelf today; your time and mistakes are recorded.</string>
-    <string name="reyon_audit_daily_done_fmt">Audited today: %1$s · %2$d mistakes</string>
-    <string name="reyon_audit_free_desc">Random shelf; audits with no mistakes and no hints count as records.</string>
-    <string name="reyon_audit_start">Start the audit</string>
     <string name="reyon_audit_generating">Preparing the audit…</string>
-    <string name="reyon_audit_plan_label">Plan</string>
-    <string name="reyon_audit_shelf_label">Shelf: tap the deviations</string>
+    <string name="reyon_audit_plan_label">Planogram</string>
+    <string name="reyon_audit_shelf_label">Store shelf</string>
+    <string name="reyon_audit_shelf_hint">tap the deviations</string>
+    <string name="dev_type_swap">Swap</string>
+    <string name="dev_type_gap">Empty slot</string>
+    <string name="dev_type_foreign">Foreign product</string>
+    <string name="dev_type_brand">Wrong brand</string>
+    <string name="dev_type_size">Wrong size</string>
+    <string name="dev_type_spill">Spill</string>
     <string name="reyon_audit_found_label">Found</string>
-    <string name="reyon_audit_mistakes_label">Mistakes</string>
+    <string name="reyon_audit_mistakes_label">Wrong marks</string>
     <string name="reyon_audit_remaining_fmt">%1$d more to find</string>
     <string name="reyon_audit_done_title">Audit complete</string>
-    <string name="reyon_audit_result_fmt">%1$s · %2$d mistakes · %3$d hints</string>
+    <string name="reyon_audit_result_fmt">%1$s · %2$d wrong marks · guide used %3$d times</string>
     <string name="reyon_audit_board_desc_fmt">Audit shelf %1$d shelves × %2$d slots, %3$d/%4$d deviations found</string>
     <string name="reyon_audit_plan_desc_fmt">Plan %1$d shelves × %2$d slots</string>
     <string name="reyon_audit_plan_zoom_hint">tap to enlarge</string>
@@ -199,18 +240,12 @@
     <string name="reyon_dev_spill_fmt">Spill: %1$s spills into %2$s</string>
 
     <!-- Reyon: Satış -->
-    <string name="reyon_sales_intro">Arrange the products as you like; points come from the sales rules (eye level, heavy items low, complements side by side, cleaning away from food, category and brand blocks). The target is the best layout the optimizer found; reaching it earns three stars.</string>
-    <string name="reyon_sales_daily_desc">Everyone arranges the same products today; your best score of the day is recorded.</string>
-    <string name="reyon_sales_daily_done_fmt">Today: %1$d / %2$d points · %3$s</string>
-    <string name="reyon_sales_free_desc">Random product set; the percentage of the target counts as a record.</string>
-    <string name="reyon_sales_best_fmt">Best: %1$d%% of the target</string>
-    <string name="reyon_sales_start">Start arranging</string>
-    <string name="reyon_sales_generating">Computing the target…</string>
-    <string name="reyon_sales_score_label">Points</string>
-    <string name="reyon_sales_target_label">Target</string>
+    <string name="reyon_sales_intro">Arrange the products as you like; the shelf yield comes from the sales rules (eye level, heavy items low, complements side by side, cleaning away from food, category and brand blocks). The expert’s layout is the best the optimizer found; your shelf yield is shown as a share of it.</string>
+    <string name="reyon_sales_generating">Computing the expert’s layout…</string>
+    <string name="reyon_sales_score_label">Shelf yield</string>
     <string name="reyon_sales_rules_label">Sales rules</string>
     <string name="reyon_sales_rule_position">Position</string>
-    <string name="reyon_sales_rule_position_desc">demand × facings × shelf factor: eye level ×3, top and middle ×2, bottom ×1 · ▼ heavy only at the bottom ×3 · ★ only at eye level ×4</string>
+    <string name="reyon_sales_rule_position_desc">demand × facings × shelf factor: eye level ×3, top and middle ×2, bottom ×1 · heavy only at the bottom ×3 · high-margin only at eye level ×4</string>
     <string name="reyon_sales_rule_complement">Complementary</string>
     <string name="reyon_sales_rule_complement_desc">pairs like chips and dip side by side +6, stacked +3</string>
     <string name="reyon_sales_rule_conflict">Conflict</string>
@@ -223,31 +258,27 @@
     <string name="reyon_sales_part_fmt">%1$s %2$+d</string>
     <string name="reyon_sales_breakdown_fmt">%1$s: %2$s = %3$+d</string>
     <string name="reyon_sales_selected_fmt">%1$s selected (demand %2$d): tap a slot on the shelf</string>
-    <string name="reyon_sales_pick_hint">Tap a product to see its score breakdown</string>
-    <string name="reyon_sales_demand_fmt">demand %1$d</string>
+    <string name="reyon_sales_pick_hint">Tap a product to see its yield breakdown</string>
+    <string name="sales_chip_fmt">×%1$d · demand %2$d</string>
+    <string name="rules_total_fmt">total %1$d</string>
     <string name="reyon_sales_finish">Finish</string>
-    <string name="reyon_sales_done_title">Layout complete</string>
-    <string name="reyon_sales_result_fmt">%1$d / %2$d points (%3$d%% of the target)</string>
-    <string name="reyon_sales_beat_target">You beat the target! 🏆</string>
+    <string name="reyon_sales_done_title">Shelf ready for sale</string>
+    <string name="reyon_sales_result_fmt">shelf yield %1$d / %2$d (%3$d%% of the expert)</string>
+    <string name="reyon_sales_beat_target">Above the expert</string>
     <string name="reyon_sales_reopen">Keep arranging</string>
-    <string name="reyon_sales_show_target">Show target</string>
+    <string name="reyon_sales_show_target">Expert’s layout</string>
     <string name="reyon_sales_review_mine">My layout</string>
-    <string name="reyon_sales_review_target_fmt">Target (%1$d)</string>
-    <string name="reyon_sales_back_to_result">Result</string>
-    <string name="reyon_sales_board_desc_fmt">Sales shelf %1$d shelves × %2$d slots, %3$d products unplaced, %4$d points</string>
+    <string name="reyon_sales_review_target_fmt">Expert (%1$d)</string>
+    <string name="reyon_sales_back_to_result">Report</string>
+    <string name="reyon_sales_board_desc_fmt">Sales shelf %1$d shelves × %2$d slots, %3$d products unplaced, shelf yield %4$d</string>
 
     <!-- Reyon: Sipariş -->
-    <string name="reyon_order_intro">The shelf plan is set; your job is stock. Each day decide how many cases to order per product: orders arrive the next morning, what does not fit is returned, stock left at night pays holding, expired units are waste. The target is the profit of an expert seeing the same forecasts.</string>
+    <string name="reyon_order_intro">The shelf plan is set; your job is stock. Each day decide how many cases to order per product: orders arrive the next morning, what does not fit is returned, stock left at night pays holding, expired units are waste. Your profit is compared with that of an expert who sees the same forecasts.</string>
     <string name="reyon_order_level_desc_fmt">%1$d shelves × %2$d slots · %3$d days · %4$d promotions</string>
-    <string name="reyon_order_daily_desc">Everyone runs the same week today; your best profit of the day is recorded.</string>
-    <string name="reyon_order_daily_done_fmt">Today: %1$d / %2$d profit · %3$s</string>
-    <string name="reyon_order_free_desc">Random week; the percentage of the target counts as a record.</string>
-    <string name="reyon_order_best_fmt">Best: %1$d%% of the target</string>
-    <string name="reyon_order_start">Start the week</string>
     <string name="reyon_order_generating">Preparing the week…</string>
     <string name="reyon_order_day_label">Day</string>
     <string name="reyon_order_profit_label">Profit</string>
-    <string name="reyon_order_target_label">Target</string>
+    <string name="reyon_order_target_label">Expert</string>
     <string name="reyon_order_dow_1">Monday</string>
     <string name="reyon_order_dow_2">Tuesday</string>
     <string name="reyon_order_dow_3">Wednesday</string>
@@ -281,19 +312,43 @@
     <string name="reyon_order_sum_delivered_fmt">Morning delivery: %1$d units</string>
     <string name="reyon_order_sum_profit_fmt">Day profit %1$+d · total %2$d</string>
     <string name="reyon_order_continue">Continue</string>
-    <string name="reyon_order_done_title">Week complete</string>
-    <string name="reyon_order_result_fmt">%1$d / %2$d profit (%3$d%% of the target)</string>
-    <string name="reyon_order_stats_fmt">Stock turnover %1$s (expert %2$s) · service level %3$d%% (expert %4$d%%)</string>
+    <string name="reyon_order_done_title">Weekly report</string>
+    <string name="reyon_order_result_fmt">%1$d / %2$d profit (%3$d%% of the expert)</string>
     <string name="reyon_order_chart_profit">Daily profit</string>
     <string name="reyon_order_chart_turnover">Turnover</string>
     <string name="reyon_order_chart_expert_fmt">expert %1$s</string>
     <string name="reyon_order_chart_day_fmt">day %1$d %2$+d</string>
     <string name="reyon_order_chart_desc_fmt">Week chart: %1$s · stock turnover %2$s (expert %3$s)</string>
-    <string name="reyon_order_beat_target">You beat the expert! 🏆</string>
-    <string name="reyon_order_rules">Sales +4 per unit (★ +6) · holding −1 per unit per night · waste −2 (★ −4) · returns −1</string>
+    <string name="reyon_order_beat_target">Above the expert</string>
+    <string name="reyon_order_rules">Sales +4 per unit (high-margin +6) · holding −1 per unit per night · waste −2 (high-margin −4) · returns −1</string>
     <string name="reyon_order_board_desc_fmt">Order shelf %1$d shelves × %2$d slots, day %3$d, profit %4$d</string>
     <string name="reyon_order_item_desc_fmt">%1$s: stock %2$d/%3$d, order %4$d cases</string>
     <string name="reyon_order_hint_fmt">Expert: %2$d cases of %1$s</string>
     <string name="reyon_order_hint_none">Your orders match the expert\'s</string>
     <string name="reyon_order_share_fmt">Stock turnover %1$s</string>
+    <string name="band_expert">Expert level</string>
+    <string name="band_good">Good</string>
+    <string name="band_developing">Developing</string>
+    <string name="band_weak">Weak</string>
+    <string name="report_personal_best">Personal best</string>
+    <string name="report_per_expert_fmt">/ %1$d expert</string>
+    <string name="report_of_expert_fmt">%1$d%% of the expert</string>
+    <string name="report_expert_is_fmt">expert = %1$d%%</string>
+    <string name="report_new_case">New case</string>
+    <string name="report_new_week">New week</string>
+    <string name="report_try_again">Try again</string>
+    <string name="report_week_profit">Weekly profit</string>
+    <string name="report_service_level">Service level</string>
+    <string name="report_turnover">Stock turnover</string>
+    <string name="report_expert_value_fmt">expert %1$s</string>
+    <string name="report_points_fmt">%1$s pts</string>
+    <string name="report_chart_title">Daily profit and stock turnover</string>
+    <string name="report_findings">Findings</string>
+    <string name="report_order_subtitle_fmt">%1$s · %2$s · %3$d days</string>
+    <string name="report_service_low_fmt">Service level is %1$d points below the expert: on some days you could not meet demand.</string>
+    <string name="report_service_ok">Service level is on par with the expert: you met demand.</string>
+    <string name="report_turnover_low_fmt">Stock turnover is %1$s below the expert: more stock than needed waited on the shelf.</string>
+    <string name="report_turnover_tight">Stock turnover is above the expert but service fell: stock was kept too tight.</string>
+    <string name="report_turnover_ok">Stock turnover is close to the expert’s: stock moved efficiently.</string>
+    <string name="report_wrong_mix">Together, these suggest the orders went to the wrong products.</string>
 </resources>

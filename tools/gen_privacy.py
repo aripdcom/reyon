@@ -31,24 +31,24 @@ def add(tag, name, title, meta, short_label, short, sections, contact, contact_i
 
 
 add("tr", "Türkçe", "Gizlilik politikası",
-    "Reyon (Android) · Yürürlük: 21 Eylül 2026 · Geliştirici: aripdcom",
+    "Reyon (Android) · Yürürlük: 24 Eylül 2026 · Geliştirici: aripdcom",
     "Kısaca:",
     "Reyon hiçbir kişisel veri toplamaz, saklamaz, paylaşmaz ya da satmaz. Uygulama hiçbir izin "
-    "istemez, reklam ya da izleme kütüphanesi içermez ve ağa bağlanmaz. Skorlar ve ayarlar yalnızca "
+    "istemez, reklam ya da izleme kütüphanesi içermez ve ağa bağlanmaz. Sonuçlar ve ayarlar yalnızca "
     "sizin cihazınızda durur.",
     [("Toplanan veriler",
       "Hiçbiri. Reyon ad, e-posta, konum, cihaz kimliği, kullanım istatistiği, çökme raporu ya da "
       "başka bir veri toplamaz. Uygulamada analitik, reklam ya da üçüncü taraf SDK'sı yoktur."),
      ("İzinler ve ağ",
       "Uygulama manifestosunda tek bir <code>uses-permission</code> bile yoktur; İNTERNET izni dahil. "
-      "Reyon hiçbir sunucuya bağlanmaz; günlük bulmacalar cihaz tarihinden çevrimdışı üretilir."),
+      "Reyon hiçbir sunucuya bağlanmaz; günün vakaları cihaz tarihinden çevrimdışı üretilir."),
      ("Cihazda kalanlar",
-      "Rekorlar, günlük bulmaca ilerlemesi ve ayarlar uygulamanın özel alanında saklanır; başka "
+      "Sonuçlar, yarım kalan vakalar ve ayarlar uygulamanın özel alanında saklanır; başka "
       "uygulamalar erişemez. Uygulamayı kaldırdığınızda ya da verisini temizlediğinizde silinir. "
       "Android'in cihaz yedeklemesi açıksa bu ayarlar standart uygulama yedeğine dahil olabilir; o yedek "
       "sizin Google hesabınıza aittir ve Reyon ona erişemez."),
      ("Sonuç paylaşımı",
-      "Bitiş kartındaki &quot;Paylaş&quot; düğmesi bir sonuç görseli ve kısa bir metin üretir, sonra "
+      "Rapordaki &quot;Paylaş&quot; düğmesi bir sonuç görseli ve kısa bir metin üretir, sonra "
       "Android'in paylaşım sayfasını açar. Görsel yalnızca sizin seçtiğiniz uygulamaya, yalnızca okuma "
       "için verilir; Reyon'un kendisi hiçbir şey göndermez ve kimin ne paylaştığını bilmez."),
      ("Bağlantılar, çocuklar, değişiklikler",
@@ -58,19 +58,19 @@ add("tr", "Türkçe", "Gizlilik politikası",
     "İletişim", "Sorular ve bildirimler için:")
 
 add("en", "English", "Privacy policy",
-    "Reyon for Android · Effective 21 September 2026 · Developer: aripdcom",
+    "Reyon for Android · Effective 24 September 2026 · Developer: aripdcom",
     "In short:",
     "Reyon collects, stores, shares or sells no personal data. The app requests no permissions, "
-    "contains no ads or tracking libraries, and never connects to the network. Scores and settings stay "
+    "contains no ads or tracking libraries, and never connects to the network. Results and settings stay "
     "on your device only.",
     [("Data collected",
       "None. No names, e-mails, location, device identifiers, usage statistics or crash reports. There "
       "are no analytics, advertising or third-party SDKs in the app."),
      ("Permissions and network",
       "The app manifest declares no <code>uses-permission</code> at all, not even INTERNET. Reyon "
-      "connects to no server; daily puzzles are generated offline from the device date."),
+      "connects to no server; the cases of the day are generated offline from the device date."),
      ("What stays on your device",
-      "High scores, daily-puzzle progress and settings live in the app's private storage, where "
+      "Results, unfinished cases and settings live in the app's private storage, where "
       "no other app can reach them. They are removed when you uninstall the app or clear its data. If "
       "Android device backup is on, the settings may be included in the standard app backup owned by "
       "your Google account; Reyon cannot access it."),
@@ -85,20 +85,20 @@ add("en", "English", "Privacy policy",
     "Contact", "Questions and reports:")
 
 add("de", "Deutsch", "Datenschutzerklärung",
-    "Reyon für Android · Gültig ab 21. September 2026 · Entwickler: aripdcom",
+    "Reyon für Android · Gültig ab 24. September 2026 · Entwickler: aripdcom",
     "Kurz gesagt:",
     "Reyon erhebt, speichert, teilt und verkauft keine personenbezogenen Daten. Die App verlangt keine "
     "Berechtigungen, enthält weder Werbung noch Tracking-Bibliotheken und verbindet sich nie mit dem Netz. "
-    "Punkte und Einstellungen bleiben nur auf deinem Gerät.",
+    "Ergebnisse und Einstellungen bleiben nur auf deinem Gerät.",
     [("Erhobene Daten",
       "Keine. Keine Namen, E-Mail-Adressen, Standorte, Gerätekennungen, Nutzungsstatistiken oder "
       "Absturzberichte. In der App gibt es keine Analyse-, Werbe- oder Drittanbieter-SDKs."),
      ("Berechtigungen und Netz",
       "Das App-Manifest enthält keine einzige <code>uses-permission</code>, nicht einmal INTERNET. "
-      "Reyon verbindet sich mit keinem Server; die täglichen Rätsel entstehen offline aus dem "
+      "Reyon verbindet sich mit keinem Server; die Fälle des Tages entstehen offline aus dem "
       "Gerätedatum."),
      ("Was auf dem Gerät bleibt",
-      "Rekorde, der Fortschritt im Tagesrätsel und die Einstellungen liegen im privaten Speicher "
+      "Ergebnisse, angefangene Fälle und die Einstellungen liegen im privaten Speicher "
       "der App, an den keine andere App kommt. Sie verschwinden, wenn du die App deinstallierst oder ihre "
       "Daten löschst. Ist die Gerätesicherung von Android aktiv, können die Einstellungen in der "
       "Standardsicherung landen, die deinem Google-Konto gehört; Reyon hat darauf keinen Zugriff."),
@@ -113,20 +113,20 @@ add("de", "Deutsch", "Datenschutzerklärung",
     "Kontakt", "Fragen und Meldungen:")
 
 add("fr", "Français", "Politique de confidentialité",
-    "Reyon pour Android · En vigueur le 21 septembre 2026 · Développeur : aripdcom",
+    "Reyon pour Android · En vigueur le 24 septembre 2026 · Développeur : aripdcom",
     "En bref :",
     "Reyon ne collecte, ne conserve, ne partage ni ne vend aucune donnée personnelle. L'appli ne "
     "demande aucune autorisation, ne contient ni publicité ni bibliothèque de suivi, et ne se connecte "
-    "jamais au réseau. Les scores et les réglages restent uniquement sur votre appareil.",
+    "jamais au réseau. Les résultats et les réglages restent uniquement sur votre appareil.",
     [("Données collectées",
       "Aucune. Ni nom, ni e-mail, ni position, ni identifiant d'appareil, ni statistique d'usage, ni "
       "rapport de plantage. L'appli ne contient aucun SDK d'analyse, de publicité ou tiers."),
      ("Autorisations et réseau",
       "Le manifeste de l'appli ne déclare aucune <code>uses-permission</code>, pas même INTERNET. "
-      "Reyon ne se connecte à aucun serveur ; les énigmes du jour sont générées hors ligne à partir "
+      "Reyon ne se connecte à aucun serveur ; les cas du jour sont générés hors ligne à partir "
       "de la date de l'appareil."),
      ("Ce qui reste sur votre appareil",
-      "Records, progression de l'énigme du jour et réglages vivent dans le stockage privé de "
+      "Résultats, cas en cours et réglages vivent dans le stockage privé de "
       "l'appli, inaccessible aux autres applis. Ils disparaissent quand vous désinstallez l'appli ou "
       "effacez ses données. Si la sauvegarde Android est activée, les réglages peuvent figurer dans la "
       "sauvegarde standard qui appartient à votre compte Google ; Reyon n'y a pas accès."),
@@ -141,20 +141,20 @@ add("fr", "Français", "Politique de confidentialité",
     "Contact", "Questions et signalements :")
 
 add("nl", "Nederlands", "Privacybeleid",
-    "Reyon voor Android · Geldig vanaf 21 september 2026 · Ontwikkelaar: aripdcom",
+    "Reyon voor Android · Geldig vanaf 24 september 2026 · Ontwikkelaar: aripdcom",
     "Kort gezegd:",
     "Reyon verzamelt, bewaart, deelt of verkoopt geen persoonsgegevens. De app vraagt geen rechten, "
-    "bevat geen advertenties of trackingbibliotheken en maakt nooit verbinding met het netwerk. Scores en "
+    "bevat geen advertenties of trackingbibliotheken en maakt nooit verbinding met het netwerk. Resultaten en "
     "instellingen blijven alleen op je toestel.",
     [("Verzamelde gegevens",
       "Geen. Geen namen, e-mailadressen, locatie, apparaat-id's, gebruiksstatistieken of crashrapporten. "
       "Er zitten geen analyse-, advertentie- of externe SDK's in de app."),
      ("Rechten en netwerk",
       "Het app-manifest bevat geen enkele <code>uses-permission</code>, zelfs INTERNET niet. Reyon "
-      "maakt met geen enkele server verbinding; de dagpuzzels worden offline uit de datum van het toestel "
-      "afgeleid."),
+      "maakt met geen enkele server verbinding; de casussen van de dag worden offline uit de datum van het "
+      "toestel afgeleid."),
      ("Wat op je toestel blijft",
-      "Records, de voortgang van de dagpuzzel en de instellingen staan in de privéopslag van de "
+      "Resultaten, onafgemaakte casussen en de instellingen staan in de privéopslag van de "
       "app, waar geen andere app bij kan. Ze verdwijnen zodra je de app verwijdert of de gegevens wist. "
       "Staat de back-up van Android aan, dan kunnen de instellingen in de standaardback-up terechtkomen "
       "die bij je Google-account hoort; Reyon kan daar niet bij."),
@@ -169,20 +169,20 @@ add("nl", "Nederlands", "Privacybeleid",
     "Contact", "Vragen en meldingen:")
 
 add("es", "Español", "Política de privacidad",
-    "Reyon para Android · En vigor el 21 de septiembre de 2026 · Desarrollador: aripdcom",
+    "Reyon para Android · En vigor el 24 de septiembre de 2026 · Desarrollador: aripdcom",
     "En resumen:",
     "Reyon no recopila, guarda, comparte ni vende ningún dato personal. La app no pide permisos, no "
-    "contiene anuncios ni bibliotecas de seguimiento y nunca se conecta a la red. Las puntuaciones y los "
+    "contiene anuncios ni bibliotecas de seguimiento y nunca se conecta a la red. Los resultados y los "
     "ajustes se quedan solo en tu dispositivo.",
     [("Datos recopilados",
       "Ninguno. Ni nombres, ni correos, ni ubicación, ni identificadores del dispositivo, ni estadísticas "
       "de uso, ni informes de fallos. La app no lleva SDK de analítica, publicidad ni de terceros."),
      ("Permisos y red",
       "El manifiesto de la app no declara ni un solo <code>uses-permission</code>, ni siquiera INTERNET. "
-      "Reyon no se conecta a ningún servidor; los puzles diarios se generan sin conexión a partir de "
+      "Reyon no se conecta a ningún servidor; los casos del día se generan sin conexión a partir de "
       "la fecha del dispositivo."),
      ("Lo que se queda en tu dispositivo",
-      "Récords, el progreso del puzle diario y los ajustes viven en el almacenamiento privado de "
+      "Resultados, casos a medias y ajustes viven en el almacenamiento privado de "
       "la app, al que ninguna otra app llega. Desaparecen cuando desinstalas la app o borras sus datos. "
       "Si tienes activada la copia de seguridad de Android, los ajustes pueden incluirse en la copia "
       "estándar que pertenece a tu cuenta de Google; Reyon no puede acceder a ella."),
@@ -197,20 +197,20 @@ add("es", "Español", "Política de privacidad",
     "Contacto", "Preguntas y avisos:")
 
 add("pt", "Português", "Política de privacidade",
-    "Reyon para Android · Em vigor em 21 de setembro de 2026 · Desenvolvedor: aripdcom",
+    "Reyon para Android · Em vigor em 24 de setembro de 2026 · Desenvolvedor: aripdcom",
     "Em resumo:",
     "O Reyon não coleta, guarda, compartilha nem vende nenhum dado pessoal. O app não pede permissões, "
-    "não tem anúncios nem bibliotecas de rastreamento e nunca se conecta à rede. Os recordes e as "
+    "não tem anúncios nem bibliotecas de rastreamento e nunca se conecta à rede. Os resultados e as "
     "configurações ficam só no seu aparelho.",
     [("Dados coletados",
       "Nenhum. Nem nomes, nem e-mails, nem localização, nem identificadores do aparelho, nem estatísticas "
       "de uso, nem relatórios de falha. O app não tem SDK de análise, publicidade ou de terceiros."),
      ("Permissões e rede",
       "O manifesto do app não declara uma única <code>uses-permission</code>, nem INTERNET. O Reyon "
-      "não se conecta a nenhum servidor; os desafios diários são gerados offline a partir da data do "
+      "não se conecta a nenhum servidor; os casos do dia são gerados offline a partir da data do "
       "aparelho."),
      ("O que fica no seu aparelho",
-      "Recordes, o progresso do desafio diário e as configurações ficam no armazenamento "
+      "Resultados, casos em andamento e as configurações ficam no armazenamento "
       "privado do app, onde nenhum outro app chega. Somem quando você desinstala o app ou limpa os dados. "
       "Se o backup do Android estiver ligado, as configurações podem entrar no backup padrão que pertence "
       "à sua conta do Google; o Reyon não consegue acessá-lo."),
@@ -225,20 +225,20 @@ add("pt", "Português", "Política de privacidade",
     "Contato", "Dúvidas e avisos:")
 
 add("it", "Italiano", "Informativa sulla privacy",
-    "Reyon per Android · In vigore dal 21 settembre 2026 · Sviluppatore: aripdcom",
+    "Reyon per Android · In vigore dal 24 settembre 2026 · Sviluppatore: aripdcom",
     "In breve:",
     "Reyon non raccoglie, conserva, condivide né vende alcun dato personale. L'app non chiede "
     "permessi, non contiene pubblicità né librerie di tracciamento e non si collega mai alla rete. "
-    "Punteggi e impostazioni restano solo sul tuo dispositivo.",
+    "Risultati e impostazioni restano solo sul tuo dispositivo.",
     [("Dati raccolti",
       "Nessuno. Né nomi, né e-mail, né posizione, né identificativi del dispositivo, né statistiche "
       "d'uso, né rapporti di arresto. Nell'app non ci sono SDK di analisi, pubblicitari o di terze parti."),
      ("Permessi e rete",
       "Il manifesto dell'app non dichiara nemmeno un <code>uses-permission</code>, neppure INTERNET. "
-      "Reyon non si collega ad alcun server; i rompicapi del giorno nascono offline dalla data del "
+      "Reyon non si collega ad alcun server; i casi del giorno nascono offline dalla data del "
       "dispositivo."),
      ("Ciò che resta sul dispositivo",
-      "Record, avanzamento del rompicapo del giorno e impostazioni stanno nella memoria privata "
+      "Risultati, casi in sospeso e impostazioni stanno nella memoria privata "
       "dell'app, dove nessun'altra app arriva. Spariscono quando disinstalli l'app o ne cancelli i dati. "
       "Se il backup di Android è attivo, le impostazioni possono finire nel backup standard che "
       "appartiene al tuo account Google; Reyon non può accedervi."),
@@ -253,19 +253,19 @@ add("it", "Italiano", "Informativa sulla privacy",
     "Contatti", "Domande e segnalazioni:")
 
 add("da", "Dansk", "Privatlivspolitik",
-    "Reyon til Android · Gælder fra 21. september 2026 · Udvikler: aripdcom",
+    "Reyon til Android · Gælder fra 24. september 2026 · Udvikler: aripdcom",
     "Kort sagt:",
     "Reyon indsamler, gemmer, deler eller sælger ingen personlige data. Appen beder ikke om "
     "tilladelser, indeholder hverken reklamer eller sporingsbiblioteker og forbinder aldrig til nettet. "
-    "Rekorder og indstillinger bliver kun på din enhed.",
+    "Resultater og indstillinger bliver kun på din enhed.",
     [("Indsamlede data",
       "Ingen. Hverken navne, e-mails, placering, enheds-id'er, brugsstatistik eller nedbrudsrapporter. "
       "Der er hverken analyse-, reklame- eller tredjeparts-SDK'er i appen."),
      ("Tilladelser og netværk",
       "Appens manifest erklærer ikke en eneste <code>uses-permission</code>, heller ikke INTERNET. "
-      "Reyon forbinder til ingen server; de daglige opgaver dannes offline ud fra enhedens dato."),
+      "Reyon forbinder til ingen server; dagens cases dannes offline ud fra enhedens dato."),
      ("Det, der bliver på enheden",
-      "Rekorder, fremdrift i dagens opgave og indstillinger ligger i appens private lager, hvor "
+      "Resultater, påbegyndte cases og indstillinger ligger i appens private lager, hvor "
       "ingen anden app kan nå dem. De forsvinder, når du afinstallerer appen eller rydder dens data. Er "
       "Androids sikkerhedskopiering slået til, kan indstillingerne indgå i den standardsikkerhedskopi, "
       "der hører til din Google-konto; Reyon har ikke adgang til den."),
@@ -280,19 +280,19 @@ add("da", "Dansk", "Privatlivspolitik",
     "Kontakt", "Spørgsmål og henvendelser:")
 
 add("sv", "Svenska", "Integritetspolicy",
-    "Reyon för Android · Gäller från 21 september 2026 · Utvecklare: aripdcom",
+    "Reyon för Android · Gäller från 24 september 2026 · Utvecklare: aripdcom",
     "Kort sagt:",
     "Reyon samlar inte in, lagrar, delar eller säljer några personuppgifter. Appen begär inga "
     "behörigheter, innehåller varken annonser eller spårningsbibliotek och ansluter aldrig till nätet. "
-    "Rekord och inställningar stannar bara på din enhet.",
+    "Resultat och inställningar stannar bara på din enhet.",
     [("Insamlade uppgifter",
       "Inga. Varken namn, e-post, plats, enhets-id, användningsstatistik eller kraschrapporter. Det finns "
       "inga analys-, annons- eller tredjeparts-SDK:er i appen."),
      ("Behörigheter och nätverk",
       "Appens manifest deklarerar inte en enda <code>uses-permission</code>, inte ens INTERNET. Reyon "
-      "ansluter till ingen server; dagens pussel skapas offline utifrån enhetens datum."),
+      "ansluter till ingen server; dagens fall skapas offline utifrån enhetens datum."),
      ("Det som stannar på din enhet",
-      "Rekord, framsteg i dagens pussel och inställningar ligger i appens privata lagring, dit "
+      "Resultat, påbörjade fall och inställningar ligger i appens privata lagring, dit "
       "ingen annan app når. De försvinner när du avinstallerar appen eller rensar dess data. Om Androids "
       "säkerhetskopiering är på kan inställningarna ingå i standardkopian som tillhör ditt Google-konto; "
       "Reyon kommer inte åt den."),
@@ -306,19 +306,19 @@ add("sv", "Svenska", "Integritetspolicy",
     "Kontakt", "Frågor och synpunkter:")
 
 add("nb", "Norsk bokmål", "Personvernerklæring",
-    "Reyon for Android · Gjelder fra 21. september 2026 · Utvikler: aripdcom",
+    "Reyon for Android · Gjelder fra 24. september 2026 · Utvikler: aripdcom",
     "Kort sagt:",
     "Reyon samler ikke inn, lagrer, deler eller selger personopplysninger. Appen ber ikke om "
     "tillatelser, inneholder verken reklame eller sporingsbiblioteker og kobler seg aldri til nettet. "
-    "Rekorder og innstillinger blir bare på enheten din.",
+    "Resultater og innstillinger blir bare på enheten din.",
     [("Innsamlede data",
       "Ingen. Verken navn, e-post, posisjon, enhets-ID-er, bruksstatistikk eller krasjrapporter. Det "
       "finnes ingen analyse-, annonse- eller tredjeparts-SDK-er i appen."),
      ("Tillatelser og nett",
       "Appmanifestet erklærer ikke én eneste <code>uses-permission</code>, ikke engang INTERNETT. "
-      "Reyon kobler seg til ingen server; dagens oppgaver lages offline ut fra datoen på enheten."),
+      "Reyon kobler seg til ingen server; dagens case lages offline ut fra datoen på enheten."),
      ("Det som blir igjen på enheten",
-      "Rekorder, fremdrift i dagens oppgave og innstillinger ligger i appens private lager, der "
+      "Resultater, påbegynte case og innstillinger ligger i appens private lager, der "
       "ingen annen app når dem. De forsvinner når du avinstallerer appen eller tømmer dataene. Er "
       "Androids sikkerhetskopiering på, kan innstillingene havne i standardkopien som hører til "
       "Google-kontoen din; Reyon har ikke tilgang til den."),
@@ -333,20 +333,20 @@ add("nb", "Norsk bokmål", "Personvernerklæring",
     "Kontakt", "Spørsmål og meldinger:")
 
 add("fi", "Suomi", "Tietosuojakäytäntö",
-    "Reyon Androidille · Voimassa 21. syyskuuta 2026 alkaen · Kehittäjä: aripdcom",
+    "Reyon Androidille · Voimassa 24. syyskuuta 2026 alkaen · Kehittäjä: aripdcom",
     "Lyhyesti:",
     "Reyon ei kerää, säilytä, jaa eikä myy henkilötietoja. Sovellus ei pyydä käyttöoikeuksia, siinä ei "
-    "ole mainoksia eikä seurantakirjastoja, eikä se ota koskaan yhteyttä verkkoon. Ennätykset ja "
+    "ole mainoksia eikä seurantakirjastoja, eikä se ota koskaan yhteyttä verkkoon. Tulokset ja "
     "asetukset pysyvät vain laitteessasi.",
     [("Kerätyt tiedot",
       "Ei mitään. Ei nimiä, sähköposteja, sijaintia, laitetunnisteita, käyttötilastoja eikä "
       "kaatumisraportteja. Sovelluksessa ei ole analytiikka-, mainos- eikä kolmannen osapuolen SDK:ita."),
      ("Käyttöoikeudet ja verkko",
       "Sovelluksen manifestissa ei ole yhtään <code>uses-permission</code>-riviä, ei edes INTERNET. "
-      "Reyon ei ota yhteyttä yhteenkään palvelimeen; päivän pulmat syntyvät offline laitteen "
+      "Reyon ei ota yhteyttä yhteenkään palvelimeen; päivän tapaukset syntyvät offline laitteen "
       "päivämäärästä."),
      ("Mitä laitteeseen jää",
-      "Ennätykset, päivän pulman edistyminen ja asetukset ovat sovelluksen omassa "
+      "Tulokset, kesken jääneet tapaukset ja asetukset ovat sovelluksen omassa "
       "tallennustilassa, johon mikään muu sovellus ei pääse. Ne katoavat, kun poistat sovelluksen tai "
       "tyhjennät sen tiedot. Jos Androidin varmuuskopiointi on päällä, asetukset voivat päätyä "
       "vakiovarmuuskopioon, joka kuuluu Google-tilillesi; Reyon ei pääse siihen käsiksi."),
@@ -360,20 +360,20 @@ add("fi", "Suomi", "Tietosuojakäytäntö",
     "Yhteystiedot", "Kysymykset ja ilmoitukset:")
 
 add("ru", "Русский", "Политика конфиденциальности",
-    "Reyon для Android · Действует с 21 сентября 2026 года · Разработчик: aripdcom",
+    "Reyon для Android · Действует с 24 сентября 2026 года · Разработчик: aripdcom",
     "Коротко:",
     "Reyon не собирает, не хранит, не передаёт и не продаёт персональные данные. Приложение не "
     "запрашивает разрешений, не содержит рекламы и библиотек слежения и никогда не выходит в сеть. "
-    "Рекорды и настройки остаются только на вашем устройстве.",
+    "Результаты и настройки остаются только на вашем устройстве.",
     [("Какие данные собираются",
       "Никакие. Ни имена, ни адреса почты, ни местоположение, ни идентификаторы устройства, ни "
       "статистика использования, ни отчёты о сбоях. В приложении нет ни аналитических, ни рекламных, ни "
       "сторонних SDK."),
      ("Разрешения и сеть",
       "В манифесте приложения нет ни одной строки <code>uses-permission</code>, даже INTERNET. Reyon "
-      "не подключается ни к одному серверу; ежедневные задачи создаются офлайн из даты устройства."),
+      "не подключается ни к одному серверу; кейсы дня создаются офлайн из даты устройства."),
      ("Что остаётся на устройстве",
-      "Рекорды, прогресс ежедневной задачи и настройки лежат в личном хранилище приложения, куда "
+      "Результаты, незавершённые кейсы и настройки лежат в личном хранилище приложения, куда "
       "не дотянется другое приложение. Они исчезают, когда вы удаляете приложение или очищаете его "
       "данные. Если включено резервное копирование Android, настройки могут попасть в стандартную копию, "
       "принадлежащую вашему аккаунту Google; Reyon не имеет к ней доступа."),
@@ -388,7 +388,7 @@ add("ru", "Русский", "Политика конфиденциальност
     "Связь", "Вопросы и сообщения:")
 
 add("ar", "العربية", "سياسة الخصوصية",
-    "Reyon لأندرويد · سارية من 21 سبتمبر 2026 · المطوّر: aripdcom",
+    "Reyon لأندرويد · سارية من 24 سبتمبر 2026 · المطوّر: aripdcom",
     "باختصار:",
     "لا يجمع Reyon أي بيانات شخصية ولا يخزّنها ولا يشاركها ولا يبيعها. لا يطلب التطبيق أي أذونات، ولا "
     "يحتوي إعلانات ولا مكتبات تتبّع، ولا يتصل بالشبكة أبدًا. تبقى النتائج والإعدادات على جهازك وحده.",
@@ -397,9 +397,9 @@ add("ar", "العربية", "سياسة الخصوصية",
       "أعطال. لا توجد في التطبيق حزم تحليلات ولا إعلانات ولا حزم طرف ثالث."),
      ("الأذونات والشبكة",
       "لا يعلن بيان التطبيق أي <code>uses-permission</code> على الإطلاق، ولا حتى INTERNET. لا يتصل "
-      "Reyon بأي خادم؛ تُولَّد ألغاز اليوم دون اتصال من تاريخ الجهاز."),
+      "Reyon بأي خادم؛ تُولَّد حالات اليوم دون اتصال من تاريخ الجهاز."),
      ("ما يبقى على جهازك",
-      "الأرقام القياسية وتقدّم لغز اليوم والإعدادات تعيش في التخزين الخاص بالتطبيق حيث لا يصل "
+      "النتائج والحالات غير المكتملة والإعدادات تعيش في التخزين الخاص بالتطبيق حيث لا يصل "
       "إليها تطبيق آخر. تختفي عند إزالة التطبيق أو مسح بياناته. وإذا كان النسخ الاحتياطي في أندرويد "
       "مفعّلًا فقد تُدرج الإعدادات في النسخة القياسية التي تخصّ حسابك في Google؛ ولا يستطيع Reyon "
       "الوصول إليها."),
@@ -412,44 +412,45 @@ add("ar", "العربية", "سياسة الخصوصية",
     "التواصل", "للأسئلة والبلاغات:")
 
 
-ICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width"
-        "='32' height='32' rx='7' fill='%230B0F1A'/%3E%3Cg fill='%2360A5FA'%3E%3Crect x='5.92' y='4.54' w"
-        "idth='4.58' height='4.58' rx='0.6'/%3E%3Crect x='11.42' y='4.54' width='4.58' height='4.58' rx='"
-        "0.6'/%3E%3Crect x='16.92' y='4.54' width='4.58' height='4.58' rx='0.6'/%3E%3Crect x='5.00' y='9."
-        "13' width='22.00' height='1.83' rx='0.6'/%3E%3Crect x='5.92' y='12.79' width='4.58' height='4.58"
-        "' rx='0.6'/%3E%3Crect x='16.92' y='12.79' width='4.58' height='4.58' rx='0.6'/%3E%3Crect x='22.4"
-        "2' y='12.79' width='4.58' height='4.58' rx='0.6'/%3E%3Crect x='5.00' y='17.38' width='22.00' hei"
-        "ght='1.83' rx='0.6'/%3E%3Crect x='5.92' y='21.04' width='4.58' height='4.58' rx='0.6'/%3E%3Crect"
-        " x='11.42' y='21.04' width='4.58' height='4.58' rx='0.6'/%3E%3Crect x='16.92' y='21.04' width='4"
-        ".58' height='4.58' rx='0.6'/%3E%3Crect x='22.42' y='21.04' width='4.58' height='4.58' rx='0.6'/%"
-        "3E%3Crect x='5.00' y='25.62' width='22.00' height='1.83' rx='0.6'/%3E%3C/g%3E%3C/svg%3E")
+# Favicon: site/index.html ve uygulama simgesiyle aynı işaret (petrol zemin, raf
+# çizgileri, sarı ambalaj).
+ICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Crect width"
+        "='36' height='36' rx='8' fill='%230F4C5C'/%3E%3Cg transform='translate(5 5) scale(0.7222)'%3E%3Cpat"
+        "h d='M4 12h28M4 22h28M4 32h28' stroke='%23fff' stroke-width='2.5' stroke-linecap='round'/%3E%3Cg f"
+        "ill='%23fff'%3E%3Crect x='6' y='4' width='7' height='7' rx='1.5'/%3E%3Crect x='15' y='6' width='6"
+        "' height='5' rx='1.5'/%3E%3Crect x='6' y='15' width='9' height='6' rx='1.5'/%3E%3Crect x='24' y='"
+        "14' width='6' height='7' rx='1.5'/%3E%3Crect x='6' y='25' width='6' height='6' rx='1.5'/%3E%3Crec"
+        "t x='14' y='24' width='7' height='7' rx='1.5'/%3E%3Crect x='23' y='26' width='7' height='5' rx='1."
+        "5'/%3E%3C/g%3E%3Crect x='23' y='3' width='7' height='8' rx='1.5' fill='%23FFD23F'/%3E%3C/g%3E%3C/s"
+        "vg%3E")
 
-STYLE = """  :root {
+STYLE = """  /* Uygulamanın 1.1.0 renkleri (site/index.html ile aynı). */
+  :root {
     color-scheme: light dark;
-    --bg: #F3F6FB; --surface: #FFFFFF; --surface-2: #E8EDF5; --text: #0F1828; --muted: #5A6577; --title: #0891B2;
-    --card-border: rgba(15, 24, 40, 0.06);
+    --bg: #F3F2EE; --surface: #FFFFFF; --surface-2: #E9E6DF; --text: #17201D; --muted: #56615C; --title: #0F4C5C;
+    --card-border: #DDDAD2;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #0B0F1A; --surface: #111827; --surface-2: #1B2437; --text: #E4EAF5; --muted: #AAB4C8; --title: #4DE1FF; --card-border: rgba(255, 255, 255, 0.05); }
+    :root { --bg: #111513; --surface: #1A1F1D; --surface-2: #242A27; --text: #E6EBE8; --muted: #A3ADA8; --title: #7CC4D2; --card-border: #2E3532; }
   }
   * { box-sizing: border-box; margin: 0; }
-  body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.6; }
+  body { background: var(--bg); color: var(--text); font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.6; }
   .wrap { max-width: 720px; margin: 0 auto; padding: 40px 20px 64px; }
   a { color: var(--title); }
   .back { display: inline-block; text-decoration: none; font-weight: 700; margin-bottom: 20px; }
-  h1 { font-size: 34px; font-weight: 900; line-height: 1.15; }
+  h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; }
   h2 { font-size: 24px; margin-top: 8px; }
   h3 { font-size: 18px; margin-top: 22px; }
   .meta { color: var(--muted); font-size: 14px; margin-top: 6px; }
   p, li { margin-top: 10px; }
   code { background: var(--surface-2); border-radius: 5px; padding: 1px 5px; font-size: 0.92em; }
   .summary {
-    margin-top: 18px; background: var(--surface); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px 18px;
+    margin-top: 18px; background: var(--surface); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px 18px;
   }
   .summary strong { color: var(--title); }
   /* Dil şeridi: 14 bölümün tamamı tek adreste, her biri kendi çapasında. */
   .langs { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 15px; }
-  .langs a { text-decoration: none; background: var(--surface); border: 1px solid var(--card-border); border-radius: 999px; padding: 4px 12px; }
+  .langs a { text-decoration: none; background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; padding: 4px 12px; }
   section { margin-top: 44px; padding-top: 12px; border-top: 1px solid var(--card-border); }
   section:first-of-type { border-top: 0; }
   section[dir="rtl"] { text-align: right; }
@@ -491,8 +492,8 @@ def page(tags):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#F3F6FB" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0B0F1A" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F3F2EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111513" media="(prefers-color-scheme: dark)">
 <title>Reyon · Gizlilik politikası · Privacy policy</title>
 <meta name="description" content="Reyon gizlilik politikası, 14 dilde: uygulama hiçbir veri toplamaz, hiçbir izin istemez, ağa bağlanmaz.">
 <link rel="icon" href="{ICON}">
