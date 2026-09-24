@@ -6,8 +6,8 @@ izin bile yok.
 
 [![CI](https://github.com/aripdcom/reyon/actions/workflows/ci.yml/badge.svg)](https://github.com/aripdcom/reyon/actions/workflows/ci.yml)
 
-- **Site:** https://aripdcom.github.io/reyon
-- **Gizlilik:** https://aripdcom.github.io/reyon/gizlilik.html
+- **Site:** https://reyon.aripd.com
+- **Gizlilik:** https://reyon.aripd.com/gizlilik.html
 - **APK:** [en yeni sürüm](https://github.com/aripdcom/reyon/releases/latest/download/reyon.apk)
 
 ## Dört mod
@@ -70,7 +70,7 @@ python3 tools/apk_dogrula.py     # dist/: SHA256, paket/sürüm, izin yokluğu, 
 
 Uygulama ağa hiç bağlanmaz ve manifestte tek bir `uses-permission` taşımaz.
 İlerleme ve ayarlar yalnızca cihazda, uygulamanın özel alanında durur; uygulama
-kaldırılınca gider. Ayrıntı: [gizlilik politikası](https://aripdcom.github.io/reyon/gizlilik.html).
+kaldırılınca gider. Ayrıntı: [gizlilik politikası](https://reyon.aripd.com/gizlilik.html).
 
 ## Lisans
 

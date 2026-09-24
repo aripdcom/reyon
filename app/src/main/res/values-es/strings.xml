@@ -51,7 +51,7 @@
     <string name="share_chooser">Compartir el resultado</string>
     <string name="share_failed">No se pudo abrir la opción de compartir</string>
     <string name="share_tagline">Reyon: cero anuncios, cero permisos, cero rastreadores. Gratis y de código abierto:</string>
-    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_link">https://reyon.aripd.com</string>
     <string name="share_daily_fmt">Caso del día · %1$s</string>
 
     <!-- Hakkında -->

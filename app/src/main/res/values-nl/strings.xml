@@ -51,7 +51,7 @@
     <string name="share_chooser">Resultaat delen</string>
     <string name="share_failed">Delen kon niet worden geopend</string>
     <string name="share_tagline">Reyon: nul advertenties, nul rechten, nul trackers. Gratis en open source:</string>
-    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_link">https://reyon.aripd.com</string>
     <string name="share_daily_fmt">Casus van de dag · %1$s</string>
 
     <!-- Hakkında -->

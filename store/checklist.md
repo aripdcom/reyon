@@ -32,7 +32,7 @@
       — `store/screenshots/{tr,en}/`: Görevler, dört mod, bir koyu tema karesi; 1.1.0
       arayüzünden (docs/cihaz-testi.md, "1.1.0 · FMCG tasarımı cihaz koşumu")
 - [ ] Veri güvenliği formu ve IARC anketi (`store/` altındaki cevaplarla)
-- [ ] Gizlilik politikası URL'si: `https://aripdcom.github.io/reyon/gizlilik.html`
+- [ ] Gizlilik politikası URL'si: `https://reyon.aripd.com/gizlilik.html`
 
 ## Ekran görüntüsü önerisi
 

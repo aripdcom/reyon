@@ -51,7 +51,7 @@
     <string name="share_chooser">Dela resultatet</string>
     <string name="share_failed">Det gick inte att öppna delning</string>
     <string name="share_tagline">Reyon: noll annonser, noll behörigheter, noll spårning. Gratis och öppen källkod:</string>
-    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_link">https://reyon.aripd.com</string>
     <string name="share_daily_fmt">Dagens fall · %1$s</string>
 
     <!-- Hakkında -->

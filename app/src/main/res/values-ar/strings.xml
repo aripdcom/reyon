@@ -51,7 +51,7 @@
     <string name="share_chooser">شارك النتيجة</string>
     <string name="share_failed">لم يتمكّن من فتح المشاركة</string>
     <string name="share_tagline">Reyon: صفر إعلانات، صفر أذونات، صفر تتبّع. مجاني ومفتوح المصدر:</string>
-    <string name="share_link">https://aripdcom.github.io/reyon</string>
+    <string name="share_link">https://reyon.aripd.com</string>
     <string name="share_daily_fmt">حالة اليوم · %1$s</string>
 
     <!-- Hakkında -->
