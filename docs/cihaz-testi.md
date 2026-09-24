@@ -930,5 +930,23 @@ düğümü — "göz hizası (2. raf), soldan 2. göz: Şampuan, Meltem, küçü
 parmakla seçilen ürün boş göze dokununca yine yerleşiyor. İlk sürümde göz içeriği
 işlev olarak veriliyordu ve durum değişince yenilenmiyordu (ürün kalktıktan sonra
 göz eski ürünü okuyordu); `ReyonShelfSlotsTest` bunu yakaladı, içerik artık hazır
-liste. TalkBack'le elle oynanarak doğrulanacak: tepsiden ürün seç, boş göze çift
-dokun, özel eylemlerle raftan kaldır.
+liste.
+
+**TalkBack'le elle oynandı (kullanıcı, 2026-09-24): çalışıyor.** Diziliş'te: tepsideki
+Ayran'a dokun ve çift dokun → çip seçildi (sarı çerçeve); "göz hizası (2. raf), soldan 1.
+göz: boş"a dokun ve çift dokun → Ayran iki göze yerleşti, tepsiden kalktı, göz "Ayran,
+Ege, küçük boy" okudu; üç parmakla TalkBack menüsü → Eylemler → "Raftan kaldır" → Ayran
+tepsiye döndü, göz yeniden "boş". Her adım `uiautomator` ağacıyla da doğrulandı.
+
+Sınamada öğrenilenler (uygulama hatası değil, sonraki sınamalar için):
+
+- TalkBack'te çift dokunuş parmağın altındakini değil **odaktaki** öğeyi çalıştırır.
+  Ekran açılınca odak en üstteki "Geri"de; hemen çipe çift dokunmak "Geri"yi çalıştırıp
+  Görevler'e döndürdü. Önce öğeye tek dokunup okunduğunu duymak gerekiyor.
+- İki dokunuş arası uzarsa TalkBack ikisini ayrı keşif dokunuşu sayıyor, odak kayıyor.
+- Cihazın metin okuma dili İngilizce (Samsung, `en_US`) iken TalkBack Türkçe metni
+  İngilizce sesle okuyordu, anlaşılmıyordu. Samsung'un Türkçe sesi yüklü değildi
+  ("Language was not loaded"); sınama Google metin okuma motoru, Türkçe ile yapıldı
+  (`tts_default_synth=com.google.android.tts`, `tts_default_locale=…:tr-TR`).
+- Açık kalan küçük pürüz: çip odaklanınca TalkBack etiketten sonra çipin yazılarını
+  ("Ayran", "×2") da okuyor; etiket yazıları zaten içerdiği için tekrar gibi duyuluyor.
