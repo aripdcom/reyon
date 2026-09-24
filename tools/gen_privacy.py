@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""site/gizlilik.html'i 14 dilde üretir.
+"""Gizlilik politikasının 14 dildeki metni.
 
-Gizlilik politikası tek adreste durur (Play bir URL ister) ve her dil kendi
-bölümünde. Metin burada, üretilen sayfa depoda: `tools/check_site.py` ikisinin
+Politika tek adreste durur (site/gizlilik.html; Play bir URL ister) ve her dil
+kendi bölümünde. Metin burada; sayfayı sitenin geri kalanıyla aynı kalıpta
+tools/gen_site.py üretir, `tools/check_site.py` üretilenle depodakinin
 ayrışmadığını denetler.
 
-Kullanım: python3 tools/gen_privacy.py
+Kullanım: python3 tools/gen_privacy.py  (tools/gen_site.py'yi koşar)
 """
 import os
 import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, "site", "gizlilik.html")
 APP_LOCALE = os.path.join(ROOT, "app", "src", "main", "kotlin", "com", "aripd",
                           "reyon", "platform", "AppLocale.kt")
 MAIL = "reyon@aripd.com"
@@ -412,52 +412,6 @@ add("ar", "العربية", "سياسة الخصوصية",
     "التواصل", "للأسئلة والبلاغات:")
 
 
-# Favicon: site/index.html ve uygulama simgesiyle aynı işaret (petrol zemin, raf
-# çizgileri, sarı ambalaj).
-ICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Crect width"
-        "='36' height='36' rx='8' fill='%230F4C5C'/%3E%3Cg transform='translate(5 5) scale(0.7222)'%3E%3Cpat"
-        "h d='M4 12h28M4 22h28M4 32h28' stroke='%23fff' stroke-width='2.5' stroke-linecap='round'/%3E%3Cg f"
-        "ill='%23fff'%3E%3Crect x='6' y='4' width='7' height='7' rx='1.5'/%3E%3Crect x='15' y='6' width='6"
-        "' height='5' rx='1.5'/%3E%3Crect x='6' y='15' width='9' height='6' rx='1.5'/%3E%3Crect x='24' y='"
-        "14' width='6' height='7' rx='1.5'/%3E%3Crect x='6' y='25' width='6' height='6' rx='1.5'/%3E%3Crec"
-        "t x='14' y='24' width='7' height='7' rx='1.5'/%3E%3Crect x='23' y='26' width='7' height='5' rx='1."
-        "5'/%3E%3C/g%3E%3Crect x='23' y='3' width='7' height='8' rx='1.5' fill='%23FFD23F'/%3E%3C/g%3E%3C/s"
-        "vg%3E")
-
-STYLE = """  /* Uygulamanın 1.1.0 renkleri (site/index.html ile aynı). */
-  :root {
-    color-scheme: light dark;
-    --bg: #F3F2EE; --surface: #FFFFFF; --surface-2: #E9E6DF; --text: #17201D; --muted: #56615C; --title: #0F4C5C;
-    --card-border: #DDDAD2;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #111513; --surface: #1A1F1D; --surface-2: #242A27; --text: #E6EBE8; --muted: #A3ADA8; --title: #7CC4D2; --card-border: #2E3532; }
-  }
-  * { box-sizing: border-box; margin: 0; }
-  body { background: var(--bg); color: var(--text); font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.6; }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 40px 20px 64px; }
-  a { color: var(--title); }
-  .back { display: inline-block; text-decoration: none; font-weight: 700; margin-bottom: 20px; }
-  h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; }
-  h2 { font-size: 24px; margin-top: 8px; }
-  h3 { font-size: 18px; margin-top: 22px; }
-  .meta { color: var(--muted); font-size: 14px; margin-top: 6px; }
-  p, li { margin-top: 10px; }
-  code { background: var(--surface-2); border-radius: 5px; padding: 1px 5px; font-size: 0.92em; }
-  .summary {
-    margin-top: 18px; background: var(--surface); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px 18px;
-  }
-  .summary strong { color: var(--title); }
-  /* Dil şeridi: 14 bölümün tamamı tek adreste, her biri kendi çapasında. */
-  .langs { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 15px; }
-  .langs a { text-decoration: none; background: var(--surface); border: 1px solid var(--card-border); border-radius: 8px; padding: 4px 12px; }
-  section { margin-top: 44px; padding-top: 12px; border-top: 1px solid var(--card-border); }
-  section:first-of-type { border-top: 0; }
-  section[dir="rtl"] { text-align: right; }
-  footer { margin-top: 48px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
-  footer a { text-decoration: none; }"""
-
-
 def app_tags():
     """AppLocale.TAGS: uygulamanın dilleri, kaynak sırasıyla."""
     src = open(APP_LOCALE, encoding="utf-8").read()
@@ -465,73 +419,9 @@ def app_tags():
     return re.findall(r'"([^"]+)"', block.group(1))
 
 
-def section(tag):
-    policy = POLICY[tag]
-    rtl = ' dir="rtl"' if tag in RTL else ""
-    out = [f'  <section id="{tag}" lang="{tag}"{rtl}>',
-           f'    <h2>{policy["name"]} — {policy["title"]}</h2>',
-           f'    <p class="meta">{policy["meta"]}</p>',
-           '    <div class="summary">',
-           f'      <strong>{policy["short_label"]}</strong> {policy["short"]}',
-           '    </div>']
-    for heading, body in policy["sections"]:
-        out.append(f'    <h3>{heading}</h3>')
-        out.append(f'    <p>{body}</p>')
-    out.append(f'    <h3>{policy["contact"]}</h3>')
-    out.append(f'    <p>{policy["contact_intro"]} <a href="mailto:{MAIL}">{MAIL}</a> · '
-               f'<a href="{ISSUES}">github.com/aripdcom/reyon/issues</a></p>')
-    out.append('  </section>')
-    return "\n".join(out)
-
-
-def page(tags):
-    nav = " ".join(f'<a href="#{t}">{POLICY[t]["name"]}</a>' for t in tags)
-    body = "\n".join(section(t) for t in tags)
-    return f"""<!doctype html>
-<html lang="tr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#F3F2EE" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111513" media="(prefers-color-scheme: dark)">
-<title>Reyon · Gizlilik politikası · Privacy policy</title>
-<meta name="description" content="Reyon gizlilik politikası, 14 dilde: uygulama hiçbir veri toplamaz, hiçbir izin istemez, ağa bağlanmaz.">
-<link rel="icon" href="{ICON}">
-<style>
-{STYLE}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <a class="back" href="./">← Reyon</a>
-  <h1>Gizlilik politikası · Privacy policy</h1>
-  <p class="meta">Aynı politika, {len(tags)} dilde. / The same policy, in {len(tags)} languages.</p>
-  <nav class="langs">{nav}</nav>
-
-{body}
-
-  <footer>
-    <span>Reyon · zero-ads, zero-permission app</span>
-    <a href="./">Ana sayfa</a>
-    <a href="https://github.com/aripdcom/reyon">GitHub</a>
-  </footer>
-</div>
-</body>
-</html>
-"""
-
-
 def main():
-    tags = app_tags()
-    missing = [t for t in tags if t not in POLICY]
-    if missing:
-        sys.exit(f"politika metni olmayan dil: {', '.join(missing)}")
-    extra = [t for t in POLICY if t not in tags]
-    if extra:
-        sys.exit(f"AppLocale.TAGS içinde olmayan dil: {', '.join(extra)}")
-    open(OUT, "w", encoding="utf-8").write(page(tags))
-    print(f"{OUT}: {len(tags)} dil ({' '.join(tags)})")
-    return 0
+    import gen_site  # gen_site bu modülü içe aktarır; döngü olmasın diye burada
+    return gen_site.main()
 
 
 if __name__ == "__main__":
