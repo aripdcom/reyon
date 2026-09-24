@@ -242,8 +242,25 @@ def uygulamayi_ac(paket: str) -> None:
 # Komutlar
 # ---------------------------------------------------------------------------
 
+def derleme_uyarisi(paket: str) -> None:
+    """Kare ölçümü derlenmemiş yapıda anlamsız: adb ile kurulan APK JIT ile çalışır.
+
+    Play'den kurulan uygulama başlangıç profiliyle önceden derlenir; adb ile kurulan
+    `status=verify` kalır ve yeniden oluşturma kareleri iki kata yakın uzar
+    (docs/cihaz-testi.md, 1.1.0 B). Ölçümden önce:
+    `adb shell cmd package compile -m speed-profile -f com.aripd.reyon`
+    """
+    satir = next((s for s in kabuk("dumpsys package dexopt").split(paket, 1)[-1].splitlines() if "status=" in s), "")
+    m = re.search(r"status=([\w-]+)", satir)
+    durum = m.group(1) if m else "?"
+    if durum not in ("speed-profile", "speed", "everything"):
+        print(f"UYARI: {paket} derlenmemiş (status={durum}); kare süreleri Play kurulumunu temsil etmez.")
+        print(f"       Önce: adb shell cmd package compile -m speed-profile -f {paket}\n")
+
+
 def komut_kare(args) -> None:
     """Kare hızı ve takılma (jank) oranı; oyun OYNANIRKEN çağrılmalı."""
+    derleme_uyarisi(args.paket)
     kabuk(f"dumpsys gfxinfo {args.paket} reset")
     kabuk(f"sleep {args.sure}")
     cikti = kabuk(f"dumpsys gfxinfo {args.paket}")

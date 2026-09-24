@@ -80,6 +80,13 @@ vakasında düğmede, alıştırmada "son sonuç" sütununda).
 Reyon sürekli animasyon çizmiyor; bakılan şey dokunma sonrası gecikme ve
 liste kaydırmasının düzgünlüğü.
 
+> **Ölçümden önce derle:** `adb install` ile kurulan APK derlenmemiş kalır
+> (`status=verify`), kod JIT ile çalışır; Play'den kurulan ise başlangıç profiliyle
+> derlenir. Derlenmemiş yapıda yeniden oluşturma kareleri iki kata yakın uzun
+> ölçüldü (1.1.0 B). `adb shell cmd package compile -m speed-profile -f
+> com.aripd.reyon`; `cihaz_testi.py kare` derlenmemişse uyarır. v1.0.1 ve önceki
+> B kayıtları derlenmemiş yapıyla alındı.
+
 ## C · Giriş kalibrasyonu
 
 Dokunma hedefleri 48 dp'nin altına düşmemeli; ürün blokları, raf gözleri ve
@@ -872,6 +879,34 @@ Cihazda şimdi yerel sürüm yapısı (`427beaaa…`) kurulu.
 
 `ReyonHomeTextTest` G2 ve G3'ü 14 dilde ölçüyor (eski Almanca metinle kırılıyor).
 Y3, Y4, G4, G5 çizim/yerleşim düzeltmeleri; cihazda ekran görüntüsüyle bakıldı.
+
+**B — Sipariş adımlayıcısı, iz ve düzeltme.** Perfetto izi (`atrace` bu ROM'da
+açılmıyor: "record-tgid: Out of memory"; iz işaretleri protobuf'tan elle okundu):
+pahalı dokunuş karelerinde süre Compose'un yeniden oluşturmasında, kare başına
+35–45 ms; raf çizimi ~1 ms, gün başlığı <1 ms. Geçici iz işaretli yapıyla: her
+dokunuşta ekrandaki bütün sipariş satırları yeniden oluşuyordu (kare başına 5,8
+`OrderRow`, satır başına ~4 ms). İki düzeltme:
+
+- Satır motor durumunu ve `version`'ı değil, gösterdiği değerleri alıyor
+  (`OrderRowData`, `@Immutable`). `@Immutable`sız ilk denemede satırlar yine
+  oluşuyordu: `List` alanı sınıfı kararsız yapıyor, güçlü atlama kimlikle (===)
+  karşılaştırıyor. İşaretten sonra kare başına 0,8 `OrderRow` (yalnız dokunulan satır),
+  yeniden oluşturma 33 → 21 ms.
+- Raf `version`'a değil stok listesine bağlı; sipariş stoğu değiştirmiyor.
+
+Ölçüm (24 dokunuş × 3 pencere, iki tur, ikisi de profille derlenmiş):
+
+| Yapı | p90 | p99 |
+| --- | --- | --- |
+| düzeltmesiz (`f527bb71…`) | 61 ms | 73–77 ms |
+| düzeltmeli (`e7008db3…`) | 48–53 ms | 65 ms |
+| (derlenmemiş, düzeltmesiz) | 89 ms | 105 ms |
+
+Kaçan vsync turdan tura 4–29 arası oynuyor; karşılaştırmada kullanılmadı. v1.0.1'in
+"p99 30 ms"si derlenmemiş yapıyla ve düğme dalgacığının ek kareleriyle ölçülmüştü
+(dokunuş başına 4,8 kare, şimdi 2,7): sayılar doğrudan kıyaslanamaz, "gerileme"nin
+bir kısmı yöntemden. Tek satırın yeniden oluşması derlenmiş yapıda da birkaç ms
+tutuyor (adımlayıcı düğmesi ~3 ms, derlenmemişken); daha fazlası ayrı iş.
 
 **E — TalkBack açık** (yapı `sha256=3f1c68a1…`). Samsung TalkBack 13.5 kullanıcı 0
 için geri yüklendi (`cmd package install-existing`). Açılışta telefon izni
