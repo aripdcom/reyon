@@ -38,6 +38,7 @@ engellemek**. Asıl koruma, ölçülen doğruların değişmez testine çevrilme
 | Satış panelinin tavanı tepsiye iki sıra bırakır; tavan ile tepsi payı 72–308 dp arasında birebir tümler | `ReyonLayoutTest` |
 | Kısa ekranda brif ve kural satırları okunur, taşan satır dokununca açılır | `ReyonShortScreenTest` |
 | Uygulama açılışta doğrudan Reyon'a girer; dişli ayarları açar | `ReyonAppTest` |
+| Üç düğmeli alt satırın etiketleri 14 dilde kelime ortasından bölünmez (360 dp; yazı ölçeği 1,0 · 1,1 · 1,3) | `ReyonActionLabelTest` |
 | Metin kontrastı WCAG AA eşiğini tutar | `ThemeContrastTest` |
 
 Yeni bir ölçüm bulgusu düzeltildiğinde, mümkünse **paylı bir değişmez** olarak
@@ -559,3 +560,130 @@ alınan sayılar 3.0'la aynı çıkıyor (raf 167,0 / 156,0 dp).
 
 `logcat AndroidRuntime:E` bütün koşumlarda boş. Ekran ayarları, yazı ölçeği ve
 arayüz dili koşumlardan sonra geri alındı.
+
+### v1.0.1 · A–F cihaz koşumu ve Play ekran görüntüleri · 2026-09-23
+
+Ölçülen yapı yayındaki APK: `com.aripd.reyon 1.0.1
+sha256=c3d46e0cd7e2b0f73ff29252ffe0fae4aacacac4330773985c0fabcc0e0b54a3`
+(`kurulu_yapi`; özet Release'teki `SHA256SUMS.txt` ile aynı). Cihaz SM-A515F,
+Android 13, yazı ölçeği 1,1. Uygulama artık tek başına: açılış doğrudan
+Reyon, hub yok.
+
+**Araç düzeltmesi — `reyon` Denetim'i ölçemiyordu.** Başlatma etiketi
+"Denetlemeye başla" diye aranıyordu (uygulamadaki metin "Denetime başla"), raf
+ön ekleri arasında "Denetim rafı" / "Audit shelf" yoktu. İkisi düzeltilince dört
+mod da ölçülüyor.
+
+**Yerleşim** (`reyon --ekran 360x640`, ölçek 2,0; sayılar dp):
+
+| Mod | Raf 360×640 | Panel 360×640 | Raf 411 dp | Panel 411 dp |
+| --- | --- | --- | --- | --- |
+| Diziliş | 336 × 167,0 | 3 kural, 32,5 dp, 3/3 görünür | 387 × 226,3 | 3 kural, 3/3 |
+| Denetim | 336 × 190,5 | plan 161,5 dp | 387 × 261,3 | plan 222,1 dp |
+| Satış | 336 × 167,0 | başlık y = 343 | 387 × 226,3 | başlık y = 406 |
+| Sipariş | 336 × 156,0 | 2 satır (32,0 + 14,5) | 387 × 179,8 | 4 satır, 4/4 |
+
+Raf yükseklikleri v0.43.x kayıtlarıyla aynı (167,0 / 156,0; 411 dp'de 226,3 /
+179,8): G6 tutuyor.
+
+**A — koşum ✅.** Dört modun her birinde Kolay/Serbest bir tur sonuna kadar
+oynandı: Sipariş 266/327 kâr ★☆☆ "Yeni rekor!", hafta grafiği çizildi; Diziliş
+0:44 "Tebrikler!" (5 ipucu, rekor yazılmadı — ipuçlu tur); Denetim 2/2, 0 hata,
+"Yeni rekor!"; Satış 95/95 ★★★ "Yeni rekor!" (tepsi boşalınca beş kural da
+okunuyor: 2026-09-21 Bulgu 2'nin düzeltmesi cihazda doğrulandı). Yarım tur arka
+plana alıp dönmede ve `am force-stop` sonrasında aynen geri geldi. Geri tuşu
+turdan doğrudan uygulamadan çıkıyor (`ReyonApp`: ana ekranda `onExit = onQuit`);
+tur saklandığı için yeniden açılışta kaldığı yerden sürüyor. `logcat
+AndroidRuntime:E` bütün koşum boyunca boş.
+
+**B — kare hızı** (12 s pencereler).
+
+| Pencere | Kare | p50 / p90 / p99 | Kaçan vsync | Takılma |
+| --- | --- | --- | --- | --- |
+| Diziliş turu, dokunmadan | 12 (1/s, süre sayacı) | 34 / 36 / 36 ms | 0 | — |
+| Sipariş listesi, 16 sürükleme | 676 = 56,3 kare/s | 18 / 22 / 32 ms | 1 | %8,9 |
+| Adımlayıcı, 24 dokunuş | 481 = 40,1 kare/s | 22 / 23 / 30 ms | 0 | %3,5 |
+
+`fazlar` kaydırmada: toplam ortanca 18,0 ms, bunun 13,4 ms'si GPU; çizim kaydı
+0,4 ms. Maliyet çizim kodunda değil dolguda. Boştaki kareler saniyede bir süre
+sayacı; takılma sayılmaları 34 ms'lik tek karelerden.
+
+**C — giriş kalibrasyonu.** Menüde ve dört modda dokunulabilir düğümler tarandı
+(cihazın kendi ekranı): düğmeler ve çipler ≥ 48 dp (geri oku 47,6 dp = 125 px,
+yuvarlama). 48 dp'nin altında kalan iki satır türü var:
+
+- Diziliş brif satırları **32,4 dp** yüksekliğinde ve dokunulabilir (taşan satırı
+  açar); bitişik diziliyorlar, ıska komşu satırı açar — bedeli bir dokunuş.
+- Satış kural satırları **38,1 dp** (sonuncusu 43,0).
+
+Tuval gözü en dar durumda (Zor 4×6, 360×640 dp) **56 × ~35 dp**. Dokunma eşlemesi
+ölçüldü (tepsiden tek yüzlü ürün, 2. raf 3. göz, merkezden dikey kaydırma):
+−17…+20 dp aynı göze, −20 dp üst rafa düşüyor — raf aralığı 41,7 dp, yani bant
+aralığın tamamı ve kaçan dokunuş en yakın göze gidiyor. Hızlı dokunuş uzun basış
+sayılmıyor: yerleşmiş ürüne 10 × dokunuş ürünü yerinde bıraktı, 700 ms basış
+tepsiye geri gönderdi.
+
+**D — denge** (`./gradlew :engine:probe`). Bütün ölçüm sayıları 2026-09-09
+kaydıyla birebir aynı (brif, teknik payları, denetim tür karışımı, satış
+hedef/taban, sipariş uzman/kâhin %99 · %98 · %96). Değişen yalnız süreler (yalnız
+rapor): Satış iyileştiricisi 27 / 40 / 84 ms (önce 18 / 36 / 70), üretim en kötü
+36 / 57 / 85 ms.
+
+**E — erişilebilirlik ⚠️ yarım.** TalkBack kapalıyken `erisim` dört modda da
+"etiketsiz 0". Sınırı sıfır düğüm Diziliş 3, Denetim 1, Satış 3, Sipariş 2 —
+hepsi alt eylem satırı; çubuklar gizliyken beklenen (2026-09-10 Bulgu 3).
+**TalkBack açık ölçüm yapılamadı:** Samsung TalkBack (13.5) bu cihazda kullanıcı 0
+için kaldırılmış (`installed=false`); servis ayarlarda etkinleştirilse de
+bağlanmıyor. v0.28.2'den beri bekleyen "TalkBack açıkken sınırı sıfır … 0"
+doğrulaması hâlâ açık.
+
+Yeni bulgu: **raf gözleri ekran okuyucuya tek tek açılmıyor.** Dört modun tuvali
+de tek bir düğüm ("Reyon 3 raf × 4 göz, 5 ürün yerleşmedi"); gözlerin konumu
+okunmuyor ve bir göze ürün koymanın erişilebilir bir yolu yok
+(`ReyonScreen.kt` tuvalde yalnız `contentDescription`). Ekran okuyucuyla
+Diziliş, Satış ve Denetim oynanamaz; Sipariş'in listesi okunuyor.
+
+**F — diller** (14 dil, 360×640 dp = `wm size 1080x1920` + `wm density 480`,
+dil `cmd locale set-app-locales` ile; kurulum kartı ve dört mod). Arapça'da
+yerleşim sağdan sola, rakamlar Latin (81%, 1/5); raf tuvali aynalanmıyor ve brif
+de "soldan" diyor, tutarlı. Satış'ta kısa ekranda okunan kural tr, de, fi'de
+**3/5** — 2026-09-21 Bulgu 1'in düzeltmesi (tek satır gövde) cihazda doğrulandı
+(de ve fi önce 2/5).
+
+Bulgular, hepsi 360 dp genişlikte:
+
+| # | Ne | Diller |
+| --- | --- | --- |
+| F1 | Diziliş ve Satış'ın üç düğmeli alt satırında etiket **kelime ortasından** bölünüyor: "Tamaml·a", "Rückgä·ngig", "Alustall·e", "Deshac·er", "Termine·r", "Suggeri·mento", "Desfaze·r", "Отмени·ть", "Подска·зка" | tr, de, fi, es, fr, it, pt, ru |
+| F2 | Aynı satırda etiket üç noktayla kırpılıyor: "Ongedaan ma…", "Naar het ba…" | nl |
+| F3 | Stat kartı başlığı kelime ortasından bölünüyor: "ENCONTRAD·AS/OS" (Denetim), "FORTJENEST·E" (Sipariş) | es, pt, da, nb |
+| F4 | Üst çubukta uygulama adı "REYO·N" diye bölünüyor ("Terug naar het begin" yer yiyor), dört modda da | nl |
+| F5 | Kurulum kartında zorluk çipi kırpılıyor: "Keskit…", "Слож…", "Makk…" / "Gemid…", "Vansk…" | fi, ru, nl, nb |
+| F6 | "Tepsiye al" ve karşılıkları iki satıra sarıyor (kelime sınırında), "koli 6 · Salı gelir" iki-üç satır | çoğu dil |
+
+**Düzeltildi (ölçüm bekliyor): F1.** Sebep yazı alanının darlığı: 360 dp'de düğme
+106,7 dp, Material'ın 24 dp'lik yan payları çıkınca yazıya ~59 dp kalıyordu ve
+bundan geniş tek kelime ortasından bölünüyordu. İki değişiklik: üç düğmeli
+satırlarda iç pay 8 dp (`ActionRowPadding`, yazı alanı ~91 dp); `ActionLabel`
+puntoyu, her kelime tek satıra sığana dek 0,5 sp adımlarla 10 sp'ye kadar
+küçültüyor (`actionLabelSp`), satır yalnız boşlukta kırılıyor.
+`ReyonActionLabelTest` 14 dilin dört etiketini gerçek fontla en dar düğmede
+ölçüyor: yazı ölçeği 1,0'da punto ≥ 12 sp, 1,1'de ≥ 11 sp, 1,3'te tabana inse de
+kelime bölünmüyor. Yalnız payı daraltmak 1,0'da yetiyor, 1,1 ve 1,3'te yetmiyor
+(punto küçültme kapatılınca test bu ikisinde kırılıyor). F2 de aynı değişiklikle
+kapanmalı: "Ongedaan maken" ve "Naar het bakje" artık iki satırda tam. Cihazda
+doğrulanacak: 360×640 dp'de 14 dilde alt satır, `store/screenshots` yeniden.
+
+F1–F4 kelimeyi bölüyor ya da gizliyor; F5 yalnız zorluk adını kırpıyor (seçili
+olan üst satırda tam yazıyor); F6 kabul edilebilir sarma. İngilizce, Danca (F3
+hariç), Norveççe (F3, F5 hariç) ve İsveççe temiz. Rusça brifte ürün adı
+çekimsiz kalıyor ("над Сыр"): şablonun sınırı, yerleşim sorunu değil.
+
+**Play ekran görüntüleri** `store/screenshots/{tr,en}/` altında, 1080×1920
+(`wm size 1080x1920`, yoğunluk cihazınki, 411 × 731 dp), dört mod: Diziliş
+(brif + üç ipucuyla kısmen dolu raf, ✓'li kurallar), Denetim (plan/raf ikilisi),
+Satış (dolu raf, puan paneli 49/66), Sipariş (hafta sonucu, grafik; 218/323,
+%67). Sipariş karesinde yıldız yok; daha iyi bir hafta ile yeniden alınabilir.
+
+Ekran boyutu, yoğunluk, uygulama dili ve erişilebilirlik ayarları koşumlardan
+sonra geri alındı.

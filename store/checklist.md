@@ -27,7 +27,8 @@
 - [ ] Cihazda koşum (`tools/cihaz_testi.py`), `docs/cihaz-testi.md` protokolü
 - [ ] Play Console: uygulamayı oluştur, kategori **Uygulamalar → Eğitim**
 - [ ] Play App Signing'i aç; yüklenen AAB `-play.aab` olan
-- [ ] Ekran görüntüleri: telefon için en az 2 (1080×1920), her modun bir karesi önerilir
+- [x] Ekran görüntüleri: telefon için en az 2 (1080×1920), her modun bir karesi önerilir
+      — `store/screenshots/{tr,en}/`, dört mod (docs/cihaz-testi.md, 2026-09-23)
 - [ ] Veri güvenliği formu ve IARC anketi (`store/` altındaki cevaplarla)
 - [ ] Gizlilik politikası URL'si: `https://aripdcom.github.io/reyon/gizlilik.html`
 

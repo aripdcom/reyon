@@ -73,6 +73,7 @@ import com.aripd.reyon.engine.ReyonLevel
 import com.aripd.reyon.engine.ReyonState
 import com.aripd.reyon.engine.Rules
 import com.aripd.reyon.ui.common.ActionLabel
+import com.aripd.reyon.ui.common.ActionRowPadding
 import com.aripd.reyon.ui.common.GameTopBar
 import com.aripd.reyon.ui.common.OverlayCard
 import com.aripd.reyon.ui.common.ScoreCard
@@ -577,13 +578,13 @@ private fun Controls(canUndo: Boolean, canRemove: Boolean, onUndo: () -> Unit, o
             .padding(horizontal = 12.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        OutlinedButton(onClick = onUndo, enabled = canUndo, modifier = Modifier.weight(1f)) {
+        OutlinedButton(onClick = onUndo, enabled = canUndo, modifier = Modifier.weight(1f), contentPadding = ActionRowPadding) {
             ActionLabel(stringResource(R.string.undo))
         }
-        OutlinedButton(onClick = onRemove, enabled = canRemove, modifier = Modifier.weight(1f)) {
+        OutlinedButton(onClick = onRemove, enabled = canRemove, modifier = Modifier.weight(1f), contentPadding = ActionRowPadding) {
             ActionLabel(stringResource(R.string.reyon_remove))
         }
-        Button(onClick = onHint, modifier = Modifier.weight(1f)) {
+        Button(onClick = onHint, modifier = Modifier.weight(1f), contentPadding = ActionRowPadding) {
             ActionLabel(stringResource(R.string.reyon_hint))
         }
     }
