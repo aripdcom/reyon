@@ -973,6 +973,15 @@ göz: boş"a dokun ve çift dokun → Ayran iki göze yerleşti, tepsiden kalkt�
 Ege, küçük boy" okudu; üç parmakla TalkBack menüsü → Eylemler → "Raftan kaldır" → Ayran
 tepsiye döndü, göz yeniden "boş". Her adım `uiautomator` ağacıyla da doğrulandı.
 
+**Satış ve Denetim de TalkBack'le elle oynandı (kullanıcı, 2026-09-24): çalışıyor.**
+Satış: tepsideki Limonata'ya dokun + çift dokun → TalkBack "seçili" dedi; "göz hizası (2.
+raf), soldan 1. göz: boş"a çift dokunuş → Limonata yerleşti; göz "Limonata, …, +12"
+okudu (verim katkısıyla). Denetim: planogramda "en üst raf, soldan 2. göz: Deterjan…",
+mağaza rafında aynı göz "boş" → çift dokunuş → BULUNAN 1/2, göz "boş, Boş göz" okudu;
+göz hizası 1. gözde plan "Sünger", raf "Kâğıt havlu" → çift dokunuş → "Denetim tamam"
+kartı açıldı ve okundu. Üç modda raf gözleri ekran okuyucuyla oynanabilir; v1.0.1'den
+açık E bulgusu kapandı.
+
 Sınamada öğrenilenler (uygulama hatası değil, sonraki sınamalar için):
 
 - TalkBack'te çift dokunuş parmağın altındakini değil **odaktaki** öğeyi çalıştırır.
