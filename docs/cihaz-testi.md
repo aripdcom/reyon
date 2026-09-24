@@ -887,7 +887,7 @@ kullanıcının kararıyla reddedildi ve "bir daha sorma" durumuna alındı
 | Sonuç kartları | ✅ ağaçta okunuyor: "Raf satışa hazır", raf verimi, düzey; haftalık raporda "Hafta grafiği: 1. gün +62, …" |
 | Raf gözleri | ❌ dört modda tuval tek düğüm (v1.0.1'den açık) — düzeltildi, aşağıda |
 | Alt eylem satırı | ✅ elle: TalkBack'le dokunarak ve sağa kaydırarak ulaşılıyor, okunuyor (aşağıda). `uiautomator` ağacında ise sınırı sıfır: Diziliş 3, Denetim 1, Sipariş raporu 2 düğüm |
-| Y5 (360×640 dp) | ❌ TalkBack açıkken de son alıştırma satırı ağaçta 11 dp (y = 1096…1125), adı dışarıda |
+| Y5 (360×640 dp) | ✅ elle (2026-09-24): TalkBack'le "Satış"tan sağa kaydırınca liste kayıyor, "Sipariş" okunuyor, çift dokunuş haftalık raporu açıyor. `uiautomator` ağacında ise satır hâlâ kesik ve kaymış görünüyor (y = 958…1125, ekranda 915…1045): alt satırdaki gibi ağaç dökümünün kusuru |
 
 Alt satır için ölçülenler, sebep bulunamadı:
 
@@ -948,6 +948,10 @@ Sınamada öğrenilenler (uygulama hatası değil, sonraki sınamalar için):
   İngilizce sesle okuyordu, anlaşılmıyordu. Samsung'un Türkçe sesi yüklü değildi
   ("Language was not loaded"); sınama Google metin okuma motoru, Türkçe ile yapıldı
   (`tts_default_synth=com.google.android.tts`, `tts_default_locale=…:tr-TR`).
+- `uiautomator dump` (dolayısıyla `cihaz_testi.py`'nin `arayuz`'u) çalışırken Android
+  erişilebilirlik servislerini bastırıyor: TalkBack yeniden bağlanınca odak ekranın
+  başına dönüyor, kullanıcının o sıradaki çift dokunuşu boşa gidiyor ("ekran donmuş
+  gibi"). Elle TalkBack sınaması sürerken ağaç dökümü alınmaz; yalnız `screencap`.
 - Pürüz: çip odaklanınca TalkBack etiketten sonra çipin yazılarını ("Ayran", "×2") da
   okuyordu; seçim yalnız sarı çerçeveyle görünüyor, okunmuyordu. **Düzeltildi**
   (yapı `sha256=f527bb71…`): çipin iç yazıları ekran okuyucudan gizli
