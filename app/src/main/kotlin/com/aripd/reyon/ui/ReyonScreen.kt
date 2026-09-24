@@ -49,7 +49,9 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -674,10 +676,16 @@ internal fun ProductChips(
                     shape = RoundedCornerShape(8.dp),
                     color = MaterialTheme.colorScheme.surface,
                     border = BorderStroke(if (ring != null) 2.dp else 1.dp, ring ?: tokens.line),
-                    modifier = Modifier.semantics { contentDescription = desc },
+                    // Ekran okuyucu tek cümle okur: etiket ve seçili durumu. İçteki yazılar
+                    // gizli; etiket onları zaten içeriyor, yoksa "Ayran", "×2" tekrar okunuyordu.
+                    modifier = Modifier.semantics {
+                        contentDescription = desc
+                        this.selected = isSelected
+                    },
                 ) {
                     Row(
                         modifier = Modifier
+                            .clearAndSetSemantics {}
                             .heightIn(min = 40.dp)
                             .padding(horizontal = 10.dp, vertical = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,

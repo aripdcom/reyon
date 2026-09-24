@@ -88,6 +88,25 @@ class ReyonShelfSlotsTest {
     @Test
     fun salesCanBePlayedThroughSlotNodes() = placeAndRemoveThroughSlots(ReyonKind.SALES)
 
+    /**
+     * Tepsi çipi ekran okuyucuya tek cümle: etiket ve seçili durumu. İçteki yazılar
+     * ("Ayran", "×2") etiketten sonra bir daha okunuyordu (1.1.0 E, TalkBack'le elle
+     * sınama); seçim yalnız sarı çerçeveyle görünüyordu, okunmuyordu.
+     */
+    @Test
+    fun trayChipReadsOnceAndAnnouncesSelection() {
+        rule.setAppContent { ReyonScreen(highScore = 0L, onScore = {}, onExit = {}) }
+        rule.reyonStartPractice(ReyonKind.PUZZLE)
+        rule.waitUntil(timeoutMillis = 30_000) { trayChips().isNotEmpty() }
+        val chip = trayChips().first()
+        val label = desc(chip)
+        assertEquals("birleşik çipte iç yazı kalmamalı", null, chip.config.getOrNull(SemanticsProperties.Text))
+        assertEquals(false, chip.config.getOrNull(SemanticsProperties.Selected))
+        click(chip)
+        val after = trayChips().first { desc(it) == label }
+        assertEquals("seçilen çip seçili okunmalı", true, after.config.getOrNull(SemanticsProperties.Selected))
+    }
+
     @Test
     fun auditExposesEverySlotOfBothShelves() {
         rule.setAppContent { ReyonScreen(highScore = 0L, onScore = {}, onExit = {}) }

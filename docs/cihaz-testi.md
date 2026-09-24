@@ -948,5 +948,10 @@ Sınamada öğrenilenler (uygulama hatası değil, sonraki sınamalar için):
   İngilizce sesle okuyordu, anlaşılmıyordu. Samsung'un Türkçe sesi yüklü değildi
   ("Language was not loaded"); sınama Google metin okuma motoru, Türkçe ile yapıldı
   (`tts_default_synth=com.google.android.tts`, `tts_default_locale=…:tr-TR`).
-- Açık kalan küçük pürüz: çip odaklanınca TalkBack etiketten sonra çipin yazılarını
-  ("Ayran", "×2") da okuyor; etiket yazıları zaten içerdiği için tekrar gibi duyuluyor.
+- Pürüz: çip odaklanınca TalkBack etiketten sonra çipin yazılarını ("Ayran", "×2") da
+  okuyordu; seçim yalnız sarı çerçeveyle görünüyor, okunmuyordu. **Düzeltildi**
+  (yapı `sha256=f527bb71…`): çipin iç yazıları ekran okuyucudan gizli
+  (`clearAndSetSemantics`), çip `selected` taşıyor. Cihazda çip ağacında yalnız etiket
+  kalıyor; seçili çip `checkable=true, checked=true` (Compose sekme olmayan öğede seçimi
+  böyle bildiriyor, TalkBack "seçili" okuyor). `ReyonShelfSlotsTest
+  .trayChipReadsOnceAndAnnouncesSelection` düzeltme çıkarılınca kırılıyor.
