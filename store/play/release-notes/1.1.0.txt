@@ -1,98 +1,112 @@
 <tr-TR>
-• Yeni tasarım: FMCG saha aracı görünümü, açık ve koyu tema, IBM Plex yazı.
+• Yeni tasarım: FMCG saha aracı görünümü, açık ve koyu tema.
 • Görevler: her gün dört modda günün vakası; alıştırmada Market, Süpermarket ya da Hipermarket formatı.
 • Raf etiketi, kategori rengi ve talep çubuklarıyla yeni raf çizimi.
 • Sonuçlar rapor olarak: uzmana göre yüzde, düzey ve kişisel en iyi; Sipariş'te bulgulu haftalık rapor.
+• Ekran okuyucu: raf gözleri tek tek okunuyor ve kullanılabiliyor.
 • Ses varsayılan olarak kapalı.
 </tr-TR>
 <en-US>
-• New design: the look of an FMCG field tool, light and dark theme, IBM Plex type.
+• New design: the look of an FMCG field tool, light and dark theme.
 • Tasks: a case of the day in each of the four modes; practice in the Market, Supermarket or Hypermarket format.
 • New shelf drawing with shelf labels, category colours and demand bars.
 • Results as reports: share of the expert’s result, level and personal best; a weekly report with findings in Ordering.
+• Screen readers: shelf slots are read and usable one by one.
 • Sound is off by default.
 </en-US>
 <de-DE>
-• Neues Design: der Look eines FMCG-Praxiswerkzeugs, helles und dunkles Design, Schrift IBM Plex.
+• Neues Design: der Look eines FMCG-Praxiswerkzeugs, helles und dunkles Design.
 • Aufgaben: jeden Tag ein Fall des Tages in allen vier Modi; Übung im Format Markt, Supermarkt oder Hypermarkt.
 • Neue Regaldarstellung mit Regaletiketten, Kategoriefarben und Nachfragebalken.
 • Ergebnisse als Bericht: Anteil am Profi-Ergebnis, Stufe und persönliche Bestleistung; beim Bestellen ein Wochenbericht mit Befunden.
+• Screenreader: Regalplätze einzeln vorgelesen und bedienbar.
 • Ton ist standardmäßig aus.
 </de-DE>
 <fr-FR>
-• Nouveau design : l’allure d’un outil terrain PGC, thème clair et sombre, police IBM Plex.
+• Nouveau design : l’allure d’un outil terrain PGC, thème clair et sombre.
 • Tâches : un cas du jour dans chacun des quatre modes ; entraînement au format Supérette, Supermarché ou Hypermarché.
 • Nouveau dessin du rayon avec étiquettes, couleurs de catégorie et barres de demande.
-• Résultats en rapport : part du résultat de l’expert, niveau et record personnel ; pour les commandes, un rapport hebdomadaire avec constats.
+• Résultats en rapport : part de l’expert, niveau et record personnel ; rapport hebdomadaire avec constats pour les commandes.
+• Lecteur d’écran : emplacements du rayon lus un par un.
 • Le son est coupé par défaut.
 </fr-FR>
 <nl-NL>
-• Nieuw ontwerp: de uitstraling van een FMCG-praktijktool, licht en donker thema, lettertype IBM Plex.
+• Nieuw ontwerp: de uitstraling van een FMCG-praktijktool, licht en donker thema.
 • Taken: elke dag een casus van de dag in alle vier de modi; oefenen in het formaat Buurtwinkel, Supermarkt of Hypermarkt.
 • Nieuwe schaptekening met schaplabels, categoriekleuren en vraagbalken.
 • Resultaten als rapport: aandeel van het expertresultaat, niveau en persoonlijk record; bij Bestellen een weekrapport met bevindingen.
+• Schermlezer: schapplekken één voor één voorgelezen.
 • Geluid staat standaard uit.
 </nl-NL>
 <es-ES>
-• Nuevo diseño: aspecto de herramienta de campo de gran consumo, tema claro y oscuro, tipografía IBM Plex.
-• Tareas: un caso del día en cada uno de los cuatro modos; práctica en formato Tienda, Supermercado o Hipermercado.
+• Nuevo diseño: aspecto de herramienta de campo de gran consumo, tema claro y oscuro.
+• Tareas: un caso del día en los cuatro modos; práctica en formato Tienda, Supermercado o Hipermercado.
 • Nuevo dibujo del estante con etiquetas, colores de categoría y barras de demanda.
-• Resultados como informe: porcentaje del resultado del experto, nivel y mejor marca personal; en Pedidos, un informe semanal con hallazgos.
+• Resultados como informe: % del experto, nivel y mejor marca personal; informe semanal con hallazgos en Pedidos.
+• Lector de pantalla: huecos del estante leídos uno a uno.
 • El sonido está desactivado por defecto.
 </es-ES>
 <pt-BR>
-• Novo design: visual de ferramenta de campo para bens de consumo, tema claro e escuro, fonte IBM Plex.
-• Tarefas: um caso do dia em cada um dos quatro modos; prática no formato Mercearia, Supermercado ou Hipermercado.
+• Novo design: visual de ferramenta de campo para bens de consumo, tema claro e escuro.
+• Tarefas: um caso do dia nos quatro modos; prática no formato Mercearia, Supermercado ou Hipermercado.
 • Novo desenho da prateleira com etiquetas, cores de categoria e barras de demanda.
-• Resultados como relatório: porcentagem do resultado do especialista, nível e melhor marca pessoal; em Pedidos, um relatório semanal com constatações.
+• Resultados como relatório: % do especialista, nível e melhor marca pessoal; em Pedidos, um relatório semanal com constatações.
+• Leitor de tela: espaços da prateleira lidos um a um.
 • O som vem desligado por padrão.
 </pt-BR>
 <it-IT>
-• Nuovo design: uno strumento sul campo per il largo consumo, tema chiaro e scuro, carattere IBM Plex.
-• Compiti: un caso del giorno in tutte le quattro modalità; esercizio nel formato Minimarket, Supermercato o Ipermercato.
+• Nuovo design: uno strumento sul campo per il largo consumo, tema chiaro e scuro.
+• Compiti: un caso del giorno nelle quattro modalità; esercizio nel formato Minimarket, Supermercato o Ipermercato.
 • Nuovo disegno dello scaffale con etichette, colori di categoria e barre della domanda.
-• Risultati come rapporto: quota del risultato dell’esperto, livello e record personale; negli Ordini un rapporto settimanale.
+• Risultati come rapporto: quota dell’esperto, livello e record personale; negli Ordini un rapporto settimanale.
+• Lettore di schermo: posti dello scaffale letti uno a uno.
 • Audio disattivato di serie.
 </it-IT>
 <da-DK>
-• Nyt design: udseende som et praksisværktøj til dagligvarer, lyst og mørkt tema, skrifttypen IBM Plex.
+• Nyt design: udseende som et praksisværktøj til dagligvarer, lyst og mørkt tema.
 • Opgaver: dagens case i alle fire tilstande; øvelse i formatet Købmand, Supermarked eller Hypermarked.
 • Ny hyldetegning med hyldeetiketter, kategorifarver og efterspørgselsbjælker.
 • Resultater som rapport: andel af ekspertens resultat, niveau og personlig rekord; i Bestilling en ugerapport med fund.
+• Skærmlæser: hyldepladser læses op og kan bruges én ad gangen.
 • Lyd er slået fra som standard.
 </da-DK>
 <sv-SE>
-• Ny design: utseendet av ett fältverktyg för dagligvaror, ljust och mörkt tema, typsnittet IBM Plex.
+• Ny design: utseendet av ett fältverktyg för dagligvaror, ljust och mörkt tema.
 • Uppgifter: dagens fall i alla fyra lägen; övning i formatet Närbutik, Supermarket eller Stormarknad.
 • Ny hyllritning med hyllkantsetiketter, kategorifärger och efterfrågestaplar.
 • Resultat som rapport: andel av expertens resultat, nivå och personbästa; i Beställning en veckorapport med iakttagelser.
+• Skärmläsare: hyllplatser läses upp och kan användas en i taget.
 • Ljudet är avstängt som standard.
 </sv-SE>
 <no-NO>
-• Nytt design: preget av et feltverktøy for dagligvarer, lyst og mørkt tema, skrifttypen IBM Plex.
+• Nytt design: preget av et feltverktøy for dagligvarer, lyst og mørkt tema.
 • Oppgaver: dagens case i alle fire moduser; øving i formatet Nærbutikk, Supermarked eller Hypermarked.
 • Ny hylletegning med hyllekantetiketter, kategorifarger og etterspørselsstolper.
 • Resultater som rapport: andel av ekspertens resultat, nivå og personlig rekord; i Bestilling en ukerapport med funn.
+• Skjermleser: hylleplasser leses opp og kan brukes én om gangen.
 • Lyd er av som standard.
 </no-NO>
 <fi-FI>
-• Uusi ulkoasu: päivittäistavarakaupan kenttätyökalun tyyli, vaalea ja tumma teema, IBM Plex -fontti.
+• Uusi ulkoasu: päivittäistavarakaupan kenttätyökalun tyyli, vaalea ja tumma teema.
 • Tehtävät: päivän tapaus kaikissa neljässä tilassa; harjoitus formaatissa Lähikauppa, Supermarket tai Hypermarket.
 • Uusi hyllypiirros: hyllyetiketit, kategoriavärit ja kysyntäpalkit.
 • Tulokset raporttina: osuus asiantuntijan tuloksesta, taso ja oma ennätys; Tilauksessa viikkoraportti havaintoineen.
+• Ruudunlukija: hyllypaikat luetaan ja niitä voi käyttää yksitellen.
 • Äänet ovat oletuksena pois päältä.
 </fi-FI>
 <ru-RU>
-• Новый дизайн: облик полевого инструмента для FMCG, светлая и тёмная тема, шрифт IBM Plex.
+• Новый дизайн: облик полевого инструмента для FMCG, светлая и тёмная тема.
 • Задачи: кейс дня во всех четырёх режимах; тренировка в формате Минимаркет, Супермаркет или Гипермаркет.
 • Новая отрисовка полки: ценники, цвета категорий и полосы спроса.
 • Итоги в виде отчёта: доля от результата эксперта, уровень и личный рекорд; в Заказах недельный отчёт с выводами.
+• Экранный диктор: ячейки полки озвучиваются и доступны по одной.
 • Звук по умолчанию выключен.
 </ru-RU>
 <ar>
-• تصميم جديد: مظهر أداة ميدانية للسلع الاستهلاكية، وسمة فاتحة وداكنة، وخط IBM Plex.
+• تصميم جديد: مظهر أداة ميدانية للسلع الاستهلاكية، وسمة فاتحة وداكنة.
 • المهام: حالة اليوم في الأوضاع الأربعة؛ والتدريب بصيغة بقالة أو سوبرماركت أو هايبرماركت.
 • رسم جديد للرف مع ملصقات الرف وألوان الفئات وأشرطة الطلب.
 • النتائج كتقرير: نسبة من نتيجة الخبير والمستوى وأفضل نتيجة شخصية؛ وفي الطلبيات تقرير أسبوعي مع الملاحظات.
+• قارئ الشاشة: تُقرأ مواضع الرف ويمكن استخدامها واحداً واحداً.
 • الصوت متوقف افتراضياً.
 </ar>
