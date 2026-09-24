@@ -5,6 +5,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -28,6 +30,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
@@ -186,7 +189,11 @@ internal fun ReyonOrderContent(
             if (st != null) {
                 val shelfH = shelfHeight(maxWidth, maxHeight, st.order.cols / (st.order.rows * 0.62f))
                 Column(modifier = Modifier.fillMaxSize()) {
-                    OrderShelfCanvas(state = st, version = version, height = shelfH)
+                    // Raf yalnız stoğa bağlı; sipariş vermek stoğu değiştirmez (gün kapanınca
+                    // değişir). version'a bağlıyken her adımlayıcı dokunuşunda bütün raf yeniden
+                    // çiziliyordu (docs/cihaz-testi.md, 1.1.0 B).
+                    val stocks = List(st.order.items.size) { st.stockOf(it) }
+                    OrderShelfCanvas(state = st, stocks = stocks, day = st.day, profit = st.profit, height = shelfH)
                     DayHeader(state = st, version = version, hinted = hinted, noHint = noHint)
                     OrderList(
                         state = st,
@@ -258,7 +265,7 @@ internal fun ReyonOrderContent(
  * stok/kapasite. Stok tükenmişse değer kırmızı.
  */
 @Composable
-private fun OrderShelfCanvas(state: ReyonOrderState, version: Int, height: Dp) {
+private fun OrderShelfCanvas(state: ReyonOrderState, stocks: List<Int>, day: Int, profit: Int, height: Dp) {
     val order = state.order
     val res = LocalContext.current.resources
     val colors = rememberShelfColors()
@@ -266,7 +273,7 @@ private fun OrderShelfCanvas(state: ReyonOrderState, version: Int, height: Dp) {
     val textMeasurer = rememberTextMeasurer()
     val labeler = remember(textMeasurer, colors.packFamily) { BlockLabeler(textMeasurer, colors.packFamily) }
     val names = remember(order, res) { order.items.map { ReyonText.kind(res, it.product.kind) } }
-    val desc = appString(R.string.reyon_order_board_desc_fmt, order.rows, order.cols, minOf(state.day + 1, order.days), state.profit)
+    val desc = appString(R.string.reyon_order_board_desc_fmt, order.rows, order.cols, minOf(day + 1, order.days), profit)
     Canvas(
         modifier = Modifier
             .fillMaxWidth()
@@ -274,12 +281,10 @@ private fun OrderShelfCanvas(state: ReyonOrderState, version: Int, height: Dp) {
             .clip(RoundedCornerShape(6.dp))
             .semantics { contentDescription = desc },
     ) {
-        @Suppress("UNUSED_VARIABLE")
-        val tick = version
         val g = ShelfGeom(size.width, size.height, order.rows, order.cols, density)
         drawGondola(g, colors)
         for ((i, item) in order.items.withIndex()) {
-            val stock = state.stockOf(i)
+            val stock = stocks[i]
             val p = item.product
             drawPack(g, labeler, colors, names[i], texts.mark(p), p, p.facings, item.row, item.col, stock = stock.toFloat() / item.capacity)
             drawShelfLabel(
@@ -357,24 +362,66 @@ private fun OrderList(
         verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         for ((i, item) in state.order.items.withIndex()) {
-            OrderRow(state = state, version = version, index = i, item = item, hinted = i == hinted, onAdjust = onAdjust)
+            OrderRow(data = orderRowData(state, i), index = i, item = item, hinted = i == hinted, onAdjust = onAdjust)
         }
     }
 }
 
+/**
+ * Bir sipariş satırının gösterdiği her şey. Satır bunu alır, motor durumunu değil: Compose
+ * değeri değişmeyen satırları atlar. `version`'la bütün satırlar her adımlayıcı dokunuşunda
+ * yeniden oluşuyordu; kare başına 35–45 ms yeniden oluşturma (docs/cihaz-testi.md, 1.1.0 B).
+ * `@Immutable`: alanlar değişmez, ama `List` alanı yüzünden derleyici sınıfı kararsız sayıyor
+ * ve güçlü atlamada kimlikle (===) karşılaştırıyordu; her seferinde yeni nesne, satır yine
+ * yeniden oluşuyordu. İşaretle içerikle (equals) karşılaştırılır.
+ */
+@Immutable
+private data class OrderRowData(
+    val day: Int,
+    val stock: Int,
+    val cases: Int,
+    val canOrder: Boolean,
+    val arrival: Int,
+    val incoming: List<Pair<Int, Int>>,
+    val expiringTonight: Int,
+    val expiringTomorrow: Int,
+    val promoNow: Boolean,
+    val days: Int,
+)
+
+private fun orderRowData(state: ReyonOrderState, index: Int): OrderRowData {
+    val order = state.order
+    val item = order.items[index]
+    val day = minOf(state.day, order.days - 1)
+    val incoming = (state.day + 1 until minOf(order.days, state.day + OrderRules.MAX_LEAD + 1))
+        .map { it to state.incoming(index, it) }
+        .filter { it.second > 0 }
+    val tonight = if (item.perishable) state.expiring(index, day) else 0
+    val tomorrow = if (item.perishable) state.expiring(index, day + 1) - tonight else 0
+    return OrderRowData(
+        day = day,
+        stock = state.stockOf(index),
+        cases = state.orderOf(index),
+        canOrder = state.canOrder(index),
+        arrival = state.arrivalDay(index),
+        incoming = incoming,
+        expiringTonight = tonight,
+        expiringTomorrow = tomorrow,
+        promoNow = order.isPromo(day, index),
+        days = order.days,
+    )
+}
+
 @Composable
-private fun OrderRow(state: ReyonOrderState, version: Int, index: Int, item: OrderItem, hinted: Boolean, onAdjust: (Int, Int) -> Unit) {
-    @Suppress("UNUSED_VARIABLE")
-    val tick = version
+private fun OrderRow(data: OrderRowData, index: Int, item: OrderItem, hinted: Boolean, onAdjust: (Int, Int) -> Unit) {
     val res = LocalContext.current.resources
     val tokens = Reyon.tokens
-    val order = state.order
     val name = ReyonText.kind(res, item.product.kind)
-    val day = minOf(state.day, order.days - 1)
-    val stock = state.stockOf(index)
-    val cases = state.orderOf(index)
-    val canOrder = state.canOrder(index)
-    val arrival = state.arrivalDay(index)
+    val day = data.day
+    val stock = data.stock
+    val cases = data.cases
+    val canOrder = data.canOrder
+    val arrival = data.arrival
     val desc = appString(R.string.reyon_order_item_desc_fmt, name, stock, item.capacity, cases)
     val more = stringResource(R.string.reyon_order_more)
     val less = stringResource(R.string.reyon_order_less)
@@ -382,18 +429,11 @@ private fun OrderRow(state: ReyonOrderState, version: Int, index: Int, item: Ord
     // Bilgi satırı: bugünkü ve teslimat günü tahmini, gelen teslimat, bozulacak birimler.
     val info = ArrayList<String>()
     info += appString(R.string.reyon_order_today_fmt, item.low(day), item.high(day))
-    if (arrival < order.days && arrival != day) info += appString(R.string.reyon_order_forecast_fmt, ReyonText.dow(res, arrival), item.low(arrival), item.high(arrival))
-    for (d in state.day + 1 until minOf(order.days, state.day + OrderRules.MAX_LEAD + 1)) {
-        val units = state.incoming(index, d)
-        if (units > 0) info += appString(R.string.reyon_order_incoming_fmt, ReyonText.dow(res, d), units)
-    }
-    if (item.perishable) {
-        val tonight = state.expiring(index, day)
-        val tomorrow = state.expiring(index, day + 1) - tonight
-        if (tonight > 0) info += appString(R.string.reyon_order_expiring_fmt, tonight)
-        if (tomorrow > 0) info += appString(R.string.reyon_order_expiring_tomorrow_fmt, tomorrow)
-    }
-    val promoNow = order.isPromo(day, index)
+    if (arrival < data.days && arrival != day) info += appString(R.string.reyon_order_forecast_fmt, ReyonText.dow(res, arrival), item.low(arrival), item.high(arrival))
+    for ((d, units) in data.incoming) info += appString(R.string.reyon_order_incoming_fmt, ReyonText.dow(res, d), units)
+    if (data.expiringTonight > 0) info += appString(R.string.reyon_order_expiring_fmt, data.expiringTonight)
+    if (data.expiringTomorrow > 0) info += appString(R.string.reyon_order_expiring_tomorrow_fmt, data.expiringTomorrow)
+    val promoNow = data.promoNow
 
     Surface(
         shape = RoundedCornerShape(10.dp),
@@ -666,6 +706,7 @@ private fun signedDecimal(v: Float): String {
 }
 
 /** Raporun küçük ölçüsü: başlık, değer, altında uzmanın değeri ve fark. */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ReportStat(label: String, value: String, expert: String, delta: Int, deltaText: String, modifier: Modifier = Modifier) {
     val tokens = Reyon.tokens
@@ -678,10 +719,14 @@ private fun ReportStat(label: String, value: String, expert: String, delta: Int,
         Column(modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 8.dp, bottom = 10.dp)) {
             FitText(text = label.uppercase(appLocale()), style = kpiLabelStyle(), color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(text = value, style = monoStyle(22f, 30f))
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            // Fark sığmazsa bütün olarak alt satıra geçer; satırda sıkışınca "−10 / puan" diye
+            // ikiye bölünüyordu (docs/cihaz-testi.md, 1.1.0, G5).
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(text = expert, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text(
                     text = "· $deltaText",
+                    maxLines = 1,
+                    softWrap = false,
                     style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
                     color = when {
                         delta < -5 -> tokens.bad
@@ -701,6 +746,7 @@ private fun ReportStat(label: String, value: String, expert: String, delta: Int,
  * Akşam stoğu 0.28.1 öncesi kayıtlarda tutulmuyordu; bilinmiyorsa yalnız
  * çubuklar çizilir (bkz. [DaySummary.evening]).
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun WeekChart(state: ReyonOrderState, result: OrderResult) {
     val history = state.history
@@ -784,7 +830,13 @@ private fun WeekChart(state: ReyonOrderState, result: OrderResult) {
                 )
             }
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(top = 6.dp), horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+        // Sığmayan öğe alt satıra geçer; tek satıra sıkıştırılınca sonuncusu harf harf
+        // alt alta diziliyordu ("эксперт 9,0"; docs/cihaz-testi.md, 1.1.0, G4).
+        FlowRow(
+            modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
             Legend(color = barUp, bar = true, text = stringResource(R.string.reyon_order_chart_profit))
             if (known) {
                 Legend(color = line, bar = false, text = stringResource(R.string.reyon_order_chart_turnover))

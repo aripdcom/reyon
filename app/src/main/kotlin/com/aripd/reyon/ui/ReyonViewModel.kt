@@ -72,8 +72,13 @@ class ReyonViewModel(application: Application) : AndroidViewModel(application) {
     private val _level = MutableStateFlow(store.lastLevel())
     val level: StateFlow<ReyonLevel> = _level.asStateFlow()
 
-    /** Görevler'de seçili alıştırma formatı; günün vakası kendi formatında açılır, bunu değiştirmez. */
-    private val _practiceLevel = MutableStateFlow(store.practiceLevel())
+    /**
+     * Görevler'de seçili alıştırma formatı; günün vakası kendi formatında açılır, bunu değiştirmez.
+     * Kayıt yoksa son oynanan formattan türer — ve hemen yazılır: yazılmazsa bir sonraki süreçte
+     * yeniden türer, arada açılan günün vakası da "son oynanan"ı değiştirdiği için seçim kendi
+     * kendine günün formatına kayar (docs/cihaz-testi.md, 1.1.0, Y1).
+     */
+    private val _practiceLevel = MutableStateFlow(store.practiceLevel().also(store::savePracticeLevel))
     val practiceLevel: StateFlow<ReyonLevel> = _practiceLevel.asStateFlow()
 
     fun setPracticeLevel(level: ReyonLevel) {

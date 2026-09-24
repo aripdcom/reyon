@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">all’altezza degli occhi (ripiano 2)</string>
     <string name="reyon_shelf_bottom_at">sul ripiano in basso</string>
     <string name="reyon_shelf_nth_at">sul ripiano %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, posto %2$d da sinistra: %3$s</string>
+    <string name="reyon_slot_empty">vuoto</string>
+    <string name="reyon_slot_selected">selezionato</string>
+    <string name="reyon_size_small">piccolo</string>
+    <string name="reyon_size_medium">medio</string>
+    <string name="reyon_size_large">grande</string>
     <string name="reyon_clue_placed">%1$s sta %2$s (dato)</string>
     <string name="reyon_clue_on_shelf">%1$s sta %2$s</string>
     <string name="reyon_clue_in_slot">%1$s occupa il posto %2$d da sinistra</string>
@@ -256,7 +262,7 @@
     <string name="sales_chip_fmt">×%1$d · domanda %2$d</string>
     <string name="rules_total_fmt">totale %1$d</string>
     <string name="reyon_sales_finish">Finisci</string>
-    <string name="reyon_sales_done_title">Disposizione conclusa</string>
+    <string name="reyon_sales_done_title">Scaffale pronto per la vendita</string>
     <string name="reyon_sales_result_fmt">resa %1$d / %2$d (%3$d%% dell’esperto)</string>
     <string name="reyon_sales_beat_target">Sopra l’esperto</string>
     <string name="reyon_sales_reopen">Continua a disporre</string>

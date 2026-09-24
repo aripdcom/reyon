@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">i øyehøyde (hylle 2)</string>
     <string name="reyon_shelf_bottom_at">på den nederste hylla</string>
     <string name="reyon_shelf_nth_at">på hylle %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, plass %2$d fra venstre: %3$s</string>
+    <string name="reyon_slot_empty">tom</string>
+    <string name="reyon_slot_selected">valgt</string>
+    <string name="reyon_size_small">liten</string>
+    <string name="reyon_size_medium">middels</string>
+    <string name="reyon_size_large">stor</string>
     <string name="reyon_clue_placed">%1$s står %2$s (gitt)</string>
     <string name="reyon_clue_on_shelf">%1$s står %2$s</string>
     <string name="reyon_clue_in_slot">%1$s tar plass %2$d fra venstre</string>
@@ -256,7 +262,7 @@
     <string name="sales_chip_fmt">×%1$d · etterspørsel %2$d</string>
     <string name="rules_total_fmt">totalt %1$d</string>
     <string name="reyon_sales_finish">Ferdig</string>
-    <string name="reyon_sales_done_title">Oppstillingen er ferdig</string>
+    <string name="reyon_sales_done_title">Hylla er klar for salg</string>
     <string name="reyon_sales_result_fmt">hylleavkastning %1$d / %2$d (%3$d%% av eksperten)</string>
     <string name="reyon_sales_beat_target">Over eksperten</string>
     <string name="reyon_sales_reopen">Still opp videre</string>

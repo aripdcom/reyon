@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">silmien korkeudelle (hylly 2)</string>
     <string name="reyon_shelf_bottom_at">alimmalle hyllylle</string>
     <string name="reyon_shelf_nth_at">hyllylle %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, paikka %2$d vasemmalta: %3$s</string>
+    <string name="reyon_slot_empty">tyhjä</string>
+    <string name="reyon_slot_selected">valittu</string>
+    <string name="reyon_size_small">pieni</string>
+    <string name="reyon_size_medium">keskikoko</string>
+    <string name="reyon_size_large">iso</string>
     <string name="reyon_clue_placed">%1$s on %2$s (annettu)</string>
     <string name="reyon_clue_on_shelf">%1$s on %2$s</string>
     <string name="reyon_clue_in_slot">%1$s vie paikan %2$d vasemmalta</string>
@@ -256,7 +262,7 @@
     <string name="sales_chip_fmt">×%1$d · kysyntä %2$d</string>
     <string name="rules_total_fmt">yhteensä %1$d</string>
     <string name="reyon_sales_finish">Valmis</string>
-    <string name="reyon_sales_done_title">Järjestys valmis</string>
+    <string name="reyon_sales_done_title">Hylly myyntivalmis</string>
     <string name="reyon_sales_result_fmt">hyllytuotto %1$d / %2$d (%3$d%% asiantuntijasta)</string>
     <string name="reyon_sales_beat_target">Asiantuntijaa parempi</string>
     <string name="reyon_sales_reopen">Jatka järjestämistä</string>

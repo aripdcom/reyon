@@ -28,9 +28,9 @@
 - [ ] Cihazda koşum (`tools/cihaz_testi.py`), `docs/cihaz-testi.md` protokolü
 - [ ] Play Console: uygulamayı oluştur, kategori **Uygulamalar → Eğitim**
 - [ ] Play App Signing'i aç; yüklenen AAB `-play.aab` olan
-- [ ] Ekran görüntüleri: telefon için en az 2 (1080×1920), her modun bir karesi önerilir
-      — `store/screenshots/{tr,en}/` 1.0 arayüzünden (yıldızlı, menülü); 1.1.0 cihaz
-      koşumunda yeniden alınacak (docs/cihaz-testi.md, "1.1.0 · FMCG tasarımı")
+- [x] Ekran görüntüleri: telefon için en az 2 (1080×1920), her modun bir karesi önerilir
+      — `store/screenshots/{tr,en}/`: Görevler, dört mod, bir koyu tema karesi; 1.1.0
+      arayüzünden (docs/cihaz-testi.md, "1.1.0 · FMCG tasarımı cihaz koşumu")
 - [ ] Veri güvenliği formu ve IARC anketi (`store/` altındaki cevaplarla)
 - [ ] Gizlilik politikası URL'si: `https://aripdcom.github.io/reyon/gizlilik.html`
 

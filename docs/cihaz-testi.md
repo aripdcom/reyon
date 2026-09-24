@@ -38,7 +38,10 @@ engellemek**. Asıl koruma, ölçülen doğruların değişmez testine çevrilme
 | Satış panelinin tavanı tepsiye iki sıra bırakır; tavan ile tepsi payı 72–308 dp arasında birebir tümler | `ReyonLayoutTest` |
 | Kısa ekranda brif ve kural satırları okunur, taşan satır dokununca açılır | `ReyonShortScreenTest` |
 | Uygulama Görevler ekranıyla açılır (dört modun günün vakası ve alıştırma satırı); dişli ayarları açar; tema seçimi ve sesin kapalı varsayılanı kalıcı | `ReyonAppTest` |
-| Günün vakası günün formatında açılır, alıştırma formatı hatırlanır, "Nasıl çalışılır" kartı ilk girişte bir kez açılır | `ReyonHomeTest` |
+| Günün vakası günün formatında açılır, alıştırma formatı hatırlanır ve günün vakası onu kaydırmaz, "Nasıl çalışılır" kartı ilk girişte bir kez açılır | `ReyonHomeTest` |
+| Biten günün vakası düğmesinde mod adı sonucun yanında kırpılmaz (360 dp, yazı ölçeği 1,1; 8 dil) | `ReyonDailyButtonTest` |
+| Görevler'de format adı dilimine sığar, alıştırma alt yazısında kelime bölünmez (14 dil, 360 dp, yazı ölçeği 1,1) | `ReyonHomeTextTest` |
+| Raf gözleri ekran okuyucuya tek tek açık: Diziliş ve Satış'ta göz düğümüyle ürün yerleşir ve özel eylemle kalkar, göz içeriği güncel kalır; Denetim'de iki rafın her gözü okunur | `ReyonShelfSlotsTest` |
 | Düzey eşikleri (≥%90 · %75–89 · %50–74 · <%50), Sipariş bulguları, günün formatının dönüşü, "aynı vaka" kararı | `ReyonReportTest` |
 | Üç düğmeli alt satırın etiketleri 14 dilde kelime ortasından bölünmez (360 dp; yazı ölçeği 1,0 · 1,1 · 1,3) | `ReyonActionLabelTest` |
 | Metin kontrastı WCAG AA eşiğini tutar | `ThemeContrastTest` |
@@ -76,6 +79,13 @@ vakasında düğmede, alıştırmada "son sonuç" sütununda).
 `dumpsys gfxinfo com.aripd.reyon` ile 12 saniyelik pencerede kare ölçümü.
 Reyon sürekli animasyon çizmiyor; bakılan şey dokunma sonrası gecikme ve
 liste kaydırmasının düzgünlüğü.
+
+> **Ölçümden önce derle:** `adb install` ile kurulan APK derlenmemiş kalır
+> (`status=verify`), kod JIT ile çalışır; Play'den kurulan ise başlangıç profiliyle
+> derlenir. Derlenmemiş yapıda yeniden oluşturma kareleri iki kata yakın uzun
+> ölçüldü (1.1.0 B). `adb shell cmd package compile -m speed-profile -f
+> com.aripd.reyon`; `cihaz_testi.py kare` derlenmemişse uyarır. v1.0.1 ve önceki
+> B kayıtları derlenmemiş yapıyla alındı.
 
 ## C · Giriş kalibrasyonu
 
@@ -719,3 +729,277 @@ Satış (dolu raf, puan paneli 49/66), Sipariş (hafta sonucu, grafik; 218/323,
 
 Ekran boyutu, yoğunluk, uygulama dili ve erişilebilirlik ayarları koşumlardan
 sonra geri alındı.
+
+### 1.1.0 · FMCG tasarımı cihaz koşumu · 2026-09-23
+
+İki yapı, ikisi de PR #4'ün başı `144ae82`'den:
+
+- CI'ın debug APK'sı (`reyon-debug-apk`, koşum 35892200994):
+  `com.aripd.reyon 1.0.0 sha256=0d29503f40873c58790cb7a6a21fcc9c6ced64fa3c0e74a5002a096fc2b6a9e2`.
+  Temiz kurulum denetimleri ve A bununla.
+- Yerelde `assembleRelease` (R8 açık), yerel hata ayıklama anahtarıyla imzalı:
+  `sha256=427beaaad985095f69c86a378635e54c63b8a7a8b626a04110b3b68784442708`.
+  B, C, E, F ve Play ekran görüntüleri bununla — B'nin v1.0.1 (sürüm yapısı) ile
+  karşılaştırılabilmesi için; debug yapıda Compose çok daha yavaş (aşağıda).
+
+Sürüm adı iki yapıda da `1.0.0`: CI ve yerel derleme `-PappVersion` vermiyor, yapıyı
+özet ayırt ediyor. Cihaz SM-A515F, Android 13, yazı ölçeği 1,1.
+
+**1.1.0'a özgü bakılacaklar**
+
+| Madde | Sonuç |
+| --- | --- |
+| Görevler: günün vakası bugünün formatında | ✅ 23 Eylül → Süpermarket · 4×5. Dönüş (Market → Süpermarket → Hipermarket) cihazda tek gün gözlenebildi; kural `dailyLevel(epochDay)` ve `ReyonReportTest`'te |
+| Biten vaka düğmede onay ve sonuçla | ✅ "✓ Diziliş 0:48 · ✓ Denetim 0:33 · ✓ Satış 90/146 · ✓ Sipariş 519/558", sayaç 4/4; vaka raporunda "Yeniden dene" |
+| Alıştırma "son sonuç" sütunu | ✅ Market'te 1:03 · 0:35 · 68/89 · 309/325 |
+| Alıştırma formatı kapanıp açılınca duruyor | ✅ Hipermarket seçildi, `am force-stop` sonrası seçili; bitmiş bir günün vakasına girip çıkmak değiştirmiyor. Ama bkz. Y1 |
+| 360×640'ta son alıştırma satırına kaydırmayla ulaşılıyor | ✅ gözle; ⚠️ erişilebilirlik ağacında değil (Y5) |
+| "Nasıl çalışılır" kartı | ✅ dört modda: ilk girişte açık, ikinci girişte kapalı, bilgi simgesiyle yeniden açılıyor |
+| Tema: Açık / Koyu / Telefona göre | ✅ varsayılan Açık; iki temada da raf etiketi ve kural puanları okunuyor (`store/screenshots/*/6-satis-koyu.png`) |
+| Durum/gezinme çubuğu simgeleri temaya uyuyor | Koyu ✅ (açık simge). Açık temada gözlenemedi: uygulama çubukları gizliyor, kaydırınca geçici gösterilen çubuğa sistem kendi gri perdesini ve beyaz simgeyi çiziyor. Kod açık temada koyu simgeyi istiyor (`ReyonApp.kt`, `isAppearanceLightStatusBars = !dark`) |
+| Raporlar | ✅ Diziliş/Denetim süre + "Kişisel en iyi"; Satış uzmana göre yüzde ve düzey (68/89, %76, "İyi"); Sipariş haftalık rapor: grafik, hizmet düzeyi, stok devri, bulgular (309/325, %95, "Uzman düzeyi") |
+| Paylaşım kartı | ⚠️ yarım: paylaşım sayfası açılıyor, önizlemede açık zemin ve "Planogram kuruldu" görünüyor; işaret ve tanıtım satırı küçük önizlemede seçilemiyor, imzalı yapıda dosya çekilemiyor |
+| Ses: temiz kurulumda kapalı | ✅ Ayarlar "Sesi aç" diyor |
+| Simge: petrol zemin, yeni işaret | ✅ başlatıcıda. Tema simgesi: `monochrome` katmanı var (ön planla aynı çizim); One UI 5 onu tek renk çizmedi, gözlenemedi |
+
+**Bulgular (1.1.0)**
+
+- **Y1 — alıştırma formatı, açıkça seçilene dek son oynanan formatı izliyor.** Temiz
+  kurulumda Market seçili görünüyor ama kayıtlı değil; `ReyonStore.practiceLevel()`
+  kayıt yoksa `lastLevel()`'a düşüyor ve o her tur başında (günün vakası dahil,
+  `saveLast`) değişiyor. Cihazda: Market'te dört alıştırma, sonra günün vakaları
+  (Süpermarket) → Görevler'de alıştırma formatı Süpermarket'e geçti ve "son sonuç"
+  sütunu boşaldı. Formata bir kez dokunan kullanıcıda olmuyor.
+- **Y2 — Satış'ın sonuç başlığı "Diziliş tamam".** `reyon_sales_done_title`
+  (İngilizce "Layout complete"); 1.1.0'da "Diziliş" bir modun adı, Satış raporunda
+  yanlış moda gönderme gibi okunuyor.
+- **Y3 — haftalık raporda üst çubuktaki paylaş düğmesi ekranın sağından taşıyor**
+  (x 896–1069 / 1080; 14 dilde de, 360 dp'de de).
+- **Y4 — Denetim'de bulunan sapmanın bayrağı ürün adının üstüne biniyor**
+  ("Yer değişimi" çipi "Kuruyemiş"i örtüyor).
+- **Y5 — 360×640 dp'de son alıştırma satırı erişilebilirlik penceresinin dışında.**
+  Satır ekranda tam görünüyor, ama ağaçta sınırı y = 1096…1125 (14,5 dp) ve adı
+  dışarıda: çubuklar gizliyken alanın altı düşüyor (2026-09-10, Bulgu 3'ün aynısı).
+  `cihaz_testi.py reyon` bu yüzden 360×640'ta Sipariş'i açamıyor. TalkBack açıkken
+  çubuklar görünür ve alta pay verilir; cihazda TalkBack olmadığı için sınanamadı.
+
+**A — koşum ✅** (debug yapı). Dört modun alıştırması (Market) ve dört günün vakası
+(Süpermarket) sonuna kadar: Diziliş kılavuzla (1:03, 6 kez kılavuz), Denetim elle
+(0:35, 0 yanlış işaret, "Kişisel en iyi"), Satış 68/89 "İyi", Sipariş kılavuzla
+309/325 "Uzman düzeyi". Yarım tur Görevler'e dönüp aynı satıra dokununca, arka
+plandan ve `am force-stop`'tan sonra kaldığı yerden sürüyor; süreç ölümünden sonra
+açılış Görevler. `logcat AndroidRuntime:E` boş, FATAL/ANR 0.
+
+**B — kare hızı** (sürüm yapısı; 12 s pencereler).
+
+| Pencere | Kare | p50 / p90 / p99 | Kaçan vsync | Takılma | v1.0.1 |
+| --- | --- | --- | --- | --- | --- |
+| Diziliş, dokunmadan | 12 (1/s) | 48 ms | 0 | — | 34 ms |
+| Sipariş listesi, 16 sürükleme | 677 = 56,4 kare/s | 19 / 23 / 34 ms | 2 | %8,7 | 56,3 kare/s, 1 kaçan |
+| Adımlayıcı, 24 dokunuş | 490 = 40,8 kare/s | 23 / 24 / **73** ms | **7** | %8,4 | p99 30 ms, 0 kaçan |
+
+Kaydırma aynı (toplam ortanca 19,1 ms, GPU 14,2). Adımlayıcıda arada bir kare
+pahalı: 90p'de girdi→traversal 32 ms, çizim kaydı 13 ms — dokunuş başına bir
+yeniden oluşturma dalgası. Debug yapıda aynı pencere 33 kaçan vsync, p90 117 ms
+veriyordu: debug yapıyla ölçüm kıyaslanamaz.
+
+**C — giriş.** Görevler ve Ayarlar'da her dokunulabilir öğe ≥ 48 dp. 48 dp altı
+kalanlar (kaydırma kenarında yarım görünenler dışında): Diziliş brif satırları
+**33,1 dp** (v1.0.1 32,4), Satış kural satırları **45,3 dp** (v1.0.1 38,1 —
+iyileşti).
+
+**D — denge** (`:engine:probe`, bu dal). Bütün ölçüm sayıları v1.0.1 ile birebir
+aynı; yalnız süreler değişti (satış iyileştiricisi 13 / 22 / 43 ms).
+
+**E — erişilebilirlik ⚠️ yarım.** TalkBack cihazda hâlâ kurulu değil. Kapalıyken
+`erisim` Görevler ve dört modda "etiketsiz 0"; sınırı sıfır düğüm yalnız alt eylem
+satırları (Diziliş 3, Denetim 1, Satış 3, Sipariş 2). Raf gözleri hâlâ tek düğüm
+(v1.0.1 bulgusu açık).
+
+**F — diller** (14 dil, 360×640 dp; Görevler, dört mod, haftalık rapor).
+**v1.0.1 F1 ve F2 kapandı:** alt satırda hiçbir dilde kelime bölünmüyor ya da
+kırpılmıyor ("Raftan · kaldır", "Ongedaan · maken" boşlukta sarıyor). Format
+seçici fi, nl, de, ru'da sığıyor; KPI başlıkları uzun dillerde küçülerek sığıyor
+("VÄÄRÄT MERKINNÄT", "ЛОЖНЫЕ ОТМЕТКИ"). Arapça'da yerleşim sağdan sola, rakamlar
+Latin. Yeni bulgular:
+
+| # | Ne | Diller |
+| --- | --- | --- |
+| G1 | Günün vakası düğmesi bitince mod adı kırpılıyor: "Sipa… 402/558", "Orde… 402/558", "Best… 402/558", "Раскла… 0:47" | tr, en, de, nl, ru, fr, es ve çoğu dil |
+| G2 | Format seçicide format adı kırpılıyor: "Supermerca…", "Hipermerca…" | es, pt, it |
+| G3 | Alıştırma satırı alt yazısı kelime ortasından bölünüyor: "Bestandsentscheidunge·n" | de |
+| G4 | Haftalık rapor grafiğinin göstergesinde "эксперт 9,0" harf harf alt alta | ru |
+| G5 | Rapor KPI'sında uzman farkı satırlara dağılıyor: "−10 / puan", "−10 / pist." | tr, fi, pt |
+
+**Play ekran görüntüleri** `store/screenshots/{tr,en}/`, 1080×1920 (yoğunluk
+cihazınki, 411 × 731 dp), 1.1.0 arayüzüyle yeniden alındı; 1.0'ın yıldızlı kareleri
+silindi: `1-gorevler` (günün vakalarından ikisi bitmiş, alıştırma sonuçları),
+`2-dizilis` (brif + kısmen dolu raf, kılavuz satırı), `3-denetim` (planogram /
+mağaza rafı, bir sapma bulunmuş), `4-satis` (dolu raf, 98/118 %83), `5-siparis`
+(haftalık rapor, 301/327 "Uzman düzeyi"), `6-satis-koyu` (koyu tema).
+
+Ekran boyutu, yoğunluk, uygulama dili ve tema koşumlardan sonra geri alındı.
+Cihazda şimdi yerel sürüm yapısı (`427beaaa…`) kurulu.
+
+**Düzeltildi: Y1, Y2, G1** (cihazda doğrulandı, yerel sürüm yapısı
+`sha256=819371d1454981c7472f1a198fe7244499eb8899d90211a72decda1e3878e29b`).
+
+- **Y1.** Görünüm modeli açılırken çözdüğü alıştırma formatını hemen yazıyor
+  (`ReyonViewModel`, `practiceLevel().also(store::savePracticeLevel)`): kayıt bir
+  kez oluşunca günün vakası onu kaydıramıyor. `ReyonHomeTest
+  .aDailyCaseDoesNotMoveAnUntouchedPracticeFormat` temiz kurulumu, Süpermarket
+  günün vakasını ve yeni süreci taklit ediyor; düzeltme çıkarılınca kırılıyor.
+- **Y2.** `reyon_sales_done_title` 14 dilde "raf satışa hazır" anlamına çevrildi
+  ("Raf satışa hazır", "Shelf ready for sale", "Regal verkaufsbereit", "Полка
+  готова к продаже"…); Türkçe, Rusça ve Arapça'da mod adıyla birebir aynıydı, öbür
+  dillerde aynı kökten. Cihazda Satış raporunun başlığı "Raf satışa hazır".
+- **G1.** Günün vakası düğmesinde ad ile sonuç sığıyorsa tek satırda, sığmıyorsa
+  sonuç ikinci satıra iniyor (`NameAndResult`); ad bütün genişliği alıyor.
+  `ReyonDailyButtonTest` 360 dp'de, yazı ölçeği 1,1'de sekiz dilde dört modun
+  adını ölçüyor; tek satıra zorlanınca sekizi de kırılıyor. Cihazda 360×640 dp,
+  tr/en/de/nl/ru: "Sipariş / 402/558", "Bestücken / 0:47", "Раскладка / 0:47" —
+  hiçbir ad kırpılmıyor.
+
+**Düzeltildi: Y3, Y4, G2–G5** (cihazda doğrulandı, yerel sürüm yapısı
+`sha256=3f1c68a1cb5cfd566082e7f6ce5cc8dcb3ac233bf710df92e9cec7a7456e8571`;
+360×640 dp).
+
+- **Y3.** Üst çubuktaki paylaş artık 48 dp'lik simge düğmesi (`ShareButton`,
+  `compact`), dişliyle aynı biçimde; kartların sağ kenarını aşmıyor.
+- **Y4.** Sapma bayrağı göz bölgesinin üst kenarında (`drawDeviationFlag`); ürün
+  adı açık kalıyor ("Yer değişimi" üstte, "Kuruyemiş" okunuyor).
+- **G2.** Format adı sığmazsa 11 sp'ye kadar küçülüyor (mevcut `FitText`): es, pt,
+  it'de "Supermercado", "Hipermercado", "Supermercato", "Ipermercato" tam.
+- **G3.** Almanca alıştırma alt yazısı "Bestand für die Woche planen" (önce
+  "Wöchentliche Bestandsentscheidungen": tek kelime satırdan genişti).
+- **G4.** Grafik göstergesi `FlowRow`: sığmayan öğe alt satıra geçiyor
+  (Rusça "эксперт 9,0" ikinci satırda, tek parça).
+- **G5.** KPI'daki fark `FlowRow` içinde ve tek satır: "· −10 puan", "· −10
+  pist.", "· −10 p.p." bütün olarak alt satıra iniyor.
+
+`ReyonHomeTextTest` G2 ve G3'ü 14 dilde ölçüyor (eski Almanca metinle kırılıyor).
+Y3, Y4, G4, G5 çizim/yerleşim düzeltmeleri; cihazda ekran görüntüsüyle bakıldı.
+
+**B — Sipariş adımlayıcısı, iz ve düzeltme.** Perfetto izi (`atrace` bu ROM'da
+açılmıyor: "record-tgid: Out of memory"; iz işaretleri protobuf'tan elle okundu):
+pahalı dokunuş karelerinde süre Compose'un yeniden oluşturmasında, kare başına
+35–45 ms; raf çizimi ~1 ms, gün başlığı <1 ms. Geçici iz işaretli yapıyla: her
+dokunuşta ekrandaki bütün sipariş satırları yeniden oluşuyordu (kare başına 5,8
+`OrderRow`, satır başına ~4 ms). İki düzeltme:
+
+- Satır motor durumunu ve `version`'ı değil, gösterdiği değerleri alıyor
+  (`OrderRowData`, `@Immutable`). `@Immutable`sız ilk denemede satırlar yine
+  oluşuyordu: `List` alanı sınıfı kararsız yapıyor, güçlü atlama kimlikle (===)
+  karşılaştırıyor. İşaretten sonra kare başına 0,8 `OrderRow` (yalnız dokunulan satır),
+  yeniden oluşturma 33 → 21 ms.
+- Raf `version`'a değil stok listesine bağlı; sipariş stoğu değiştirmiyor.
+
+Ölçüm (24 dokunuş × 3 pencere, iki tur, ikisi de profille derlenmiş):
+
+| Yapı | p90 | p99 |
+| --- | --- | --- |
+| düzeltmesiz (`f527bb71…`) | 61 ms | 73–77 ms |
+| düzeltmeli (`e7008db3…`) | 48–53 ms | 65 ms |
+| (derlenmemiş, düzeltmesiz) | 89 ms | 105 ms |
+
+Kaçan vsync turdan tura 4–29 arası oynuyor; karşılaştırmada kullanılmadı. v1.0.1'in
+"p99 30 ms"si derlenmemiş yapıyla ve düğme dalgacığının ek kareleriyle ölçülmüştü
+(dokunuş başına 4,8 kare, şimdi 2,7): sayılar doğrudan kıyaslanamaz, "gerileme"nin
+bir kısmı yöntemden. Tek satırın yeniden oluşması derlenmiş yapıda da birkaç ms
+tutuyor (adımlayıcı düğmesi ~3 ms, derlenmemişken); daha fazlası ayrı iş.
+
+**E — TalkBack açık** (yapı `sha256=3f1c68a1…`). Samsung TalkBack 13.5 kullanıcı 0
+için geri yüklendi (`cmd package install-existing`). Açılışta telefon izni
+(`READ_PHONE_STATE`) istiyor ve her açılışta alt sayfayla yeniden soruyor;
+kullanıcının kararıyla reddedildi ve "bir daha sorma" durumuna alındı
+(`pm set-permission-flags … user-fixed`), ölçüm ancak ondan sonra temiz alınabildi.
+Ölçüm için TalkBack her ekranda açılıp kapatıldı; koşum sonunda kapalı.
+
+| Bakılan | Sonuç |
+| --- | --- |
+| Çubuklar ve alt pay | ✅ keşif açıkken durum ve gezinme çubuğu görünüyor, eylem satırının altında `ExplorationInset` payı var (ekranda y = 2186…2274) |
+| Etiketler | ✅ Görevler, dört mod ve raporlarda "etiketsiz 0" |
+| Sonuç kartları | ✅ ağaçta okunuyor: "Raf satışa hazır", raf verimi, düzey; haftalık raporda "Hafta grafiği: 1. gün +62, …" |
+| Raf gözleri | ❌ dört modda tuval tek düğüm (v1.0.1'den açık) — düzeltildi, aşağıda |
+| Alt eylem satırı | ✅ elle: TalkBack'le dokunarak ve sağa kaydırarak ulaşılıyor, okunuyor (aşağıda). `uiautomator` ağacında ise sınırı sıfır: Diziliş 3, Denetim 1, Sipariş raporu 2 düğüm |
+| Y5 (360×640 dp) | ✅ elle (2026-09-24): TalkBack'le "Satış"tan sağa kaydırınca liste kayıyor, "Sipariş" okunuyor, çift dokunuş haftalık raporu açıyor. `uiautomator` ağacında ise satır hâlâ kesik ve kaymış görünüyor (y = 958…1125, ekranda 915…1045): alt satırdaki gibi ağaç dökümünün kusuru |
+
+Alt satır için ölçülenler, sebep bulunamadı:
+
+- TalkBack açıkken Reyon'un erişilebilirlik penceresi ekranın tamamı
+  (`bounds=Rect(0, 0 - 1080, 2400)`); v1.0.1'deki "pencere 2186'da bitiyor"
+  açıklaması bu durumda geçerli değil. Ekranda eylem satırı y = 1999…2186
+  (düğmeler 2028…2154), yani pencerenin içinde.
+- Deney yapısında alt pay iki katına çıkarıldı, satır 88 px yukarı çıktı
+  (1911…2098): düğümler yine sıfır. Aynı ekranda Görevler'in 1783…1962'deki satırı
+  görünür geliyor. Kesim bir y sınırı gibi davranmıyor.
+- Robolectric'te aynı düğmeler (`AccessibilityNodeProvider`) görünür ve sınırları
+  doğru: uygulamanın semantiği sağlam, kayıp cihaza özgü.
+- Gizli klavye penceresi değil (yüzeyi yok, `mInputShown=false`).
+
+**Elle sınama (kullanıcı, TalkBack açık, 2026-09-23): hepsi çalışıyor.** Diziliş'te
+Kılavuz, Geri al ve Raftan kaldır'a dokununca odak çerçevesi geliyor ve adı
+okunuyor; bir üründen sağa kaydırmak sırayla alt satıra iniyor; Denetim'de
+Kılavuz, Sipariş raporunda Görevler ve Yeni hafta da okunuyor.
+
+Yani sıfır sınır, `uiautomator`'ın bu cihazda gördüğü ağacın kusuru; TalkBack'in
+kullandığı düğümler sağlam. Sonuç: `cihaz_testi.py erisim`'in "sınırı sıfır …"
+sayısı SM-A515F'te alt satır için güvenilir bir ölçü değil — bundan sonra alt
+satırın erişilebilirliği TalkBack'le elle sınanır. (`adb shell input tap`
+TalkBack'in keşfinden geçmiyor, dokunuş düğmeyi doğrudan çalıştırıyor; keşfi
+betikle taklit etmek mümkün değil.) v0.28.2'nin "TalkBack açıkken sınırı sıfır 0"
+maddesi bu yüzden kapandı: ölçüt yanlıştı, davranış doğru.
+
+**Düzeltildi: raf gözleri ekran okuyucuya açık** (yapı
+`sha256=20b64c9f8f8b067d3d6a5295c5e1f01949651f2dea48078ca19c0c9e5235977c`). Tuvalin
+üstünde her göz için görünmez bir düğüm var (`ShelfSlots`, tuvalle aynı `ShelfGeom`):
+konumu ve içeriği okunuyor, çift dokunuş parmak dokunuşuyla aynı işi yapıyor, raftan
+kaldırma özel eylem ("Raftan kaldır"). Ürün tür, marka ve boyla okunuyor, çünkü marka
+ve boy rafta yalnız harf ve noktayla görünüyor (Denetim'in marka/boy sapmaları,
+Diziliş'in boy akışı kuralı). Satış'ta göz ürünün verim katkısını da okuyor,
+Denetim'de bulunan sapmanın türünü. Boy adları 14 dilde yeni (`reyon_size_*`).
+
+Cihazda (TalkBack kapalı, `uiautomator`): Diziliş ve Satış'ta 12, Denetim'de 24 göz
+düğümü — "göz hizası (2. raf), soldan 2. göz: Şampuan, Meltem, küçük boy, +43",
+"en üst raf, soldan 1. göz: Gazoz, Toros, orta boy". Düğümlerin dokunma işleyicisi yok;
+parmakla seçilen ürün boş göze dokununca yine yerleşiyor. İlk sürümde göz içeriği
+işlev olarak veriliyordu ve durum değişince yenilenmiyordu (ürün kalktıktan sonra
+göz eski ürünü okuyordu); `ReyonShelfSlotsTest` bunu yakaladı, içerik artık hazır
+liste.
+
+**TalkBack'le elle oynandı (kullanıcı, 2026-09-24): çalışıyor.** Diziliş'te: tepsideki
+Ayran'a dokun ve çift dokun → çip seçildi (sarı çerçeve); "göz hizası (2. raf), soldan 1.
+göz: boş"a dokun ve çift dokun → Ayran iki göze yerleşti, tepsiden kalktı, göz "Ayran,
+Ege, küçük boy" okudu; üç parmakla TalkBack menüsü → Eylemler → "Raftan kaldır" → Ayran
+tepsiye döndü, göz yeniden "boş". Her adım `uiautomator` ağacıyla da doğrulandı.
+
+**Satış ve Denetim de TalkBack'le elle oynandı (kullanıcı, 2026-09-24): çalışıyor.**
+Satış: tepsideki Limonata'ya dokun + çift dokun → TalkBack "seçili" dedi; "göz hizası (2.
+raf), soldan 1. göz: boş"a çift dokunuş → Limonata yerleşti; göz "Limonata, …, +12"
+okudu (verim katkısıyla). Denetim: planogramda "en üst raf, soldan 2. göz: Deterjan…",
+mağaza rafında aynı göz "boş" → çift dokunuş → BULUNAN 1/2, göz "boş, Boş göz" okudu;
+göz hizası 1. gözde plan "Sünger", raf "Kâğıt havlu" → çift dokunuş → "Denetim tamam"
+kartı açıldı ve okundu. Üç modda raf gözleri ekran okuyucuyla oynanabilir; v1.0.1'den
+açık E bulgusu kapandı.
+
+Sınamada öğrenilenler (uygulama hatası değil, sonraki sınamalar için):
+
+- TalkBack'te çift dokunuş parmağın altındakini değil **odaktaki** öğeyi çalıştırır.
+  Ekran açılınca odak en üstteki "Geri"de; hemen çipe çift dokunmak "Geri"yi çalıştırıp
+  Görevler'e döndürdü. Önce öğeye tek dokunup okunduğunu duymak gerekiyor.
+- İki dokunuş arası uzarsa TalkBack ikisini ayrı keşif dokunuşu sayıyor, odak kayıyor.
+- Cihazın metin okuma dili İngilizce (Samsung, `en_US`) iken TalkBack Türkçe metni
+  İngilizce sesle okuyordu, anlaşılmıyordu. Samsung'un Türkçe sesi yüklü değildi
+  ("Language was not loaded"); sınama Google metin okuma motoru, Türkçe ile yapıldı
+  (`tts_default_synth=com.google.android.tts`, `tts_default_locale=…:tr-TR`).
+- `uiautomator dump` (dolayısıyla `cihaz_testi.py`'nin `arayuz`'u) çalışırken Android
+  erişilebilirlik servislerini bastırıyor: TalkBack yeniden bağlanınca odak ekranın
+  başına dönüyor, kullanıcının o sıradaki çift dokunuşu boşa gidiyor ("ekran donmuş
+  gibi"). Elle TalkBack sınaması sürerken ağaç dökümü alınmaz; yalnız `screencap`.
+- Pürüz: çip odaklanınca TalkBack etiketten sonra çipin yazılarını ("Ayran", "×2") da
+  okuyordu; seçim yalnız sarı çerçeveyle görünüyor, okunmuyordu. **Düzeltildi**
+  (yapı `sha256=f527bb71…`): çipin iç yazıları ekran okuyucudan gizli
+  (`clearAndSetSemantics`), çip `selected` taşıyor. Cihazda çip ağacında yalnız etiket
+  kalıyor; seçili çip `checkable=true, checked=true` (Compose sekme olmayan öğede seçimi
+  böyle bildiriyor, TalkBack "seçili" okuyor). `ReyonShelfSlotsTest
+  .trayChipReadsOnceAndAnnouncesSelection` düzeltme çıkarılınca kırılıyor.

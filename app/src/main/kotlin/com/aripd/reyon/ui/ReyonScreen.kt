@@ -49,7 +49,9 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -453,45 +455,64 @@ private fun ShelfCanvas(
     val names = remember(puzzle, res) { puzzle.products.map { ReyonText.kind(res, it.kind) } }
     val unplaced = puzzle.products.size - state.placedCount
     val desc = appString(R.string.reyon_board_desc_fmt, rows, cols, unplaced)
-    Canvas(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height)
-            .clip(RoundedCornerShape(6.dp))
-            .semantics { contentDescription = desc }
-            .pointerInput(rows, cols) {
-                detectTapGestures(
-                    onTap = { pos ->
-                        val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
-                        currentTap(g.rowAt(pos.y), g.colAt(pos.x))
-                    },
-                    onLongPress = { pos ->
-                        val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
-                        currentLong(g.rowAt(pos.y), g.colAt(pos.x))
-                    },
-                )
-            },
-    ) {
+    val selectedText = stringResource(R.string.reyon_slot_selected)
+    val removeText = stringResource(R.string.reyon_remove)
+    Box(modifier = Modifier.fillMaxWidth().height(height)) {
+        Canvas(
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(6.dp))
+                .semantics { contentDescription = desc }
+                .pointerInput(rows, cols) {
+                    detectTapGestures(
+                        onTap = { pos ->
+                            val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
+                            currentTap(g.rowAt(pos.y), g.colAt(pos.x))
+                        },
+                        onLongPress = { pos ->
+                            val g = ShelfGeom(size.width.toFloat(), size.height.toFloat(), rows, cols, density)
+                            currentLong(g.rowAt(pos.y), g.colAt(pos.x))
+                        },
+                    )
+                },
+        ) {
+            @Suppress("UNUSED_VARIABLE")
+            val tick = version
+            val g = ShelfGeom(size.width, size.height, rows, cols, density)
+            drawGondola(g, colors)
+            val placed = puzzle.products.mapNotNull { p -> state.placement(p.id)?.let { Triple(p, it.row, it.col) } }
+            drawEmptySlots(g, occupiedMask(puzzle.board, placed), colors)
+            for ((p, row, col) in placed) {
+                drawPack(g, labeler, colors, names[p.id], texts.mark(p), p, p.facings, row, col, pinned = state.isLocked(p.id))
+                drawShelfLabel(g, labeler, colors, p, p.facings, row, col, texts.code(p), texts.badges(p), highlighted = p.id == selected)
+            }
+            for ((p, row, col) in placed) {
+                val ring = when {
+                    p.id == selected -> colors.tokens.attention
+                    p.id == hinted -> colors.tokens.attention
+                    p.id in violated -> colors.tokens.bad
+                    p.id in highlighted -> colors.highlight
+                    else -> null
+                }
+                if (ring != null) drawPackRing(g, p, p.facings, row, col, ring, width = if (p.id == selected) 3.dp.toPx() else 2.5.dp.toPx())
+            }
+        }
+        // Gözler ekran okuyucuya tek tek: konum, içerik, çift dokunuş = dokunuş, kaldırma özel eylem.
         @Suppress("UNUSED_VARIABLE")
         val tick = version
-        val g = ShelfGeom(size.width, size.height, rows, cols, density)
-        drawGondola(g, colors)
-        val placed = puzzle.products.mapNotNull { p -> state.placement(p.id)?.let { Triple(p, it.row, it.col) } }
-        drawEmptySlots(g, occupiedMask(puzzle.board, placed), colors)
-        for ((p, row, col) in placed) {
-            drawPack(g, labeler, colors, names[p.id], texts.mark(p), p, p.facings, row, col, pinned = state.isLocked(p.id))
-            drawShelfLabel(g, labeler, colors, p, p.facings, row, col, texts.code(p), texts.badges(p), highlighted = p.id == selected)
-        }
-        for ((p, row, col) in placed) {
-            val ring = when {
-                p.id == selected -> colors.tokens.attention
-                p.id == hinted -> colors.tokens.attention
-                p.id in violated -> colors.tokens.bad
-                p.id in highlighted -> colors.highlight
-                else -> null
-            }
-            if (ring != null) drawPackRing(g, p, p.facings, row, col, ring, width = if (p.id == selected) 3.dp.toPx() else 2.5.dp.toPx())
-        }
+        val occupants = List(rows * cols) { state.occupant(it / cols, it % cols) }
+        ShelfSlots(
+            rows = rows,
+            cols = cols,
+            contents = occupants.map { id ->
+                slotContent(res, if (id >= 0) spokenProduct(res, puzzle.products[id]) else null, if (id >= 0 && id == selected) selectedText else null)
+            },
+            onActivate = { row, col -> currentTap(row, col) },
+            modifier = Modifier.matchParentSize(),
+            removeLabel = removeText,
+            removable = occupants.map { it >= 0 && !state.isLocked(it) },
+            onRemove = { row, col -> currentLong(row, col) },
+        )
     }
 }
 
@@ -655,10 +676,16 @@ internal fun ProductChips(
                     shape = RoundedCornerShape(8.dp),
                     color = MaterialTheme.colorScheme.surface,
                     border = BorderStroke(if (ring != null) 2.dp else 1.dp, ring ?: tokens.line),
-                    modifier = Modifier.semantics { contentDescription = desc },
+                    // Ekran okuyucu tek cümle okur: etiket ve seçili durumu. İçteki yazılar
+                    // gizli; etiket onları zaten içeriyor, yoksa "Ayran", "×2" tekrar okunuyordu.
+                    modifier = Modifier.semantics {
+                        contentDescription = desc
+                        this.selected = isSelected
+                    },
                 ) {
                     Row(
                         modifier = Modifier
+                            .clearAndSetSemantics {}
                             .heightIn(min = 40.dp)
                             .padding(horizontal = 10.dp, vertical = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,

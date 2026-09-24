@@ -111,6 +111,12 @@
     <string name="reyon_shelf_eye_at">auf Augenhöhe (Boden 2)</string>
     <string name="reyon_shelf_bottom_at">auf den untersten Boden</string>
     <string name="reyon_shelf_nth_at">auf Boden %1$d</string>
+    <string name="reyon_slot_fmt">%1$s, Platz %2$d von links: %3$s</string>
+    <string name="reyon_slot_empty">leer</string>
+    <string name="reyon_slot_selected">ausgewählt</string>
+    <string name="reyon_size_small">klein</string>
+    <string name="reyon_size_medium">mittel</string>
+    <string name="reyon_size_large">groß</string>
     <string name="reyon_clue_placed">%1$s steht %2$s (gegeben)</string>
     <string name="reyon_clue_on_shelf">%1$s steht %2$s</string>
     <string name="reyon_clue_in_slot">%1$s belegt Platz %2$d von links</string>
@@ -160,7 +166,7 @@
     <string name="home_puzzle_desc">Briefing lesen, Planogramm aufbauen</string>
     <string name="home_audit_desc">Regal mit dem Planogramm vergleichen</string>
     <string name="home_sales_desc">Regalleistung steigern</string>
-    <string name="home_order_desc">Wöchentliche Bestandsentscheidungen</string>
+    <string name="home_order_desc">Bestand für die Woche planen</string>
     <string name="howto_title">So geht’s</string>
     <string name="howto_ok">Verstanden</string>
     <string name="howto_format_fmt">%1$s: %2$s</string>
@@ -256,7 +262,7 @@
     <string name="sales_chip_fmt">×%1$d · Nachfrage %2$d</string>
     <string name="rules_total_fmt">gesamt %1$d</string>
     <string name="reyon_sales_finish">Fertig</string>
-    <string name="reyon_sales_done_title">Belegung fertig</string>
+    <string name="reyon_sales_done_title">Regal verkaufsbereit</string>
     <string name="reyon_sales_result_fmt">Regalleistung %1$d / %2$d (%3$d%% des Profis)</string>
     <string name="reyon_sales_beat_target">Über dem Profi</string>
     <string name="reyon_sales_reopen">Weiter aufstellen</string>

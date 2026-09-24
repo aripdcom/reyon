@@ -525,7 +525,9 @@ internal fun DrawScope.drawDeviationFlag(g: ShelfGeom, labeler: BlockLabeler, c:
         val full = padX + icon + 3.dp.toPx() + t.size.width + padX
         val pillW = if (full <= width - 4.dp.toPx()) full else minOf(icon + 2 * padX, width)
         val cx = left + width / 2f
-        val cy = g.base(r) - g.zone * 0.5f
+        // Bölgenin üst kenarında: ortada ürünün adının tam üstüne biniyordu ("Yer değişimi"
+        // çipi "Kuruyemiş"i örtüyordu; docs/cihaz-testi.md, 1.1.0, Y4).
+        val cy = g.base(r) - g.zone + h / 2f + 2.dp.toPx()
         drawRoundRect(
             c.tokens.label,
             topLeft = Offset(cx - pillW / 2f, cy - h / 2f),
