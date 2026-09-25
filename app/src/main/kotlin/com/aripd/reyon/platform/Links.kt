@@ -17,8 +17,7 @@ object Links {
     const val SITE = "https://reyon.aripd.com"
 
     // Gizlilik politikasının İngilizce sayfası; Play Console'daki adres de bu.
-    // Her dilin kendi sayfası var ([privacyFor]). 1.1.0'a kadar adres
-    // gizlilik.html'di; o sayfa sitede durur ve okurun diline yönlendirir.
+    // Her dilin kendi sayfası var ([privacyFor]).
     const val PRIVACY = "https://reyon.aripd.com/privacy.html"
     const val SOURCE = "https://github.com/aripdcom/reyon"
     const val REPORT = "https://github.com/aripdcom/reyon/issues/new"

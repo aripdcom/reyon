@@ -11,10 +11,13 @@ Google Play listelemesi için metinler ve form cevapları. Kaynak dosyalar burad
 | `data-safety.md` | Veri güvenliği formu cevapları | |
 | `icerik-derecelendirme.md` | IARC anketi cevapları ve hedef kitle | |
 | `graphics/icon-512.png` | Uygulama simgesi | 512×512, 32 bit PNG |
-| `graphics/feature-1024.png` | Öne çıkan görsel | 1024×500 |
+| `graphics/feature-1024.png` | Öne çıkan görsel | 1024×500, alfasız 24 bit PNG |
+| `screenshots/<dil>/*.png` | Telefon ekran görüntüleri (`en` varsayılan, `tr` Türkçe giriş) | alfasız 24 bit PNG, 2–8 kare |
 | `checklist.md` | Yayın öncesi kontrol listesi | |
 
-Sınırları ve dil kapsamını `tools/check_store.py` denetler; CI her itmede çağırır.
+Sınırları, dil kapsamını ve görsellerin biçimini `tools/check_store.py` denetler; CI her
+itmede çağırır. Yeni ekran görüntüsü alınınca `python3 tools/store_screenshots.py` onu
+Play'in istediği alfasız 24 bit PNG'ye çevirir (`screencap` 32 bit yazar).
 
 ## Kategori
 

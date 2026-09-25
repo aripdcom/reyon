@@ -235,22 +235,29 @@ def to_rgba(path):
         return
     rgba = [bytes(b for x in range(width)
                   for b in (*row[x * bpp:x * bpp + 3], 255)) for row in rows]
-    stride = width * 4
+    write_png(path, width, height, 4, rgba)
+
+
+def png_chunk(kind, body):
+    return (len(body).to_bytes(4, 'big') + kind + body
+            + zlib.crc32(kind + body).to_bytes(4, 'big'))
+
+
+def write_png(path, width, height, bpp, rows, extra=b''):
+    """8 bitlik RGB (bpp 3) ya da RGBA (bpp 4) PNG yazar. `extra`, IHDR'nin
+    ardına konan hazır yardımcı parçalar (sRGB gibi).
+    """
+    stride = width * bpp
     # Satırlar birbirine çok benzediği için "Up" süzgeci düz baytlardan çok
     # daha iyi sıkışır; ilk satırın üstü yok, süzgeçsiz yazılır.
-    raw = bytearray(b'\x00' + rgba[0])
+    raw = bytearray(b'\x00' + rows[0])
     for y in range(1, height):
-        raw += b'\x02' + bytes((rgba[y][i] - rgba[y - 1][i]) & 255 for i in range(stride))
-
-    def chunk(kind, body):
-        return (len(body).to_bytes(4, 'big') + kind + body
-                + zlib.crc32(kind + body).to_bytes(4, 'big'))
-
+        raw += b'\x02' + bytes((rows[y][i] - rows[y - 1][i]) & 255 for i in range(stride))
     header = (width.to_bytes(4, 'big') + height.to_bytes(4, 'big')
-              + bytes((8, 6, 0, 0, 0)))
+              + bytes((8, {3: 2, 4: 6}[bpp], 0, 0, 0)))
     open(path, 'wb').write(
-        b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', header)
-        + chunk(b'IDAT', zlib.compress(bytes(raw), 9)) + chunk(b'IEND', b''))
+        b'\x89PNG\r\n\x1a\n' + png_chunk(b'IHDR', header) + extra
+        + png_chunk(b'IDAT', zlib.compress(bytes(raw), 9)) + png_chunk(b'IEND', b''))
 
 
 def main():

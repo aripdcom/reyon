@@ -71,8 +71,7 @@ python3 tools/apk_dogrula.py     # dist/: SHA256, paket/sürüm, izin yokluğu, 
 https://reyon.aripd.com uygulamanın 14 dilinde: kök sayfa İngilizce, diğer diller
 `/tr/`, `/de/` … `/ar/` altında; ilk ziyarette tarayıcının dili destekleniyorsa o
 dilin sayfası açılır. Gizlilik politikası da dil başına: `privacy.html` (İngilizce,
-Play'deki adres), `tr/privacy.html` … Eski `gizlilik.html` adresi 1.1.0'a kadarki
-uygulamalar için durur ve okurun dilindeki sayfaya yönlendirir. Metnin çoğu uygulamadan (`strings.xml`) ve Play kaydından
+Play'deki adres), `tr/privacy.html` … Metnin çoğu uygulamadan (`strings.xml`) ve Play kaydından
 (`store/play/`) gelir; siteye özgü birkaç cümle `tools/gen_site.py` içinde.
 
 ```sh
