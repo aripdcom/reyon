@@ -79,11 +79,13 @@ Sırayla; her adımın cevabı depoda yazılı.
        Play'e ilk yükleme olduğu için sürüm notu olarak
        `store/play/release-notes/1.1.0.txt` önerilir (14 dil): yeni kullanıcı için asıl
        yenilikler orada; 1.1.1 ve 1.1.2'nin notları GitHub Release'te ve sitede kalır.
-       Önerilen yol: önce dahili teste yükle, 7. maddedeki raporu gör, aynı sürümü üretime
-       yükselt. Ülkeler: bütün ülkeler ya da seçilenler.
-7. [ ] **Lansman öncesi rapor.** Yalnızca test kanalına (dahili test yeter) yüklenen sürüm için
-       Play'in kendi cihazlarında koşar; doğrudan üretime yüklenen sürümde çıkmaz. Çökme ve
-       erişilebilirlik uyarılarına bakılır.
+       Önerilen yol: dahili teste yükle ve kendi telefonunda dene, aynı sürümü kapalı teste
+       yükselt (7. maddedeki rapor için), rapor temizse üretime yükselt. Ülkeler: bütün
+       ülkeler ya da seçilenler.
+7. [ ] **Lansman öncesi rapor.** Yalnız kapalı ya da açık test kanalına yayımlanan sürüm için
+       Play'in kendi cihazlarında koşar; dahili testte ve doğrudan üretime yüklenen sürümde
+       çıkmaz. Kuruluş hesabında kapalı test için 12 test kullanıcısı / 14 gün şartı yok.
+       Çökme ve erişilebilirlik uyarılarına bakılır.
 8. [ ] **Büyük ekran (isteğe bağlı).** Android 16, hedef API 36'daki uygulamalarda 600 dp ve
        üstü ekranlarda dikey kilidi yok sayar; bir tablette ya da katlanabilirde yatay görünüm
        bir kez denenir.
