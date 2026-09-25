@@ -34,6 +34,7 @@ import html
 import os
 import re
 import sys
+import unicodedata
 import xml.etree.ElementTree as ET
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -483,6 +484,16 @@ def endonyms():
     return dict(re.findall(r'"([^"]+)" to "([^"]+)"', block))
 
 
+def by_name(names):
+    """Görünen dil listelerinin sırası: dilin kendi adına göre alfabetik (Dansk, Deutsch,
+    English … Русский, العربية). Aksan sırayı bozmaz; Latin dışı yazılar Unicode
+    sırasıyla sona düşer. Uygulamanın kendi sırası (AppLocale.TAGS) değişmez."""
+    def key(tag):
+        name = unicodedata.normalize("NFD", names[tag])
+        return "".join(ch for ch in name if not unicodedata.combining(ch)).casefold()
+    return sorted(TAGS, key=key)
+
+
 def android_strings(tag):
     """values(-tag)/strings.xml; Android kaçışları çözülmüş hâliyle."""
     folder = "values" if tag == "en" else f"values-{tag}"
@@ -918,7 +929,7 @@ REDIRECT = """<script>
 
 def topbar(tag, s, c, names, prefix):
     items = []
-    for x in TAGS:
+    for x in by_name(names):
         current = ' aria-current="page"' if x == tag else ""
         items.append(f'<li><a href="{home_href(prefix, x)}" hreflang="{x}" lang="{x}" '
                      f'data-lang="{x}"{current}>{html.escape(names[x])}'
@@ -1067,7 +1078,7 @@ def home_page(tag, ctx):
     note_items = "".join(f"<li>{t(tag, n)}</li>" for n in notes[NOTE_LOCALE[tag]])
     lang_items = "".join(
         f'<li><a href="{home_href(prefix, x)}" hreflang="{x}" lang="{x}" data-lang="{x}"'
-        f'{attr("aria-current", "page", x == tag)}>{html.escape(names[x])}</a></li>' for x in TAGS)
+        f'{attr("aria-current", "page", x == tag)}>{html.escape(names[x])}</a></li>' for x in by_name(names))
     chips = "".join(f"<li>{t(tag, s[k])}</li>" for k in ("chip_no_ads", "chip_no_trackers", "chip_no_permissions"))
     chips += f"<li>{t(tag, st['theme'])}</li>"
     arrow = icon("arrow", "ic ic-sm ic-flip")
@@ -1173,9 +1184,9 @@ def privacy_page(ctx):
     base, names = ctx["base"], ctx["names"]
     policy = gen_privacy.POLICY
     nav = "".join(f'<li><a href="#{x}" hreflang="{x}" lang="{x}">{html.escape(names[x])}</a></li>'
-                  for x in TAGS)
+                  for x in by_name(names))
     sections = []
-    for x in TAGS:
+    for x in by_name(names):
         p = policy[x]
         rtl = ' dir="rtl"' if x in RTL else ""
         parts = [f'  <section id="{x}" lang="{x}"{rtl} class="policy">',
@@ -1251,7 +1262,7 @@ def not_found(ctx):
     items = "".join(
         f'<li lang="{x}"{attr("dir", "rtl", x in RTL)}><span>{t(x, COPY[x]["notfound"])}</span>'
         f'<a href="/{"" if x == "en" else x + "/"}" data-lang="{x}">{t(x, COPY[x]["home"])}</a>'
-        f'<small>{html.escape(names[x])}</small></li>' for x in TAGS)
+        f'<small>{html.escape(names[x])}</small></li>' for x in by_name(names))
     return f"""<!doctype html>
 <html lang="en">
 <head>

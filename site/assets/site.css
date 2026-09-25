@@ -163,13 +163,13 @@ p { text-wrap: pretty; }
 .lang[open] summary .ic-sm { transform: rotate(180deg); }
 .lang-menu {
   position: absolute; inset-inline-end: 0; top: calc(100% + 8px); z-index: 30;
-  min-width: 230px; max-height: min(70vh, 560px); overflow: auto;
+  min-width: 230px; max-height: min(82vh, 640px); overflow: auto;
   background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
   box-shadow: var(--shadow); padding: 6px;
 }
 .lang-menu a {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 9px 12px; border-radius: 9px; color: var(--text); text-decoration: none; font-size: 15.5px;
+  padding: 8px 12px; border-radius: 9px; color: var(--text); text-decoration: none; font-size: 15.5px;
 }
 .lang-menu a:hover { background: var(--bg-2); }
 .lang-menu a[aria-current] { font-weight: 600; color: var(--brand); background: var(--brand-weak); }
