@@ -31,9 +31,9 @@ engine/    saf Kotlin/JVM motor — hiçbir bağımlılığı yok (üretici, ç�
            denetim, satış puanı, sipariş simülasyonu) + testler + denge ölçümü
 app/       Android uygulaması: Compose arayüz (açık/koyu tema, IBM Plex), 14 dil,
            paylaşım kartı, ayarlar
-site/      proje sayfası ve 14 dilde gizlilik politikası (GitHub Pages)
+site/      14 dilde tanıtım sitesi ve gizlilik politikası (GitHub Pages)
 store/     Play listeleme metinleri, görseller, form cevapları
-tools/     metin/mağaza/site denetimleri, yayın paketi doğrulaması, gizlilik ve
+tools/     metin/mağaza/site denetimleri, yayın paketi doğrulaması, site ve
            mağaza görseli üreticileri
 docs/      cihaz koşum protokolü ve kütükler
 ```
@@ -55,7 +55,7 @@ Denetimler CI'da Gradle'dan önce koşar:
 ```sh
 python3 tools/check_strings.py   # 14 dilde anahtar ve biçim belirteci paritesi
 python3 tools/check_store.py     # Play metin sınırları ve dil kapsamı
-python3 tools/check_site.py      # gizlilik sayfası üreticisiyle aynı mı, bağlantılar tutarlı mı
+python3 tools/check_site.py      # site üreticisiyle aynı mı, 14 dil tam mı, bağlantılar kırık mı
 ```
 
 Yayın paketlerini `release.yml`, GitHub Release oluşturmadan önce
@@ -65,6 +65,22 @@ Yayın paketlerini `release.yml`, GitHub Release oluşturmadan önce
 ```sh
 python3 tools/apk_dogrula.py     # dist/: SHA256, paket/sürüm, izin yokluğu, 14 dil, v2 imza ve parmak izi
 ```
+
+## Site
+
+https://reyon.aripd.com uygulamanın 14 dilinde: kök sayfa İngilizce, diğer diller
+`/tr/`, `/de/` … `/ar/` altında; ilk ziyarette tarayıcının dili destekleniyorsa o
+dilin sayfası açılır. Metnin çoğu uygulamadan (`strings.xml`) ve Play kaydından
+(`store/play/`) gelir; siteye özgü birkaç cümle `tools/gen_site.py` içinde.
+
+```sh
+python3 tools/gen_site.py        # site/ altındaki sayfaları üretir (gizlilik dahil)
+python3 tools/gen_site_fonts.py  # IBM Plex'ten WOFF2 alt kümeleri (fontTools + brotli ister)
+```
+
+Uygulama metni ya da Play metni değişince site yeniden üretilir; `check_site.py`
+üretilmemiş siteyi CI'da durdurur. `main`'e gelen `site/` değişikliğini `pages.yml`
+yayımlar.
 
 ## Gizlilik
 
