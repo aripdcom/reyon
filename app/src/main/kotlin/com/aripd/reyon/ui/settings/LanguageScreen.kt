@@ -37,8 +37,9 @@ const val LANGUAGE_LIST_TAG = "language_list"
  * Dil seçimi.
  *
  * İlk satır "telefonun dili"dir ([AppLocale.SYSTEM]); altında desteklenen
- * diller kendi adlarıyla listelenir. Seçim uygulanınca etkinlik yeniden
- * oluşur, o yüzden ekran seçimden sonra kendiliğinden kapanır.
+ * diller kendi adlarıyla, alfabetik sırada ([AppLocale.PICKER_ORDER])
+ * listelenir. Seçim uygulanınca etkinlik yeniden oluşur, o yüzden ekran
+ * seçimden sonra kendiliğinden kapanır.
  *
  * [selected] kullanıcının açık seçimi, [effective] o an çizilen dil: kullanıcı
  * "telefonun dili"nde kaldıysa ikincisi hangi dile düşüldüğünü gösterir.
@@ -71,7 +72,7 @@ fun LanguageScreen(
                     onClick = { onPick(AppLocale.SYSTEM) },
                 )
             }
-            items(AppLocale.TAGS) { tag ->
+            items(AppLocale.PICKER_ORDER) { tag ->
                 LanguageRow(
                     label = AppLocale.endonym(tag),
                     detail = null,

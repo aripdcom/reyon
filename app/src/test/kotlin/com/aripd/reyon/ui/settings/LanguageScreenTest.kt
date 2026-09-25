@@ -44,6 +44,20 @@ class LanguageScreenTest {
     }
 
     @Test
+    fun listsLanguagesAlphabeticallyBelowThePhoneLanguage() {
+        // "Telefonun dili" en üstte; altında diller kendi adlarına göre
+        // alfabetik (Dansk, Deutsch, English …). Türkçe seçiliyken her ad
+        // listede tek geçer; ilk altı dil 891 dp'lik ekranda birlikte görünür.
+        show(selected = "tr")
+        val labels = listOf(str(R.string.language_system)) +
+            AppLocale.PICKER_ORDER.take(6).map(AppLocale::endonym)
+        val tops = labels.map { rule.onNodeWithText(it).fetchSemanticsNode().boundsInRoot.top }
+        assertEquals("satırlar $labels sırasında olmalı: $tops", tops.sorted(), tops)
+        assertEquals("satırlar üst üste binmemeli: $tops", tops.size, tops.toSet().size)
+        assertEquals("Dansk", AppLocale.endonym(AppLocale.PICKER_ORDER.first()))
+    }
+
+    @Test
     fun offersThePhoneLanguageAndNamesWhatItResolvedTo() {
         // Seçim "telefonun dili"ndeyken satır hangi dile düşüldüğünü alt satırda
         // yazar: "English" o zaman iki kez geçer (bu satır + listedeki İngilizce).

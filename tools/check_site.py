@@ -2,18 +2,19 @@
 """Site denetimi. Depo kökünden koşar, CI her itmede çağırır.
 
 Site tools/gen_site.py'nin çıktısı; uygulamanın 14 dilinin her biri kendi
-sayfasında, gizlilik politikası (Play'in istediği tek adres) 14 dili birlikte
-taşıyor. Denetimler:
+ana sayfasında ve kendi gizlilik sayfasında (privacy.html; İngilizcesi Play'deki
+adres). Denetimler:
 
   1. site/ altındaki her üretilen dosya üreticinin çıktısıyla birebir aynı;
      üreticinin bilmediği dosya yok (elle yazılan CSS, JS ve yazı tipleri hariç).
      Metin uygulamadan ve store/play'den geliyor: onlar değişip site yeniden
      üretilmezse burada düşer
-  2. AppLocale.TAGS'teki her dilin sayfası var, lang/dir doğru, her sayfa
-     bütün dillere hreflang ile bağlı; gizlilik sayfasında her dilin bölümü
-     ve iletişim adresi var
+  2. AppLocale.TAGS'teki her dilin ana sayfası ve gizlilik sayfası var,
+     lang/dir doğru, her sayfa kendi türünün bütün dillerine hreflang ile
+     bağlı; gizlilik sayfasında o dilin politikası ve iletişim adresi var
   3. Uygulamadaki bağlantılar (Links.SITE, Links.PRIVACY) sitenin alan adıyla
-     aynı: yarım kalmış alan adı taşıması ölü bağlantı bırakır
+     aynı: yarım kalmış alan adı taşıması ölü bağlantı bırakır. Eski gizlilik
+     adresi (gizlilik.html) duruyor: yüklü 1.0.x–1.1.0 uygulamaları ona bakıyor
   4. Sitede önceki depodan kalma marka izi yok
   5. İç bağlantılar ve çapalar bir dosyaya/öğeye varıyor; sayfalar dışarıdan
      kaynak yüklemiyor (yazı tipi, betik, stil, görsel hepsi sitede)
@@ -81,31 +82,34 @@ def check_generated(files):
 
 
 def check_languages(tags, pages):
-    """2. Dil kapsamı, lang/dir, hreflang; gizlilik bölümleri."""
-    for tag in tags:
-        path = "index.html" if tag == "en" else f"{tag}/index.html"
-        page = pages.get(path)
-        if page is None:
-            errors.append(f"{tag} dilinin sayfası üretilmiyor ({path})")
-            continue
-        m = re.search(r"<html([^>]*)>", page)
-        attrs = m.group(1) if m else ""
-        if f'lang="{tag}"' not in attrs:
-            errors.append(f"{path}: <html lang=\"{tag}\"> değil")
-        if (tag in gen_site.RTL) != ('dir="rtl"' in attrs):
-            errors.append(f"{path}: yazı yönü yanlış")
-        alternates = set(re.findall(r'<link rel="alternate" hreflang="([^"]+)"', page))
-        missing = (set(tags) | {"x-default"}) - alternates
-        if missing:
-            errors.append(f"{path}: hreflang eksik ({', '.join(sorted(missing))})")
-    privacy = pages["gizlilik.html"]
-    for tag in tags:
-        block = re.search(rf'<section id="{tag}" lang="{tag}".*?</section>', privacy, re.S)
-        if not block:
-            errors.append(f"gizlilik.html: {tag} bölümü yok")
-        elif gen_site.MAIL not in block.group(0):
-            errors.append(f"gizlilik.html: {tag} bölümünde iletişim adresi yok")
-    print(f"diller: {len(tags)} sayfa, gizlilik.html {len(tags)} bölüm")
+    """2. Dil kapsamı, lang/dir, hreflang; her dilin gizlilik sayfası."""
+    for page_name in ("index.html", gen_site.PRIVACY):
+        for tag in tags:
+            path = page_name if tag == "en" else f"{tag}/{page_name}"
+            page = pages.get(path)
+            if page is None:
+                errors.append(f"{tag} dilinin sayfası üretilmiyor ({path})")
+                continue
+            m = re.search(r"<html([^>]*)>", page)
+            attrs = m.group(1) if m else ""
+            if f'lang="{tag}"' not in attrs:
+                errors.append(f"{path}: <html lang=\"{tag}\"> değil")
+            if (tag in gen_site.RTL) != ('dir="rtl"' in attrs):
+                errors.append(f"{path}: yazı yönü yanlış")
+            alternates = dict(re.findall(r'<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"', page))
+            missing = (set(tags) | {"x-default"}) - set(alternates)
+            if missing:
+                errors.append(f"{path}: hreflang eksik ({', '.join(sorted(missing))})")
+            wrong = [x for x, url in alternates.items() if not url.endswith("/" + page_name.replace("index.html", ""))]
+            if wrong:
+                errors.append(f"{path}: hreflang başka türden sayfaya bakıyor ({', '.join(sorted(wrong))})")
+            if page_name == gen_site.PRIVACY:
+                policy = gen_site.gen_privacy.POLICY[tag]
+                if gen_site.MAIL not in page:
+                    errors.append(f"{path}: iletişim adresi yok")
+                if f"<h1>{policy['title']}</h1>" not in page.replace("\u00ad", ""):
+                    errors.append(f"{path}: {tag} politikasının başlığı yok")
+    print(f"diller: {len(tags)} ana sayfa, {len(tags)} gizlilik sayfası")
 
 
 def check_domain(pages):
@@ -114,8 +118,10 @@ def check_domain(pages):
     site, privacy = links["SITE"], links["PRIVACY"]
     if host(site) != host(privacy):
         errors.append(f"Links: SITE ({host(site)}) ile PRIVACY ({host(privacy)}) aynı alan adında değil")
-    if not privacy.endswith("/gizlilik.html"):
-        errors.append(f"Links.PRIVACY ({privacy}) sitedeki gizlilik.html'e bakmıyor")
+    if privacy != f"{site.rstrip('/')}/{gen_site.PRIVACY}":
+        errors.append(f"Links.PRIVACY ({privacy}) sitedeki {gen_site.PRIVACY}'e bakmıyor")
+    if gen_site.LEGACY_PRIVACY not in pages:
+        errors.append(f"{gen_site.LEGACY_PRIVACY} üretilmiyor: yüklü uygulamaların gizlilik bağlantısı ölür")
     for path, page in pages.items():
         # Kendi barındırmamıza bakan bağlantılar: aripd.com alan adları ve
         # proje sayfası. GitHub depo bağlantıları buna girmez.

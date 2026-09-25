@@ -7,7 +7,7 @@ izin bile yok.
 [![CI](https://github.com/aripdcom/reyon/actions/workflows/ci.yml/badge.svg)](https://github.com/aripdcom/reyon/actions/workflows/ci.yml)
 
 - **Site:** https://reyon.aripd.com
-- **Gizlilik:** https://reyon.aripd.com/gizlilik.html
+- **Gizlilik:** https://reyon.aripd.com/privacy.html (her dilde: `/tr/privacy.html` …)
 - **APK:** [en yeni sürüm](https://github.com/aripdcom/reyon/releases/latest/download/reyon.apk)
 
 ## Dört mod
@@ -70,7 +70,9 @@ python3 tools/apk_dogrula.py     # dist/: SHA256, paket/sürüm, izin yokluğu, 
 
 https://reyon.aripd.com uygulamanın 14 dilinde: kök sayfa İngilizce, diğer diller
 `/tr/`, `/de/` … `/ar/` altında; ilk ziyarette tarayıcının dili destekleniyorsa o
-dilin sayfası açılır. Metnin çoğu uygulamadan (`strings.xml`) ve Play kaydından
+dilin sayfası açılır. Gizlilik politikası da dil başına: `privacy.html` (İngilizce,
+Play'deki adres), `tr/privacy.html` … Eski `gizlilik.html` adresi 1.1.0'a kadarki
+uygulamalar için durur ve okurun dilindeki sayfaya yönlendirir. Metnin çoğu uygulamadan (`strings.xml`) ve Play kaydından
 (`store/play/`) gelir; siteye özgü birkaç cümle `tools/gen_site.py` içinde.
 
 ```sh
@@ -86,7 +88,7 @@ yayımlar.
 
 Uygulama ağa hiç bağlanmaz ve manifestte tek bir `uses-permission` taşımaz.
 İlerleme ve ayarlar yalnızca cihazda, uygulamanın özel alanında durur; uygulama
-kaldırılınca gider. Ayrıntı: [gizlilik politikası](https://reyon.aripd.com/gizlilik.html).
+kaldırılınca gider. Ayrıntı: [gizlilik politikası](https://reyon.aripd.com/privacy.html).
 
 ## Lisans
 

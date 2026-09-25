@@ -1,0 +1,56 @@
+<tr-TR>
+• Dil seçici: diller artık kendi adlarına göre alfabetik sırada.
+• Hakkında: web sitesi ve gizlilik politikası uygulamanın dilinde açılır.
+</tr-TR>
+<en-US>
+• Language picker: languages are now listed alphabetically by their own names.
+• About: the website and the privacy policy open in the app’s language.
+</en-US>
+<de-DE>
+• Sprachauswahl: Die Sprachen stehen jetzt alphabetisch nach ihrem eigenen Namen.
+• Über: Website und Datenschutzerklärung öffnen sich in der Sprache der App.
+</de-DE>
+<fr-FR>
+• Choix de la langue : les langues sont désormais classées par ordre alphabétique de leur propre nom.
+• À propos : le site web et la politique de confidentialité s’ouvrent dans la langue de l’appli.
+</fr-FR>
+<nl-NL>
+• Taalkeuze: de talen staan nu alfabetisch op hun eigen naam.
+• Over: de website en het privacybeleid openen in de taal van de app.
+</nl-NL>
+<es-ES>
+• Selector de idioma: los idiomas aparecen ahora por orden alfabético de su propio nombre.
+• Acerca de: el sitio web y la política de privacidad se abren en el idioma de la app.
+</es-ES>
+<pt-BR>
+• Seletor de idioma: os idiomas agora aparecem em ordem alfabética pelo próprio nome.
+• Sobre: o site e a política de privacidade abrem no idioma do app.
+</pt-BR>
+<it-IT>
+• Scelta della lingua: le lingue sono ora in ordine alfabetico secondo il loro nome.
+• Informazioni: il sito web e l’informativa sulla privacy si aprono nella lingua dell’app.
+</it-IT>
+<da-DK>
+• Sprogvalg: sprogene står nu alfabetisk efter deres eget navn.
+• Om: hjemmesiden og privatlivspolitikken åbner på appens sprog.
+</da-DK>
+<sv-SE>
+• Språkval: språken listas nu i bokstavsordning efter sitt eget namn.
+• Om: webbplatsen och integritetspolicyn öppnas på appens språk.
+</sv-SE>
+<no-NO>
+• Språkvalg: språkene står nå alfabetisk etter sitt eget navn.
+• Om: nettstedet og personvernerklæringen åpnes på appens språk.
+</no-NO>
+<fi-FI>
+• Kielivalinta: kielet ovat nyt aakkosjärjestyksessä omalla nimellään.
+• Tietoja: verkkosivu ja tietosuojakäytäntö avautuvat sovelluksen kielellä.
+</fi-FI>
+<ru-RU>
+• Выбор языка: языки теперь идут по алфавиту их собственных названий.
+• О приложении: сайт и политика конфиденциальности открываются на языке приложения.
+</ru-RU>
+<ar>
+• اختيار اللغة: تظهر اللغات الآن مرتّبة أبجديًا بحسب أسمائها.
+• حول: يُفتح الموقع وسياسة الخصوصية بلغة التطبيق.
+</ar>

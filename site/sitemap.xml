@@ -253,6 +253,255 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/"/>
   </url>
   <url>
-    <loc>https://reyon.aripd.com/gizlilik.html</loc>
+    <loc>https://reyon.aripd.com/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/tr/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/de/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/fr/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/nl/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/es/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/pt/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/it/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/da/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/sv/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/nb/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/fi/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/ru/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://reyon.aripd.com/ar/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reyon.aripd.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://reyon.aripd.com/tr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://reyon.aripd.com/de/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://reyon.aripd.com/fr/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://reyon.aripd.com/nl/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://reyon.aripd.com/es/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://reyon.aripd.com/pt/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://reyon.aripd.com/it/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="da" href="https://reyon.aripd.com/da/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://reyon.aripd.com/sv/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="nb" href="https://reyon.aripd.com/nb/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="fi" href="https://reyon.aripd.com/fi/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://reyon.aripd.com/ru/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reyon.aripd.com/ar/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reyon.aripd.com/privacy.html"/>
   </url>
 </urlset>

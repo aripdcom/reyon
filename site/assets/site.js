@@ -50,24 +50,4 @@
         .format(now) + " · ";
     } catch (e) { /* eski tarayıcı: tarih görünmez */ }
   }
-
-  // Gizlilik sayfası çapasız açılırsa (uygulamadaki bağlantı böyle) okurun
-  // dilindeki bölüme geçer: önce seçtiği dil, sonra tarayıcının dili. Bölümler
-  // alfabetik; okurun dili zaten ilk bölümse sayfa yerinde kalır.
-  var policy = document.querySelector("[data-policy]");
-  if (policy && !location.hash) {
-    var pick = null;
-    try { pick = localStorage.getItem(KEY); } catch (e) { /* yok say */ }
-    var prefs = pick ? [pick] : (navigator.languages || [navigator.language || ""]);
-    var first = policy.querySelector("section.policy");
-    for (var j = 0; j < prefs.length; j++) {
-      var tag = String(prefs[j]).toLowerCase().split("-")[0];
-      if (tag === "no" || tag === "nn") tag = "nb";
-      var section = document.getElementById(tag);
-      if (section && section.classList.contains("policy")) {
-        if (section !== first) location.replace("#" + tag);
-        break;
-      }
-    }
-  }
 })();

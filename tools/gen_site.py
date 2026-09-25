@@ -7,19 +7,23 @@ Site, uygulamanın ve Play kaydının söylediğini söyler; metnin çoğu orada
     sonuç, gizlilik ve lisans cümleleri (Play'de yayımlanan metnin aynısı)
   - app/src/main/res/values*/strings.xml: mod adları, formatlar, düzeyler ve
     telefon maketindeki Görevler ekranı (uygulamada görünen metnin aynısı)
-  - store/play/release-notes/<en yeni sürüm>.txt: "Yenilikler" bölümü
+  - store/play/release-notes/<en yeni ara sürüm>.*.txt: "Yenilikler" bölümü
 
 Yalnızca siteye özgü cümleler (giriş, bölüm başlıkları, indirme) aşağıdaki
 COPY sözlüğünde 14 dilde yazılı. Gizlilik metni tools/gen_privacy.py'de durur,
-sayfası burada üretilir.
+sayfaları burada, ana sayfalarla aynı kalıpta üretilir.
 
 Çıktılar (site/):
   index.html          İngilizce, x-default. İlk ziyarette tarayıcının dili
                       destekleniyorsa o dilin sayfasına geçer; seçicide bir
                       dile tıklayan bir daha yönlendirilmez
   <dil>/index.html    Diğer 13 dil; ar sağdan sola
-  en/index.html       Köke yönlendirir (adres elle yazılırsa boşa düşmesin)
-  gizlilik.html       Gizlilik politikası, 14 dil tek adreste (Play'deki URL)
+  privacy.html        Gizlilik politikası, İngilizce (Play'deki URL); kök sayfa gibi
+                      tarayıcının diline geçer
+  <dil>/privacy.html  Gizlilik politikası, diğer 13 dilde
+  en/…                Köke yönlendirir (adres elle yazılırsa boşa düşmesin)
+  gizlilik.html       Eski adres: 1.0.x–1.1.0 uygulamaları gizlilik politikasına
+                      buradan bakıyor; okurun dilindeki privacy.html'e yönlendirir
   404.html, sitemap.xml, robots.txt
   assets/icon.svg     Uygulama simgesinin işareti (sekme simgesi)
   assets/og.png, assets/icon-512.png   store/graphics'ten kopya
@@ -50,6 +54,10 @@ LINKS_KT = os.path.join(ROOT, "app", "src", "main", "kotlin", "com", "aripd", "r
 RTL = gen_privacy.RTL
 MAIL = gen_privacy.MAIL
 RELEASES = "https://github.com/aripdcom/reyon/releases"
+PRIVACY = "privacy.html"
+# 1.0.x–1.1.0 uygulamaları gizlilik politikasına bu adresten bakıyor (Links.PRIVACY);
+# sayfa kaldırılırsa yüklü uygulamalardaki bağlantı ölür.
+LEGACY_PRIVACY = "gizlilik.html"
 APK = RELEASES + "/latest/download/reyon.apk"
 
 # Open Graph yerel ayarı; Facebook Arapça için "ar_AR" bekler.
@@ -445,15 +453,17 @@ COPY = {
     ),
 }
 
-# Başlıktaki uzun bileşik sözcüklerin bölünebileceği yerler (yumuşak tire).
-# 320 px'lik ekranda "Päivittäistavarakaupan" tek satıra sığmaz; tarayıcının
-# kendi heceleme sözlüğü her yerde yok, bölme yeri burada elle yazılı.
+# Başlıklardaki uzun bileşik sözcüklerin bölünebileceği yerler (yumuşak tire):
+# kahramandaki slogan ve gizlilik sayfasının başlığı. 320 px'lik ekranda
+# "Päivittäistavarakaupan" ya da "Datenschutzerklärung" tek satıra sığmaz;
+# tarayıcının heceleme sözlüğü her yerde yok, bölme yeri burada elle yazılı.
 SOFT_HYPHENS = {
-    "de": ("Regal|management",),
-    "da": ("Hylde|simulator", "dagligvare|handlen"),
-    "sv": ("Hyll|simulator", "dagligvaru|handeln"),
-    "nb": ("Hylle|simulator", "dagligvare|handelen"),
-    "fi": ("Päivittäis|tavara|kaupan", "hylly|simulaattori"),
+    "de": ("Regal|management", "Datenschutz|erklärung"),
+    "da": ("Hylde|simulator", "dagligvare|handlen", "Privatlivs|politik"),
+    "sv": ("Hyll|simulator", "dagligvaru|handeln", "Integritets|policy"),
+    "nb": ("Hylle|simulator", "dagligvare|handelen", "Personvern|erklæring"),
+    "fi": ("Päivittäis|tavara|kaupan", "hylly|simulaattori", "Tietosuoja|käytäntö"),
+    "ru": ("конфиденци|альности",),
 }
 
 
@@ -535,15 +545,22 @@ def store(tag):
 
 
 def release_notes():
-    """En yeni sürüm notu: (sürüm, {Play yerel ayarı: [madde, ...]})."""
+    """Sitenin "Yenilikler" bölümü: en yeni ara sürümün (1.1) bütün notları, önce ara
+    sürümün kendisi (1.1.0), sonra yamaları (1.1.1 …). Yalnız son yamanın notu
+    gösterilse ara sürümün asıl yenilikleri siteden düşerdi.
+    Döner: ("1.1", {Play yerel ayarı: [madde, ...]})."""
     folder = os.path.join(STORE, "play", "release-notes")
-    versions = [f[:-4] for f in os.listdir(folder) if re.fullmatch(r"\d+\.\d+\.\d+\.txt", f)]
-    latest = max(versions, key=lambda v: tuple(int(p) for p in v.split(".")))
-    src = open(os.path.join(folder, latest + ".txt"), encoding="utf-8").read()
+    versions = sorted(tuple(int(p) for p in f[:-4].split("."))
+                      for f in os.listdir(folder) if re.fullmatch(r"\d+\.\d+\.\d+\.txt", f))
+    latest = versions[-1]
     notes = {}
-    for loc, body in re.findall(r"<([A-Za-z-]+)>\n(.*?)\n</\1>", src, re.S):
-        notes[loc] = [line.lstrip("•").strip() for line in body.split("\n") if line.strip()]
-    return latest, notes
+    for version in (v for v in versions if v[:2] == latest[:2]):
+        name = ".".join(map(str, version)) + ".txt"
+        src = open(os.path.join(folder, name), encoding="utf-8").read()
+        for loc, body in re.findall(r"<([A-Za-z-]+)>\n(.*?)\n</\1>", src, re.S):
+            notes.setdefault(loc, []).extend(
+                line.lstrip("•").strip() for line in body.split("\n") if line.strip())
+    return f"{latest[0]}.{latest[1]}", notes
 
 
 def load(tag):
@@ -589,12 +606,18 @@ def decimal(tag, value):
     return text if tag in DECIMAL_POINT else text.replace(".", ",")
 
 
-def home_href(prefix, tag):
-    return (prefix + ("" if tag == "en" else f"{tag}/")) or "./"
+def home_href(prefix, tag, page=""):
+    """Bir dilin sayfasına göreli bağlantı: İngilizce kökte, diğerleri <dil>/ altında."""
+    return (prefix + ("" if tag == "en" else f"{tag}/") + page) or "./"
 
 
-def page_url(base, tag):
-    return base if tag == "en" else f"{base}{tag}/"
+def page_url(base, tag, page=""):
+    return (base if tag == "en" else f"{base}{tag}/") + page
+
+
+def plain(text):
+    """Politika metnindeki HTML'i düz metne indirir (başlık ve açıklama için)."""
+    return html.unescape(re.sub(r"<[^>]+>", "", text))
 
 
 # --------------------------------------------------------------------------
@@ -860,7 +883,7 @@ def shelf_band():
 # Sayfa parçaları
 
 
-def head(tag, title, desc, base, prefix, canonical, alternates=True, extra=""):
+def head(tag, title, desc, base, prefix, canonical, alternates=True, extra="", page=""):
     rtl = tag in RTL
     font = {"ar": "reyon-sans-arabic-400.woff2", "ru": "reyon-sans-400-cyrillic.woff2"}.get(
         tag, "reyon-sans-400-latin.woff2")
@@ -878,8 +901,8 @@ def head(tag, title, desc, base, prefix, canonical, alternates=True, extra=""):
         f'<link rel="canonical" href="{canonical}">',
     ]
     if alternates:
-        out += [f'<link rel="alternate" hreflang="{x}" href="{page_url(base, x)}">' for x in TAGS]
-        out.append(f'<link rel="alternate" hreflang="x-default" href="{base}">')
+        out += [f'<link rel="alternate" hreflang="{x}" href="{page_url(base, x, page)}">' for x in TAGS]
+        out.append(f'<link rel="alternate" hreflang="x-default" href="{base}{page}">')
     out += [
         f'<link rel="icon" href="{prefix}assets/icon.svg" type="image/svg+xml">',
         f'<link rel="apple-touch-icon" href="{prefix}assets/icon-512.png">',
@@ -907,9 +930,10 @@ def og(tag, title, desc, base, url):
     return "\n".join(out)
 
 
-# Kök sayfa: ilk ziyarette tarayıcının dili destekleniyorsa o dilin sayfası.
-# Seçicide bir dile tıklayan (site.js hatırlar) bir daha yönlendirilmez;
-# betik çalışmazsa sayfa İngilizce kalır. Çizimden önce koşsun diye satır içi.
+# Kök sayfalar (index.html, privacy.html): ilk ziyarette tarayıcının dili
+# destekleniyorsa o dilin aynı sayfası. Seçicide bir dile tıklayan (site.js
+# hatırlar) bir daha yönlendirilmez; betik çalışmazsa sayfa İngilizce kalır.
+# Çizimden önce koşsun diye satır içi.
 REDIRECT = """<script>
 (function () {
   var tags = %s, key = "reyon.lang", pick = null;
@@ -922,16 +946,22 @@ REDIRECT = """<script>
       if (p === "en" || tags.indexOf(p) >= 0) pick = p;
     }
   }
-  if (pick && pick !== "en" && tags.indexOf(pick) >= 0) location.replace(pick + "/");
+  if (pick && pick !== "en" && tags.indexOf(pick) >= 0) location.replace(pick + "/%s");
 })();
 </script>"""
 
 
-def topbar(tag, s, c, names, prefix):
+def redirect_script(page=""):
+    return REDIRECT % ("[" + ", ".join(f'"{x}"' for x in TAGS if x != "en") + "]", page)
+
+
+def topbar(tag, s, c, names, prefix, page=""):
+    """Üst şerit. Dil menüsü aynı sayfanın diğer dillerine bağlanır (ana sayfa → ana
+    sayfa, gizlilik → gizlilik)."""
     items = []
     for x in by_name(names):
         current = ' aria-current="page"' if x == tag else ""
-        items.append(f'<li><a href="{home_href(prefix, x)}" hreflang="{x}" lang="{x}" '
+        items.append(f'<li><a href="{home_href(prefix, x, page)}" hreflang="{x}" lang="{x}" '
                      f'data-lang="{x}"{current}>{html.escape(names[x])}'
                      f'{icon("check", "ic ic-sm") if x == tag else ""}</a></li>')
     return f"""<header class="top">
@@ -1031,7 +1061,7 @@ def footer(tag, s, st, prefix, lnk):
   <div class="wrap foot-in">
     <div class="foot-brand">{mark_box()}<div><b>Reyon</b><span>{t(tag, s['app_tagline'])}</span></div></div>
     <ul class="foot-links">
-      <li><a href="{prefix}gizlilik.html#{tag}">{t(tag, s['about_privacy'])}</a></li>
+      <li><a href="{PRIVACY}">{t(tag, s['about_privacy'])}</a></li>
       <li><a href="{lnk['SOURCE']}">{t(tag, s['about_source'])}</a></li>
       <li><a href="{lnk['REPORT']}">{t(tag, s['about_report'])}</a></li>
       <li><a href="mailto:{MAIL}">{t(tag, s['about_contact'])}</a></li>
@@ -1050,7 +1080,7 @@ def home_page(tag, ctx):
     url = page_url(base, tag)
     extra = "\n" + og(tag, st["title"], c["meta"], base, url)
     if tag == "en":
-        extra += "\n" + REDIRECT % ("[" + ", ".join(f'"{x}"' for x in TAGS if x != "en") + "]")
+        extra += "\n" + redirect_script()
     kinds = [s[f"reyon_kind_{k}"] for k in KINDS]
     fmt_names = [s[f"format_{f}"] for f, _, _ in FORMATS]
 
@@ -1148,7 +1178,7 @@ def home_page(tag, ctx):
       <h2>{t(tag, c['device_h'])}</h2>
       <ul class="zeros">{zeros}</ul>
       <p class="device-p">{t(tag, st['privacy'])}</p>
-      <a class="more more-inv" href="{prefix}gizlilik.html#{tag}">{t(tag, s['about_privacy'])}{arrow}</a>
+      <a class="more more-inv" href="{PRIVACY}">{t(tag, s['about_privacy'])}{arrow}</a>
     </div>
   </section>
 
@@ -1179,79 +1209,103 @@ def home_page(tag, ctx):
     return head(tag, st["title"], c["meta"], base, prefix, url, extra=extra) + body
 
 
-def privacy_page(ctx):
-    """Gizlilik politikası: 14 dil tek adreste; her bölüm kendi çapasında."""
-    base, names = ctx["base"], ctx["names"]
-    policy = gen_privacy.POLICY
-    nav = "".join(f'<li><a href="#{x}" hreflang="{x}" lang="{x}">{html.escape(names[x])}</a></li>'
-                  for x in by_name(names))
-    sections = []
-    for x in by_name(names):
-        p = policy[x]
-        rtl = ' dir="rtl"' if x in RTL else ""
-        parts = [f'  <section id="{x}" lang="{x}"{rtl} class="policy">',
-                 f'    <h2>{p["name"]} — {p["title"]}</h2>',
-                 f'    <p class="meta">{p["meta"]}</p>',
-                 f'    <div class="summary"><strong>{p["short_label"]}</strong> {p["short"]}</div>']
-        for heading, body in p["sections"]:
-            parts.append(f"    <h3>{heading}</h3>")
-            parts.append(f"    <p>{body}</p>")
-        parts.append(f'    <h3>{p["contact"]}</h3>')
-        parts.append(f'    <p>{p["contact_intro"]} <a href="mailto:{MAIL}">{MAIL}</a> · '
-                     f'<a href="{gen_privacy.ISSUES}">github.com/aripdcom/reyon/issues</a></p>')
-        parts.append(f'    <p class="policy-home"><a href="{home_href("", x)}" data-lang="{x}">'
-                     f'{t(x, COPY[x]["home"])}{icon("arrow", "ic ic-sm ic-flip")}</a></p>')
-        parts.append("  </section>")
-        sections.append("\n".join(parts))
-    url = base + "gizlilik.html"
-    title = "Reyon · Gizlilik politikası · Privacy policy"
-    desc = ("Reyon gizlilik politikası, 14 dilde: uygulama hiçbir veri toplamaz, hiçbir izin istemez, "
-            "ağa bağlanmaz.")
-    return head("tr", title, desc, base, "", url, alternates=False) + f"""
+def privacy_page(tag, ctx):
+    """Gizlilik politikası, bir dilde; kalıp ana sayfalarla aynı. Metin gen_privacy.POLICY'de."""
+    s, st = load(tag)
+    c = COPY[tag]
+    p = gen_privacy.POLICY[tag]
+    base, names, lnk = ctx["base"], ctx["names"], ctx["links"]
+    prefix = "" if tag == "en" else "../"
+    url = page_url(base, tag, PRIVACY)
+    extra = "\n" + redirect_script(PRIVACY) if tag == "en" else ""
+    sections = "".join(f"\n    <h2>{heading}</h2>\n    <p>{body}</p>" for heading, body in p["sections"])
+    return head(tag, f"{plain(p['title'])} · Reyon", plain(p["short"]), base, prefix, url,
+                extra=extra, page=PRIVACY) + f"""
 </head>
 <body class="doc">
 {sprite()}
-<a class="skip" href="#main">İçeriğe geç · <span lang="en">Skip to content</span></a>
-<header class="top">
-  <div class="wrap top-in">
-    <a class="brand" href="./">{mark_box()}<span class="brand-name">Reyon</span></a>
-  </div>
-</header>
-<main id="main" class="wrap doc-main" data-policy>
-  <h1>Gizlilik politikası · <span lang="en">Privacy policy</span></h1>
-  <p class="meta">Aynı politika, {len(TAGS)} dilde. / <span lang="en">The same policy, in {len(TAGS)} languages.</span></p>
-  <nav aria-label="Dil · Language"><ul class="doc-langs">{nav}</ul></nav>
-
-{chr(10).join(sections)}
+<a class="skip" href="#main">{t(tag, c['skip'])}</a>
+{topbar(tag, s, c, names, prefix, page=PRIVACY)}
+<main id="main" class="wrap doc-main">
+  <article class="policy">
+    <h1>{hyphenate(tag, p['title'])}</h1>
+    <p class="meta">{p['meta']}</p>
+    <div class="summary"><strong>{p['short_label']}</strong> {p['short']}</div>{sections}
+    <h2>{p['contact']}</h2>
+    <p>{p['contact_intro']} <a href="mailto:{MAIL}">{MAIL}</a> · <a href="{gen_privacy.ISSUES}">github.com/aripdcom/reyon/issues</a></p>
+  </article>
 </main>
-<footer class="foot">
-  <div class="wrap foot-in">
-    <div class="foot-brand">{mark_box()}<div><b>Reyon</b><span lang="en">FMCG shelf management simulator</span></div></div>
-    <ul class="foot-links">
-      <li><a href="./">reyon.aripd.com</a></li>
-      <li><a href="{ctx['links']['SOURCE']}">GitHub</a></li>
-      <li><a href="mailto:{MAIL}">{MAIL}</a></li>
-    </ul>
-  </div>
-</footer>
+{footer(tag, s, st, prefix, lnk)}
 </body>
 </html>
 """
 
 
-def en_redirect(ctx):
+# Eski gizlilik adresi: çapadaki dil (#tr), sonra seçilen dil, sonra tarayıcının
+# dili; hiçbiri yoksa İngilizce. Betik yoksa İngilizce sayfaya geçer.
+LEGACY_SCRIPT = """<script>
+(function () {
+  var tags = %s, key = "reyon.lang", pick = location.hash.slice(1).toLowerCase();
+  if (tags.indexOf(pick) < 0) { try { pick = localStorage.getItem(key); } catch (e) { pick = null; } }
+  if (tags.indexOf(pick) < 0) {
+    pick = "en";
+    var prefs = navigator.languages || [navigator.language || ""];
+    for (var i = 0; i < prefs.length; i++) {
+      var p = String(prefs[i]).toLowerCase().split("-")[0];
+      if (p === "no" || p === "nn") p = "nb";
+      if (tags.indexOf(p) >= 0) { pick = p; break; }
+    }
+  }
+  location.replace(pick === "en" ? "%s" : pick + "/%s");
+})();
+</script>"""
+
+
+def legacy_privacy(ctx):
+    """gizlilik.html: yüklü uygulamaların baktığı eski adres; okurun dilindeki sayfaya geçer."""
+    base, names = ctx["base"], ctx["names"]
+    script = LEGACY_SCRIPT % ("[" + ", ".join(f'"{x}"' for x in TAGS) + "]", PRIVACY, PRIVACY)
+    items = "".join(
+        f'<li lang="{x}"{attr("dir", "rtl", x in RTL)}><a href="{home_href("", x, PRIVACY)}" '
+        f'data-lang="{x}">{gen_privacy.POLICY[x]["title"]}</a><small>{html.escape(names[x])}</small></li>'
+        for x in by_name(names))
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reyon · Privacy policy</title>
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="{base}{PRIVACY}">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+{script}
+<noscript><meta http-equiv="refresh" content="0; url={PRIVACY}"></noscript>
+</head>
+<body class="doc">
+<main id="main" class="wrap doc-main">
+  <ul class="nf">{items}</ul>
+</main>
+</body>
+</html>
+"""
+
+
+def en_redirect(ctx, page=""):
+    """en/ ve en/privacy.html: İngilizce kökte; elle yazılan adres boşa düşmesin."""
     base = ctx["base"]
     return f"""<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Reyon</title>
-<link rel="canonical" href="{base}">
+<link rel="canonical" href="{base}{page}">
 <meta name="robots" content="noindex">
-<script>try {{ localStorage.setItem("reyon.lang", "en"); }} catch (e) {{}} location.replace("../");</script>
-<meta http-equiv="refresh" content="0; url=../">
+<script>try {{ localStorage.setItem("reyon.lang", "en"); }} catch (e) {{}} location.replace("../{page}");</script>
+<meta http-equiv="refresh" content="0; url=../{page}">
 </head>
-<body><a href="../">Reyon</a></body>
+<body><a href="../{page}">Reyon</a></body>
 </html>
 """
 
@@ -1292,10 +1346,12 @@ def not_found(ctx):
 
 def sitemap(ctx):
     base = ctx["base"]
-    alts = "".join(f'\n    <xhtml:link rel="alternate" hreflang="{x}" href="{page_url(base, x)}"/>' for x in TAGS)
-    alts += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{base}"/>'
-    urls = "".join(f"\n  <url>\n    <loc>{page_url(base, x)}</loc>{alts}\n  </url>" for x in TAGS)
-    urls += f"\n  <url>\n    <loc>{base}gizlilik.html</loc>\n  </url>"
+    urls = ""
+    for page in ("", PRIVACY):
+        alts = "".join(f'\n    <xhtml:link rel="alternate" hreflang="{x}" href="{page_url(base, x, page)}"/>'
+                       for x in TAGS)
+        alts += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{base}{page}"/>'
+        urls += "".join(f"\n  <url>\n    <loc>{page_url(base, x, page)}</loc>{alts}\n  </url>" for x in TAGS)
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
             f'xmlns:xhtml="http://www.w3.org/1999/xhtml">{urls}\n</urlset>\n')
@@ -1330,9 +1386,12 @@ def build():
     ctx = context()
     out = {}
     for tag in TAGS:
-        out["index.html" if tag == "en" else f"{tag}/index.html"] = home_page(tag, ctx)
+        folder = "" if tag == "en" else f"{tag}/"
+        out[f"{folder}index.html"] = home_page(tag, ctx)
+        out[f"{folder}{PRIVACY}"] = privacy_page(tag, ctx)
     out["en/index.html"] = en_redirect(ctx)
-    out["gizlilik.html"] = privacy_page(ctx)
+    out[f"en/{PRIVACY}"] = en_redirect(ctx, PRIVACY)
+    out[LEGACY_PRIVACY] = legacy_privacy(ctx)
     out["404.html"] = not_found(ctx)
     out["sitemap.xml"] = sitemap(ctx)
     out["robots.txt"] = robots(ctx)

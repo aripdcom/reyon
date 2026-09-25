@@ -11,6 +11,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalConfiguration
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.text.Normalizer
 import java.util.Locale
 
 /**
@@ -65,6 +66,20 @@ object AppLocale {
 
     /** Seçicide görünen ad; bilinmeyen etiket için etiketin kendisi. */
     fun endonym(tag: String): String = ENDONYMS[tag] ?: tag
+
+    /**
+     * Seçicideki sıra: dilin kendi adına göre alfabetik (Dansk, Deutsch,
+     * English … Svenska, Türkçe, Русский, العربية). Aksan sırayı bozmaz; Latin
+     * dışı yazılar Unicode sırasıyla sona düşer. Sitedeki dil listeleri de aynı
+     * sırada (`tools/gen_site.py`, `by_name`). [TAGS]'in kendi sırası değişmez:
+     * o sıra `locales_config.xml` ile birebir tutulur.
+     */
+    val PICKER_ORDER: List<String> by lazy { TAGS.sortedBy { sortKey(endonym(it)) } }
+
+    private fun sortKey(name: String): String =
+        Normalizer.normalize(name, Normalizer.Form.NFD).replace(COMBINING_MARKS, "").lowercase(Locale.ROOT)
+
+    private val COMBINING_MARKS = Regex("\\p{Mn}+")
 
     /**
      * Kullanıcının seçtiği dil, ya da [SYSTEM].

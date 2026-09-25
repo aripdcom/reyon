@@ -77,6 +77,18 @@ class AboutScreenTest {
     }
 
     @Test
+    fun siteAndPrivacyLinksPointToTheAppLanguagePages() {
+        // Testler Türkçe koşar (robolectric.properties): bağlantılar sitenin
+        // Türkçe sayfalarına gider, adres düğmenin altında okunur.
+        show()
+        val list = rule.onNode(hasScrollAction())
+        for (address in listOf("reyon.aripd.com/tr/", "reyon.aripd.com/tr/privacy.html")) {
+            list.performScrollToNode(hasText(address))
+            rule.onNodeWithText(address).assertIsDisplayed()
+        }
+    }
+
+    @Test
     fun tappingTheSoundRowReportsIt() {
         var toggled = 0
         show(onToggleSound = { toggled++ })
