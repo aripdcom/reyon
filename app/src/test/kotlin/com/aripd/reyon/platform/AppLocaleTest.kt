@@ -59,6 +59,18 @@ class AppLocaleTest {
     }
 
     @Test
+    fun pickerListsLanguagesAlphabeticallyByTheirOwnNames() {
+        // Seçicide diller kendi adlarına göre alfabetik: aksan sırayı bozmaz
+        // (Español, English'ten sonra), Latin dışı yazılar sona düşer. Sitedeki
+        // listeler de bu sırada; TAGS'in kendi sırası locales_config'le aynı kalır.
+        assertEquals(
+            listOf("da", "de", "en", "es", "fr", "it", "nl", "nb", "pt", "fi", "sv", "tr", "ru", "ar"),
+            AppLocale.PICKER_ORDER,
+        )
+        assertEquals(AppLocale.TAGS.toSet(), AppLocale.PICKER_ORDER.toSet())
+    }
+
+    @Test
     fun unsupportedLanguagesFallBackToEnglishNotTurkish() {
         // Düzeltilen hata: Türkçe res/values altındaydı, desteklenmeyen her dil
         // uygulamayı Türkçe görüyordu. Japonca hiçbir zaman listeye girmeyeceği
