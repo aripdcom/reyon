@@ -1,0 +1,42 @@
+<tr-TR>
+• Google Play'e hazırlık: Google Play'den ve GitHub'dan kurulan Reyon aynı imzayı taşır; biri diğerinin üzerine kurulur, ilerleme silinmez. Uygulamada başka değişiklik yok.
+</tr-TR>
+<en-US>
+• Ready for Google Play: Reyon from Google Play and from GitHub carries the same signature, so one installs over the other and progress is kept. No other changes in the app.
+</en-US>
+<de-DE>
+• Bereit für Google Play: Reyon aus Google Play und von GitHub trägt dieselbe Signatur; die eine Version lässt sich über die andere installieren, der Fortschritt bleibt erhalten. Sonst keine Änderungen an der App.
+</de-DE>
+<fr-FR>
+• Prêt pour Google Play : Reyon installé depuis Google Play ou depuis GitHub porte la même signature ; l’un s’installe par-dessus l’autre et la progression est conservée. Aucun autre changement dans l’appli.
+</fr-FR>
+<nl-NL>
+• Klaar voor Google Play: Reyon uit Google Play en van GitHub heeft dezelfde handtekening; de ene installeer je over de andere en je voortgang blijft bewaard. Verder geen wijzigingen in de app.
+</nl-NL>
+<es-ES>
+• Listo para Google Play: Reyon de Google Play y de GitHub lleva la misma firma; uno se instala sobre el otro y el progreso se conserva. Ningún otro cambio en la app.
+</es-ES>
+<pt-BR>
+• Pronto para o Google Play: o Reyon do Google Play e o do GitHub têm a mesma assinatura; um se instala sobre o outro e o progresso é mantido. Nenhuma outra mudança no app.
+</pt-BR>
+<it-IT>
+• Pronto per Google Play: Reyon da Google Play e da GitHub ha la stessa firma; uno si installa sopra l’altro e i progressi restano. Nessun’altra modifica all’app.
+</it-IT>
+<da-DK>
+• Klar til Google Play: Reyon fra Google Play og fra GitHub har samme signatur; den ene kan installeres oven på den anden, og fremskridt bevares. Ingen andre ændringer i appen.
+</da-DK>
+<sv-SE>
+• Redo för Google Play: Reyon från Google Play och från GitHub har samma signatur; den ena kan installeras ovanpå den andra och framstegen finns kvar. Inga andra ändringar i appen.
+</sv-SE>
+<no-NO>
+• Klar for Google Play: Reyon fra Google Play og fra GitHub har samme signatur; den ene kan installeres over den andre, og fremgangen beholdes. Ingen andre endringer i appen.
+</no-NO>
+<fi-FI>
+• Valmis Google Playhin: Google Playstä ja GitHubista asennetulla Reyonilla on sama allekirjoitus; toisen voi asentaa toisen päälle, ja edistyminen säilyy. Sovelluksessa ei muita muutoksia.
+</fi-FI>
+<ru-RU>
+• Готово к Google Play: у Reyon из Google Play и с GitHub одна и та же подпись; одну версию можно установить поверх другой, прогресс сохраняется. Других изменений в приложении нет.
+</ru-RU>
+<ar>
+• جاهز للنشر على Google Play: يحمل Reyon من Google Play ومن GitHub التوقيع نفسه، فيُثبَّت أحدهما فوق الآخر ويبقى التقدّم محفوظاً. لا تغييرات أخرى في التطبيق.
+</ar>
