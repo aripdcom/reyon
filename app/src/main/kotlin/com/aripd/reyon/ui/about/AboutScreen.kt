@@ -46,7 +46,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aripd.reyon.R
+import com.aripd.reyon.platform.AppLocale
 import com.aripd.reyon.platform.Links
+import com.aripd.reyon.platform.appLocale
 import com.aripd.reyon.platform.appString
 import com.aripd.reyon.platform.installedVersion
 import com.aripd.reyon.ui.theme.Reyon
@@ -183,10 +185,12 @@ fun AboutScreen(
 
             item { SectionTitle(stringResource(R.string.about_links)) }
             item {
-                LinkButton(stringResource(R.string.about_website), Links.SITE)
+                // Site ve gizlilik sayfası uygulamanın o anki dilinde açılır.
+                val tag = AppLocale.normalize(appLocale())
+                LinkButton(stringResource(R.string.about_website), Links.siteFor(tag))
                 LinkButton(stringResource(R.string.about_source), Links.SOURCE)
                 LinkButton(stringResource(R.string.about_report), Links.REPORT)
-                LinkButton(stringResource(R.string.about_privacy), Links.PRIVACY)
+                LinkButton(stringResource(R.string.about_privacy), Links.privacyFor(tag))
                 MailButton(stringResource(R.string.about_contact), Links.CONTACT)
             }
 

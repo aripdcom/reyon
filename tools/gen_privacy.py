@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Gizlilik politikasının 14 dildeki metni.
 
-Politika tek adreste durur (site/gizlilik.html; Play bir URL ister) ve her dil
-kendi bölümünde. Metin burada; sayfayı sitenin geri kalanıyla aynı kalıpta
-tools/gen_site.py üretir, `tools/check_site.py` üretilenle depodakinin
-ayrışmadığını denetler.
+Her dilin politikası sitede kendi sayfasında: site/privacy.html (İngilizce;
+Play'e verilen adres) ve site/<dil>/privacy.html. Metin burada; sayfaları sitenin
+geri kalanıyla aynı kalıpta tools/gen_site.py üretir, `tools/check_site.py`
+üretilenle depodakinin ayrışmadığını denetler.
 
 Kullanım: python3 tools/gen_privacy.py  (tools/gen_site.py'yi koşar)
 """

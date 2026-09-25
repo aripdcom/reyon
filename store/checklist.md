@@ -12,7 +12,8 @@ Console'da, hesap sahibinin elinde.
 - [x] Ekran görüntüleri: `store/screenshots/{tr,en}/`, 1080×1920, altı kare (Görevler, dört mod,
       bir koyu tema karesi); 1.1.0 arayüzünden (docs/cihaz-testi.md, "1.1.0 · FMCG tasarımı cihaz koşumu")
 - [x] `store/data-safety.md`, `store/icerik-derecelendirme.md`
-- [x] Gizlilik politikası: `site/gizlilik.html`, 14 dil tek adreste
+- [x] Gizlilik politikası: her dil kendi sayfasında (`site/privacy.html` İngilizce,
+      `site/<dil>/privacy.html`); eski `gizlilik.html` okurun diline yönlendirir
 - [x] Site 14 dilde: https://reyon.aripd.com (kök İngilizce, `/tr/` … `/ar/`); `tools/gen_site.py`
       üretir, `tools/check_site.py` denetler
 
@@ -53,7 +54,7 @@ Sırayla; her adımın cevabı depoda yazılı.
        Simge ve öne çıkan görsel `store/graphics/`'ten, telefon ekran görüntüleri
        `store/screenshots/en/` (Türkçe giriş için `tr/`).
 5. [ ] **Uygulama içeriği.**
-       - Gizlilik politikası: `https://reyon.aripd.com/gizlilik.html`
+       - Gizlilik politikası: `https://reyon.aripd.com/privacy.html`
        - Uygulamaya erişim: bütün işlevler giriş gerektirmeden açık
        - Reklam: yok · Reklam kimliği: kullanılmıyor
        - İçerik derecelendirmesi (IARC): `store/icerik-derecelendirme.md` (beklenen PEGI 3)
