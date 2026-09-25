@@ -7,7 +7,7 @@ Site, uygulamanın ve Play kaydının söylediğini söyler; metnin çoğu orada
     sonuç, gizlilik ve lisans cümleleri (Play'de yayımlanan metnin aynısı)
   - app/src/main/res/values*/strings.xml: mod adları, formatlar, düzeyler ve
     telefon maketindeki Görevler ekranı (uygulamada görünen metnin aynısı)
-  - store/play/release-notes/<en yeni sürüm>.txt: "Yenilikler" bölümü
+  - store/play/release-notes/<en yeni ara sürüm>.*.txt: "Yenilikler" bölümü
 
 Yalnızca siteye özgü cümleler (giriş, bölüm başlıkları, indirme) aşağıdaki
 COPY sözlüğünde 14 dilde yazılı. Gizlilik metni tools/gen_privacy.py'de durur,
@@ -545,15 +545,22 @@ def store(tag):
 
 
 def release_notes():
-    """En yeni sürüm notu: (sürüm, {Play yerel ayarı: [madde, ...]})."""
+    """Sitenin "Yenilikler" bölümü: en yeni ara sürümün (1.1) bütün notları, önce ara
+    sürümün kendisi (1.1.0), sonra yamaları (1.1.1 …). Yalnız son yamanın notu
+    gösterilse ara sürümün asıl yenilikleri siteden düşerdi.
+    Döner: ("1.1", {Play yerel ayarı: [madde, ...]})."""
     folder = os.path.join(STORE, "play", "release-notes")
-    versions = [f[:-4] for f in os.listdir(folder) if re.fullmatch(r"\d+\.\d+\.\d+\.txt", f)]
-    latest = max(versions, key=lambda v: tuple(int(p) for p in v.split(".")))
-    src = open(os.path.join(folder, latest + ".txt"), encoding="utf-8").read()
+    versions = sorted(tuple(int(p) for p in f[:-4].split("."))
+                      for f in os.listdir(folder) if re.fullmatch(r"\d+\.\d+\.\d+\.txt", f))
+    latest = versions[-1]
     notes = {}
-    for loc, body in re.findall(r"<([A-Za-z-]+)>\n(.*?)\n</\1>", src, re.S):
-        notes[loc] = [line.lstrip("•").strip() for line in body.split("\n") if line.strip()]
-    return latest, notes
+    for version in (v for v in versions if v[:2] == latest[:2]):
+        name = ".".join(map(str, version)) + ".txt"
+        src = open(os.path.join(folder, name), encoding="utf-8").read()
+        for loc, body in re.findall(r"<([A-Za-z-]+)>\n(.*?)\n</\1>", src, re.S):
+            notes.setdefault(loc, []).extend(
+                line.lstrip("•").strip() for line in body.split("\n") if line.strip())
+    return f"{latest[0]}.{latest[1]}", notes
 
 
 def load(tag):
