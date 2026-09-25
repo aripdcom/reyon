@@ -11,7 +11,8 @@ Console'da, hesap sahibinin elinde. Play'e ilk yüklenecek sürüm 1.1.1.
 - [x] `store/graphics/icon-512.png` (512×512, 32 bit) ve `feature-1024.png` (1024×500) —
       1.1.0 kimliğinde (petrol zemin, yeni işaret); `tools/gen_store_graphics.py` simgeden üretir
 - [x] Ekran görüntüleri: `store/screenshots/{tr,en}/`, 1080×1920, altı kare (Görevler, dört mod,
-      bir koyu tema karesi); 1.1.0 arayüzünden (docs/cihaz-testi.md, "1.1.0 · FMCG tasarımı cihaz koşumu")
+      bir koyu tema karesi); 1.1.0 arayüzünden (docs/cihaz-testi.md, "1.1.0 · FMCG tasarımı cihaz koşumu").
+      Alfasız 24 bit PNG, Play'in istediği biçim (`tools/store_screenshots.py` çevirir)
 - [x] `store/data-safety.md`, `store/icerik-derecelendirme.md`
 - [x] Gizlilik politikası: her dil kendi sayfasında (`site/privacy.html` İngilizce,
       `site/<dil>/privacy.html`)
@@ -52,8 +53,8 @@ Sırayla; her adımın cevabı depoda yazılı.
        en yeni Release'teki `-play.aab` (`reyon-v1.1.1-play.aab`); APK değil.
 4. [ ] **Mağaza girişi.** Başlık, kısa ve tam açıklama `store/play/<dil>/`'den; varsayılan
        dil `en`, diğer 13 dil çeviri olarak (yerel ayar karşılıkları `store/README.md`'de).
-       Simge ve öne çıkan görsel `store/graphics/`'ten, telefon ekran görüntüleri
-       `store/screenshots/en/` (Türkçe giriş için `tr/`).
+       Ortak görseller (Common visual assets): simge ve öne çıkan görsel `store/graphics/`'ten.
+       Telefon ekran görüntüleri `store/screenshots/en/` sırayla 1–6 (Türkçe giriş için `tr/`).
 5. [ ] **Uygulama içeriği.**
        - Gizlilik politikası: `https://reyon.aripd.com/privacy.html`
        - Uygulamaya erişim: bütün işlevler giriş gerektirmeden açık
