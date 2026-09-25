@@ -8,8 +8,8 @@ Google Play listelemesi için metinler ve form cevapları. Kaynak dosyalar burad
 | `play/<dil>/short.txt` | Kısa açıklama | 80 karakter |
 | `play/<dil>/full.txt` | Tam açıklama | 4000 karakter |
 | `play/release-notes/<sürüm>.txt` | Sürüm notları (dil başına `<tr-TR>` / `<en-US>` … blokları) | dil başına 500 karakter |
-| `data-safety.md` | Veri güvenliği formu cevapları | |
-| `icerik-derecelendirme.md` | IARC anketi cevapları ve hedef kitle | |
+| `data-safety.md` | Veri güvenliği formu cevapları ve hedef kitle | |
+| `icerik-derecelendirme.md` | IARC anketi cevapları | |
 | `graphics/icon-512.png` | Uygulama simgesi | 512×512, 32 bit PNG |
 | `graphics/feature-1024.png` | Öne çıkan görsel | 1024×500, alfasız 24 bit PNG |
 | `screenshots/<dil>/*.png` | Telefon ekran görüntüleri (`en` varsayılan, `tr` Türkçe giriş) | alfasız 24 bit PNG, 2–8 kare |

@@ -15,7 +15,9 @@ Diğer beyanlar:
 
 - **Reklam içeriyor mu?** Hayır.
 - **İzinler:** Manifestte `uses-permission` yok. Paylaşım için `FileProvider` (izin değildir) ve sonuç kartının yalnızca kullanıcının seçtiği uygulamaya okuma yetkisiyle verilmesi; bu, Play tanımında "veri paylaşımı" sayılmaz (kullanıcının başlattığı işlem).
-- **Hedef kitle:** 13 yaş ve üzeri seçilmesi önerilir. Uygulama her yaş için uygundur ama "çocuklara yönelik" seçimi Aile politikası yükümlülükleri getirir.
+- **Hedef kitle:** 16–17 ve 18 yaş üstü (Play Console'da seçildi, 25 Eylül 2026). İçerik her yaşa
+  uygun (beklenen PEGI 3); 13 yaş altı seçilmedi, çocuklara yönelik seçim Aile politikası
+  yükümlülükleri getirir.
 - **Gizlilik politikası URL'si:** https://reyon.aripd.com/privacy.html
 - **Erişilebilirlik / sağlık / finans beyanları:** Uygulanamaz.
 
