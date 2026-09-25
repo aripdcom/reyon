@@ -79,16 +79,18 @@ Sırayla; her adımın cevabı depoda yazılı.
        Play'e ilk yükleme olduğu için sürüm notu olarak
        `store/play/release-notes/1.1.0.txt` önerilir (14 dil): yeni kullanıcı için asıl
        yenilikler orada; 1.1.1 ve 1.1.2'nin notları GitHub Release'te ve sitede kalır.
-       Önerilen yol: önce dahili teste yükle, 7. maddedeki raporu gör, aynı sürümü üretime
-       yükselt. Ülkeler: bütün ülkeler ya da seçilenler.
+       Önerilen yol: dahili teste yükle ve kendi telefonunda dene, aynı sürümü kapalı teste
+       yükselt (7. maddedeki rapor için), rapor temizse üretime yükselt. Ülkeler: bütün
+       ülkeler ya da seçilenler.
        Yapılan: üretimde 177 ülke/bölge; paket kapalı teste yüklenmiş 10102 (1.1.2), üretim
        sürümüne **Add from library** ile eklendi — aynı AAB'yi yeniden yüklemek "Version code
        10102 has already been used" verir. Sürüm notu `release-notes/1.1.0.txt` (14 dil, dosya
        bütünüyle yapıştırıldı). 26 Eylül 2026'da incelemeye gönderildi. İmza anahtarı `reyon`
        bu sürüm üretime çıkınca sabitlenir.
-7. [ ] **Lansman öncesi rapor.** Yalnızca test kanalına (dahili test yeter) yüklenen sürüm için
-       Play'in kendi cihazlarında koşar; doğrudan üretime yüklenen sürümde çıkmaz. Çökme ve
-       erişilebilirlik uyarılarına bakılır.
+7. [ ] **Lansman öncesi rapor.** Yalnız kapalı ya da açık test kanalına yayımlanan sürüm için
+       Play'in kendi cihazlarında koşar; dahili testte ve doğrudan üretime yüklenen sürümde
+       çıkmaz. Kuruluş hesabında kapalı test için 12 test kullanıcısı / 14 gün şartı yok.
+       Çökme ve erişilebilirlik uyarılarına bakılır.
        Durum: kapalı test kanalında 1.1.2 incelemeye gönderildi ama test kullanıcısı eklenmedi
        ("Select testers" açık). Kendini ya da birkaç kişiyi ekleyince rapor oluşur; üretimi
        engellemez.
