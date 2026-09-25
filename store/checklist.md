@@ -14,7 +14,7 @@ Console'da, hesap sahibinin elinde. Play'e ilk yüklenecek sürüm 1.1.1.
       bir koyu tema karesi); 1.1.0 arayüzünden (docs/cihaz-testi.md, "1.1.0 · FMCG tasarımı cihaz koşumu")
 - [x] `store/data-safety.md`, `store/icerik-derecelendirme.md`
 - [x] Gizlilik politikası: her dil kendi sayfasında (`site/privacy.html` İngilizce,
-      `site/<dil>/privacy.html`); eski `gizlilik.html` okurun diline yönlendirir
+      `site/<dil>/privacy.html`)
 - [x] Site 14 dilde: https://reyon.aripd.com (kök İngilizce, `/tr/` … `/ar/`); `tools/gen_site.py`
       üretir, `tools/check_site.py` denetler
 

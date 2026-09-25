@@ -22,8 +22,6 @@ sayfaları burada, ana sayfalarla aynı kalıpta üretilir.
                       tarayıcının diline geçer
   <dil>/privacy.html  Gizlilik politikası, diğer 13 dilde
   en/…                Köke yönlendirir (adres elle yazılırsa boşa düşmesin)
-  gizlilik.html       Eski adres: 1.0.x–1.1.0 uygulamaları gizlilik politikasına
-                      buradan bakıyor; okurun dilindeki privacy.html'e yönlendirir
   404.html, sitemap.xml, robots.txt
   assets/icon.svg     Uygulama simgesinin işareti (sekme simgesi)
   assets/og.png, assets/icon-512.png   store/graphics'ten kopya
@@ -55,9 +53,6 @@ RTL = gen_privacy.RTL
 MAIL = gen_privacy.MAIL
 RELEASES = "https://github.com/aripdcom/reyon/releases"
 PRIVACY = "privacy.html"
-# 1.0.x–1.1.0 uygulamaları gizlilik politikasına bu adresten bakıyor (Links.PRIVACY);
-# sayfa kaldırılırsa yüklü uygulamalardaki bağlantı ölür.
-LEGACY_PRIVACY = "gizlilik.html"
 APK = RELEASES + "/latest/download/reyon.apk"
 
 # Open Graph yerel ayarı; Facebook Arapça için "ar_AR" bekler.
@@ -1241,57 +1236,6 @@ def privacy_page(tag, ctx):
 """
 
 
-# Eski gizlilik adresi: çapadaki dil (#tr), sonra seçilen dil, sonra tarayıcının
-# dili; hiçbiri yoksa İngilizce. Betik yoksa İngilizce sayfaya geçer.
-LEGACY_SCRIPT = """<script>
-(function () {
-  var tags = %s, key = "reyon.lang", pick = location.hash.slice(1).toLowerCase();
-  if (tags.indexOf(pick) < 0) { try { pick = localStorage.getItem(key); } catch (e) { pick = null; } }
-  if (tags.indexOf(pick) < 0) {
-    pick = "en";
-    var prefs = navigator.languages || [navigator.language || ""];
-    for (var i = 0; i < prefs.length; i++) {
-      var p = String(prefs[i]).toLowerCase().split("-")[0];
-      if (p === "no" || p === "nn") p = "nb";
-      if (tags.indexOf(p) >= 0) { pick = p; break; }
-    }
-  }
-  location.replace(pick === "en" ? "%s" : pick + "/%s");
-})();
-</script>"""
-
-
-def legacy_privacy(ctx):
-    """gizlilik.html: yüklü uygulamaların baktığı eski adres; okurun dilindeki sayfaya geçer."""
-    base, names = ctx["base"], ctx["names"]
-    script = LEGACY_SCRIPT % ("[" + ", ".join(f'"{x}"' for x in TAGS) + "]", PRIVACY, PRIVACY)
-    items = "".join(
-        f'<li lang="{x}"{attr("dir", "rtl", x in RTL)}><a href="{home_href("", x, PRIVACY)}" '
-        f'data-lang="{x}">{gen_privacy.POLICY[x]["title"]}</a><small>{html.escape(names[x])}</small></li>'
-        for x in by_name(names))
-    return f"""<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Reyon · Privacy policy</title>
-<meta name="robots" content="noindex">
-<meta name="color-scheme" content="light dark">
-<link rel="canonical" href="{base}{PRIVACY}">
-<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/site.css">
-{script}
-<noscript><meta http-equiv="refresh" content="0; url={PRIVACY}"></noscript>
-</head>
-<body class="doc">
-<main id="main" class="wrap doc-main">
-  <ul class="nf">{items}</ul>
-</main>
-</body>
-</html>
-"""
-
-
 def en_redirect(ctx, page=""):
     """en/ ve en/privacy.html: İngilizce kökte; elle yazılan adres boşa düşmesin."""
     base = ctx["base"]
@@ -1391,7 +1335,6 @@ def build():
         out[f"{folder}{PRIVACY}"] = privacy_page(tag, ctx)
     out["en/index.html"] = en_redirect(ctx)
     out[f"en/{PRIVACY}"] = en_redirect(ctx, PRIVACY)
-    out[LEGACY_PRIVACY] = legacy_privacy(ctx)
     out["404.html"] = not_found(ctx)
     out["sitemap.xml"] = sitemap(ctx)
     out["robots.txt"] = robots(ctx)

@@ -13,8 +13,7 @@ adres). Denetimler:
      lang/dir doğru, her sayfa kendi türünün bütün dillerine hreflang ile
      bağlı; gizlilik sayfasında o dilin politikası ve iletişim adresi var
   3. Uygulamadaki bağlantılar (Links.SITE, Links.PRIVACY) sitenin alan adıyla
-     aynı: yarım kalmış alan adı taşıması ölü bağlantı bırakır. Eski gizlilik
-     adresi (gizlilik.html) duruyor: yüklü 1.0.x–1.1.0 uygulamaları ona bakıyor
+     aynı: yarım kalmış alan adı taşıması ölü bağlantı bırakır
   4. Sitede önceki depodan kalma marka izi yok
   5. İç bağlantılar ve çapalar bir dosyaya/öğeye varıyor; sayfalar dışarıdan
      kaynak yüklemiyor (yazı tipi, betik, stil, görsel hepsi sitede)
@@ -120,8 +119,6 @@ def check_domain(pages):
         errors.append(f"Links: SITE ({host(site)}) ile PRIVACY ({host(privacy)}) aynı alan adında değil")
     if privacy != f"{site.rstrip('/')}/{gen_site.PRIVACY}":
         errors.append(f"Links.PRIVACY ({privacy}) sitedeki {gen_site.PRIVACY}'e bakmıyor")
-    if gen_site.LEGACY_PRIVACY not in pages:
-        errors.append(f"{gen_site.LEGACY_PRIVACY} üretilmiyor: yüklü uygulamaların gizlilik bağlantısı ölür")
     for path, page in pages.items():
         # Kendi barındırmamıza bakan bağlantılar: aripd.com alan adları ve
         # proje sayfası. GitHub depo bağlantıları buna girmez.
