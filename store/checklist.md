@@ -46,16 +46,20 @@ Sırayla; her adımın cevabı depoda yazılı.
        Kategori **Uygulamalar → Eğitim**; iletişim `reyon@aripd.com`, web sitesi
        `https://reyon.aripd.com`.
 3. [ ] **Play App Signing — anahtar seçimi.** GitHub'daki APK ile Play sürümünün birbirinin
-       üzerine kurulabilmesi için Play'in imza anahtarı bizim `reyon` anahtarımız olmalı:
-       "Export and upload a key from Java KeyStore" (PEPK aracıyla) seçilir. Google'ın ürettiği
-       anahtar seçilirse imza farklı olur; APK'yı GitHub'dan kuranlar Play sürümüne geçmek için
-       uygulamayı silmek zorunda kalır ve cihazdaki ilerlemeleri gider. Seçim ilk AAB
-       yüklenmeden yapılır, sonra değişmez. `pepk.jar` ve `encryption_public_key.pem` o
-       sayfadan iner; komut:
+       üzerine kurulabilmesi için Play'in imza anahtarı bizim `reyon` anahtarımız olmalı.
+       Yeri: **Protected with Play → Play Store distribution → Go to Play app signing →
+       Change the app signing key**; orada kendi anahtarını yükleme seçeneği (PEPK aracıyla)
+       seçilir. Google'ın ürettiği anahtar varsayılandır; o kalırsa imza farklı olur, APK'yı
+       GitHub'dan kuranlar Play sürümüne geçmek için uygulamayı silmek zorunda kalır ve
+       cihazdaki ilerlemeleri gider. Anahtar, açık teste ya da üretime bir sürüm çıkana kadar
+       değiştirilebilir, sonra sabitlenir; en temizi ilk AAB'den önce seçmek. `pepk.jar` ve
+       `encryption_public_key.pem` o sayfadan iner; komut:
        `java -jar pepk.jar --keystore=reyon-release.jks --alias=reyon --output=reyon-signing-key.zip --include-cert --rsa-aes-encryption --encryption-key-path=encryption_public_key.pem`
        (anahtar parolası keystore parolasıyla aynı). Çıkan zip aynı sayfaya yüklenir; ayrı
-       yükleme anahtarı gerekmez, AAB aynı anahtarla imzalı. Yüklenen dosya en yeni
-       Release'teki `-play.aab` (`reyon-v1.1.1-play.aab`); APK değil.
+       yükleme anahtarı gerekmez, AAB aynı anahtarla imzalı. Sonra Play app signing
+       sayfasındaki uygulama imza anahtarının SHA-256'sı yukarıdaki sertifikayla
+       (`B2:2F:C3:F8:…:37:92`) aynı olmalı. Yüklenen dosya en yeni Release'teki `-play.aab`
+       (`reyon-v1.1.1-play.aab`); APK değil.
 4. [ ] **Mağaza girişi.** Başlık, kısa ve tam açıklama `store/play/<dil>/`'den; varsayılan
        dil `en`, diğer 13 dil çeviri olarak (yerel ayar karşılıkları `store/README.md`'de).
        Ortak görseller (Common visual assets): simge ve öne çıkan görsel `store/graphics/`'ten.
