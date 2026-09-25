@@ -1,12 +1,12 @@
 # Yayın öncesi kontrol listesi
 
-Son güncelleme: 1.1.1 (25 Eylül 2026). Depodaki ve CI'daki işler bitti; kalanlar Play
-Console'da, hesap sahibinin elinde. Play'e ilk yüklenecek sürüm 1.1.1.
+Son güncelleme: 1.1.2 (25 Eylül 2026). Depodaki ve CI'daki işler bitti; kalanlar Play
+Console'da, hesap sahibinin elinde. Play'e ilk yüklenecek sürüm 1.1.2 (nedeni 6. adımda).
 
 ## Depoda hazır
 
 - [x] `store/play/<14 dil>/{title,short,full}.txt` — sınırlar `tools/check_store.py` ile denetleniyor
-- [x] `store/play/release-notes/1.0.0.txt`, `1.1.0.txt` ve `1.1.1.txt` — 14 dil, dil başına
+- [x] `store/play/release-notes/1.0.0.txt`, `1.1.0.txt`, `1.1.1.txt` ve `1.1.2.txt` — 14 dil, dil başına
       500 karakterin altında
 - [x] `store/graphics/icon-512.png` (512×512, 32 bit) ve `feature-1024.png` (1024×500) —
       1.1.0 kimliğinde (petrol zemin, yeni işaret); `tools/gen_store_graphics.py` simgeden üretir
@@ -57,7 +57,9 @@ Sırayla; her adımın cevabı depoda yazılı.
        o sayfadan iner):
        `java -jar pepk.jar --keystore=reyon-release.jks --alias=reyon --output=reyon-signing-key.zip --include-cert --rsa-aes-encryption --encryption-key-path=encryption_public_key.pem`
        (anahtar parolası keystore parolasıyla aynı). Yükleme anahtarı da `reyon`: AAB aynı
-       anahtarla imzalı, ayrı yükleme anahtarı yok.
+       anahtarla imzalı, ayrı yükleme anahtarı yok. Protected with Play'deki **Automatic
+       protection** kapatıldı: açık kalsa Play dağıttığı pakete kurulum kaynağı denetimi
+       ekler, paket kaynak koddakiyle aynı olmaz.
 4. [ ] **Mağaza girişi.** Başlık, kısa ve tam açıklama `store/play/<dil>/`'den; varsayılan
        dil `en`, diğer 13 dil çeviri olarak (yerel ayar karşılıkları `store/README.md`'de).
        Ortak görseller (Common visual assets): simge ve öne çıkan görsel `store/graphics/`'ten.
@@ -70,11 +72,13 @@ Sırayla; her adımın cevabı depoda yazılı.
        - Hedef kitle: 16–17 ve 18+ (Play Console'da seçildi; `store/data-safety.md`)
        - Veri güvenliği: `store/data-safety.md` (veri toplanmıyor, paylaşılmıyor)
        - Sağlık, finans, kamu kurumu beyanları: uygulanamaz
-6. [ ] **Sürüm.** `reyon-v1.1.1-play.aab` (APK değil). Paket Play'e bir kez yüklendi; aynı
-       sürüm kodu (10101) ikinci kez yüklenemez, sürüm oluştururken **Add from library** ile
-       eklenir. Play'e ilk yükleme olduğu için sürüm notu olarak
+6. [ ] **Sürüm.** `reyon-v1.1.2-play.aab` (APK değil). İlk yüklenen `reyon-v1.1.1-play.aab`
+       (10101) Google'ın ürettiği anahtarla işlenmişti; anahtar `reyon`'a çevrilince Play onu
+       "not available for releases" yaptı, silinemiyor ve aynı sürüm kodu yeniden
+       yüklenemiyor. Bu yüzden Play'deki ilk sürüm 1.1.2 (10102); uygulama 1.1.1 ile aynı.
+       Play'e ilk yükleme olduğu için sürüm notu olarak
        `store/play/release-notes/1.1.0.txt` önerilir (14 dil): yeni kullanıcı için asıl
-       yenilikler orada; 1.1.1'in notu (dil seçici, bağlantılar) GitHub Release'te kalır.
+       yenilikler orada; 1.1.1 ve 1.1.2'nin notları GitHub Release'te ve sitede kalır.
        Önerilen yol: önce dahili teste yükle, 7. maddedeki raporu gör, aynı sürümü üretime
        yükselt. Ülkeler: bütün ülkeler ya da seçilenler.
 7. [ ] **Lansman öncesi rapor.** Yalnızca test kanalına (dahili test yeter) yüklenen sürüm için
