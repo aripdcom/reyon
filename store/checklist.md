@@ -49,8 +49,13 @@ Sırayla; her adımın cevabı depoda yazılı.
        üzerine kurulabilmesi için Play'in imza anahtarı bizim `reyon` anahtarımız olmalı:
        "Export and upload a key from Java KeyStore" (PEPK aracıyla) seçilir. Google'ın ürettiği
        anahtar seçilirse imza farklı olur; APK'yı GitHub'dan kuranlar Play sürümüne geçmek için
-       uygulamayı silmek zorunda kalır ve cihazdaki ilerlemeleri gider. Yüklenen dosya
-       en yeni Release'teki `-play.aab` (`reyon-v1.1.1-play.aab`); APK değil.
+       uygulamayı silmek zorunda kalır ve cihazdaki ilerlemeleri gider. Seçim ilk AAB
+       yüklenmeden yapılır, sonra değişmez. `pepk.jar` ve `encryption_public_key.pem` o
+       sayfadan iner; komut:
+       `java -jar pepk.jar --keystore=reyon-release.jks --alias=reyon --output=reyon-signing-key.zip --include-cert --rsa-aes-encryption --encryption-key-path=encryption_public_key.pem`
+       (anahtar parolası keystore parolasıyla aynı). Çıkan zip aynı sayfaya yüklenir; ayrı
+       yükleme anahtarı gerekmez, AAB aynı anahtarla imzalı. Yüklenen dosya en yeni
+       Release'teki `-play.aab` (`reyon-v1.1.1-play.aab`); APK değil.
 4. [ ] **Mağaza girişi.** Başlık, kısa ve tam açıklama `store/play/<dil>/`'den; varsayılan
        dil `en`, diğer 13 dil çeviri olarak (yerel ayar karşılıkları `store/README.md`'de).
        Ortak görseller (Common visual assets): simge ve öne çıkan görsel `store/graphics/`'ten.
@@ -60,7 +65,7 @@ Sırayla; her adımın cevabı depoda yazılı.
        - Uygulamaya erişim: bütün işlevler giriş gerektirmeden açık
        - Reklam: yok · Reklam kimliği: kullanılmıyor
        - İçerik derecelendirmesi (IARC): `store/icerik-derecelendirme.md` (beklenen PEGI 3)
-       - Hedef kitle: 13 yaş ve üzeri (`store/data-safety.md`'deki gerekçe)
+       - Hedef kitle: 16–17 ve 18+ (Play Console'da seçildi; `store/data-safety.md`)
        - Veri güvenliği: `store/data-safety.md` (veri toplanmıyor, paylaşılmıyor)
        - Sağlık, finans, kamu kurumu beyanları: uygulanamaz
 6. [ ] **Sürüm.** `reyon-v1.1.1-play.aab`. Play'e ilk yükleme olduğu için sürüm notu olarak
