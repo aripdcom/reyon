@@ -36,9 +36,9 @@ Console'da, hesap sahibinin elinde.
 
 Sırayla; her adımın cevabı depoda yazılı.
 
-1. [ ] **Hesap türü.** Kişisel geliştirici hesabı 13 Kasım 2023'ten sonra açıldıysa üretime
-       çıkmadan önce kapalı test şart: en az 12 test kullanıcısı, 14 gün kesintisiz katılım,
-       ardından "Üretime erişim" başvurusu. Kuruluş hesabında bu şart yok.
+1. [x] **Hesap türü: kuruluş (Organization).** Kişisel hesaplara getirilen kapalı test şartı
+       (12 test kullanıcısı, 14 gün) bu hesap için geçerli değil; sürüm doğrudan üretime
+       çıkabilir.
 2. [ ] **Uygulamayı oluştur.** Varsayılan dil İngilizce (en-US), tür: uygulama, ücretsiz.
        Kategori **Uygulamalar → Eğitim**; iletişim `reyon@aripd.com`, web sitesi
        `https://reyon.aripd.com`.
@@ -60,11 +60,12 @@ Sırayla; her adımın cevabı depoda yazılı.
        - Hedef kitle: 13 yaş ve üzeri (`store/data-safety.md`'deki gerekçe)
        - Veri güvenliği: `store/data-safety.md` (veri toplanmıyor, paylaşılmıyor)
        - Sağlık, finans, kamu kurumu beyanları: uygulanamaz
-6. [ ] **Sürüm.** `reyon-v1.1.0-play.aab` önce kapalı teste (1. maddedeki şart varsa zorunlu,
-       yoksa yine önerilir); sürüm notu `store/play/release-notes/1.1.0.txt`, 14 dil.
-       Ülkeler: bütün ülkeler ya da seçilenler.
-7. [ ] **Lansman öncesi rapor.** Kapalı test yüklemesinden sonra Play'in kendi cihazlarında
-       koşar; çökme ve erişilebilirlik uyarılarına bakılır.
+6. [ ] **Sürüm.** `reyon-v1.1.0-play.aab`, sürüm notu `store/play/release-notes/1.1.0.txt`
+       (14 dil). Önerilen yol: önce dahili teste yükle, 7. maddedeki raporu gör, aynı sürümü
+       üretime yükselt. Ülkeler: bütün ülkeler ya da seçilenler.
+7. [ ] **Lansman öncesi rapor.** Yalnızca test kanalına (dahili test yeter) yüklenen sürüm için
+       Play'in kendi cihazlarında koşar; doğrudan üretime yüklenen sürümde çıkmaz. Çökme ve
+       erişilebilirlik uyarılarına bakılır.
 8. [ ] **Büyük ekran (isteğe bağlı).** Android 16, hedef API 36'daki uygulamalarda 600 dp ve
        üstü ekranlarda dikey kilidi yok sayar; bir tablette ya da katlanabilirde yatay görünüm
        bir kez denenir.
