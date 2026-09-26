@@ -42,7 +42,7 @@ Sırayla; her adımın cevabı depoda yazılı.
 1. [x] **Hesap türü: kuruluş (Organization).** Kişisel hesaplara getirilen kapalı test şartı
        (12 test kullanıcısı, 14 gün) bu hesap için geçerli değil; sürüm doğrudan üretime
        çıkabilir.
-2. [ ] **Uygulamayı oluştur.** Varsayılan dil İngilizce (en-US), tür: uygulama, ücretsiz.
+2. [x] **Uygulamayı oluştur.** Varsayılan dil İngilizce (en-US), tür: uygulama, ücretsiz.
        Kategori **Uygulamalar → Eğitim**; iletişim `reyon@aripd.com`, web sitesi
        `https://reyon.aripd.com`.
 3. [x] **Play App Signing — uygulama imza anahtarı `reyon`** (25 Eylül 2026). GitHub'daki APK
@@ -60,11 +60,11 @@ Sırayla; her adımın cevabı depoda yazılı.
        anahtarla imzalı, ayrı yükleme anahtarı yok. Protected with Play'deki **Automatic
        protection** kapatıldı: açık kalsa Play dağıttığı pakete kurulum kaynağı denetimi
        ekler, paket kaynak koddakiyle aynı olmaz.
-4. [ ] **Mağaza girişi.** Başlık, kısa ve tam açıklama `store/play/<dil>/`'den; varsayılan
+4. [x] **Mağaza girişi.** Başlık, kısa ve tam açıklama `store/play/<dil>/`'den; varsayılan
        dil `en`, diğer 13 dil çeviri olarak (yerel ayar karşılıkları `store/README.md`'de).
        Ortak görseller (Common visual assets): simge ve öne çıkan görsel `store/graphics/`'ten.
        Telefon ekran görüntüleri `store/screenshots/en/` sırayla 1–6 (Türkçe giriş için `tr/`).
-5. [ ] **Uygulama içeriği.**
+5. [x] **Uygulama içeriği.**
        - Gizlilik politikası: `https://reyon.aripd.com/privacy.html`
        - Uygulamaya erişim: bütün işlevler giriş gerektirmeden açık
        - Reklam: yok · Reklam kimliği: kullanılmıyor
@@ -72,7 +72,7 @@ Sırayla; her adımın cevabı depoda yazılı.
        - Hedef kitle: 16–17 ve 18+ (Play Console'da seçildi; `store/data-safety.md`)
        - Veri güvenliği: `store/data-safety.md` (veri toplanmıyor, paylaşılmıyor)
        - Sağlık, finans, kamu kurumu beyanları: uygulanamaz
-6. [ ] **Sürüm.** `reyon-v1.1.2-play.aab` (APK değil). İlk yüklenen `reyon-v1.1.1-play.aab`
+6. [x] **Sürüm** (26 Eylül 2026, üretim, incelemede). `reyon-v1.1.2-play.aab` (APK değil). İlk yüklenen `reyon-v1.1.1-play.aab`
        (10101) Google'ın ürettiği anahtarla işlenmişti; anahtar `reyon`'a çevrilince Play onu
        "not available for releases" yaptı, silinemiyor ve aynı sürüm kodu yeniden
        yüklenemiyor. Bu yüzden Play'deki ilk sürüm 1.1.2 (10102); uygulama 1.1.1 ile aynı.
@@ -81,9 +81,17 @@ Sırayla; her adımın cevabı depoda yazılı.
        yenilikler orada; 1.1.1 ve 1.1.2'nin notları GitHub Release'te ve sitede kalır.
        Önerilen yol: önce dahili teste yükle, 7. maddedeki raporu gör, aynı sürümü üretime
        yükselt. Ülkeler: bütün ülkeler ya da seçilenler.
+       Yapılan: üretimde 177 ülke/bölge; paket kapalı teste yüklenmiş 10102 (1.1.2), üretim
+       sürümüne **Add from library** ile eklendi — aynı AAB'yi yeniden yüklemek "Version code
+       10102 has already been used" verir. Sürüm notu `release-notes/1.1.0.txt` (14 dil, dosya
+       bütünüyle yapıştırıldı). 26 Eylül 2026'da incelemeye gönderildi. İmza anahtarı `reyon`
+       bu sürüm üretime çıkınca sabitlenir.
 7. [ ] **Lansman öncesi rapor.** Yalnızca test kanalına (dahili test yeter) yüklenen sürüm için
        Play'in kendi cihazlarında koşar; doğrudan üretime yüklenen sürümde çıkmaz. Çökme ve
        erişilebilirlik uyarılarına bakılır.
+       Durum: kapalı test kanalında 1.1.2 incelemeye gönderildi ama test kullanıcısı eklenmedi
+       ("Select testers" açık). Kendini ya da birkaç kişiyi ekleyince rapor oluşur; üretimi
+       engellemez.
 8. [ ] **Büyük ekran (isteğe bağlı).** Android 16, hedef API 36'daki uygulamalarda 600 dp ve
        üstü ekranlarda dikey kilidi yok sayar; bir tablette ya da katlanabilirde yatay görünüm
        bir kez denenir.
