@@ -1,7 +1,8 @@
 # Yayın öncesi kontrol listesi
 
-Son güncelleme: 1.1.2 (25 Eylül 2026). Depodaki ve CI'daki işler bitti; kalanlar Play
-Console'da, hesap sahibinin elinde. Play'e ilk yüklenecek sürüm 1.1.2 (nedeni 6. adımda).
+Son güncelleme: 2 Ekim 2026. Reyon Google Play'de yayında: 1.1.2 (10102),
+https://play.google.com/store/apps/details?id=com.aripd.reyon. Aşağıdaki liste ilk yayının
+kaydı; sonraki sürümlerde yapılacaklar "Her yeni sürümde" bölümünde.
 
 ## Depoda hazır
 
@@ -72,7 +73,8 @@ Sırayla; her adımın cevabı depoda yazılı.
        - Hedef kitle: 16–17 ve 18+ (Play Console'da seçildi; `store/data-safety.md`)
        - Veri güvenliği: `store/data-safety.md` (veri toplanmıyor, paylaşılmıyor)
        - Sağlık, finans, kamu kurumu beyanları: uygulanamaz
-6. [x] **Sürüm** (26 Eylül 2026, üretim, incelemede). `reyon-v1.1.2-play.aab` (APK değil). İlk yüklenen `reyon-v1.1.1-play.aab`
+6. [x] **Sürüm** (26 Eylül 2026'da incelemeye gönderildi, 2 Ekim 2026 itibarıyla yayında).
+       `reyon-v1.1.2-play.aab` (APK değil). İlk yüklenen `reyon-v1.1.1-play.aab`
        (10101) Google'ın ürettiği anahtarla işlenmişti; anahtar `reyon`'a çevrilince Play onu
        "not available for releases" yaptı, silinemiyor ve aynı sürüm kodu yeniden
        yüklenemiyor. Bu yüzden Play'deki ilk sürüm 1.1.2 (10102); uygulama 1.1.1 ile aynı.
@@ -85,8 +87,8 @@ Sırayla; her adımın cevabı depoda yazılı.
        Yapılan: üretimde 177 ülke/bölge; paket kapalı teste yüklenmiş 10102 (1.1.2), üretim
        sürümüne **Add from library** ile eklendi — aynı AAB'yi yeniden yüklemek "Version code
        10102 has already been used" verir. Sürüm notu `release-notes/1.1.0.txt` (14 dil, dosya
-       bütünüyle yapıştırıldı). 26 Eylül 2026'da incelemeye gönderildi. İmza anahtarı `reyon`
-       bu sürüm üretime çıkınca sabitlenir.
+       bütünüyle yapıştırıldı). 26 Eylül 2026'da incelemeye gönderildi. Sürüm üretime
+       çıktığı için uygulama imza anahtarı (`reyon`) artık sabit.
 7. [ ] **Lansman öncesi rapor.** Yalnız kapalı ya da açık test kanalına yayımlanan sürüm için
        Play'in kendi cihazlarında koşar; dahili testte ve doğrudan üretime yüklenen sürümde
        çıkmaz. Kuruluş hesabında kapalı test için 12 test kullanıcısı / 14 gün şartı yok.
@@ -97,7 +99,9 @@ Sırayla; her adımın cevabı depoda yazılı.
 8. [ ] **Büyük ekran (isteğe bağlı).** Android 16, hedef API 36'daki uygulamalarda 600 dp ve
        üstü ekranlarda dikey kilidi yok sayar; bir tablette ya da katlanabilirde yatay görünüm
        bir kez denenir.
-9. [ ] **Üretime çıkınca.** Siteye Google Play bağlantısı eklenir (`tools/gen_site.py`).
+9. [x] **Üretime çıkınca.** Sitede Google Play bağlantısı (`tools/gen_site.py`, `PLAY`; paket
+       adı `applicationId`'den okunur): üst çubukta ve iki indirme bölümünde birincil düğme,
+       GitHub'daki APK ikincil. README'de de var.
 
 ## Her yeni sürümde
 
@@ -105,7 +109,9 @@ Sırayla; her adımın cevabı depoda yazılı.
    "Yenilikler" bölümü en yeni ara sürümün (ör. 1.1.0 + 1.1.1) notlarını gösterir;
    `check_site.py` yeniden üretilmeyen siteyi durdurur
 2. main'e birleştir, `release.yml`'i `v<sürüm>` etiketiyle çalıştır
-3. Release'teki `-play.aab`'ı Play'e yükle; `versionCode` sürümden türer, elle artırılmaz
+3. Release'teki `-play.aab`'ı Play'e yükle (**Production → Create new release → Upload**);
+   sürüm notu o sürümün `release-notes/<sürüm>.txt` dosyası, bütünüyle yapıştırılır.
+   `versionCode` sürümden türer, elle artırılmaz; aynı kod Play'e ikinci kez yüklenemez
 
 ## Ekran görüntüsü önerisi
 
