@@ -8,6 +8,7 @@ izin bile yok.
 
 - **Site:** https://reyon.aripd.com
 - **Gizlilik:** https://reyon.aripd.com/privacy.html (her dilde: `/tr/privacy.html` …)
+- **Google Play:** https://play.google.com/store/apps/details?id=com.aripd.reyon
 - **APK:** [en yeni sürüm](https://github.com/aripdcom/reyon/releases/latest/download/reyon.apk)
 
 ## Dört mod

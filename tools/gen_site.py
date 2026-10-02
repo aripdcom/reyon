@@ -54,6 +54,10 @@ MAIL = gen_privacy.MAIL
 RELEASES = "https://github.com/aripdcom/reyon/releases"
 PRIVACY = "privacy.html"
 APK = RELEASES + "/latest/download/reyon.apk"
+# Google Play sayfası; paket adı uygulamanın applicationId'sinden okunur.
+PLAY = "https://play.google.com/store/apps/details?id=" + re.search(
+    r'applicationId = "([^"]+)"',
+    open(os.path.join(ROOT, "app", "build.gradle.kts"), encoding="utf-8").read()).group(1)
 
 # Open Graph yerel ayarı; Facebook Arapça için "ar_AR" bekler.
 OG_LOCALE = {
@@ -79,7 +83,7 @@ COPY = {
         lead="Build the planogram, audit the shelf, raise the shelf yield and manage a week of stock. "
              "Every result is measured against an expert’s.",
         download="Download APK",
-        download_short="Download",
+        play="Get it on Google Play",
         releases="All releases and SHA-256 checksums",
         requires="Android 8.0 or newer · free · no account",
         install="Android may ask you to allow installs from your browser; that is the usual step for an "
@@ -104,7 +108,7 @@ COPY = {
         lead="Planogramı kur, rafı denetle, raf verimini artır, bir haftalık stoğu yönet. Her sonuç bir "
              "uzmanınkiyle ölçülür.",
         download="APK indir",
-        download_short="İndir",
+        play="Google Play'den indir",
         releases="Bütün sürümler ve SHA-256 özetleri",
         requires="Android 8.0 ve üstü · ücretsiz · hesap gerekmez",
         install="Android, tarayıcından uygulama yüklemeye izin vermeni isteyebilir; Google Play dışından "
@@ -131,7 +135,7 @@ COPY = {
         lead="Planogramm aufbauen, Regal prüfen, Regalleistung steigern, eine Woche Bestand steuern. "
              "Jedes Ergebnis wird an einem Profi gemessen.",
         download="APK herunterladen",
-        download_short="Download",
+        play="Jetzt bei Google Play",
         releases="Alle Versionen und SHA-256-Prüfsummen",
         requires="Android 8.0 oder neuer · kostenlos · ohne Konto",
         install="Android fragt eventuell, ob dein Browser Apps installieren darf; das ist der übliche "
@@ -158,7 +162,7 @@ COPY = {
         lead="Monte le planogramme, contrôle le rayon, augmente son rendement et gère une semaine de "
              "stock. Chaque résultat est mesuré à celui d’un expert.",
         download="Télécharger l’APK",
-        download_short="Télécharger",
+        play="Disponible sur Google Play",
         releases="Toutes les versions et sommes SHA-256",
         requires="Android 8.0 ou plus récent · gratuit · sans compte",
         install="Android peut te demander d’autoriser ton navigateur à installer des applis ; c’est "
@@ -185,7 +189,7 @@ COPY = {
         lead="Bouw het planogram, controleer het schap, verhoog het schaprendement en beheer een week "
              "voorraad. Elk resultaat wordt gemeten aan dat van een expert.",
         download="APK downloaden",
-        download_short="Downloaden",
+        play="Ontdek het op Google Play",
         releases="Alle versies en SHA-256-controlesommen",
         requires="Android 8.0 of nieuwer · gratis · geen account nodig",
         install="Android kan vragen of je browser apps mag installeren; dat is de gewone stap voor een "
@@ -212,7 +216,7 @@ COPY = {
         lead="Arma el planograma, audita el estante, sube su rendimiento y gestiona una semana de stock. "
              "Cada resultado se mide con el de un experto.",
         download="Descargar APK",
-        download_short="Descargar",
+        play="Disponible en Google Play",
         releases="Todas las versiones y sumas SHA-256",
         requires="Android 8.0 o posterior · gratis · sin cuenta",
         install="Android puede pedirte que permitas instalar apps desde el navegador; es el paso "
@@ -239,7 +243,7 @@ COPY = {
         lead="Monte o planograma, audite a prateleira, aumente o rendimento e gerencie uma semana de "
              "estoque. Cada resultado é medido pelo de um especialista.",
         download="Baixar APK",
-        download_short="Baixar",
+        play="Disponível no Google Play",
         releases="Todas as versões e somas SHA-256",
         requires="Android 8.0 ou mais recente · grátis · sem conta",
         install="O Android pode pedir que você permita instalar apps pelo navegador; é o passo normal "
@@ -266,7 +270,7 @@ COPY = {
         lead="Costruisci il planogramma, controlla lo scaffale, aumenta la resa e gestisci una settimana "
              "di scorte. Ogni risultato è misurato su quello di un esperto.",
         download="Scarica l’APK",
-        download_short="Scarica",
+        play="Disponibile su Google Play",
         releases="Tutte le versioni e i checksum SHA-256",
         requires="Android 8.0 o successivo · gratis · senza account",
         install="Android potrebbe chiederti di consentire al browser di installare app; è il passaggio "
@@ -293,7 +297,7 @@ COPY = {
         lead="Byg planogrammet, kontrollér hylden, øg hyldeafkastet og styr en uges lager. Hvert "
              "resultat måles mod en eksperts.",
         download="Hent APK",
-        download_short="Hent",
+        play="Nu på Google Play",
         releases="Alle udgivelser og SHA-256-kontrolsummer",
         requires="Android 8.0 eller nyere · gratis · ingen konto",
         install="Android kan bede dig om at tillade installationer fra din browser; det er det normale "
@@ -320,7 +324,7 @@ COPY = {
         lead="Bygg planogrammet, kontrollera hyllan, höj hyllavkastningen och styr en veckas lager. "
              "Varje resultat mäts mot en experts.",
         download="Ladda ned APK",
-        download_short="Ladda ned",
+        play="Ladda ned på Google Play",
         releases="Alla versioner och SHA-256-kontrollsummor",
         requires="Android 8.0 eller senare · gratis · inget konto",
         install="Android kan be dig tillåta installationer från webbläsaren; det är det vanliga steget "
@@ -347,7 +351,7 @@ COPY = {
         lead="Bygg planogrammet, kontroller hylla, øk hylleavkastningen og styr en ukes lager. Hvert "
              "resultat måles mot en eksperts.",
         download="Last ned APK",
-        download_short="Last ned",
+        play="Tilgjengelig på Google Play",
         releases="Alle versjoner og SHA-256-sjekksummer",
         requires="Android 8.0 eller nyere · gratis · ingen konto",
         install="Android kan be deg tillate installasjoner fra nettleseren; det er det vanlige steget "
@@ -374,7 +378,7 @@ COPY = {
         lead="Rakenna planogrammi, tarkasta hylly, nosta hyllytuottoa ja hallitse viikon varastoa. "
              "Jokaista tulosta verrataan asiantuntijan tulokseen.",
         download="Lataa APK",
-        download_short="Lataa",
+        play="Nyt Google Playssa",
         releases="Kaikki versiot ja SHA-256-tarkistussummat",
         requires="Android 8.0 tai uudempi · ilmainen · ei tiliä",
         install="Android voi pyytää sallimaan asennukset selaimesta; se on tavallinen vaihe Google "
@@ -401,7 +405,7 @@ COPY = {
         lead="Собери планограмму, проверь полку, подними её отдачу и управляй запасом на неделю. "
              "Каждый результат сравнивается с результатом эксперта.",
         download="Скачать APK",
-        download_short="Скачать",
+        play="Доступно в Google Play",
         releases="Все версии и контрольные суммы SHA-256",
         requires="Android 8.0 или новее · бесплатно · без аккаунта",
         install="Android может попросить разрешить установку из браузера — это обычный шаг для APK не "
@@ -427,7 +431,7 @@ COPY = {
         lead="ابنِ مخطط الرف، ودقّق الرف، وارفع عائده، وأدِر مخزون أسبوع كامل. تُقاس كل نتيجة بنتيجة "
              "خبير.",
         download="تنزيل APK",
-        download_short="تنزيل",
+        play="احصل عليه من Google Play",
         releases="كل الإصدارات وبصمات SHA-256",
         requires="Android 8.0 أو أحدث · مجاني · بلا حساب",
         install="قد يطلب منك Android السماح بالتثبيت من المتصفح؛ هذه هي الخطوة المعتادة لملف APK من "
@@ -625,6 +629,7 @@ ICONS = {
     "order": '<path d="M3 7.5l9-4.5 9 4.5v9l-9 4.5-9-4.5zM3 7.5l9 4.5 9-4.5M12 12v9"/>',
     "globe": '<path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM3.6 9h16.8M3.6 15h16.8M12 3c-2.4 2.6-3.6 5.6-3.6 9s1.2 6.4 3.6 9M12 3c2.4 2.6 3.6 5.6 3.6 9s-1.2 6.4-3.6 9"/>',
     "download": '<path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/>',
+    "store": '<path d="M5 8h14l-1.2 12H6.2zM9 8V6.5a3 3 0 0 1 6 0V8"/>',
     "down": '<path d="M6 9l6 6 6-6"/>',
     "arrow": '<path d="M5 12h14M13 6l6 6-6 6"/>',
     "check": '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
@@ -969,7 +974,7 @@ def topbar(tag, s, c, names, prefix, page=""):
           {"".join(items)}
         </ul>
       </details>
-      <a class="btn btn-sm" href="{APK}">{icon("download", "ic ic-sm")}<span>{t(tag, c['download_short'])}</span></a>
+      <a class="btn btn-sm" href="{PLAY}" aria-label="{a(tag, c['play'])}">{icon("store", "ic ic-sm")}<span>Google Play</span></a>
     </div>
   </div>
 </header>"""
@@ -1122,7 +1127,8 @@ def home_page(tag, ctx):
         <h1>{t(tag, hyphenate(tag, s['app_tagline']))}</h1>
         <p class="lead">{t(tag, c['lead'])}</p>
         <div class="cta">
-          <a class="btn" href="{APK}">{icon("download")}<span>{t(tag, c['download'])}</span></a>
+          <a class="btn" href="{PLAY}">{icon("store")}<span>{t(tag, c['play'])}</span></a>
+          <a class="btn btn-alt" href="{APK}">{icon("download")}<span>{t(tag, c['download'])}</span></a>
           <a class="more" href="{RELEASES}">{t(tag, c['releases'])}{arrow}</a>
         </div>
         <p class="fine">{t(tag, c['requires'])}</p>
@@ -1183,7 +1189,8 @@ def home_page(tag, ctx):
       <ul class="notes">{note_items}</ul>
       <p class="fine">{t(tag, c['install'])}</p>
       <div class="cta">
-        <a class="btn" href="{APK}">{icon("download")}<span>{t(tag, c['download'])}</span></a>
+        <a class="btn" href="{PLAY}">{icon("store")}<span>{t(tag, c['play'])}</span></a>
+        <a class="btn btn-alt" href="{APK}">{icon("download")}<span>{t(tag, c['download'])}</span></a>
         <a class="more" href="{RELEASES}">{t(tag, c['releases'])}{arrow}</a>
       </div>
     </div>
