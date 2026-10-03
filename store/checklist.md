@@ -93,12 +93,12 @@ Sırayla; her adımın cevabı depoda yazılı.
        Play'in kendi cihazlarında koşar; dahili testte ve doğrudan üretime yüklenen sürümde
        çıkmaz. Kuruluş hesabında kapalı test için 12 test kullanıcısı / 14 gün şartı yok.
        Çökme ve erişilebilirlik uyarılarına bakılır.
-       Durum: kapalı test kanalında 1.1.2 incelemeye gönderildi ama test kullanıcısı eklenmedi
-       ("Select testers" açık). Kendini ya da birkaç kişiyi ekleyince rapor oluşur; üretimi
-       engellemez.
-8. [ ] **Büyük ekran (isteğe bağlı).** Android 16, hedef API 36'daki uygulamalarda 600 dp ve
+       Durum (3 Ekim 2026): "Reyon ekip" adlı test e-posta listesi oluşturuldu, hesap sahibi
+       listede; rapor **Testing → Pre-launch report → Overview**'da beklenir. Liste kapalı
+       test kanalının (Alpha) **Testers** sekmesinde seçili olmalı. Rapor üretimi engellemez.
+8. [x] **Büyük ekran (isteğe bağlı).** Android 16, hedef API 36'daki uygulamalarda 600 dp ve
        üstü ekranlarda dikey kilidi yok sayar; bir tablette ya da katlanabilirde yatay görünüm
-       bir kez denenir.
+       bir kez denenir. 3 Ekim 2026: tablette denendi, görünüm sorunsuz.
 9. [x] **Üretime çıkınca.** Sitede Google Play bağlantısı (`tools/gen_site.py`, `PLAY`; paket
        adı `applicationId`'den okunur): üst çubukta ve iki indirme bölümünde birincil düğme,
        GitHub'daki APK ikincil. README'de de var.
